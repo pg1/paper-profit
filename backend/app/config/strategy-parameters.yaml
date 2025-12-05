@@ -1,0 +1,150 @@
+parameters:
+  # Fundamental Parameters
+  min_quality_score:
+    type: integer
+    description: Minimum fundamental quality score
+    typical_values: 70
+
+  sell_on_fundamental_shift:
+    type: boolean
+    description: Sell if fundamentals deteriorate
+    typical_values: true/false
+
+  allocation_percent:
+    type: percentage
+    description: Portfolio allocation percentage
+    typical_values: 100
+
+  investment_amount:
+    type: number
+    description: Fixed investment amount
+    typical_values: 100
+
+  min_dividend_growth_rate:
+    type: percentage
+    description: Minimum dividend growth rate
+    typical_values: 5%
+
+  max_payout_ratio:
+    type: percentage
+    description: Maximum dividend payout ratio
+    typical_values: 70%
+
+  min_dividend_yield:
+    type: percentage
+    description: Minimum dividend yield
+    typical_values: 2%
+
+  auto_reinvest_dividends:
+    type: boolean
+    description: Automatically reinvest dividends
+    typical_values: true/false
+
+  max_pe:
+    type: number
+    description: Maximum P/E ratio
+    typical_values: 15-20
+
+  max_pb:
+    type: number
+    description: Maximum P/B ratio
+    typical_values: 1.5-2
+
+  discount_to_intrinsic_value:
+    type: percentage
+    description: Discount to intrinsic value
+    typical_values: 20%
+
+  min_revenue_growth:
+    type: percentage
+    description: Minimum revenue growth
+    typical_values: 15%
+
+  min_eps_growth:
+    type: percentage
+    description: Minimum EPS growth
+    typical_values: 10-15%
+
+  max_pe_ratio:
+    type: number
+    description: Maximum P/E ratio for growth
+    typical_values: 70
+
+  sector_strength_threshold:
+    type: integer
+    description: Sector strength score threshold
+    typical_values: 60
+
+  target_stock_allocation:
+    type: percentage
+    description: Target stock allocation
+    typical_values: 30-60%
+
+  target_bond_allocation:
+    type: percentage
+    description: Target bond allocation
+    typical_values: 40-55%
+
+  gold_allocation_percent:
+    type: percentage
+    description: Gold allocation percentage
+    typical_values: 7.5%
+
+  commodities_allocation_percent:
+    type: percentage
+    description: Commodities allocation percentage
+    typical_values: 7.5%
+
+  underlying_quality_required:
+    type: boolean
+    description: Require quality underlying
+    typical_values: true/false
+
+  required_margin_of_safety_percent:
+    type: percentage
+    description: Required margin of safety
+    typical_values: 25%
+
+  minimum_roe_percent:
+    type: percentage
+    description: Minimum return on equity
+    typical_values: 10%
+
+  preferred_industry_moat:
+    type: string
+    description: Industry moat strength
+    typical_values: "strong"
+
+  net_net_discount_percent:
+    type: percentage
+    description: Net-net discount percentage
+    typical_values: 20%
+
+  max_peg:
+    type: number
+    description: Maximum PEG ratio
+    typical_values: 1
+
+  narrative_match_required:
+    type: boolean
+    description: Require growth narrative match
+    typical_values: true/false
+
+  cost_ratio_max:
+    type: percentage
+    description: Maximum cost ratio
+    typical_values: 0.05%
+
+  macro_signal_strength_threshold:
+    type: integer
+    description: Macro signal strength
+    typical_values: 70
+
+  conviction_score_minimum:
+    type: integer
+    description: Minimum conviction score
+    typical_values: 75
+
+  liquidity_filter:
+    type: string
+    description: Liquidity requirement

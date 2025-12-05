@@ -1,0 +1,33 @@
+categories:
+  - name: "Brokers"
+    description: "Online broker platforms"
+    services:
+      - name: "Alpaca"
+        parameters: "{\n\"key\":\"your key here\",\n\"secret\":\"secret here\"\n}"
+        status: 1
+  - name: "Data Providers"
+    description: "News, earnings and other stock related data"
+    services:
+      - name: "Alpha_vantage"
+        parameters: "{\"key\":\"your key here\"}"
+        status: 1
+      - name: "Yahoo_finance"
+        parameters: "{\"key\":\"your key here\"}"
+        status: 1
+      - name: "Financial_modeling_prep"
+        parameters: "{\"key\":\"your key here\"}"
+        status: 1
+  - name: "AI Platforms"
+    description: "Artificial Intelligence platforms for analysis and insights"
+    services:
+      - name: "DeepSeek"
+        parameters: "{\"key\":\"your key here\"}"
+        status: 1
+      - name: "OpenAI"
+        parameters: "{\"key\":\"your key here\"}"
+        status: 1
+      - name: "Claude"
+        parameters: "{\"key\":\"your key here\"}"
+        status: 1
+        
+      

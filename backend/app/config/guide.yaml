@@ -1,0 +1,1552 @@
+- number: 1
+  title: Introduction to Financial Markets
+  summary: '### 1.1 What Is Investing? Investing is the process of putting money into
+    assets with the expectation that they will grow in value or generate income over
+    time. Instead of letting money sit idle, investing allows it to work for you—by
+    owning part of a company, lending money to governments or corporations, or holding
+    assets that gain value.'
+  keywords:
+  - markets
+  - financial
+  - exist
+  - how
+  - introduction
+  - investing
+  - market
+  - participants
+  sections:
+  - title: What Is Investing?
+    number: '1.1'
+    keywords:
+    - investing
+    - money
+    - assets
+    - gain
+    - gambling
+    - generate
+    - grow
+    - income
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/11SMY7bQAzs8wqWCaDYHxDcX5figNTUipYIr8jFLiWdujwiL8xLjiuffOc0AkTODDmcbdPlRRYqxjIAF7CRIGUNVAroFdJse2dSoQ1YTAFLISuwso07mt4SBUNjFf9Hq8XN2zHCkHV1EiwYZwLNMJBQRiMvBp28tFAG44lO8CLFCPs6NNLXoYUNuI/UOOlYFGPUtYB3fKFV8w2urr7p/O/P324DXaWiEmaregg+LKFsjUtL/ynt5KGuIBOJW3KJoDlp3s2UphZGjTvhw/VucMDD06k9p8u39r8bilbM1EX/P8HrqPMwQqd+L3egcSHIXG5f/Tipw0LuXiBTIcxhbGoOHXYc2Zh8G5Qeosrw0yhPQEFFJw6AwXhhc3PryJEek10oOq9KxjncdnoZNdudr7PVCMrDQlssu/rl97jBL9LkUndX7fmjc0fO0T+RL696z3cljG7tEWV79uaB6MjvxXKN+0mfWo+3kPy2vBxv4glT0Os12kExFvieyThTTasB6uewqzbuFCP4pq7mdQunH8+Tal5XFpTADmTpKfk7IAnHtLObegdmBdefCgMAAA==
+  - title: Why Financial Markets Exist
+    number: '1.2'
+    keywords:
+    - financial
+    - markets
+    - assets
+    - grow
+    - investors
+    - key
+    - risk
+    - transfer
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1VSwW7bMAy97yt4Dork3hm+FOhlG1AMBYYeFZu2iciiRlI2/PelEidoL5Igku/xPbLJ7SulkDoKEeYgFzSFs1AawXhEm1DgXDYUhZB6UIyxvnmA4VEWVL3qCO8Tbp4hC/q5oHjo4j+5SGZFfW5Ouf3R5LZRE05j+8uDryV1Rpy0Oe2/t6wS/YjUHg4vIZNVlhi5CzX3cHiGF55zSIQKEkgRZk6OZgyj8PoTKC2oxt6pawDOmcVKIqsFnoRBEghakaTH5uQ8O9lv+l+oJ9sqxwcX6EKq+h/id7GOoBS3b7VvQh1CT9qxi78i/NkN7dFQZkoIbigsIRasFu5YNgmXcQItOccbVY+zX9/g/5JewCQkHVAq+DtzVIh0QZerxSMdPsGZU69PO4jQ4o65FVf31i+2uAnOEEbvQx6oIM5xJz1dR5Dbf2QTF/sy731NnKuoa3IRCiuX6A6ZlHGMeB/ErQ9KPS3UlxDveVPwHRmCwICr065hu3Z0LuTBFUO06Vj34BP+caYUngIAAA==
+  - title: Understanding Market Participants
+    number: '1.3'
+    keywords:
+    - funds
+    - market
+    - buying
+    - firms
+    - investors
+    - markets
+    - participants
+    - amounts
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/12SwW7bMAyG73sKHtdgSO6D4cOGBCiKYEW77c5YtE1EllSJcqad9hB7wj3JaDnZ0F5kSyI//vypJrTfMbLPCYLFQjEBO6GInegPyEjQs0PXMVpIJQlNW3hw/sJugMvol4gCGAlGsiEB/VCMJk4YzyRwohFn9nHb7EL7rgltkyR6N7THJegRo3DHAZ2kZne9WSOz1cVyu9k8kSBbuHczJfExbTYfYT9TLAaLSjQ8s8loE5xyWURpUHdOH+DkndHP/utBV5JOJSjvCr13SViysHf4hv1ILukx9LnmT1mUftuNZAZaN/Dn1++1+8nPBBaj3uDkszYDvtdTR+VV0U/ozgnQmWvBiZzAgeNU6x6wY8uCQiARzdLKEmrJLf+vQMfV3COeadVcISoGBUL0aojq4ZfMhqXAqUDntV912ZabSws6kbVv0U80ZIs3L77EAR3/xMWnBCl3I2Cqj+J5/xnef9s+b+9A/co6/x45Vqyqdynok9Du1meQbiV2dayh3aOSwv/pw6hYw31PNWvwyzyrRIUJDUzq/WVkzeoi6ckqwhSHE3d1ANXMxfZ/FUP7F1yrnrPdAgAA
+  - title: How Financial Markets Work
+    number: '1.4'
+    keywords:
+    - markets
+    - trading
+    - electronic
+    - goes
+    - more
+    - people
+    - price
+    - want
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32SQW7bQAxF9z0Fly1gxBcQBLQNusuqAbqmR4w1MDUcDEdW1FVXPUB7w5ykf+IkjoOgG2mg0X/8n2SX+8+V6ijkccoqXknlKLqhictBqpNlKVyFLJHPOetKnAYaZMLrqtvm/kM3Kx4a+x+jJJqsCGUxwGjhBLjRbm4qYnep9PD7D+USg9DexGnOoED8f4KL6lvlYEt61m4fPeT+tvCAq5FzBgme5T6MnPbiG1rGGEZiwIOkWljjTxkoKwcoPuZx9RhYyQqJSqjFUgyfoBIokECKP0ZvVto5WEr47YpubJCSXhrWCrBOhlaiTCyClp2BG9ypLTHtCRaSc6jRklMEIKpGF3AHf+ps7jtvun1/u2a4tDu6OZXptk8XlyP4Xi0cXqw8/PpLd8gD963gs/t29hE+/dz5L6h6oTvl3tsR2SYEOYUPNmVOEVZ2VootGFaS9Yz5atNkQ6zrBQtJh1a0MARYphJZnTQeWgEdNmRR23yE6xn1DWtw/y4mzKVICvG1/2tAj1zjEdbe1VgbecDXHTvGjtWYE+amp860zfRXu/QPuBaaZhgDAAA=
+  - title: Primary vs. Secondary Markets
+    number: '1.5'
+    keywords:
+    - company
+    - market
+    - secondary
+    - assets
+    - example
+    - here
+    - money
+    - primary
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42Sz2rDMAzG73sK3bbBaO8lBHYorIeuhW6HHV1bSUwT2VhK29z2EHvCPcnk9A+juwwCIZb0ffp+ThHLd3KYWAw5TzVI4xmcZ/FkxQcC/bSpt960s2Iay7silgVLClSX6+Q7kwZYmrRDKabn40vbW5bS59BgQqg8GcoyYJhRGIwe2oRG0IGaA4fWQRWSrpC7dSUQ3+HkIjc/mi62OINnsKGLhgZgbFsGlmB3IGEcjP229RY8qSYs1it4WJCXbLs+VVZVhUmTPl6FX3S9p3G4C4QD1AEzgoRW2uGie7ac3DLYoA3k/k3hV3ZJxuXoleCYebjfI2wRM3Lu0f0N/hF62PYDKKOcHLhRHQa9pLzhKx60I+1gM/KYH21jqMabmKeIpxKDvhyrqRxGX9qjwkz8/flFQUbVvEv+L27zL0O+H42Qi42JEYkz9TzDVybdyGQc+gGbU+LKagIAAA==
+- number: 2
+  title: Core Investment Instruments
+  summary: '### 2.1 What Is a Stock? A stock represents partial ownership of a company.
+    When you buy a share, you own a small piece of that business.'
+  keywords:
+  - funds
+  - what
+  - bond
+  - commodities
+  - core
+  - cryptocurrencies
+  - estate
+  - etfs
+  sections:
+  - title: What Is a Stock?
+    number: '2.1'
+    keywords:
+    - stock
+    - companies
+    - dividends
+    - assets
+    - buy
+    - higher
+    - issue
+    - money
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VTzWrcQAy+9yl0NmH3XowhtIXkkLI0gdDjxJZ3xNqjQRo78a3v0Dfsk1QzjneTlF6MPaNP+n7kOjbXoInbEwhGQcWQFKKTRG4Afg4o6ikC9+Cg5TG6sOzg0WOAhSd4mhY7V+8Er8qBIfLB6IYBImGLGZm8S1aqFFB1V+9j86mOTa1JOBybR7/Al9KZUOFWdUK4z4zq/WvFhrhUUalaeScGcaQIIwdcoGf5vAKmwR4DNd9eDKXEod7bVzn6YUKdtB5c6KDDGQeOo0m/VNyQUDiWe44oLhleL9cHt+Rr7nuDP224fRl5kfawRCNrDhQ9+kHQxq+qTJiRX6uqCv78+g13rAkichywuJw86Q5+msVHTDBzyuOFjt7iyiQjJ+OfQ+topg5Dl53e6FbVQbBHEezeTfnO71td2awE3t5RoB0cjdnec8cyyaliOjf/KPmGn+E2zGjZiMKdO6FJsVz+o/0gZDvioq1eS8XkwuvBb+mKJWt5B5jdMOEbSV/PpDLgnkd83c+8H2Ujyxqv+4ckEIV7+pf4Gg2Ye13Waoma9OyA/RBpkvDG2eyNG5Q3g4zbaR2afTXwaH8HcMp3Z5di8xe9kK8dZAMAAA==
+  - title: What Is a Bond?
+    number: '2.2'
+    keywords:
+    - bonds
+    - payments
+    - bond
+    - government
+    - interest
+    - issued
+    - higher
+    - how
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VTvW7bQAze+xQcEyOuHqCCgCZDmsEdGgNFx5NESYTvjofjnR116tQHaN8wT1JKthPHcRdBIKiP35/KUH2Gmn0LJGDAsvEwcoaetgiJddTzFqN36BNwhIZdMH4E8oBPzWB8j9DpnHzCiJIgmHHalY9lEaoPZahKSZF9X33hHdzqIYHvHDdlcRgf137oUYvKw7HHEZ5//4H1oC8hsiOZuSg0UILaNBtgr9QkYEMdNdCahHDlTMqR0nj9cnuFxu8Gsngzi4rY4KTrHVm4aoy12Kq8HBT6OL9+p+KOnRKE9RhQgLu9ojMx2erDUrVY3L96Ny8uFvD86y88iGQ9Vo/gTSL2xp64LJ+gR49RCY2axw4jRJKNMlHIA+4dx8BxEn0Zdp8SoWJx1ynCQP0wAaE65AXqnF5G59ir7KmhoJwuY0vSuzJ3gdJ8QthhIqfDZJ6WXUR8A7iOaCTHEW7JWim+sn5enGI/DhzT8gYctpSdvhitgVU/lxqTgxbrBJ3WANKAJ0YdjxSz32+L9uC3mi9HgZXZIKymTv0npW/YZ2suNPhVwyNaS77Xxs1/ytR3x1E7ORz+lmCoPWOzr7qZtsZAzZxmFrVQi6wW1mTpJ4KmmDq2xDKL3gevsYaoXjS6Zqe2apw4N/Ef5T/sQq4DAAA=
+  - title: Mutual Funds and Index Funds
+    number: '2.3'
+    keywords:
+    - funds
+    - index
+    - invest
+    - mutual
+    - bonds
+    - diversified
+    - fund
+    - stocks
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/22SQU7jQBBF95yiVggkmLBhw1iWQBo0SCAhwQU6dtkppd3V09Um9I47zA3nJPPthAQQG1ty/e9+v35Xsb6mYcyj89SNoSUxchRVPWlHgwYu1Kj33GRuqUs60OBCIQkvbFkT1DDhk+sxXxaKSTs2Ew3OG21WSsuxUCsvnEw6gciZcbYf1SLWR1WsK8tJQ18/l8g2HfqwpbkFjVWL3XSrHj0eXupff0bJZQY2+vf2d4eDFwGqWcMH1Sy9UfB9J1zq/P+9znkXGv6oHeR14tn+kY7dEH9+dT1hL5o+eDptRqQAR+QGeRsc1Y4IIfxuW8wpDsHvQsuv38ZFN2HyYzx3k5ObSBz2ndacd6MTL2umvGJ6mhkf6fLi4hRDy+zaKUFORUJPGV2wgy3vl/+8Qr8u8dXn/d7r5rxRy4egv6Vf+U89Hmb3ID7PnAbcD+HQ+vIl6d0+gk2H4UIFk5YTto0LNhOC3mSIHuWckbluKmnjik3Qu846LHrJvYQAhDnBfwq5Nmi9AgAA
+  - title: Exchange-Traded Funds (ETFs)
+    number: '2.4'
+    keywords:
+    - etfs
+    - exchange
+    - funds
+    - stocks
+    - advantages
+    - alike
+    - almost
+    - among
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/0VRwWrDMAy97yv0Ad16HyGwwQaDwS79AdWWU1FbCraSNX8/JQ3rxcjS09PTUzf2H6fPBlgJGhfOWMEUymQTZkiTxAbnycAqRoLMV4eZhmsDFUABuoULykAv3XHsn7qx75pVlaF/izOK4UCOTLDO6I576Q6dsj+Z+2/9pQqJyAH+3XJfss7DZRvLMkDKdOMzZ7blgfpJRgJFXbrh7ZlS4sAk9kC8V8UIkWeqjb2Kxip7+bgJ2Nd39maQtALmoh6StyzAMlOz4pzAkfB13/0AZ3VjDtAomFYPgpaikY3JP05DPLgyrFcyT6DElVAgr7TuSYSxapyCtX/fThdatisgJJy1snlY3C4408Ai7tFK432JWvM1/Dx3eS7AVa+XiROtx/M7jtmtsGVrCds+uzlh2Sb+AZpusrX3AQAA
+  - title: Commodities
+    number: '2.5'
+    keywords:
+    - commodities
+    - can
+    - gold
+    - invest
+    - physical
+    - against
+    - away
+    - bars
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/12Ru27DMAxF934FxxZw4r0wPPSRJlMzFCg6KhItC5VFQY8Y/vtSbhO7WSRAVyTPvWx8+0zDQMokgxFEQPD9FI0UFjSRihCz7EHEx6b27V2TLR/WtG9kFQinIBp7xtDU/DYL78bO706kHEoTERfxs0eRKpAUXDm7DnERD07lmILhogGTsJe6ep7p2y/KIIUD484YE1/cYSFPfaCs+xvM14/davwuMxP/leRSEDKtpOPFNI0OQ+yNh3vc6m3FKbDTkwjx4YanYVhymk1NcETyFuFwRVuF2tR/H/+j7VFpBKGFcXNJZ0Uy5BakF8PBRtNNIEYxQRdogJhIfq+wn9BhZ9KvqC2d2EHM3ttpw0vYKBzKLlJAp27j3NOIPKC6pjiBD0aWeDjkE8KZChG7UhkhEYy8u74UaDZLlr2VvLiHS7Gad44cLA1Ggpykxbgthn8Afg4zV2ECAAA=
+  - title: Real Estate
+    number: '2.6'
+    keywords:
+    - estate
+    - real
+    - income
+    - property
+    - appreciation
+    - buying
+    - can
+    - capital
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3WSz27bMAzG73sKHjegXV7A8KFFgeUwoMgK7MxItENMogSJWpZb36Fv2CcZLadIWyAHGxZNfd+Pf4Y87ggDUFVUAhYXmqcKhSp7EmUMN+BSjFRc/0bxluVb1WJnyCVlKspUvw+bPH4Z8jjYryTz+BtPFTTBVv6a+rA5h9e0FuwVeLxrJ5b5TeYEr88vsFt8LcgKqdlTYAqc8xKa7GC5E5ue3e4Snf9h5V+9ognAUzHGCl93D9un+q0L36eYUYwV9IAmfJSl4BTp1jR9c4tDuXTjk8W5Ra6ko5+a+M4dUI0p1nPuptd16cFjSfVK5b8U94HOAAZUUpsPZi/vSntMus7AimZHgDkXsjkoJ7lkbWUKPQQH8jNdQblPcg3lB5szC3cnh5kVwzuIt9ko/qN6AxFZDAvF0boOEQVnih/If2L5Qwru5IK126HAnqCGdIS9jZRtDk6nFj6xfljFCmkyH9s+WXaxkAe0QxEqVZOQ/YZgxdwqlQhHu6qHvoT/AYrpFwbUAgAA
+  - title: Cryptocurrencies
+    number: '2.7'
+    keywords:
+    - cryptocurrencies
+    - technology
+    - assets
+    - beginners
+    - bitcoin
+    - blockchain
+    - can
+    - crypto
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VRy04cQQy85yt8JBKwPzAaKeEhuHAgSJx7erwz1vTYI9vD0pzyEfnCfEm8u4hFQrm0Wq6yq1xulvZK6+KSV1XkTGiQFKGngTwVSGboBoaBYw9dha5InvKYiMExjyxFhnoJP8mzRC1xDzc+ouI6HybFH2Yxhx2WcjGx7BjwNc1LQbtsNkv7rVnaxlyFh/Z5rHDPL2guavAj2u/ZY5Y59s3mnXRsWks8hdo7GkZYxJGdwrCir8rWbAI64NeYA9JU6C0W2NsbinSpnBgPuIMtcYrtYwBmsRp6s8HZNd7SOTzcPtn3d/rmIHsy/Eg22X+c3by64ozwIiU5FfJ60nzEYY2qaIWVM6pHnp/xp49oLxSDGNY1pE6EX/uLxEg4G1Oe7BzKPuMJ6xerx/tCTgwdwpLUQbaQIjP1rRSSv7//dKvDgIwRU6lgo6yl37MT2BylA5eEYSsa5YE4qMfr/QOb3O1KQQIAAA==
+- number: 3
+  title: Understanding the Stock Market
+  summary: '### 3.1 How Stock Exchanges Operate A stock exchange is a marketplace
+    where buyers and sellers trade shares of publicly listed companies.'
+  keywords:
+  - market
+  - stock
+  - actions
+  - corporate
+  - cycles
+  - dividends
+  - exchanges
+  - how
+  sections:
+  - title: How Stock Exchanges Operate
+    number: '3.1'
+    keywords:
+    - stock
+    - exchange
+    - exchanges
+    - order
+    - always
+    - ask
+    - bid
+    - buy
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/22TzWrbQBDH732KuTWBEt+LEBhqMCQOBBvSHFfS2DvRamczu6qrW9+hb9gn6Uhy5Q/1skjsf75+898s5EuIicsa8GdpjT8gUAQDjZEaU3CmRDhaFISi7VD0ylcQ0bn+O4mpEKI1ghF4D6EtHJWuA0cxYQUlN8F4wviQLUL+KQt5FpOwP+Qb884C26Hw6lQ4ZovT7ahunR6O8mc8whtLfSOHu+e37eo+W6hk1C2335Yv5/8n9hX7WdTTVdCO645nmt2VZq09wWN/nBXrx9X3f5LF0GnIt9zgeeYBAmgDTesSBYcT4TmONR9hpzBJa7zqqLcoQr7hCsWfVjUuR3ehazGuYa2DPpGgokeHZR9K5VTl1aKHjlsY12k8sGi2L0AJDqydJv56jXwJhXCNcmaw9FP7n+MYDwVzfaHQtlJp+xHQH8gjJGsSBEPqFK0up6gjJQtRUbFK0EXNd8NxZ9WC1oSAPgJ52IspE7EfPGbUfaVu9j+W6qHAxmjfc347ixEHYHuSJo69aZ5EvuU2Kjj192TukXMPRmeJrUY5+mipotQ9XGQkgXcubtm5o+kiBOEfpK/DDImDkJK/K6i68NVMOZQ+SU2s72dcsM/Ee93bXrjRIfRZUvXn129VQwyCphpmsOgC1Ihhsoq03veriQ1zsm4c4y+mTyQc/gMAAA==
+  - title: Order Types
+    number: '3.2'
+    keywords:
+    - order
+    - price
+    - stop
+    - limit
+    - fill
+    - types
+    - buys
+    - cancel
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42US27bQAyG9zkFd02NOrqAoEUNJAsncIG6BxhLlMR6NBRmRla16yF6wp6knIfrxEjSAoYMjfj4+POXyrHa2QYt+GVEBw22ZBB6nmHhSU6tahDIAf7AevLY3MG+l1v5scRxC75HGNh5oGFk65XxULOpcfQOWs4VrLsri7G6KceqdN6y6aoNW4TUeh9al0V+kAJZy0VTtVo9KXtEn0JXq7KQw5tyyo8/T4srHGotSMOADSmPegHlI9cBhUudFGl10AijpRpzAbncK+dDQBqN2HyCwyT0yoBG1YBnmNm6nCfaTJZMByfWypMmv+RSRYQpIvEF+5EG+g9qNgk3qu1GrKklbFJLEPkO6D3aC/RTkE0EFq104h3UAoY9tKT1u0RfPY/rR3buDaoNmxNaWRsZGV1J4Sg8xx3NPZoMKWUyn7igJ3+B++Ywyqbj7Fpahb3+E+kdpa6ZUuWEJKqps2T19XLf1slb6jpJJwOtOCCP+Rrnxaw7cZMFGa+ddCK99usZeG/FbcEmYTT4/fNX0qtlrXl2WbeBTzig+ds05Kkjrr9Ybs9SxFzN9THMDp0i8yz6gbmBD3vSsFHyrmktut8+7Dcfc0e1OFC1pxPCZMSsYXPB2BL6zP9imDXb9Vb+4fZ+t03Zw+SSmV68UWLFF/lJp7HaGp7DuHNPdZ8XEz4lwQaTixYJTvou+aOyPnwxLLmjHBnVRRHil+EPhZyVEocEAAA=
+  - title: Market Indices
+    number: '3.3'
+    keywords:
+    - companies
+    - indices
+    - market
+    - major
+    - index
+    - large
+    - performance
+    - stocks
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VSwU7jMBC98xUjDoiVUFtYcSKKFLYgUcSqqCDOVjKNZ5t4rLGd0tv+A3/IlzAJQUXscokj+73n5zcv83kBrZENRiBX4TMIesGALgaIFsGjrFla40oEXoOBWjj5/jdELjfhBGrqyNVgHHCH0hFu+9NR06Jpop1kU58fZD7PQhR2db5knxojcOMqKjFk03H/HZca/TSUr45M6y+WcD6bwevfl2FVVo3wOFlNoOTWG0c9XcEDY85bWLDD0CsnFSXTQKG2jJKO54ub4seg9HOmBv+wfCv0u1jNi3v4pSccKOLA0sd01Oxgi1TbiBVE3hrRBUs7xrFXuH5YXcHp6Hx0ffvfq2izQYKzs/MB+u5rYRSmY/iHMB3C2Sf5ZHcfKcKdiRHluzCtZoMlO26phCjoqk8mLtGVtp+ZtqDDEFstwOfZ75FL4Y4qBHzWZJIgdGTG6qyTamoRKrh6uP5q+Mmigx2nPkWBw75bH70LkPzJoV7HvkFIIZlGUxZco2jEYyI0PlIoaN2GRr0BOh7lGL0CAAA=
+  - title: Dividends and Corporate Actions
+    number: '3.4'
+    keywords:
+    - dividends
+    - shares
+    - companies
+    - company
+    - increase
+    - actions
+    - corporate
+    - goal
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4WTz27bMAzG73sKntY2SBxsxy4IkKXAtkMxoNkLKDZtE7EljZSS+e1H+U+ywt12kS1aIn/fR3rjtxsJ7Gy1faIzFWgL2azHyGbtt+82fruDYvwGJGDAOw7kLLhSN7lrvbHdnYBnV1LQp6ECggOpDWPtmgJZsinXj86jPA672OjS0HZvpL6W0PIa6uOH4PLT7MO6v+ZvvKBlEkarSEaXCiSYY4PLkSi9j5iEksFXqupVxe4S6ltYxQS0wEj2jBKuYshKQFMkrd50pMmvPFdNk4N7x2qNCQi7PBk0d3J/LSeuxUCtvrXmpHi1sZVuQm0CmLLEPLzyb3TMjY4tFoM3B98o5GIxWjMZ+s3mjEZQ0yHY2B6Rk4A+ocClJjWEsYh50pPOeKZcVz3Wn4F7zKpsCR9XpePVh4fs1pMvzjSPA/OYrnV6QZEdF8np7FWb1j3xDfsFz6oG/wb+kqDmyEttw6ioJ53zIAbAX4OL0JCEpIzxZyTGFm2Qf2N9jt3R5Kc50NCwDo6x01nQeXAXOwnXEeeBV6L3TQcm/SAT6Nk08T9mPCNX6kZ/b5crq1A/NnD//N60/tPuYcbz3U6j3KloTiNzIZ1jx+Ajq37BlM9pU/kPlw59V3vvBKJE0yhu686KTpWlknJjg4aKyMm4sTxos9607jf0T+aQNgQAAA==
+  - title: Market Cycles and Trends
+    number: '3.5'
+    keywords:
+    - market
+    - volatility
+    - cycles
+    - move
+    - prices
+    - economy
+    - high
+    - higher
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VSy67UMAzd8xXeIO4dCQaxRKULXmIBAmkG9qHxtNEkcWSnd5QdH8EX8iW4aSHMRXfTND4+9vGJu9R/MnzGLGApPskQ6A6BTbQUfIFfP35CnrAAnTLGFXQRhjJ4FP07+RnjgBa+F8CBIgU3gJ7WZUdRnnX71D/qUt9JZopj/4VdMFxg7Qlvap1uv6Fr9uz1412/272evd9Sd7tur7EKaJFBu7MTF8cW/pyyC04CTG6cWvhdlVVgZLq0/H3t8k8rNPxwq5PxXrnw4vljIFYbGFvO+4WqhkFCkaqgYQdPl4UhE7t4XkqsLpUrGc2fw0Scnx6RAxwZo73vTeqPbCyybA/iic5g8str576mXMlws1iBXB2RqnELqCy5bTLf0iX+oSh0xVjv9wgHZ/FiikDYludGxxLyzprl4W8fGO8becW9y+W/uRoEAY3MrLZPat7JSF6V6yXMwwRpfZNlF//u1weVC3etxCvwhkfVrUtyXueglNTbOepmYlvMj1r1iicZjXXKrG3ADMs8Nf03wlyjMysDAAA=
+- number: 4
+  title: Fundamental Analysis
+  summary: '### 4.1 Reading Financial Statements Public companies are required to
+    publish financial reports. These documents reveal a company''s operations, income,
+    expenses, assets, and liabilities.'
+  keywords:
+  - analysis
+  - fundamental
+  - financial
+  - indicators
+  - industry
+  - key
+  - macroeconomic
+  - methods
+  sections:
+  - title: Reading Financial Statements
+    number: '4.1'
+    keywords:
+    - cash
+    - company
+    - financial
+    - flow
+    - how
+    - income
+    - liabilities
+    - purpose
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4VTXY/aMBB8v1+xbwWE4B1FSNeWk1C/UGl/gEk2xJJj+7w2lH/fcRIIvaL2JZF21zuzs7OFX+/SweiSStd6ZTULqcAU+DXpwBVFRz4XSEO1tsqWWhlkvQtRFvSjYWGqXJlatlGQODHyauh2eSfkPAcVtbMyJ20R5znxL89WGBElwjH/bUVGq4M2OoLDolj69VPh14XE4OxxDSCABWb6orSllxuVfVSRO/BiOdT2b53Bx+j1bLbtUMfK2axYIvFUpKFk37izkA+u1rGncCF34oA5QF67iiavSYWIiAt0YRWmi6EFPp/4QhqdZUXfMb5NGHBzG/Arx2FsmvQIU6RVsNoeJbcnabLgk81uPx2b7lLwTnhFP23FQWLWR9cUIcMgLemRsuFOQIyBrBUtEWOClBBfkYBx5bzs5l52Ao0qvVcGkkKmhvlviZ5JrPLSuEjuDxrY8OgLUNZ51aQitBPPpa5hrdZl2d9IVmIbRxew7BU9dy6gybnBw/sZ3dkK9Po8OmMo0uBx5pzbwKjY1yQ/OymTmAzXgK/zuu4s9Ujcj4yiVlu+m0FuFrhK2qayoYoPEb6FtPJvHT8onMqLwbv/Ga5bV65uYTaBSzpEl24SH5KAm8idcv0NCJfdRa3oW39d9th3qoE7p61Fv7fB4WTugw8U2Vbgq+sLnRsGhTCeMh3ZZizOVw6dui44B2cNpCpLl2wH2XvygUi/Afg5OpNrBAAA
+  - title: Key Fundamental Ratios
+    number: '4.2'
+    keywords:
+    - ratios
+    - ratio
+    - assets
+    - earnings
+    - growth
+    - how
+    - price
+    - companies
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/41U0W7TMBR95yvuA0Kj0hrxyrJI3RZtSAyqMnh3nJvEq2sHX7slf8+1k6wU2OAhjer6nnPuOUfN+2IjvLIEHeoeBhtA2l0vHI5vo5Dge1ByqwcQpgZbPaL0ao96WOZZX7zK+yIn76xpi29ChwhmYMTMs+mH8WLQ/KFVsViss3K8AmdrpySee3teCmeUaentYvEe7uwBdkF2oMweyVtH0IsBGuvg9TuwDeB0ewl3qu3gElpnD74D/NGzvCSCLuAjw1xCb4lUpRGCqdHtZ5Esn8XMisrbE0XZLAe8hduEnYSt6sdAniBuUA0zqxMelxAx3mh/AVGhR8MOGlJMifWRGutT3uzqDyeurN0msusxCYKdcFv0kOajIMNfBBF63v8rYRN0sqZRRhiphD5mN5NlyfxjVGtnG+VFpbTyw7/i+sR04wDcC9cqE8VNB4JAQI9OovGixZiNwz2agCd7btAHZ4CrUXKbmPJs87l8ihqbRknFCFwy383VGyAQLz9XAKToWbJ+BneV/Ii4q4RbTphyYARG4jDZOp6fnXvGmRusfGr6l/+1J06kBk+b3WTjZvcoKMT4NBvi2JwT5dfBOd54BE/Vmtg4X2l5AKizjoHR7UCrUcsLif6y74t6P7Cdhu0c4IGdi0RHVcnD389noocOCaOoA8TngFr/JSyOgFe2gQtB6Q/iJ8pZZD9iBAAA
+  - title: Valuation Methods
+    number: '4.3'
+    keywords:
+    - cash
+    - companies
+    - company
+    - valuation
+    - value
+    - based
+    - businesses
+    - dividend
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31TS27bMBDd5xSza2q41j4wDNiWg3gRoEjb7ClxVA1CkQJnKNe73qE37Ek6VOUPYCQbihA0b95Py3619wOyhMiQGIFxwGgcdChtsAwSwKJg7MgjHFojYKAOXW/8EYjhEKK0i2XRr+6WwenhaDWb7b1E8kw1vBqXEO5L4jokL2hha7iFRxcO8Pf3Hyi3j59ns2WhY3fLNAHsWKgzgrq9RegjMnqBYYQKDTRJUkSoM1CjQLyY5vXYW1TyTYgP8E1M5XAiS8hz2CRWFcwKfCBpM7KlevrshDZhFSOZYtR0EfaCzggNOOrSW/A35Ld5n1K+8kk9ZOrImQhB90Om8RNinmdw9IYP8LXYzfXYzGH3Wuw2++/l+iLqB2OTnLqP/j9mzPM9omZGfjSJTYd6t4klHhcfaihpIIvewikUeA4WnYZUPt9mobtt9vPio+7TFvTmqK80Y5Ycjp1Ar7MYs88+aLvqN6hMhgoe8FePda7CFORpNmN2CsYf819rgPJlM6K9H8PaanlTP5pzbs45kk9KK8PoQ/dyqiSaWnIYpiJHojIXN/6PrXrJ/dL/ResJDcVOa/UUnM2BXDVNrZWYm2ahOpfuRtU/gDjKAX0DAAA=
+  - title: Industry and Sector Analysis
+    number: '4.4'
+    keywords:
+    - cyclical
+    - defensive
+    - industry
+    - company
+    - economic
+    - understanding
+    - all
+    - analysis
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VSS07EMAzdcwovoRrN7FFVaTSAmAUbJA6QSU3HkMZV4hTKATgAR+QkOJmvQGyqOvZ7fs92PTRPvsUQxfiWfAeyRSDfpihhAorwon9gIlA/cNCiEqQ/EMv9YPw0rxdDc1EPTa149l1zZ6xwiCAMK/aRFFcv9rldbXL6cdQ8mPCKApE+EJQYusBvsoVgBOuF5kvRStugkBB7cDiiO6UesUvO5Mzpbe09j+WtUArarWfH3QQS0LfxVHlr2XNPFiKqSqGRZIJLO1lH1jgY4xxafM65EbWmmLrawxfFwsnz6hx1c0Std1MljP9MoKoOyKq6hmUS7nlDDuMMXHpPuo+OudVIglHr8P35dZSLecJ4MJF145m7qjrKyNT3aJxsrQk4gyTklCA3UXRMPQbQzQ6K3zUQs3H5JMA4B+hHUuU9eom/3C91Y2jkcAkFoTNTQz4fyfGmejMpKSmZhqnrXJGet12O5wcZ/rgskQIAAA==
+  - title: Macroeconomic Indicators
+    number: '4.5'
+    keywords:
+    - economic
+    - affects
+    - consumer
+    - expansion
+    - indicators
+    - rates
+    - accordingly
+    - adjust
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VSS07DQAzdcwrv2AC9QJQNVFUlkKpyAnfipAOTcWQ7hey4AzfkJDihpR/EJpnPe/Z7b1x05SNKQ7caMBFQ4MxtDFCzBFIImCHmOvWUAwFC4LbDPFwrdCSOadHP74pZV14VXVmoCeemfMIXFljmKgY0Fi1m+4sfYJ/8k2K5eFjBQvjNtvD18QktofbiTX9F0Ls308i5mDl84ixdDJofwRrNsSMR65qCuaRewhY15gY6fiM5ZRl5ZTshRTcykjYsLmHkBFbTI2fedomHlrLBAxpOJKE6Ta1cofYtCWhHbjM3R9794coXdaym4H64O8KkoF4xjmVPKL2I4wZ4Nv83+zwOtprEG0xjGCy+xVyN4sf1vsJsCvQY//yQ38rToP/Sn/8Nd0X4embExDM6g6zJx0Ivj3hHMlyouZ9GJXrcG9rijqCKbsj9WRoADQjDFtSwoZvJk7Yo5sO283fymQGsXnp/MQyBZUw4DdOcfQNnRidrsQIAAA==
+- number: 5
+  title: Technical Analysis
+  summary: '### 5.1 Price Charts and Timeframes **Types of Price Charts**'
+  keywords:
+  - analysis
+  - channels
+  - chart
+  - charts
+  - indicators
+  - patterns
+  - price
+  - resistance
+  sections:
+  - title: Price Charts and Timeframes
+    number: '5.1'
+    keywords:
+    - timeframes
+    - chart
+    - charts
+    - good
+    - traders
+    - candlesticks
+    - close
+    - high
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31TwW7bMAy99yt4bIO0Rg+7GJ6BNQO2Q4YNaIeeVZu2hciiQMoxvK8fFTtNkDW7CBBFPr5HPhWhLCQy+bZ8mQIKUAO/2FYIm85wlCJbXosslDcFOT2cLVerrfVLzmpVZBq6KYblcUPeYxUFKkdifQshAcqSpcez7YNDiWB8rUlovF5Oz9+IamiIQRBTOe2RjXNQW1ZYS35JzQ4NswOnE7Enw1d4PXc0CvTECDVGY10OPwP6NXy3bbeGLY1r2Chl/C/+Rkkn8rbaXenz0qF2UXkV9T15N8EgqEJTMkSdMrxNENnUyPJwkn0GLCDKNYcnqqdcdTcNMnpdyhvGEdEDKe9lesp3Da+pKIdOhRzCjsa0yahMArKlWpWRI85hCHBLTdTylhXpDnTONY0ebhnruytsOnQB9lYG4+wfFWd4hxGCTFWnqO308MHEzoxle2zY9HjpplDOJoPKeJWmHXDUQZmKSQT2RokPAlHLQYLxks9lxzk/3vfWDxFPpD/9E3m872jg0/2rrn06XV8Rd+f3H+Rj9x6Y5YRkHI7IByazEPgMjRGNrWc/ebJpDe3RubV53/BR6lZ1X2Ik73MK6nZrOauXUY2fBf0+ye+XUF8WZwEPDnP4LbqSwUWrn+ocP5Lm+cZyPwMks4XyLw6qE97yAwAA
+  - title: Support and Resistance
+    number: '5.2'
+    keywords:
+    - price
+    - resistance
+    - support
+    - level
+    - stop
+    - where
+    - analysis
+    - breakouts
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/21SzU7DMAy+8xR+AKB3VFWCGzcESJyz1m0tQhzZzkbfHjfrYAwukRz7+3PS5u6l5MxiENIAgkpqIfUIQRBsRhi5pCEYcQIewbCfE/Uh+niIi0/ftk3urtrctWrCaTrxtc1Wn/r3kIWcOOIeIxxmdIFdWShNQMm8UgNSOKIAE5dpBmO/4FydHOGj8AeMIUYH/tF+/vb/j/y5sGIlcE5ULbKSezeZXioJ6bnQq4QBReEQrJ/XWd0COZDvjlMl+hGpexyckMYFMqvSLiKsGqIhatt4vw49xZA8rAmh1ifAT7Lffbey7uAmOg2wrPpbv6lSP/EfBMM7lxV/kf5txrTF+uC9Sw3YezI3vngKqbvW7SOwnP2DayC/Gc3hSpO/ubuEhAcwwTTUvXwBgDBV80QCAAA=
+  - title: Trendlines and Channels
+    number: '5.3'
+    keywords:
+    - channels
+    - trendlines
+    - line
+    - lower
+    - market
+    - traders
+    - between
+    - call
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/21RwU7DMAy98xXWzrDeUamE4ILEccA5a73VIrWjxG1Vvh4na5k0calSv5fn917q0NRJo/C5OUTkzhNjqqt1VFehuatD8wy6gdAKM7aaoKdzjxG8zAmIwTGModBAytSwTLmA0MnMBd1vooceF+jRBxN3Hcb0eEFGbx9PzSsqxiGv1B5hcPEbFTqKtpyE68oohffWISudFgii+eQ8RJxMzw5BiDVduZ+URufpx/RkMPI4rFhVtl7LeOmdxfT/VdFeoFxEomRFyAl0FgguOu8N+OvqNtFHCLmwHOnJPObbjlu82nsvra2ENIYgUW8MfvXIECK1OcKECY6oM9rMSho2T5bML/dbr9CaLyC1V9it5onPa6P73ZZsi2zqMlGH5fUe7OfojuRJl6KXb0oxNjIpYSrv+QtU91uXRwIAAA==
+  - title: Indicators
+    number: '5.4'
+    keywords:
+    - volume
+    - indicators
+    - moving
+    - average
+    - day
+    - price
+    - signals
+    - line
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/41UX0/bMBB/51PcY6kK7TZNk1BWqS1ooFGBKOPdTa6JheOLbKe0b3yH7RPySTg7bpOuE9pDojh39t3vjy+pxjc6k6lwZCwIg1AKVyC/+J8CftJa8YK0haWwmAFpqIxMEcjAmlRd4nkyrMYnSTV+LHAbznBEyr69/tHkIK+FEdoh+h+uEA4KVBWkpFfSlGBlroWy+zMS6wzpfHxPFRc20HaXDGOoSSXFLyXH/f6c1lLnMFmjETla6M0np/1+MuTgSVLHtEVJ5Aqg2sX2M+FEzPHhgl7AGdQZZNJg6hG30cdthfYCFrKsFMJhPegtuN4ArjYVadROMm1/Z1xxRnvajMqSWYzIL+AHqQw1zAxZbn5ZKyVtcQpvr7/h6+gsE1uYTyD1UQYnlrRG+DzaBQZwiazYfjcK88HuJSrG2e6OTQ0DS8NAacvrA3rludrCE5NzERYDN9B7WNwcEzynktHXJcidYt4qAix7iM2yghG39Gk0Om+JmAQs30bwHfjDLKnOC9eGp6HZL7uwZZra4DWbyILMPOOrLVTkIvcGfW5jqQ/AzSezS3bKoVAz0vyVo2Z/XMrd5zHWRyPSZwvlDrJg2zTmsZGq8wO5G2ew1KGqkhoHbCYvf1xcS+soN6LsOHJnj1vOaAQMLAw6ndnOTsBNJbRl3w75bjnusOPhf3MwJbaaztHAlBHYY5iFQQwddi6/dZwrDN8TXMswGTpYf1l/T24aVSRv4wnBOUq6LbcaJLMsVUeupUHxzLfS7hixQWzccELGFZvL+h9gnsIs6syLIzgxI04eCy8F8qgzsUTJZZsJ2IwZP99euLcOup883thxgiFey7yI44/tGXfwyWsZOh3ALVt3H/fnhALtWbEZ2Q5fqVNVZ3gBd/psKpTwJoxZvbvpE4+YuDo07f73vaGVVHhE0jvXfEf+4wUAAA==
+  - title: Chart Patterns
+    number: '5.5'
+    keywords:
+    - patterns
+    - continuation
+    - double
+    - movement
+    - reversal
+    - after
+    - ascending
+    - bottom
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/21RMW7DMAzc+wqOLRDEHzA8NG2RMUDyAcZmZCGSKIiSAW/9Q3/Yl5SR46ZDF0Ik7njiXRu7A+ZMKQhgIpisFHRw4eQxW9ZpnwgzDXCeISbbE3ieyFPIWziNNEOimEi0h56doz7bSTGYrpQhytyP7NjM27aJ3VMbu1Zy4mC6HXvPAVbxtrnPF1xxWpzt9oQDYBjgOHJxAyWB788vEGsCOlHtSUfo2kaxlfDG5ewIThyhgXvzyjmzr8SVAPFXd2XuSqxKey1KuqHPxTkrox4Wsg2lGvIgnJLFYBwJPKP0FAYbzAYGerxl9p6ymobuZVmoXl655H/kPxwaqR84UAgY8nLpX2nAi5JgMarGsPKb6lfs3rEf190gxRgS3RM5azxWr16j2+hpt7zCxd5zBitAIguuhvUDkldTcBoCAAA=
+  - title: Volume Analysis
+    number: '5.6'
+    keywords:
+    - volume
+    - price
+    - down
+    - strong
+    - conviction
+    - indicates
+    - interest
+    - lack
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4VSy04DMQy88xW+I3XvaNkDXEACCSHE3STuNjRrr+Jkq/497j5a1PK4JLEznnjGqfvmXWLpCHQjOwVboEPeW4iJtHLCOaHLChaCHT35VV31zVXdN7XmJNw2D6HdwERTV3NuwTyyDw4zKUwXEDiTMWdA9mD0Q3A5CK/gXrpOGDDfTLUl2hJDc5cIt1Ky1pVFY+qVBkqK8VvqGT8lAZNpsEs+oquR5tTrkwn8t9XCjlJGa3UPxhrRbUHWx9YvDJgtvIaXFBzBm7SUN5TOXlgETaDSG36YCu18u/hT+pyI/UnZJdzLjq1gZ778Bh8hP/IrxRhs702JlkR/V85PLQ6c5nVm7+xAUBCmA9L0Qyc25kQx4Ee0zyMSFdbm54AxeMyHLjS0bHMcHf0CvyCpt4wCAAA=
+- number: 6
+  title: Risk Management
+  summary: '### 6.1 Why Risk Management Matters Most traders lose money not because
+    their strategies are bad, but because they: - Risk too much per trade - Trade
+    emotionally - Fail to set stop-losses - Over-leverage positions - Ignore market
+    conditions'
+  keywords:
+  - risk
+  - management
+  - trading
+  - control
+  - different
+  - diversification
+  - emotional
+  - importance
+  sections:
+  - title: Why Risk Management Matters
+    number: '6.1'
+    keywords:
+    - risk
+    - because
+    - control
+    - losses
+    - trade
+    - traders
+    - bad
+    - can
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/12RwU7DMAyG7zyFH6Bj96nqEQkBYgIuHNPUa83SOIpdpvL0uJlY2S6WYv+xv9+uU/PCoqDZdZgFAgvCyBFniKzQoneTZXRAyiCmUuwJBVxGaF1XQTtdqeZdvU3NXT0FC4GaN5IjKDOMkx8gYT5PqrdWK4KP5Qk4shJHF8K8lh4cBfsLgmqjOW0MTlBWwes35k1Ai65HSCy0NPkneOwjG+jo8tF6eI7dlWJbKFPzPnmPIkCx0FHsTTuay0Pm8cbQPrOi16JxidSFddwTYloKZ06Q0fys1WfU8u1EMS6r7jOfbkCs+cFAyiYuJ9GB4nFhS5lb11IwDyhVuY/HrI7ikrg/c6bmk6cMX9wCybI9c62ZA5wGpzDzZNjxL7mDbPepLqsDoR+swMUOOhJPKVDE0vgXeOPDmSgCAAA=
+  - title: Position Sizing
+    number: '6.2'
+    keywords:
+    - account
+    - position
+    - risk
+    - per
+    - trade
+    - loss
+    - size
+    - stop
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/2VS3UrcQBS+71N8FwoK2yYrFcoSA0ItFBREF3o9JiebwfkJc2Z045VXPkD7MH2AvolP4kySzVa8CZkz3znfz5miK68tSy+tAcsnaTaoyZPT0hCjtY/QoWphGwgDwUwevQ3g1gZV4y70X4qsKz8VXVmwd9ZsynVL+CG3VOOaXEXGiw3hJigqsgmx67gSpod3oibHcJLvYY3qsXx9/nNymCh9S9JBVJUNxqMjN6Jnyout0J2i1e78sxnEteKBIHCwzBd5ns/9wtQjy/JwPwuvL7+hxVbqoKEsM85SYz5zrFvJ6Bw9RCccpzb0iDtRj92MxlkdE0vO+hRe5J8Vf4hmTvpWPsWQrNNBiQ+xnKOyWkdUMwJme+/bz3B0Pjm7Sa6SpXUSdYwMR7fedp8vk5/vkr0wFR3vxvyy7j5uh96FF1T8KFlOI1e79IosFoebmWRwvkopjlHtIRfGux7C4+A0X4CThCHSVPn6bYg6FVFPktKAk337/w+RpuH49zdi4uE0j49OOOIJnw2Kp/2Q4RCvYnBRgVWK6kX658gT1zZsfVjGG5O615DuAgAA
+  - title: Diversification
+    number: '6.3'
+    keywords:
+    - diversification
+    - different
+    - risk
+    - among
+    - assets
+    - bad
+    - bonds
+    - cash
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/2VRsU4DMQzd+Yq3AaLQHZ1uAgkGJgbEmOZ8Pau5OIodSv8e94CCYIkj+T37veeu9Hf8RlV55BiMJWOmkBVaKoWB8xYHaRWzZDogeNli4HGkStkQVMkUJqg0tEiorLubbl36s670nVp1/L8F9+9hLom0W38BPgkt+ZO4fzaJO8UVNpKHY41Bp27tnaV9d9quFE2q4sIoTitMFJJNMVRaoRknNia9/EWUmdQ4+kTORjUvakLCHOrObfwgn1oydoWw+hmBu2xFIRXGM401zPQNXy+yf8y+TAew+UzzFX8tlv5xhCeJIspLFmPgpKsjYxDSfG7YcyFIM9hE2E+SjuhqoySWU7QPsicP9RZ/s2VFFj8MtG3crDUjjK57E4blOC4shy3Nnt9p2Ks0ODYlZKLBv1Kuk/hpFSEPfm6NngZnWhgfrrLiADICAAA=
+  - title: Stop-Loss and Take-Profit Rules
+    number: '6.4'
+    keywords:
+    - stop
+    - loss
+    - profit
+    - take
+    - fixed
+    - levels
+    - trade
+    - above
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3WSQW/bMAyF7/sVRE8dEDvAdhsMAx2K7dIOwRbsztqMzUYWBZKu438/2Um3oNsuOvA9iXyfWKX6DswlFUHMgA0QklJLTjpwpBaScHRAh6nnpodZRqAT5wq4YkvgAoGHXFgeKKttqt9Vqa7MVWJX7+dEBnKAH0uPh2whq7YX8WweQz4C11/4lNvdSwioq73a5uoq7Ugbio4dvRF+SkDnwD4Xn9Hy9UWGWyq7cgN3++/v/1j31PSRGwwXzxMFmcDGlER9A/gkLwRKxuYYG9oAeVO+3t+uQ17FwiMVO5VDzv1ALxTehkpnS1otBj2FtKIL0hyBI3TI0WBi72V0MGoktkU3khnH7jfFR4zzGbMajEaf/kVMaUJtIaxjvGb/cAJR+HgCZTteUdihOmcG58EKx2PudwVJMdOM3boS9p/wXyW0FEHHQH+l/panUBgWlni1V4dRvc8CTjjDzfNovuxNx9mW65dNGkTzD4gM5c3y3C9hgfdWmwIAAA==
+  - title: Risk-to-Reward Ratios
+    number: '6.5'
+    keywords:
+    - risk
+    - reward
+    - could
+    - make
+    - rate
+    - ratios
+    - what
+    - win
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/22QQU7DMBRE95xiFkWCRRvasoosS71C4AK/jWmsOrb1/UPUHSsOwCE4WE+CU9xFEBsvxs8z41FRNzadlhKWbEbiFg9N3TziEPpIbBLGjgTnMGRlcC1cSAbvafVXP5L1K1VFfaeiVkk4+KN+EfLt5NmQ2JBUVfRfbnD5cFav6w0un1/g3AOLNSSgp5PBYqOqfF2Y7f/MtjDV1S3qHYSpNYzRSlfPg56f7rPswSRmbs3zCXiqW4ioLx/fB/JIYp3D3iByeLNCe2fKh2/Zr51NsNNkZ+QRc0MRwwl9YAPpssct/frwBzHMFut7AQAA
+  - title: Emotional Control and Trading Psychology
+    number: '6.6'
+    keywords:
+    - trading
+    - emotional
+    - after
+    - analysis
+    - any
+    - avoid
+    - big
+    - breaks
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VS206EMBB99yvmURN1f4CQmFWjUbMbLw8+FhigUjrNzLAb/t6BXWVjYkII7Tl0zqVZyj9pYOh9rAQVKlRkW6DAOO0zyhBUoCdG0NZFcHEEI/vSKTHYI8pOsRmvs1XKz7KUZ7ZDscnX1PcU4a4n9RRdgHd2SbLVET7Qh2Cv4PN7dHZabUJEfGyABoXz+83L5iJbGTxzXnGHsTEd7CrjLMBmh1xSrH2FscRl/8amjuIFkuPD14KtA82D9j5GZAElAtMQxoXyjKoTxZgTg4d4xFaz6sXpA+3tf3jsE9MO4dZL6VOwFP8xu2W8SsHCNEM8zn5OVD8hJnA/LuHLejAfC/4hCGWLZRe86ImjN/VlN+mosLbZFbCXDoLNCCesd9chFIyuE3C1tQ2Fn1OQqUyzKnjCvtmRr36l7Fs0zT99htFkOG6w+hPLlqlGq3EufTY35Wsj9fek4E2Fg2KQ6a7JJURSWwdSnRIxJQ5aKorDrfoGQwKxfKYCAAA=
+  - title: The Importance of a Trading Plan
+    number: '6.7'
+    keywords:
+    - plan
+    - trading
+    - conditions
+    - criteria
+    - day
+    - emotion
+    - entry
+    - exit
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/01QsU7EMAzd+QpvbGRHVSUGFiQWmBhD4yvWOXaUOPTy97g9pLvFlp+fn/08lflLewWrMZGsUDgKtB/tnIBk4Z7weQplfpg6e2CaP51quA6onbFNwaED/6B2BqZMdge+itUR8EIGSyXDSvHWfI8Xyj2D9PyNFfR0XIENilcpjntmPaNLqCQyUmkwtMNGzGFTebTr4I3/5pYk8m6ojWaY/1vhMFHmF9j8GkO5+q2Y9df3etrVIUqCk9bFIdaVlqf9A39CUJrPKgEAAA==
+  - title: Risk Management for Different Timeframes
+    number: '6.8'
+    keywords:
+    - risk
+    - different
+    - less
+    - stops
+    - traders
+    - use
+    - about
+    - analysis
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4WRTU7EMAyF95zCe37mAlUlJEBCDCsGsfak7tQiTYKdFsLpcQqjipEQGy+cZ7/PL01qG80Sw6G9wQI7wY5Em81Pr9mk9qyZvBXP7bMSZD4MGTTHZCrrLQ8PRAmE9RXoIwuN5AvoiN6vkus5cgdxJgnLhhSVM8dw3LJZTFaap3cOh394XtgeT1keoxDQmAZUVogBDCh00LGQq4arclkOnlShF3qbKGRf/sDZWrnckYxwH2Yyyz+h7qKbFt+O7Vjlnh3+9t1WRxeDsyyoA9zHKUM25CgoBebobcBzLutITf6YGCh/1mzOoZ9Ch6NhowcM6ItdfMJ/i26whIonqCdaCApoaH1PFkv+/jRMSaIJL2BfSQbzEg6Ok2VjYyNyWLpqZlf12i8nkAchNgIAAA==
+- number: 7
+  title: Developing a Trading Strategy
+  summary: '### 7.1 Types of Traders Different trading styles fit different personalities,
+    schedules, and risk tolerances. Before choosing a strategy, you must understand
+    what kind of trader you are.'
+  keywords:
+  - strategy
+  - trading
+  - backtesting
+  - creating
+  - criteria
+  - developing
+  - effective
+  - entry
+  sections:
+  - title: Types of Traders
+    number: '7.1'
+    keywords:
+    - strategy
+    - holds
+    - trader
+    - charts
+    - trades
+    - uses
+    - different
+    - focuses
+    - fundamentals
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/41TTW/bMAy991fwuGXJggLbLfChKIYWKIYB6w47qjJtaZFFT6Ji+N+PVJKmH0GwiyFLT0/v8ZGbsbn1XYcJIwMn0/rYQ+Y5YIbOM7TPhyOmTNEEzx7zErJ12JagSxNbSD5vgSlgMtFi/rxZj83VZmxusKOEYB1RVmoj5Mkw9vMSZiowlMxQYivkrDyTMwxbLyvqqh5MFWcSHjgpyCf4ZrG4NTM8VshisVnL1tWmHA7vKLR5f198UILBx8KyZgJHJeUDXj7fCWiHKfreiUlRyZ7ii/NvZEuWmxTBR2WUV60ziTN8uF4Jr3Jef9XVx9OtO6EDY9nvPItVp7/iHPOReV2lrqubk6Wfkxbpf02JlOpoQty+UPxL5X5Zqc+lYHw4Cj5BHmiSwu4FLaFD/dsTnzD3LZpQ3xmRxoAweRZP8IeeQDaDHzxjK42QEKUIfsCL1n4cSnvZXc2KIrtqbEaT3kahQXTSMWaQrjQhwycYjE0k+jG2b8ugpQnzulKerwN0Cf8WjFZiChT7FWMaoE80sbto6EHBjwq+jzvMTO893RQJSNvaPZtr0b4uc5X5yhDFMJ/tP0vDSIKsg6TDIgFJJE/FB907o3ZsfksX6Phlyeg4evupGwxbp8OlWXZYh77SjnmWC4H6uY7cP8FJi+4jBAAA
+  - title: Backtesting and Forward Testing
+    number: '7.2'
+    keywords:
+    - backtesting
+    - forward
+    - real
+    - strategy
+    - testing
+    - see
+    - trading
+    - whether
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/22RTU/DMAyG7/wKH+EwdkdVJRDjiBCaxNlrvTZaGkeJ29B/j5N9dBq7JK1fx/b7uPJ1FSWw6+o3bA5CUYzrqvUpVq19/VD5aw2Mm9hOFAG9t3OOzDwG0Bco1M0gDL2JwsE0aMHrRdCiYBYiEfScwAgkHm0LPU4EnsKew0Dt871+QtbG3OPlqI5WD2vqza+nRqiFZBzk3tVao0V6nShgRxBMPKyEV4EShnbR3wOmlpOLS+inJ+kpgB6LFRNhMriz59Lr0ntB9sEhF4btadTHL1QvsA3Y6u/TP4zn/LO1gdBFkGP6DUZrlEwy0vMoxUhOCaRIB3Y0X1BtFTb0ZH1hlAnfcPrWNysxw4UzuuaK1WZgMey0rhZv8ucdKmG0eeGBgDCWFe/ZWk43XD5JwUPDw6ALLrM26I3oPToxtgyoqrckBDuWXu2Sj8XLH0To6UeKAgAA
+  - title: Creating a Trading Plan
+    number: '7.3'
+    keywords:
+    - trade
+    - when
+    - above
+    - plan
+    - trading
+    - chart
+    - conditions
+    - criteria
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31UTU8bMRC98yvmUgERIVRVe0BRpDSAyoEWQSR6NevZrBXbY9neJNtf37F3yW4C4rIftmfmzXtvPHWzOUQvpLIrCPwRcdVAqKjWEl4Rtl7FiBYKjcLrBoSVEBwWqlSF0Lq5nE7c7GTqZr/Q42mAbSUiCCjIOI0RwWlhQdlC1xLDdXuYND+0mo1GD8KvMcIdFXUYjaYTXjyZ1t32c6RiHbpFftyRx13/u/CNi9T/31upChyc/+OiIvu2MMlpJ7l2D2CpDJZeGNxXd7PbnUjgO7BvaG6E4vaLSvgIJXlAG70alntBXB+ciB6ZrIJsqbwRCcunUG45YQML5hu9EgM8N1gqi3D7d75YpnRS5b4gJqpNHWLSyWB6cVlMyDgDyymysNhJ1NbbtxeO+nv0zB6IV9ogfL8aS9GAoU1Os0EvVth3+vR8D4WnEPJujvh2BWelJwP84wNped4f/+lRrKmO3VGPQYUoLFcjC5VaVbAhXRs8YGfAy07Fj2hZbgmQ944bYdu4sWZ0cJbNqOxGaCXZ2IkybDkZwFuKNY6dp5LLcAR7PRJoth5HwkooG84/1e1JhTU8CMsUGaYenmom972djmH+RmYKfAo2STVW08LXL+DQtxB7hO3RilkFWWdleRYtv7nFZDSeVh/HzI9pI30YtDffkJL7CeeWcMfGNMhW1bQFDh9IkKorkp/PzCOF7EB4Vv8454FTE4hk1opTm7qoEpcsALJJ941BnY2TtGD0ptYiQPbOohKOE8CPA8cOhjVH91QPKmfSU7ojljlE6fZqIzcY1rnMdDC6rbKWGRvcK3WMaY8t1K9/zER3fS32M/luao/gvCR7NVQfK7xfl2RPY0fTGV6uLi/A4jYAO8DGcJElY6n4NtEqNjzqG+XJJjI+dKlrM7PqkurXeA33JajI17SlNBippM9X9MWgumTJYpbgP/CmpJEdBgAA
+  - title: Entry and Exit Criteria
+    number: '7.4'
+    keywords:
+    - ema
+    - exit
+    - above
+    - entry
+    - examples
+    - moving
+    - resistance
+    - stop
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4WSwW7CQAxE7/0KH6kEBCH1FkWCikMPSFXpD5hg0lUc72rXCfD3dZZWpKdeosgavxlPUobqlQkjxJ4pAbHrnKASUOfVeUGGE9Uu2WtalkWonspQlUmjl6baicYb7K7YBVsui5/xXdazPdhV20jY+l4Bj34gQGjpBpGSS4pSEzANxGVhyix/75mPWLeg3rSdH5w0gANFbAhmtGyWc1ivYLffPD+WPg5vv9LRyZ/BrGLyfHpotgZ26QtqlJOlVWceAVUpSjKwND2fDTCH4ASOGCf4/Qbq6FPKUJi9ZPv7KKfLh61Xf1IV+f5JV1en/1V1UB8WbFQ4EvuLtVSTKKTL6GKDR6JPbGkRoj8bFBWErjrpdKKL6HjcToaGs2ej5MgCfdBIMikoJ/QCeWy08Vj7/Mk19hekyVnfrL7DXDQCAAA=
+  - title: Record-Keeping and Journaling
+    number: '7.5'
+    keywords:
+    - journal
+    - price
+    - traders
+    - behavior
+    - chart
+    - discipline
+    - entered
+    - entry
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/12RwU7DMAyG7zyFn4DdUdUbgnGa2CTEMbRuY5bFkeO2lKfHbTe17JLI9hfn/+0ilS+CTkHF1Sh5uqszYI8yqqfYPha7VD4UqSyyCse2/ORO4GS0FeHNgugCHD13oYZ9rEJXY7G7ssvbLtgRqHyOKiMkocoIi5fkD+l97sCZlDhCpt9N+sOPMHIHGBUF67XwysNcaDDoFjdbg8Eg1HoFFhgmVStxrAQxZs+agRtQj1B5J7ceu1l4Kt+xJxwmu+Pk/fvqeaAQnv47NBKtcqGs7ox585M3icmpCY8ZKC6dvtC7nlg2TjCk2QonpYu5X0Abp1NsxxXcX5Jwj1BTrigFingn+iDcYM42RRN0W+5N+rzeJTvv9w/XOJ10BgIAAA==
+  - title: Strategy Examples (Simple but Effective)
+    number: '7.6'
+    keywords:
+    - ema
+    - below
+    - rsi
+    - stop
+    - strategy
+    - entry
+    - exit
+    - breakout
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/5VUwY7TMBC971fMCUHVkrIIrShRpd3VIjhUQtsizk4yDVYdTzTjNO3fM06y7dIuFA5xIvu98Zvn56T1/AsygokPrLGFDEvrPfJkzRZ94fYggU3QWRTYUwO58eB0ggF3tfHFLE3q+VVKTgdn56PRipU3+UzOUWt9Ccuevx+N0kQBV2kzQFdETmZwPYWHxe0YPgzvx+XXAajDgw+8n8E3trkqzGiLkFH4GZECuntEw6syfFL6M9bOhidS7khUeoYqZ9jjCFwGqmdw160x5ugDSCdaJ46oH8SbWEECWA8h9hcxleENBnk7AJOur6Qz4ujGHaPZUBMu2rBs6po4JIxiJRiv0h1u0ckYtuSaCs9MOZTufXlGbK1a1LNAarvBU2tWbKyLPYgaAMTgcRfgdOuXfcqetj3F2Kp22B1KTS3yunGw1tKqwwQbV0Qu2rVAjdejFmax5C+a9lJWukQ4TcT7KbymWIlc8Was3cVv42KCC3dmSaQxhoa9QKCYFNV+M/3frHwXLGJK2PgSJxk1asc/BWVB21jsVkWaEuGeSSSq/7MHQ78fY6Qhj3jNeUe5fvd7zPsODzDITL6Bglr/9+76RB4x91RVeihGh/Lwo+ivoXElsaausrleEFPo/Hm7vwD3wQEGbgQAAA==
+- number: 8
+  title: Options Trading
+  summary: '### 8.1 What Are Options? An option is a contract that gives the buyer
+    the right, but not the obligation, to buy or sell an asset at a set price before
+    a specific date.'
+  keywords:
+  - options
+  - option
+  - step
+  - trade
+  - trading
+  - avoid
+  - benefits
+  - choose
+  sections:
+  - title: What Are Options?
+    number: '8.1'
+    keywords:
+    - buy
+    - asset
+    - gives
+    - option
+    - right
+    - call
+    - put
+    - sell
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42QPW8DIQyG9/wKz6cot1fopKpDx3bo0pFwDmcFYQSmp/v3NeRr6NAsyHptPzyySdNrBE5CHIEKWHAcJVsnIIsV8PSDRUuEY90w9yqTX2SvgUBk6REfA3nbIHsQbrPAGQqGADaCLQUFlGahFSmTUx6eOGOLEjo6kYPZCh7MmKadSdOXUmVlkC1hebmkHPQJNA3Dm1XyR7ceBjNqtjP12n2/K3fRm08Lapwxh42ivzgdrqv6fHPtY3qAxl4XjLBpJgvFc18uwu4MK2nXM9R0Wx77x2OXexh+6nWeF+yXetowKftfwZnX+FfxFxoqxBnwAQAA
+  - title: Key Option Terminology
+    number: '8.2'
+    keywords:
+    - price
+    - strike
+    - stock
+    - contract
+    - money
+    - option
+    - call
+    - date
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32RTW7CMBCF9z3FrCqICD9bmkZCbRcsKpDgAq6ZJFaMbdljtblBe82epJMQUOjfyopn3vec97Ko85tMqzxJduRVjbD1SmKSLGFfIbj2AwTBa6VkBY2NIIWBl9jMAmoNxDvRHNDrRpkSRAhI02zGvB769OaUF6SsgUdBHbc9mYemU0tryAtJgO0mhiv11uNRxeP5NdIGAlt0Ous66EU+cughVMLjeAqLH+N7WMznp/m1xdqkjEuP1mADo/X+edy6PQitl7AjK+s+g9uS7iB0EU1gG+nbVF+mQ/gmUmqLocHmbwP9r0H5q8GKhvBVDx8KPz/ee93p4vzzs654l3OugRsuCuSU2g3ucQJehXoCwhxaLfdVNsB98wqHygSXfwG9MfoaOAIAAA==
+  - title: Why Trade Options? (Benefits)
+    number: '8.3'
+    keywords:
+    - income
+    - moves
+    - premium
+    - amount
+    - benefits
+    - buyers
+    - calls
+    - control
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1WQwU7DMAyG7zzFf4QKsXGdyi5MQ0hDQkw8QNa6qdUkrpK0Xd8edzAENzuyv99fSnHbm9LxtigONFI0lopig2cJOYrD43qN1JpICRPnFgbJG+dgvAwhQxp4CTQ/lCtF/HB21HCgGh+cOtw2EiF9Zgk4DTPFdLfw38yZ/eDhJCU8oY/kWdvecP2PtXd05hM7zvOy9h6l4QwOG3z2Gj1SusdOpnCtj1zTZOYEb2JHWV8OMkFPaNm2GMWZfIH9zXgNlXjCCwXVXw5dko5Za7Ks4o47QqX8qFKV2ifY71lCJDs4E38F+MK6Kqz0c78AMO/CmmEBAAA=
+  - title: Risks of Options Trading
+    number: '8.4'
+    keywords:
+    - options
+    - risks
+    - accounts
+    - away
+    - beginners
+    - blow
+    - can
+    - changes
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/02QvW7DMAyE9z4FxwRIk70wvHTu1KCdGZmxiFA/lai4evvSRhFkIYgjP9yRQx6/PQtBTguVa5MDpKycYgWXAsHC6qFF/mkEheutvg2nPL4MTawIj2e2pYkcdtidPSnugVAr4GIKKuRCgVuAO0qj43AyZOPeU8hCvzZnx3GGgDeqoJ4CeCwTFdBkvtZUxTg9kZ8kYirslsJqzd7YDld0ZPvCwcRpi/rEfCVBZWHt4DzG2awcRpgKVmWHIh1CutP/6Vsoqk/8B8YOF5o5xtXaVsurkFWcCSweXCQtgM6lFvUBnrYn5fHsua6+WdezCJ03/57aeqIWnOjx8opXkn6AmBQKuZtQrdKP68v/ABuetQWpAQAA
+  - title: The Greeks (Critical Concept)
+    number: '8.5'
+    keywords:
+    - options
+    - how
+    - option
+    - delta
+    - volatility
+    - changes
+    - greeks
+    - high
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/11Sy27bMBC89ysGObWuKzdXwzAQ1EFiIEGC1MidoVYmYb5AUnZ066lor+0f5ku6etiVc5EAzuzszO4uwvImEu0SLIlUR4LyB/iQtXcJkVLwrkT2kEq4LSVoByvijjIkI7rjFYtZWH5YhOVGabeDr5AVWYjU/nERVJO0TBctMCgPFbXhj9HLyWRFJgu8/fiLlY4kW9JkMsctm7G1VJ1QX4sQtSRYv2c3B517LGUvdwW+CWNQtlpzfG1tf76c4rHOZ2/c5bLAiihgvbk/hX37/auX6bQtuVzg4R1udM6G/hMWM3Y/RNgoGiJstCXWl6I5y7AXpqZxEuMTZwgUUYqmwNoGH7NwGZWPczz0pJe6ocjdf/4BObLN9AgkMuaIVFGTK8duboS1vZsrKYmJYjzTSqRhJsfFFrh+DUZoDnpQzSl0qsuSnGmwZQg+dp6RAlF5Fv6Ztn23Z2+4E8+py37fH1UaXdWwv+M9dRvcn4oK3Ort+KGLp9q3EMnq2qYp7ljsHUMqEuFEGTt7Ut3GsXaZ2EnGk8iUOnPacSCqKr430KukkNvzNt5tvzDXnobw8e766vH7p2PgGZ/tPyy+uzU4AwAA
+  - title: Types of Option Strategies
+    number: '8.6'
+    keywords:
+    - strategies
+    - buy
+    - income
+    - premium
+    - risk
+    - spreads
+    - call
+    - profit
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31UXW/aQBB876/YpyoQAulrSpECqVKkVI1KP9THi702K853p7szjvvrO2ebAK3SF2TsvZ3Zmdmbu8VPpkxFLq2X30xxyxWJiRZPnpk071mHm/nMLd7M3WIeoremXNxOacmlGMOeNtGn88KBLjZSOc30VlXuPW1UwX40nw1n+h5W40fLYjxe1q2YklZK6zAe39CdeM6iWKM0PdVaS9jSE8cJfVbPpG0I9IGc50rqakLfjZZKIudUuyA5z2foed74sY7/9mXl/9t3KSV5bpTPSQoK0WY7yrwKWw6nECu7Zw/wjjxdrE1mKx4ltC+NoXfX1xS2ykORSwqsNSlorPWE7hmKQa0j4Eq5YQQMHYGd1xlTbhvz91grsLjacFYn4MNwm9Td4Q81ErdAScOpbAcBJvRReQMzE7cJPdrIJgpotEBqh9lUBLdcQmZrEwe0WefR0ezllNYmsq84l8T91PA7LsRwfvVVwo42mErl4XXLf7CPAiUOlWkCuEXKkHXJohe9jEUS/YFegSCBPDh72fGUvjXIZ+s4pOMoT+JS6HrSxZCdEcyE20mc46fe/tGUHlJ6AvlEW5l88Hx6pjd0lnigejD5ZPreb+dsQBDJFpTzkxzAJvTL1mibsexf7IbTBYRB9jq9JIC5c4ziR28LnEXmMPfgTYiqDfAvpQfCKTx5ZcqzUKzRjlbW5NYnNkmYrOfd0wjH1oZSoprUs1J+xxHfHmzTaTABGKrbIS2vBGE1pdt8r0yGAB5leNXtVJLnmo8290ZddvlTyRlk9NlhO/Fvub6nCmtFF7Uj67sVgIf3mCJSgRfwziDWZ3uYIEw5QDwgGykiPWi3TtmWlWOPXbeeyVtbda0STsXJhyWHSM2WDbWwi3sye6tVFC2xTW8UNtGa8wsmYh0KLT3uiybArrOI/ZzQJym3h4vEc2qHyXCrZjbEU7edF6w7GwTMpLRagzLlS4791XvixB/8tnMZrAUAAA==
+  - title: How to Choose the Right Strategy
+    number: '8.7'
+    keywords:
+    - expect
+    - spreads
+    - buy
+    - calls
+    - condors
+    - credit
+    - iron
+    - puts
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/33RwWrDMAwG4PueQuewkXsJObSnHnbqEwhbTcwU2dhy07z95NAxBl0v5kegD0ke0viJ6mYomlFp2kAjLJi/SMFF8UFDlHIY+jS+DZXt4TB23fkKW6xA90ROAQVq0kziu+4Ax7qBQ+bybpF5z1BSJvRWutBeKvNHIVczeUhVy9Ab+9wGH1f5g7cGswlziz/0/0QJnlbcCizxRguJNuico+wbxmzYyQYJ+jvlsapSvnKgF+5cJ4JbZNTAQbemXuyK3jO1RS3KxE+BFUUhiIsLta6TzdUu8bjaq9EeWG9f8Q1lI/BIuwEAAA==
+  - title: Option Trade Example (Step-by-Step)
+    number: '8.8'
+    keywords:
+    - call
+    - premium
+    - profit
+    - defined
+    - max
+    - risk
+    - step
+    - stock
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VSS07DMBTcc4q3iEQrEGmpqkpRGom2S0CVsmJpkpfGimtb/rR0xx1YcCBuwkl4TgNNK7GwHb+JZ96MnersEd21hT0TDbjaKL+pgYHlWy0QFl4IWDKacm2QlaAkgdF4NALrVNHcpbHOrlKdpdYZJTdZjs7rNO52R9QLmgTP8nACtOEFJi1HGlO1hRb+cGQtglalDETTE5ojFaPxuA/fd3Dcsp8aeEYHS2UdDFb4yt3wohedRVP4fv8gAphDNIGvTwi64ZsWw21zaWltVMUd5AVKZriy/7h7Ym/kLfyawIpXFRqUBQKXlJThDVoYkMNhK05ZbrnfUmUyDNKzWxq9Vma0HLlOIQR+oaxNYN2d1oyXXeO9JOmaGtyhTCBvdeHmT24eMp5cBPeiPEi1h5rtMDm39AAlVlxi2eXyq9Gr456Z8gzhBgvHlWQCtGCyj1lGqQDTZI0VNb02JuHVH7jc0KOS1HbZXnCvwR/Yl8fpnwIAAA==
+  - title: Managing Options Trades
+    number: '8.9'
+    keywords:
+    - avoid
+    - during
+    - management
+    - options
+    - trades
+    - close
+    - early
+    - events
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/11PzUrEMBC++xRzERTEelkECQXZg4e9LeI9NNM6bDYTM9Pa3nwH39AncWIXXbxMyHzffD8ut0/MATgrcQItPmAR6LkbBWxRSA5w9MkPeMSkN5BYIRcM1NUDuXVNbi9cbp1o4TS0O1zO+KDMUR5cc0JX9hhtRGq3kQXBBqVhtRZAX+LiGkN/KM/+gObHPSl4hc3d18fn/eYSuDeXGQZP6Y/8ODEFeOUYquBaSSwC4Jyp+Pr9T66ulRzGUh+ctVjwuFiqd4j0NlIgPcuzR8nYKUwcTS8aBlcvOPjrX4XJasvpoLGm39bbwiBiAQAA
+  - title: Common Mistakes to Avoid
+    number: '8.10'
+    keywords:
+    - options
+    - avoid
+    - blindly
+    - buying
+    - cheap
+    - common
+    - earnings
+    - gamble
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/02PPQ7CMAyFd07hEQbUC1QdWBASP0s5QNpaSVQTV45TqZyepBKU8b3ve7JcJ2p2NfnmGX2wwJN6DhGUwZpXR1hXma3CKS3F6B2aCR7t7efuiTX76vsRNR62xcUGlrI5C+IYN3BnBWfmggxMZMKGHjPKMfp3YSpmwL9Zm/PaO+FkHaCRkHOEjnwYaNnMK6oWkziiRJD0vVDldz9F7dML8wAAAA==
+  - title: Summary
+    number: '8.11'
+    keywords:
+    - risk
+    - based
+    - bets
+    - controlled
+    - directional
+    - gamblers
+    - generation
+    - greeks
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/02QwWrDQAxE7/0KfUAc34sxFAIhh1LIofe1d2wWy6tFWlPy95VdQnMRu/PEaKSu9F+lJslGQUFFfqDTxlRF2GgSfe/a0r91G3vh1F+SYtz7A9OAal3r4kHuyZZmlFxVmBGpaoh44Z9BF9QmY3PCZF4r5vTacsujrKAZGQ59yD/6FnaFU300QzC3L4qYjiRPg/bIWPqP3VvyTFuOUKshx+Q/meiqwGInUo96ItefKR5k4L+9/FXCLpqPkAlmx7J+C5WV5rAO7Kbn/Sq/xa1oNTwBAAA=
+- number: 9
+  title: Technical Analysis (In-Depth)
+  summary: '### 9.1 Price Action – The Foundation of TA Before indicators, before
+    oscillators—everything begins with price.'
+  keywords:
+  - analysis
+  - indicators
+  - patterns
+  - technical
+  - action
+  - averages
+  - candlestick
+  - chart
+  sections:
+  - title: Price Action – The Foundation of TA
+    number: '9.1'
+    keywords:
+    - price
+    - action
+    - before
+    - indicators
+    - advanced
+    - all
+    - analysis
+    - back
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1VQQU7EMAy88wo/AG3vq6qH5cQBhMSBszcxbVSTRLazqDcewQt5Cd6WXeASyTOZ8Yz7OhzotQhByjEFtCJ6C8cNKhoS84p9fXzSiWSxKeXR+TFlhfdkE1RJgXZ9V4ebvg5P5wkwWCrZLQO3SLrf2Mb+cBruMEcmtRRmqGhGkrXvnFjZB5SZDNSkBWtCv8xzq7WIgctBSJMa5vCHPwjhXJrpzw/Pq8gX625dX4eXadkyX1K+rRF0D/fXCwDjuIOtSyykkItdKz4SCi+AzIDxdI4QwShM2cUOZeTFs4EJBlce0Vta+b/ShxxS9SOsrt+lGtVvhQEAAA==
+  - title: Candlestick Patterns
+    number: '9.2'
+    keywords:
+    - candle
+    - patterns
+    - reversal
+    - star
+    - bearish
+    - bullish
+    - close
+    - green
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4WTTW/bMAyG7/sVPO1geAnW9bLO8GFB0Q5osWH5BYrF2NpkSaCkePn3o+SPeGu6HfwBkyZfPi9VuXonjNTog2p+QtMJCh58Zwe4BSmCAGeV4U8OKV3Kyjv46tCU8KjaroQnO5Sw09ZjtXX1m8rV30QISMZDh9pBICGRPCiJJqjjmeuF9CY0hEhGmXbuYAkayxETRVDWgFetEdpv5rqVD2RNW3+OWivfwaS72k7fx7yo+aZV/UCIJtUcOhUQmpxcbTmSw1kxvG3DpzzNJfDFSNWIgB6iGwRJcITeR5r/3eYGKzUo6P9qvqNMWg5aJMjXteh/aJF2MK+r6W7rj5ubzXvY2b5ncjOh2YlqyxkXMUXxKPoeqSjuYN8LreFg5bkEzbr5NrDTAy9DCXteAw+HeE4G+oDOJbsUe/9grQTCEwfYyNEpEAF8dM5SuIxQFLOYe9NGfeQCqe2ToBahzR6NONj73mkMqM+AOdWnYU/KRs+d5JTGojLfpCqJ6W3P2xT7dcdnO+7VPog844d3U4tFsBvBzBMGQiMBf3Ui+rx6R6sTBwmH8/LTNeI3C/FpC14lzo1sWIt6AZ7J/QWe8Ac2ox6yPXR83tIhJNWkPVsRnppfIXwB9xJqpr/w9Mg2pWf2cl3+/oR/4HxWRLzL9sjwR9CeI1xoPK8TzYX1vLorfr8BLC84UHUEAAA=
+  - title: Support and Resistance
+    number: '9.3'
+    keywords:
+    - price
+    - resistance
+    - support
+    - level
+    - buying
+    - levels
+    - often
+    - overpower
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42SQU7EMAxF95zCK1aIHoCqEhvEBmnE9AJpxm0NaRzFaatyety0MxppALGJFH/L/+XHZajqHgXBRITUIzTGfjbsEbiFhLb3ZI0D441bhOSxLEJ1V4aqlBTZd9VxDIFjKov9ftafIUSyCA4ndDD3qOObcSHfqYAi42qH/iSQGHjCGHjGCILOac/F5pCHcKut0PDoLQq0kQeQzfeG5x2VMhlt/BfS7vcn04b9I1LED7RpR4oX6xuqegkKronuccG9GcIT/Ao7Oj0cVa8c6Yt90h/I1FIWWs1SHZVU2fGq9sbT+hij6Ka7Fl5Iv9RYSzdjDhEn4lGgp66XwvF8FosMkdcDBl6joUEfYfb8SFNCSXh6yGuz4WtalKBBy9qaU/gG9UqSL2ACAAA=
+  - title: Trendlines and Market Structure
+    number: '9.4'
+    keywords:
+    - market
+    - higher
+    - highs
+    - look
+    - lower
+    - lows
+    - opportunities
+    - slopes
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42STU/DMAyG7/wK3zig0TuqekBIcAAJ8aGd09Zro2Zx5DiL+u9xM2Ab0oBLIseO/fi169C8MfreWY8R4kgZZEToLWMnljzQpjxsDU8o13UVmos6NHUUJj8070GW33X1ae/9yenhbPNghxEZRr0iXJVbTUc51pW6S8x3dYiOgjKkkA33h4A16g+aYEMMbZqtH4BCIJbkrVj8SlWVogeyO8r+N7ZHykdorlh/kPWa8jybasfyL7RX22M2c4QKXowfcNVSOsv5zLZT+WmnAC1KRvQQU6kCxvfAGG0U4zs8YN0zGilQWzR+xbhDjsswtYIRHA5oetyavoQWsVYbcqrCInKco+D2Zw9PZQ+WRKmTxAiCzunQ4s0p9lonjWVzSl6wEUY0Tsb5SL0SY+UyQkYzodeyJ14PBlrtZaKkyjLsGzFOt3EG6rrER3QfWA91ysoCAAA=
+  - title: Chart Patterns
+    number: '9.5'
+    keywords:
+    - patterns
+    - bottom
+    - double
+    - head
+    - shoulders
+    - trend
+    - ascending
+    - because
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32RzWrDMAzH73sKHTcYywuEXDbGditdYWfFVh0zRza2vJK3n5oEUhboxZb/+vzJberaIjmy614ji+eK4iPDAUUoc2mb1ds2qXtoU/dVnaMiIAOBZGILFx8CmCWZXpa4GvQIvnsP6LSGWvPzQMzIcqOcskd2gQo8YjFazrN7BkubXaZxJMneYHja8o5kZElctWZuudEc6ZdywXCHxDtWP4IZtBKB5wXoH8IHoQVUzjLEGqwW3ab45GsTguFOzFusfdBdxbTT+igSxxuoWNmS3enfZN0O9DSQdk4rHVxi/oGeDFZV9XMmyHQOuiW9lbIM/izlylhqSmGap7U04sr7B3OgIj8IAgAA
+  - title: Moving Averages
+    number: '9.6'
+    keywords:
+    - sma
+    - trend
+    - term
+    - above
+    - averages
+    - below
+    - cross
+    - crossing
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3VSS07DQAzdcwovwwJSVWKDokioVKwqIaWo62liEksz49GMU8gFOABH5CRMPiiFks1Itp/9nt84c/mOT2RrUCf0qsYAwTBLA9wKOE8lQqVEgTBQhVbotQPxaKtwm6Uuv8pcngXxbOt83zkMWTpFY7XV8dGUF2ScRkiK3cN1lsbEkN2+O7b9UKUh2f4qHZDqRrCC5DDn02HczLhhY9jCS1jk3fdSoSKPpVCEJuNK6sgnTI+o+e2M87GzylAJoXWOvaQeAwVRtsQZs/EcQmz2YUHTM7tWKw8FikRfl4StVxAXhq+PTwhNJLsR9GZ0dia7W0ExgQxW1Jp/UevVDNOR6RJ04dvPElBQbZVeEvnEOv45DPB7mNSUfTRcTG8iTOxnLqKK57PQM1j+p6dX9w0iaHwfiAIAAA==
+  - title: Momentum Indicators
+    number: '9.7'
+    keywords:
+    - momentum
+    - divergences
+    - indicators
+    - line
+    - macd
+    - measures
+    - overbought
+    - oversold
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31SS2rDMBTc5xRvmUKJnaYQaowhJLTNwgTi9gCK/GwLZD0jKUm76x16w56kz8FuPk27EUijN5oZTdwkS5MrKTxZBxXqBiSZQtkaGqskgpBekbkFQx4sNlrwmfKjOGiSQVzdJw+j6WgMa9TCqx1C5i2a0lfArPgGw3W2vIkDvjeImyRF4bYWHdRUo/HbGgpLNYRfH5/jMOw4t5oXrZLVDu2GtmXlIxAbYu5pGAcM/KCOdB7BBjXtYdJjwWG+SV4duuic8YWl5b090do68i1zFqSKd/bYMgvtjljWsPec3dkSjUR39lIXwR2ktFOmhBlfEyXCnEw/AIufWRims/nimEhW0f4kDlepwjvYKXEhvZ0CrQyeqFKlEfri8Fk5T6UV9UUaTxaFh4IsODbjWejVbK6YT3ttshKmxBNk8X8iE+4C8ZDzSsLKSaV1W7LfZdhXaLFrm9TE/8Y6ujp54rLxvn266webIcpbL9FfhQmoawe4Q0gnoh9ZD7h9+1PnWKv9Gx1cpDkNAwAA
+  - title: Volatility Indicators
+    number: '9.8'
+    keywords:
+    - volatility
+    - band
+    - average
+    - bands
+    - 'true'
+    - around
+    - atr
+    - automatic
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/2VRQU7DMBC884o9tgfIvYoiNTckkKpSHrBJtolVx2u8diB9ABJXXsDb+hJsQptKvfiwOzM7M85tkYt3bNqiZK2VaclBiaaRPPuf55kt7nJblCjUABsYWKNXWvkRqoQEdBxMAwg9D1EBcCCHLT2cmRunagLPoe7SmoOPRxIVTl8/gMFzHwVrqMKYCWl95j0xH2DPbjUNgo6PVkWyBzUb77D2io3AQt4C0ZEETp/fUDnCQzwiyzyL8JlDHxaNTIyrEGLVgS7g7O/MXMt6t4XFekoEOxcIthhbWt7080wowUUPPoFm/UsNr6m/2zgvnu29ZhGwGmvqyfjZ94ZFpYwg6hi7mxePTcSp/ZgK7VTbZZrfr3+GzKCivaQmV8l+ATeSNdPwAQAA
+  - title: Volume Analysis
+    number: '9.9'
+    keywords:
+    - volume
+    - move
+    - price
+    - strong
+    - analysis
+    - bearish
+    - behind
+    - breakouts
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3WQyQ6CMBCG7z7FHDUmcjfAwScwxngvMNCGodN0gfj2FnCpBy6T2b5/ltyUD6YwIDjJkwMvo+ct6s5LqFAq3YCxqkYYeER3yjNT7vJA0ZAqr0slGDjCuKpEv5gFWHdQBSLl5ELmWWxPmIYnvUGhsFvUnIsU8fQhC5hQ9GthT6pHeoJnaEWDhzedLdt+76xZt8oO7vx/ysVGHQ7e/WbecETrBCWpe/xMk8RX4T1a7ZJRLwnlv3tSAQAA
+  - title: Combining Indicators Intelligently
+    number: '9.10'
+    keywords:
+    - indicator
+    - indicators
+    - one
+    - use
+    - many
+    - analysis
+    - atr
+    - bands
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/22PQU7EMAxF95zCS9hM9yiq1IENQt0U5gCBmmLh2FXsIvUIcwvOxknwiJGmSGySOP/9n580t32WFV5wIhGsBiV/IPg7QiHz01nfYDGSCVw11IBJRnrNrtV2qZnbqxQhWnFzD9/Hr8h0xwpZMq9GFzaZV5WpHRZGu03NefyVF46FqT1YvCzRpKKMl2S47rub1ATwhypaUHwpW3B4eoDY++7u/h/Hp3J2YvJ16+meh5Nnr8zx4yi/zzLaxv6IOAM5GJWZcXcWmmj9A2zWEbtKAQAA
+  - title: Entry and Exit Using Technicals
+    number: '9.11'
+    keywords:
+    - come
+    - good
+    - moving
+    - trendline
+    - analysis
+    - average
+    - averages
+    - breakouts
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42RwUoEMRBE735Ff4A4dwlzEEE8CLK77D2TabPNZNIh3Vncv7dnWHUUD14SqHoFVbQrvROtnGP/xDwCZq2EAoFnhLfK873rrr7rSn/jWrInUb9vpXBVUBQV15myyg8V/cRtK722lAYfJgFlmPlMOYI/Y/URN9ShYh4TZTSqhdPW2u2fgS0gnEagDK3oAl+Bbm30e8Y76T9G7FBI1OeAkPCM6c8+wzJp4zySdYlooY348mMXhMoia+dv5MjJKyXSC0ih6Sv9OeCA4ZQp+AQ++3SxZhAbjXYMrd6+WxiaQiWZYDYi4mzHghHDykgLVkjuloEfygVF09UBAAA=
+  - title: Limitations of Technical Analysis
+    number: '9.12'
+    keywords:
+    - best
+    - limitations
+    - technical
+    - analysis
+    - approach
+    - combined
+    - component
+    - fail
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/0WQMU8DMQyFd36FJybK7RCdxAYSAwMSs5tzE6uJHcU+Tv33hGulLrb1ZH9+eqHN32/ABgiuWp5A1MecVuwoTvQcpjY/hDYH866S5k+u7OisYi9huonXpbWMUnj+kIUjunaDgilMQ9r1L3SnLgYn5HKX3znlA9eG0UFoM2D5xcILOhk4xSyDVsDI12b3sx/tZ4MjmcOWSSBqPbLQAht7hs52hoqCiSqJwyPW9grNLjFr0XS5cabd88gg0xXlHRcaxlcjGMGggQr9s9vog6Onkc5GpRy6rrKMd9haV4x5T+oPtNSa108BAAA=
+- number: 10
+  title: Fundamental Analysis (In-Depth)
+  summary: '### 10.1 The Purpose of Fundamental Analysis Investors use FA to: - Identify
+    undervalued or overvalued assets - Estimate future growth potential - Make informed
+    long-term decisions - Avoid speculative traps - Compare companies within the same
+    industry'
+  keywords:
+  - analysis
+  - fundamental
+  - financial
+  - value
+  - analyzing
+  - calculating
+  - combining
+  - common
+  sections:
+  - title: The Purpose of Fundamental Analysis
+    number: '10.1'
+    keywords:
+    - analysis
+    - assets
+    - avoid
+    - backbone
+    - benjamin
+    - buffett
+    - companies
+    - compare
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/01QQU7DQAy88wo/AOgdRZFaBKgHzpzdrNOYZu2V7U3V37OJEPRiy9LMeGa60h9lIQ81h+oE73sIfel2pX/o6tzGzP0xkQSPN6iSyBacKyVQA13+LnSn8G7X0BvlzYMzBsFYoxrB2fQaExSNVQrnf+QnXghYRrXcdGaV81OQZUg0sLPKneh+UU7ghYY6Y/BCEIblDvCquWD7NqxbmByuHBMLxETgmNdHqXrY7Zez2yKWvqVm31AnHC4nFQIdYcvWKGs/LOdHKM0PkTWfpxscSL4xN/EPwwkzoCT4QjMSONRxpIjntcYfZu8JM2IBAAA=
+  - title: Key Financial Statements (Revisited)
+    number: '10.2'
+    keywords:
+    - cash
+    - assets
+    - company
+    - cost
+    - expenses
+    - financial
+    - flow
+    - goods
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31SQW7bQAy85xU8NkYQf8Aw0BpIESBogLofYCTKu/CKVJZcu/lAH9An9iXlSkJkFG4uwgqcITkz3Eja3mxS3K5Wj9xIT7A3NOqJbbXarL1wsykzZB/krDBk6aLhS0zR3kBOlAFhoBylhU+vBbNRXr8R5tv7me+f73QiLgR/fv0GE8MEiol0AexEDaSDg0iroJK82e756/52pDRz1We3pYl8mHAL/dkXQKsF+jkQK+nI8yGYI+kd9JiPVAF3kF3bwvxGBnFSXhmTOsDOqq6U3vvNjPVoxnp0bbHui8/hxr0LRFd8Yxw0yKigi+zI6AYEwmQB0Kp9ErmuARZ7urDtsyrZJOUcHGmB3It+QHbnz3xhwFOcEon0X/il3fuAmYK77CrptdQkKwuneX3kopCWlh+K36EGeEhy/uB0fmRsjgpNhUbuUj0k5Bak2Phzfy3KKflM8FI0MunMPxCPCOGF9Mgn0nfSKAOGkpuA9RQk/3tuD1MMMz4Jst9IG0+xJW79qSbNEaJqqblekT9s95bF+eNKVYOjPWAjhr7uHPtBsiHXFJABm0YKjxtOJ1YlD9u/Aa6xen8DAAA=
+  - title: Important Financial Ratios
+    number: '10.3'
+    keywords:
+    - ratios
+    - current
+    - assets
+    - equity
+    - price
+    - profit
+    - ratio
+    - debt
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/41US27bQAzd9xRcJgZS7QtBQJwYqQG3VW2j+7FEawhLHHVmFNe73qGH6QF6k56knJGU2LGRdKPPkI/ke49S2mZL5ck40Fi3UJimVRb7OxM6UFyCa40H5y1y5bVL9qh2jM6he58mbfYubbNUooarLLdmS15tqCZ/gL5ymgzBPrmr5VJTNpl8Rg89AD4pWxFPJh/Ggz+/YYmPyB2miSQPiCX6zjIYhtn3LnS4Wn6ZXZ/CVloIaFOXaIesyxVuhYB3ocLtiwpr41U9xAdsEqdus49UaWhPSBKXVCgvUuF2SwUhe2gUqwobeTxTaEEyU/kf6tx11oZaMS0MOB4Mg8ug48mC+mHEr2OuXzsqds/4qxcF/v78BXMWjb2xh+vX64381xodgtNmD7QFr8dNOUChGBoURyVo/Y1H24DZ1FSF9ny+KQtx14pIb8lwjxupZm5Gw++T3vDepBANk58bPWcZAZ2HO3PcKEBn0/k6gJ5SZj9aZIeXvC5DA+LCopJ9B0tuB5suOHwAVTsDyFpxgWDjYp3z/KbqLkrwFtHcUoGRqbJMXMlq5gPXlTdiZEyIZPPVMdMn4NSYXQBNL4FiMAxz8kHls4dnXaRdLD/2f7Bm7/XFDYg/ixKDy8QYdkHJDyI0JAdB8MfQqQRjoeNyfI3i/AN5sxY3cgQAAA==
+  - title: Analyzing Industry and Competitors
+    number: '10.4'
+    keywords:
+    - industry
+    - company
+    - growth
+    - advantage
+    - analyzing
+    - benchmarks
+    - compare
+    - competitive
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/0WQTU7DQAyF95zCS5AqcoHRSAgBYlEW3MDMuInF/GnGk5Lb46ZtsvHi+bOf/UyxXxlcjgXTAvTHTRpwAm45oHBOz2Yo9sEU+3phKsGZZYJCVBtg8sr63qQu8EPJTRHrb9tGjDZyGu07OsnKS4a3GUNHITPcele2By2B7VHnSaBN6mQGFVb1Yk3CwjMB+hmT4EjwGDPK00591HzW06RS8m2Xv2ns+krWEynNrKaRkuz9z/sDgU/kFhd087iuOkBE6ZVlOYAnFzjR3W5YDy72Ba5vbAlqdHiDWeUtnYiLohwC9OSpFqqnXOOa1D8Js+WigwEAAA==
+  - title: Growth vs. Value Investing
+    number: '10.5'
+    keywords:
+    - growth
+    - investing
+    - value
+    - companies
+    - focus
+    - market
+    - prioritize
+    - approaches
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42QMU7EQAxFe07hE5ALjFIgLYgCsRW9kzgZi6w98jiB5fQ4YaVIiILGjb+/3/+ptKm6qUztk+mHZ3iWlaqzTKm5LVJT2ru0zDFmbh+1XyqoQK+XgsJUgT4L9U4DuMIULjBidTLwjBKD4IL2Tp6aON89XkcngcxTDtW5OYGhs9ZDcDZWY+cvAqOVZCFAGYDQJMjq/sXzTd/saEeQN5xD/+8ciwxk63YzHJkOlIflCh3NkYrFjaVyD7v6T9pIOrGAjlBxJL/+QnxBuYbPRqZWt3cdC0GnUTyWYop9jkI7rAETbD/FhU6G8Fep91uIb4qYCrq1AQAA
+  - title: Economic and Macro Factors
+    number: '10.6'
+    keywords:
+    - affects
+    - costs
+    - macro
+    - according
+    - adjust
+    - affected
+    - borrowing
+    - broader
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1VRQWrDMBC89xXzgFLfgzGUpIRADyF5gSytExVJK1ZSUv++a2Noe7AspJnZmVGfhz3HbNKMTDKxRJMswReYaSJbyWGcUe+EUdg4EpDlxHF+67s8vPQt6BL8cDyccRR+1vsOB/EPKnCkWg7Ll4UnX0vfKXKFn9IUTPWcdriQa1bhuYm9m+LTDZmfJK+bgwLL5T+3klCpuJhKZYeT2rcVI4vOX+grfp37MKGtYxDZUfgj8hFz4DlSqvikh16pjnpqtKTXhKVFzVoyJaeSv7x9E1HMjGvV/22J+77ZvAUeTYCoXGoE7RL0nVnUbel83HabVLcWl4drNFLhkxZWWdS1+2oaTQv3goUycfCs59ayLFZQGdFYYSwGXFnf4QewgByDxgEAAA==
+  - title: Calculating Intrinsic Value
+    number: '10.7'
+    keywords:
+    - value
+    - intrinsic
+    - market
+    - price
+    - cash
+    - compares
+    - dividend
+    - future
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/3WRUW7CMAyG33cKP02bBOoBVlUaFCQekNg08R5St2SEpIqdIi6wA+yIO8lcaFdA48WK5P93fn9O6ywlDt5VWW5I++gYC5gq2sLc+gM85dP5c5p0kjSps4c0WinWZKvgP1EzQRk5BgTdukpxUZpI+6TphxLwFvewUXoH7KEOSOgYGmUjDuqp39dKWtd9OBjewl6FHbJ0jO4dySlJnS1KMI6DcWR0Z3ms+OXKAj9f3xBdgeEkKM6r/O+1/3l9c2sdwDWmQFdAvywsfYFW2OXLe+zW7SQCYq93JFhIqHvXkyy6iRcgJ0gMpQ9iURs7SMa1OhpXgW7ROYN0w6YP+Y5WsWkQ2p/l5d2dZH83WCWzkZTJCGbrZDZZfOSvoColpAQLYrgI9xaN3PWgju1tqfZ8Jj0GyTtw67a9CPgLjIvND34CAAA=
+  - title: Margin of Safety
+    number: '10.8'
+    keywords:
+    - against
+    - always
+    - analysis
+    - below
+    - best
+    - buffer
+    - buying
+    - can
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/z3NXQrCMBAE4HdPMSfQC5SAggfZptuymG5CNj/m9kYffBtmPpgluXvoNAyBqTEIa913ztflltxlSe7ZWDFizVjZCkgpDBODJ50Neo56/PGjDtEDNB1SFs+ThNghWrKoiUejUHluscnG9g2FfZGooIMmKajK7zQ73nBSfnHBGRvb7+MD63SSW64AAAA=
+  - title: Combining Fundamental and Technical Analysis
+    number: '10.9'
+    keywords:
+    - entry
+    - shows
+    - analysis
+    - asset
+    - can
+    - combination
+    - combining
+    - example
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/0WPsW3DQAxF+0zxF0jUB4KANK5SegFaYiTCPN7hyJOdBTJARswkOcgB0rDgf/9/cizTe7b1ObgmiO3skasjfwQbmjNOb4gMZ+U5EBuD3DlAtuB8SCGJD4Et6ufLOJTpaSzTKVfwnVJRfn3smvahMvVE3/LNQehl8xXiaLZw3UkbL+PQmQM8/4OlqV6os72w21opuQaUd1b8fH1DFiZ9XPDnH466Mp23Hj/ndBGjkGyYySCp1LwzKker5rhtooxERqvYiip+PR75BV/BVLceAQAA
+  - title: Common Mistakes in Fundamental Analysis
+    number: '10.10'
+    keywords:
+    - analysis
+    - context
+    - fundamental
+    - ignoring
+    - industry
+    - understanding
+    - about
+    - calculating
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/2VRzU7DMAy+7yn8AqwHbqiahBCTdgEEgruXuW20NC6O09G3x2nFfoRUtWn85ftLncNmVQe/2bWRxccWHKYOmsCnurLtebZll1OZcQyTvaAVPmkHLDAIN17TBfs6ktwJhWnBw1v1DCevHWcFx1HpRy/gs+iB9gqBRgpXVFv0oQyV7WQ/oNDMBD4eclKZYCCSK/wLtYGcliM9OmEyPe69gwad8hlZzZG7+81H7nuUqa5svaqHzTbHA/YUFQNgxDAln8Ae3BfzNjQ1xXiYPXUEQgYcMWQCbgAXk3Fa19Uw8+3UIN/ZC6WHZe+v7HfCmaXxEaPzRmPESkX7Ks8TBpcDzoHEPnw1+7xxc27E/pfs/7v+MqMFm5TdMcGY1oaUI6ndoXd0U4518ViSl5SOJRYpjgSN3Xjg2N4pSW+qI6XZXZEtM2eVLBuFu/WxFJOwIV1a+QWciXHsbgIAAA==
+- number: 11
+  title: Psychology of Trading
+  summary: '### 11.1 Common Emotional Pitfalls 1. **Fear** - Fear of losing makes
+    traders exit winners too early or avoid taking trades. - Fear of missing out (FOMO)
+    pushes traders into bad positions.'
+  keywords:
+  - mindset
+  - trading
+  - avoid
+  - biases
+  - cognitive
+  - common
+  - consistent
+  - developing
+  sections:
+  - title: Common Emotional Pitfalls
+    number: '11.1'
+    keywords:
+    - leads
+    - fear
+    - traders
+    - emotional
+    - losses
+    - risk
+    - too
+    - trades
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32Sz27bMAyH730Koqc1WJcXCAoMGNpLhwxDgJ1ZmXYIS6IhSum8py+lZJkBD7lZf0x+/PTbiX+623l+2myeCdNms9va4m5XLtt1E6QHL8pxgIAjKeSEHSUF+s0Z3jnGusgiYJf9DJIAT8IdZBzrT+26frlUXhQNrK2qlAyfnvff9w8wFT0uOnDMAm/YwWT9M0u8ltk2wm3D/zfDSyLqVkN8I+VE0BvYsQwEU5Kes4In7Co4yIlSbdlgks3lyMhOZDfsBAdawO/7TBEcFl1wWg0eolgTzTI9mq16irGDxDqC52D9bqPvrZOT2HNH0dFqhl+mueJpToSjGoBB2GcmyEcC9r6o+alaOZ44On5jz3lekL/+HddjGihdnYLynwttG6K2adgBo80eKObb6D/NUjSvh7PCFfshzS0HAveWFntPN94D1kwt3oCCVBj0n4HDVHzzv4rOYZ7YobeUvUtSigpn17cBv1rZWVnhB6bz15rR4huKO5o9y0nAJsayUJ/Es8vNvelBv2C2qHK+Xq1xpg5kmiTlEs3t/7g+AEvNYQNyAwAA
+  - title: Key Psychological Traits of Successful Traders
+    number: '11.2'
+    keywords:
+    - avoid
+    - based
+    - decisions
+    - trading
+    - when
+    - accept
+    - adaptability
+    - adjust
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32STW4bMQyF9zkF10YLX8AIYLTJLnDRLLrmSPQMY4kUKMrT6ekrO0Zj1IE3Wog/+t572mh6fNgkflytvnMNXBILrVabdb962LRL8VlT0hkWbQZuGFlGKAkFZvZJm0OkI6OzymWwH6/O4QCuYFwPkFFwpEziYC1R/eh7EicDlAj0mx1U0gLzRALBuFcYAY0gk19G1meo9Zn7A/5Hf50k3KL/wr50rwYTj9PXYjrgwIl9gUreyhXI9qgc/8k7qdI9DGoUNUNf8Lx72d1leMp6sgATfFNx03QD8+q4QMCUoUnsqotRrc3ofwjOpaXKR+rGBq59aYUBK8VuD+wJ7cQzGlG8C7SNWPwi94ZlGwIVh6S1Uu3LMNC+pbRcscS3Vh1qt8Rp5N6FtQdpB3IIKpH9DBYmlPFKwk8KOgr/ofcYz58Gu8xc3vtn6nnOpjLehd8NbxScj5+xv+DhU2siOn4B0R5dYem1k0/WstrNU38BwvhtqvkCAAA=
+  - title: Developing a Trading Mindset
+    number: '11.3'
+    keywords:
+    - trading
+    - emotional
+    - focus
+    - journal
+    - losses
+    - process
+    - wins
+    - accept
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32T227bMAyG7/sUvNlNkCDdfVBg2AkY1q7ItgdQJSbhLIsBKSXx24+SjTlDil74AJmH/+NPbzg+3G0iPSwWH7zHY4bvrIq6WGzWdnq3KdP38RicIBydZOAdZHGB0n4KtNsTg9phxv0AZ0oK7+/v37XIA0KmHufQL+yLAicQ0m6VeSV4dhLAsom1Pg4olucSUAp0olBcbB0RuGTPPepUbd0krhvITPOvwbOwR9UlPHGGH2PqDd1X5jBWFwXPyWNqILUAXtCXbKAVgwR00Iy9RYmgz3GYobaoJWaFHcfIZzgfMDX04ygBSCGQejpGShjelP/oKGW7wMGvcczwjYskF2+0b9GkTOoNs03Q4nAJ2PP4brYYzBJ6speuRrkUmkXX4k+E5wkT/ozN4KVQDGa7mYOpMtRE6o3oZNsQ0JNah1XvunkTXif6rQhbroPEVuRnluJzkVszngWtoHSYbXJo29aIZqUfD+i7aCh10gLVKkJd44XyFc8nR3EAaVStoeAummFzqdd1mq7K+eiS22NvxW/0fb6gGHedJwbKTd0STMmLoO1tHSFOIbZMdYPHeYGPTigPk5pQPF5Z9P/fNGv7C3QLDl6iAwAA
+  - title: Cognitive Biases and How to Avoid Them
+    number: '11.4'
+    keywords:
+    - counter
+    - bias
+    - loss
+    - actively
+    - adjusting
+    - analysis
+    - analyzing
+    - anchoring
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32SQW4bMQxF9zkF1wYCX8AIkAYoukgQID2BLNEzjDWiQHLsTE9fSpmiCw+80UL6+nz85IHz08Mh09Nu98LlRDIFIy7wg4Ludoe9vzwc5lXzG/FMZQAueQEqJ/6ntjEY6FwriyksPAtcCK/rdz9eeC6GAscFQjS6oBsINk3zi1xMQqJoLAv4dcIScf2979X3nfM/7AdG1yzbnO8XFJzqGJT+NH9pYnNjP3UbqoS8dG3mMqA8+v0EJliS+mOCkdThKIbcafHL7uK9sio8O4Z6PDd8PzEI8MlrqaICz3ZFGkaFyuaI5EWGQGUbVc0xzKVKPfu1xwbpiPWxmUIijVQzlfspPpc4eldluEH88Ak1W2OGaY6jz9xLQJAj+aikTe/kIfuYoDoPbqeaPme1ZoNfFaP1ZVE4BsXUDOMs0gYzBTmjtWBT70nvQv9CSfDm/0ImW27D5Zy5r5WNCFH4muDoSaS8bEL6C1afcwPpa6Cka5oUz98ZfK90zaHckP0FI56DkUEDAAA=
+  - title: Mindset Techniques for Consistent Performance
+    number: '11.5'
+    keywords:
+    - review
+    - affirmations
+    - checklists
+    - consistent
+    - day
+    - decisions
+    - end
+    - ensure
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1WQwQrCMAyG7z5FzoPhXYYg4tGLgvfYphjNWmna6Xx645ig1yT/ly/pqqwXnfC6aU6sFYVfWDjFplnBnmJBkREyXQizEpSMnhQwevDkWG1Qu6WlZ8QmBM79BNAP4UA92+yYqqUlQEkQkkh6TCW4C8bf+PZC7iasZQrvotZMkM5XcoWHeTuYVOZZgp5c/gQONDA94EiqX4dd9G0KrcfPHVPXLMTuiRBy6qG3fXibgVqdsyx9oUt7zxu6WD7hIwEAAA==
+  - title: Handling Winning and Losing Streaks
+    number: '11.6'
+    keywords:
+    - consistent
+    - losing
+    - plan
+    - streak
+    - winning
+    - adjust
+    - analyze
+    - avoid
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/4WPu27DMAxF934Ft271XggGAmRrtwTorEh0ylohBZFOoXx9ZCGFs3XhcB/kocujUyvC5/GLmInPcLCCfnbDQ3ZDHl/cktpINO6uQhHkiiUITxSRA7qhGd09GIUZTKDKUiAnz5v3gZghi5KRMCjdUKHtUFJDtkdu6Hc2ps+W/w9pL/xqQBxaRhEKaUcoGFZMSKKKunEc/YxwWvcp0ASMGDFu9o59qjeES+NqSQXPEXz8WdTAvvH5qT/YY5NnrO/QGvXpp16dJCX57VWtTb68rfR3wPuczXcBAAA=
+  - title: Summary
+    number: '11.7'
+    keywords:
+    - control
+    - emotional
+    - mastering
+    - trader
+    - about
+    - before
+    - better
+    - can
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/01Qy2rDMBC89yv2C+p7MYZAciu00P6ArKzsbSStWK1T9Pdd2zTORTAzaOfRl+Fb3JXyBKU2P3PkqQFVcCMvCslVRVnVxotUjAFGDCz4pOi8IrmhvvZdGV76Mnwt3mOt4DlhhSCc3nZpifZEGs5UPZVIGfvO4MZ9OiXM/om5JFbi7KIdyiocD+lj/EGvdCdtB/mOTvIaaXUEvKM0UGv3f7Lb7Mtw2lmB35ktenaTpbQaJIC7ZQUMYTPA2MC7DLZGQbHqCdzjO+lse6gNAYp+zuQtKwuEJV9dwqwG641irDDamoX54XCU2lb7A0R45MuIAQAA
+- number: 12
+  title: Advanced Trading Strategies
+  summary: '### 12.1 Combining Technical and Fundamental Analysis Advanced traders
+    often use both approaches for better decision-making.'
+  keywords:
+  - strategies
+  - advanced
+  - traders
+  - trading
+  - adjusted
+  - algorithmic
+  - analysis
+  - based
+  sections:
+  - title: Combining Technical and Fundamental Analysis
+    number: '12.1'
+    keywords:
+    - fundamental
+    - risk
+    - technical
+    - trades
+    - advanced
+    - analysis
+    - approaches
+    - avoid
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/02RS07DMBCG95xiNkggUSJYRlGkLtoVEoj2Ao49SUbxS/akJay4AzfkJIxTEGxsyWN9/2Oa2G7NSXmNBjgpgylD6Bk9zBmhCzyCijEFpUfM0IcEHTJjAoOaMgW/cWoiP9w3VWyvmtg2mVPwQ7t7Uy5ahINQGYelqX4Gl4+zlcNSu5+9UQ49Kws9WSHXcNAJxUARkymmk7IzmjsYUjiLFOjgovIkfm7229umEszKOqIePWkhMTn5WMPOF6trLonlIc7WdkpPGThAnmMMiaFkknfKI2jljcXMpCeIquT0InL8L/JKeQKnvBqw2K7hSbQYYsjEUgdkesdCf/j6+Hy8li4FGkni/SFe8qLHYMOwgLSqpxq2p0CX/ks+M6dyoQuFKHGkOcz5B1Ct1cX2eWYpAsWAtLoRqw5GGsaNLKtTHVni5Tf5mWSNBnvysuUkAdZtfQObIuJL+wEAAA==
+  - title: Trend-Following Strategies
+    number: '12.2'
+    keywords:
+    - trend
+    - adx
+    - following
+    - averages
+    - closes
+    - directional
+    - moving
+    - price
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/42ST2vDMAzF7/sUOo3usCUUdloIBNrDDoUeytjVSVRP1LEy2emfbz85LTQtFHaxMXpIv+enoi83gr593bJzfCBv4cCyC0AeOiM7jAEOFH8gDCEa8thCS4JNJPbGQcd77NDHtyLry6eiL4sQhb0tN8wuFNnlda4OTg9H5Yr3aY7ZoxiLAWbveTbPc1iuqpciU8GoqhbfMKvOGlhMZn76Fo8T4Re7oUNo2G9JOpNUl2I2TrxCLX2U0wOotVCjTRwHJTK1+krmppy3aM82fsA8h1lM3wchXTb+TLjWg3O1aXYQGVYVsMAodfqJj/iOFP+DV6NGpT1viTQf0bRabHSEgl+rGzHkkpUQuVcKshYl3EHcrwEFCNT1DqEeIgj+DpqBtqfQUJ9MJF9CLep+eK/9xj1h1aIRdwJUM2Hciz8hqJlaZAIAAA==
+  - title: Mean-Reversion Strategies
+    number: '12.3'
+    keywords:
+    - bollinger
+    - mean
+    - reversion
+    - average
+    - band
+    - extreme
+    - price
+    - rsi
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32Rv26DQAzG9z6FpygMKZU6dChiiJShQ6Wq6Qsc4JBTzB2yffnz9jWkNEolunDgM/bv+76iL9/RhRXjEVl8DOBEUocCPfvajpMnAkZNHEAj6B7BWatr7dwpMuBZGTuELh5RHou8Lx+KvixEOYa2/IqRpMh/vq63iexBvlxHIh9am7F2obEuq40Xn9s3WNo4rmJq95oPrxKpyW4t29T3kTVnFC/qQo1AJoGmKfm45MaxCcqXGY6PQamJS/XeBE967unu4Rakr/D8BMsqXTKIDIvWCi9WECTK5hjOXv9FGENQmXw2Rw3g125b0/mmoRm0adufOE+RD5aiYYEPwM5+W5mtoYHO8QFtW5UUds6TDA1XOjALLJExzW/Ssb91IgIAAA==
+  - title: Options-Based Advanced Strategies
+    number: '12.4'
+    keywords:
+    - buy
+    - otm
+    - call
+    - profit
+    - put
+    - sell
+    - decay
+    - direction
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32SwU7DMAyG7zyFT4iNjT4A1Q7sxAENMSTOXuN21pK4ctJNfXuSstGJVVwixfmd/N8fl+1q00YWHwCtlRNERUMaIAq0KjVHqFUcGFaqsm4BR7EY2XLsFyAKkR2BoQr7p7JoV3el2LRYXs3nryoe1uKN6HxeFql2V3bn0y1ZC5vPN2i7CI+w63qoO4170kv13HCtrZLHCXEuj+r3H9tcQ4hSHdKKfYATxz17QFD0DY3qDw4H4ACWHUcyC1A6oZpcCi4/t0v+qpQPh0j+YqoYMIoBdeTd5vCMpQD36NpnyHvfpP0N/UsiuILJGTyEc/csp5qrf4gvYQ3CfO3shnn4KovaEDg5Jh+JmHjI6fcDx6Yv0UMKJoeLKp03QKiefROyA0+nAHRMzOFf6DVa8gYVtq0SmmlWK75ZRlIHMkxbQgr53bAXjdcH00jjjCWOuiYlX1G4GpCOI+4sQZ2MpylejjMKDvVAEwzfnYKlf/oCAAA=
+  - title: Market-Neutral Strategies
+    number: '12.5'
+    keywords:
+    - market
+    - neutral
+    - strategies
+    - exposure
+    - profit
+    - stock
+    - advanced
+    - against
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32RTU7DQAyF95zCe1RygSgbkFjxI8QF3IyTWp2MI9tJ6O1x05aiSrCZhX/efH6vHpsX1D35ptDkihksXqeeyQB5ABcYVTp2UOpRUyYzkA6GdQsSK7XOUh7qamzu6rGpQ0BK37wjq8GnYuLS19W5epqacjyZm2eBHFWQAlNJpDPmiVIgSLuHe7CdqIPMNw0uYDgQWPwsWlchtKp9sEXTYEepj2HskYv5hXQInYGK23mhWiGuvE+UHTevZxfexuNR9gf3owxbLgQt5hw2lQTj5Hb0SrrOftsSUvQ1ik1KV9D3k6GtDGFypzLALBmdM/sBRME5rkvU4uGG9Z+olIATRbELAUwzljY8iIGw1WDZCSxYPFYI0yGy9EnLCT3LQvpDeTxiq4Lp4pstkZ+t8X4DTRPu1S0CAAA=
+  - title: Risk-Adjusted Strategies
+    number: '12.6'
+    keywords:
+    - risk
+    - volatility
+    - adjusted
+    - position
+    - when
+    - across
+    - assets
+    - based
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/32RwU7DMAyG73sKnyfQXmCahMYNIU2b4J4m7mqWxsVOVrqnxyuFIg1xSZPqt/39/tccN4t1pM1y+YQxDrAVyijEablcr+z/Yl0mxdZFX6LLqMBdptZF6FgpmxaULgiVUwxgr064chVFygNwDT0lcClA5wauaxBnJVNvO57dB7VWrnAU7nMDfUMRwXPKwjFSOoKQnqaC1UizGqln9Fc2rnHe/UN4K5qNY/fNdqCLNbmxs7emEFHVBmKC808LIIWGjs2MOEpbFvxLGrmflS+KdYlQswC+F5uPejdui5NdrkuoSy6C+q+dHUuuORLDI51RlGry16XdZnLoBF0A7zrKlofzwmaoJM8ieM0qgFPFrDPiIbM/GUzFKdjHc9tymEi9DF3+lc0eQ/GWTBDXB+6Tjha0Zc6NfjkcwBc5442fT4KWFYRZAgAA
+  - title: Algorithmic & Systematic Trading
+    number: '12.7'
+    keywords:
+    - algorithmic
+    - based
+    - data
+    - rules
+    - strategies
+    - trading
+    - accounts
+    - advanced
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/02QPXLDQAiF+5yCAyTRBTSasYt0OQRZYZnRLmgA+ef2QXJhFcsWPB7vo1+G03hDKTRCGI5kDnoJElidwNZK/vWHnl1/elBzCAWjpjeCrMEq3323DB/9WrNUHs5Y5iAP8PQLmpjSUeDKHmpcsMKIgX2X0l3/o3ZHy+3bTAoXXMhADbxhrYCl6Crh74HTGtrSGUjC0v0T6MGRH8oIxj5D0exoPcz8qnCuh7S+qLWNd5fHnXB+YcILMxMc8nU7Vd6oThk+ro3LfiaWCQoKePLQkXQzbcgS+bYcntgk5bkf6R8WNK7kbQEAAA==
+  - title: Trade Management Techniques
+    number: '12.8'
+    keywords:
+    - trade
+    - trades
+    - management
+    - stops
+    - active
+    - adjust
+    - advanced
+    - after
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/01Qy23DMAy9dwoiC/heGAaKoBu0A7AWbbNRRFWkFPjWHbphJwlruEkuPDy+Dx/7PLw2SoChYRopgFpBo5lJodBX5UKAo3Ej8EUgOGPCmc6U7Lnv8vDU1+gj8vCuG4Ujp9ldJCtMUhyiFP6gTa5959SN/4YngozFGCPkIhObgomnhjoSFNbTnfwSPqvabouTUYEmEc3TbIVxwTQ/eh+j6H6wwmXxfkpWM7ACp4aRg3cMD/ZNOMBhkfyvOsDv9w9Iiuve+wPVvyMJVqkFSo23vM4/cAWgvteXRwEAAA==
+  - title: Psychology for Advanced Traders
+    number: '12.9'
+    keywords:
+    - even
+    - advanced
+    - avoid
+    - confident
+    - disciplined
+    - during
+    - emphasize
+    - execution
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/0WQQXLDMAhF9z0FB+jEF/B4possu2lPQCViU2PhkZAc5fSVnUy9ADb/fT70WYa3Xnj4NnYzmELVHCHVZLS8AxUK4HPkMIJo2keySDinvmvQQX4UZQ9aKEqTRxyb6kVuU2tOw409BTuRT+RgrUB/fskZF7YKGDzgvxcGlPpoVif1RU6jB4voKcFCLXEWzUmebKTCtMFGNEvtFg02ST3p67JOmPhBsEZ1lNKxBjSb04Veuu54xzpc9/ToCwZHfj8ZjUZuW2/IAhvb1DjwnByvwqFp6E4uG2u49N06/AGGCwkFVwEAAA==
+  - title: Examples of Multi-Layered Strategies
+    number: '12.10'
+    keywords:
+    - trend
+    - based
+    - earnings
+    - hedge
+    - long
+    - mean
+    - options
+    - position
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/31RzY7UMAy+71P4CAOlL1CNNKBFi7QrEFtxTxu3Y40bZ+OUqm+PGyqKtIhL4sPn78+N8PmuYTqfTs8LhRHa5DzCQvkKX2MmCQoP6Ec8nZraYHfNvC88iqE1S3+DKEobFDqn6MGGz5e6vewL9hSGnbR9gjhnkN/kB+bCLItCdClTT9EVQgowOjIPy5UYgWkyIdP1sgQlj/t6XUzVJcsR6N6lYGCFH8JGx5RX+MZufRXl47xaEgvuGettCKOJdThIQsCd5XD6jMzFJ8hwZLchVy4EmUOPE4Z8LHySqaOwF+ApYb9tOIaOnMKQZLLC/hulTRg8vIMndKH6jj8x6ab5sHaJ/Ks8X7zJ07AC242qjGmCXAjelK8aZOvaQr09PN4Hw9llmDvX3xRm3XqeNr30Ry8nGkeb/+oiS6xYVI/bZ+yvgXqLp3OMkvI/ksVze0XF0nrGkVAh4cts1UBkK9G03xuR5jI4s967hMPMkEhv0EvISfhDU8fzL8cq0ubCAgAA
+  - title: Key Takeaways for Advanced Traders
+    number: '12.11'
+    keywords:
+    - loss
+    - adjust
+    - advanced
+    - avoid
+    - based
+    - combine
+    - conditions
+    - define
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/02QwWoDMQxE7/0KfcCG3MMSWFp6KT01P+CslUVd2zKSvDT9+spbaHow+DDzZkZjS+enMdH5mfOVCkJuyagmBGNOeoLXaYCLP65GXHSAUCLkMAuDCZao49HdO+IFb50gpCu0ehMudoL38AWJ1Y1qXA+/386orNSRoPSND8iH0bx6OEhL6PnTxhQBM3ft4RoUoweHiP+Cp/jZ1LopB1nRYOYSd7gDLr3lABLKgj5DYOMUjBLZ/UF4Q6yQMEihsuz1yFBcVpY+oUMV0J2bM9Rzet6dm/gql+FCf32OftEfxjFWBVYBAAA=
+- number: 13
+  title: Conclusion and the Path Forward
+  summary: '### 13.1 Synthesizing Your Knowledge Successful market participation is
+    not about mastering one chapter in isolation, but about understanding how they
+    all connect:'
+  keywords:
+  - building
+  - conclusion
+  - continuous
+  - final
+  - forward
+  - knowledge
+  - learning
+  - own
+  sections:
+  - title: Synthesizing Your Knowledge
+    number: '13.1'
+    keywords:
+    - strategy
+    - chapters
+    - management
+    - market
+    - risk
+    - about
+    - analysis
+    - dictates
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/2VTTW/TQBC98yvmhJrIbhVAFEoUKaIq4oBU0XDgOF2P41HWO6vddVPz65ndxGkDB1uyPPvmfe3Srx4GYyjGdrDQY9hRAo8hsWGPicUBR3CSAB9lSDoREwV2WxBHYDr0+gmcp8SW+Qoeh2l6cA2FmNA1+UQne0gdjYDWghHnyKSb5ZVfvVkOVl+WV/P52qEdo+787loJfYSHFDDRdpzPb+C3DAGemPYgbYaaCF+0QXq4W1ew0UcCPErqZtCwSXo2wr5j00E8IsEoA1DvrYxwQZfbywpSINfUrVgr+0xVBaHqsJMlFfSErg70pHqKKXkgoNvS7HJ5pcyP9Ce2cDvt/slxBz/Q4ZZ6cukkw3QSyb2Qakid7NnpkTH/9xK5+B/5j1KqdFJ8bSVG8BZNAatArQUfpOVUJ9xl6mGwFM843cdRl1nRJeprtu2bHSgTueWoMVtdWoCol7wRSzopiAUMpOZhypFpetm4JEDPZIZEB554DKw6STmwCll3f9KdSbuMq6NJv+04cbwq4fvVpmO3y8EWWGoGc+gfRrXajwF7bv6ry51ox8pc1vPrrG8tO3SGcQoxFl7slOeQKUW4+HoocIRF/f48yHu2FkPMqKWSeiEyEKVOGj14t4a32PsvWrhZgc22er0Y2U+NUGX8E/yrZR/qjxV8rheL85VrT89530ahoifDLRvYBCxijsXiQz20m2ybQ2jHMF7gryv4VMHi3ey1w38Bw8jPXOkDAAA=
+  - title: Building Your Own System
+    number: '13.2'
+    keywords:
+    - system
+    - develop
+    - focus
+    - journal
+    - plan
+    - profile
+    - refine
+    - time
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1WTS28bMQyE7/0VPPVhBPaxQGskyANF0UuLJkDQIy1zbdbSUpC0dja/vsNdG2guhrVLar4Zctf5+o8NhYbYNHET2hlH0kq9NWpGWUonocWRkiYNVC2J9UISq3yoVMfaJF3RZpiqt3KUaJm8ou25Uaet0mjDcr3K1+/WFvET9XqxeJBOUTRp/yrWaZTF4gvdFvFy4p60P0ptVq6onrTfUSu8FZys0JbH8/GGnl1GJ5FCResBHFEK90Fu6LudKA1hTzAnFHCrXx4sJW036xVIzjj3e7N6xvlmYagO87xXtCYuB4GLj4AJhwqA3NR6/OmsyMsnsG7pNJW6Slc4SSWOuuvppG0/k+XZ4xvRh3NafsETvLrmfRGfAlPVlKNMNt19joDfcJUtwkW2eCMoQG1FUnS/59yk0Ocl3XE44Gmbrs2MAc5ZkTbks7NiQ43j8n+Qp+n9Y+IY6T2n/JUeA88DuZOdnn24aPUavzxbrbqJHmrWxnE5x+Zw8iJhaA49O3fyLvIJfS5MP3tsk/YBThF51VfY7RweGR29LSBdxV71bY6t8UajtpHs6GYQ8hv6H1DpsbTu9/e0Vg4+jfKS3t9zyWVPksHCkePAbqGZRR+mC4N7QECE9EEjCRBLukXv+Cpz7xQmph+FC4wVS7QxxJOAzAcfPTjqEALsep0fy7ztU//8yVwcrPBJ/AOcM3iGhAMAAA==
+  - title: Continuous Learning
+    number: '13.3'
+    keywords:
+    - financial
+    - learn
+    - learning
+    - traders
+    - assumptions
+    - benjamin
+    - books
+    - challenge
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/1WQwU7DMAyG7zyFj1CV7o6mHQYMgUBCjBfwWq8NTewqTlr69rgFJLhEsRP///d7O+zeO4KzY+TaoYeAsaekgJGgmRmDqwG5ARopXtMofnTcVrAMecLIVsEQpSZV4OUTaJJBq+1m2F1ss7fDu11RHBPO8MhniYGaoriBg3gvE0QacsKT/8vANGkJp5y+LSCJPfpk2mK9ZNYsTsk8TPpH/42wgb1Ir4v4/efgxRJMEnuF02xCLXGDcQbHIxli1DVWitiQ3S+paqsS9sQfFpnhIWKHoYTXznk3wMFpR7GEJ6x7ONbdhO1Svtiy4E5y61Gv/uE8r+DnKGHlvZUQMrs0r3Dc2jhMLnWgFJ1k/eUooXFaZ9ulawitXBjrDr0ntpFZcgRUzWFITlh/LTe25y/qcMmZygEAAA==
+  - title: Final Words of Wisdom
+    number: '13.4'
+    keywords:
+    - can
+    - discipline
+    - most
+    - often
+    - patience
+    - rewards
+    - about
+    - adapting
+    content:
+      encoding: gzip+base64
+      data: H4sIAO9nKWkC/12SQW7bQAxF9z0FgS4CGKmDbgvDQJBFtkUdIMiSkiiJ8WgozFBWtOshesKepH+kOkW6keUZiv/xfx6mcPx0CHrc7b6zq8RaSDMxnTyxS7fsdt/oqRcaOJ3FKcnMqck0XosHS0LWukTyniPpv5oqaQjKqNrTM+OitUSLTYlG9brfH+6gexVPkiVd0NUi2tEDo4ZDYfkxBaHPXwvIi01Uc7xxmrXoCXU8ALgtbW8AAoVaGnKjIHyRtcS5CiA4TemiF7SsbZBMrabsHxBOOoxBa/WlqJ5s7DW71itSEX8w3Msb5c0ZRROGZDSnKLXkzJh3oUrcJe030yzDDqsm/OQluwzbN5tf1aTBCfMytTKDK8ktzRLClyk2AjyzhsaksVYI5w+wxYl7dHopdj4mARE07nMWf0+siGftoraYIjppvKBoELwum5FI9bzmDTdLMFlC+/vnrzWjc7Q5SNOBaf3faC4cGnHAsdkOZbBiD1xFfhrWlbhy3q2rNR4LKnpRXwJhyha0oTYhuNnSeTMqFXprt6aveERZU+DKJkfIGjV2JG+jpFXjFuQa/e/5/2jc8OjlAnvg77ub9/RoZUO8X6sQYyNYJAy9gHk8/gHOHIpoDAMAAA==

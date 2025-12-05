@@ -1,0 +1,489 @@
+strategies:
+  - index: buy_and_hold
+    category: Long Term
+    strategy: Buy & Hold
+    risk: Low
+    short_description: Buy quality assets and hold for years/decades.
+    timeframe: Years / decades
+    indicators: Fundamentals
+    entry_rules: Buy strong companies or index funds at fair value.
+    exit_rules: Sell only if fundamentals deteriorate.
+    parameters:
+      fundamental:
+        min_quality_score: 70
+        sell_on_fundamental_shift: true
+      technical:
+        max_drawdown: 30%
+        rebalance_interval_days: 365
+
+  - index: index_fund_investing
+    category: Long Term
+    strategy: Index Fund Investing
+    risk: Low
+    short_description: Invest in broad-market index ETFs for long-term growth.
+    timeframe: Years
+    indicators: None
+    entry_rules: Start anytime; DCA works well.
+    exit_rules: Hold indefinitely.
+    parameters:
+      fundamental:
+        allocation_percent: 100
+      technical:
+        dca_interval_days: 30
+        auto_rebalance: yearly
+        max_slippage: 0.5%
+
+  - index: dollar_cost_averaging
+    category: Long Term
+    strategy: Dollar-Cost Averaging
+    risk: Low
+    short_description: Invest fixed amounts regularly to smooth volatility.
+    timeframe: Long term
+    indicators: None
+    entry_rules: Invest fixed amounts at regular intervals.
+    exit_rules: No fixed exit.
+    parameters:
+      fundamental:
+        investment_amount: 100
+      technical:
+        investment_interval_days: 30
+        auto_buy: true
+
+  - index: dividend_growth_investing
+    category: Long Term
+    strategy: Dividend Growth Investing
+    risk: Low–Medium
+    short_description: Buy companies with consistent dividend increases.
+    timeframe: Years
+    indicators: Dividend history, payout ratio
+    entry_rules: Buy established dividend growers.
+    exit_rules: Sell if dividend is cut.
+    parameters:
+      fundamental:
+        min_dividend_growth_rate: 5%
+        max_payout_ratio: 70%
+        min_dividend_yield: 2%
+        auto_reinvest_dividends: true
+      technical:
+        rebalance_interval_days: 365
+
+  - index: value_investing
+    category: Long Term
+    strategy: Value Investing
+    risk: Medium
+    short_description: Buy undervalued stocks based on intrinsic value.
+    timeframe: Years
+    indicators: PE, PB, cash flow metrics
+    entry_rules: Enter below intrinsic value.
+    exit_rules: Exit at fair value.
+    parameters:
+      fundamental:
+        max_pe: 20
+        max_pb: 2
+        discount_to_intrinsic_value: 20%
+      technical:
+        rebalance_interval_days: 180
+
+  - index: growth_investing
+    category: Long Term
+    strategy: Growth Investing
+    risk: Medium–High
+    short_description: Invest in fast-growing companies.
+    timeframe: Years
+    indicators: Revenue and earnings growth
+    entry_rules: Buy early in growth cycle.
+    exit_rules: Sell on slowing growth.
+    parameters:
+      fundamental:
+        min_revenue_growth: 15%
+        min_eps_growth: 10%
+        max_pe_ratio: 70
+      technical:
+        recheck_interval_days: 90
+
+  - index: sector_rotation
+    category: Long Term
+    strategy: Sector Rotation
+    risk: Medium
+    short_description: Move between sectors based on economic cycles.
+    timeframe: Months to years
+    indicators: Economic data, sector strength
+    entry_rules: Allocate to leading sectors.
+    exit_rules: Rotate when metrics change.
+    parameters:
+      fundamental:
+        sector_strength_threshold: 60
+      technical:
+        rotation_interval_days: 90
+        max_sector_allocation: 30%
+
+  - index: asset_allocation_rebalancing
+    category: Long Term
+    strategy: Asset Allocation & Rebalancing
+    risk: Low
+    short_description: Balance portfolio across asset classes.
+    timeframe: Long term
+    indicators: Allocation percentages
+    entry_rules: Allocate based on risk tolerance.
+    exit_rules: Rebalance quarterly/annually.
+    parameters:
+      fundamental:
+        target_stock_allocation: 60%
+        target_bond_allocation: 40%
+      technical:
+        rebalance_trigger_percent: 5%
+        rebalance_interval_days: 365
+
+  - index: trend_following
+    category: Swing Trading
+    strategy: Trend Following
+    risk: Medium
+    short_description: Trade in the direction of the overall trend.
+    timeframe: Days to weeks
+    indicators: Moving averages, MACD
+    entry_rules: Enter on pullbacks in a trend.
+    exit_rules: Exit on trend break.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        fast_ma: 20
+        slow_ma: 50
+        stop_loss_percent: 5%
+        take_profit_percent: 15%
+
+  - index: breakout_trading
+    category: Swing Trading
+    strategy: Breakout Trading
+    risk: Medium–High
+    short_description: Trade price breaking support or resistance.
+    timeframe: Days
+    indicators: Support/resistance levels, volume
+    entry_rules: Enter on confirmed breakout.
+    exit_rules: Exit on failed breakout.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        breakout_threshold_percent: 1%
+        volume_multiplier: 2
+        stop_loss_percent: 3%
+        take_profit_percent: 10%
+
+  - index: momentum_trading
+    category: Swing Trading
+    strategy: Momentum Trading
+    risk: High
+    short_description: Ride strong directional price movement.
+    timeframe: Days
+    indicators: RSI, MACD, volume
+    entry_rules: Enter when momentum accelerates.
+    exit_rules: Exit when momentum slows.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        rsi_entry: 60
+        rsi_exit: 50
+        min_volume_increase_percent: 30%
+        stop_loss_percent: 4%
+
+  - index: mean_reversion
+    category: Swing Trading
+    strategy: Mean Reversion
+    risk: Medium
+    short_description: Trade expecting price to revert to its average.
+    timeframe: Days
+    indicators: Bollinger Bands, RSI
+    entry_rules: Buy oversold dips.
+    exit_rules: Sell near the mean.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        bollinger_period: 20
+        bollinger_stddev: 2
+        rsi_buy: 30
+        rsi_sell: 50
+
+  - index: rsi_strategy
+    category: Swing Trading
+    strategy: RSI Overbought/Oversold
+    risk: Medium
+    short_description: Use RSI to identify reversal levels.
+    timeframe: Days
+    indicators: RSI
+    entry_rules: Buy RSI < 30, sell RSI > 70.
+    exit_rules: Exit when RSI normalizes.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        rsi_period: 14
+        rsi_buy: 30
+        rsi_sell: 70
+        stop_loss_percent: 5%
+
+  - index: scalping
+    category: Day Trading
+    strategy: Scalping
+    risk: High
+    short_description: Many rapid small-profit trades.
+    timeframe: Seconds to minutes
+    indicators: Level 2, VWAP
+    entry_rules: Enter on micro pullbacks.
+    exit_rules: Quick exit with tiny stop.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        max_trade_duration_seconds: 120
+        target_profit_ticks: 3
+        stop_loss_ticks: 2
+        max_slippage_ticks: 1
+
+  - index: vwap_strategy
+    category: Day Trading
+    strategy: VWAP Strategy
+    risk: High
+    short_description: Trade based on price relative to VWAP.
+    timeframe: Minutes to hours
+    indicators: VWAP
+    entry_rules: Long above VWAP; short below.
+    exit_rules: Exit on reversion.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        vwap_buffer_percent: 0.2%
+        stop_loss_percent: 0.5%
+        take_profit_percent: 1%
+
+  - index: opening_range_breakout
+    category: Day Trading
+    strategy: Opening Range Breakout
+    risk: High
+    short_description: Trade breakout of first 15–30 min range.
+    timeframe: Minutes to hours
+    indicators: Opening range, volume
+    entry_rules: Enter above/below range.
+    exit_rules: Exit at target or reversal.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        opening_range_minutes: 30
+        breakout_buffer_percent: 0.3%
+        stop_loss_percent: 0.8%
+        take_profit_percent: 2%
+
+  - index: news_trading
+    category: Day Trading
+    strategy: News-Based Trading
+    risk: High
+    short_description: Trade sharp moves caused by major news.
+    timeframe: Minutes to hours
+    indicators: Volume, volatility
+    entry_rules: Enter on high-volume reaction.
+    exit_rules: Exit when volatility normalizes.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        min_volume_spike_percent: 200%
+        max_hold_time_minutes: 30
+        stop_loss_percent: 1.5%
+
+  - index: covered_calls
+    category: Options
+    strategy: Covered Calls
+    risk: Medium
+    short_description: Sell call options on owned shares.
+    timeframe: 30 to 45 days
+    indicators: IV rank, delta
+    entry_rules: Sell 0.20–0.30 delta calls.
+    exit_rules: Close at 50% profit.
+    parameters:
+      fundamental:
+        underlying_quality_required: true
+      technical:
+        delta: 0.25
+        days_to_expiration: 30
+        take_profit_percent: 50%
+        roll_if_itm: true
+
+  - index: cash_secured_puts
+    category: Options
+    strategy: Cash-Secured Puts
+    risk: Medium
+    short_description: Sell puts backed by cash.
+    timeframe: 20 to 45 days
+    indicators: IV rank, delta
+    entry_rules: Sell puts at desired buy price.
+    exit_rules: Close at 50% profit.
+    parameters:
+      fundamental:
+        underlying_quality_required: true
+      technical:
+        delta: 0.20
+        days_to_expiration: 30
+        take_profit_percent: 50%
+        accept_assignment: true
+
+  - index: iron_condor
+    category: Options
+    strategy: Iron Condor
+    risk: Medium
+    short_description: Sell put and call spreads to profit from low volatility.
+    timeframe: 20 to 40 days
+    indicators: IV rank
+    entry_rules: Open in high volatility.
+    exit_rules: Close at 50–60% max profit.
+    parameters:
+      fundamental:
+        underlying_quality_required: false
+      technical:
+        wing_width: 5
+        short_delta: 0.20
+        days_to_expiration: 35
+        take_profit_percent: 55%
+        max_loss_percent: 100%
+
+  - index: warren_buffett_strategy
+    category: Greatest Investors
+    strategy: Buffett Value Investing
+    risk: Low–Medium
+    short_description: Buy great companies at fair prices and hold long term.
+    timeframe: Years to decades
+    indicators: ROE, intrinsic value, margin of safety
+    entry_rules: Buy when stock is below intrinsic value with durable moat.
+    exit_rules: Sell only if fundamentals deteriorate.
+    parameters:
+      fundamental:
+        required_margin_of_safety_percent: 25%
+        minimum_roe_percent: 10%
+        preferred_industry_moat: strong
+      technical:
+        rebalance_interval_days: 365
+
+  - index: ben_graham_strategy
+    category: Greatest Investors
+    strategy: Graham Deep Value Investing
+    risk: Medium
+    short_description: Buy undervalued stocks based on strict valuation metrics.
+    timeframe: Years
+    indicators: PE, PB, net-net value
+    entry_rules: Buy stocks priced below liquidation or net-net value.
+    exit_rules: Sell after mean reversion.
+    parameters:
+      fundamental:
+        max_pe: 15
+        max_pb: 1.5
+        net_net_discount_percent: 20%
+      technical:
+        rebalance_interval_days: 180
+
+  - index: peter_lynch_strategy
+    category: Greatest Investors
+    strategy: Lynch Growth at a Reasonable Price (GARP)
+    risk: Medium–High
+    short_description: Invest in companies with strong growth at reasonable valuations.
+    timeframe: Years
+    indicators: PEG ratio, earnings growth, market narrative
+    entry_rules: Buy stocks with PEG < 1 and strong growth story.
+    exit_rules: Exit when PEG > 2 or growth slows.
+    parameters:
+      fundamental:
+        max_peg: 1
+        min_eps_growth_percent: 15%
+        narrative_match_required: true
+      technical:
+        review_interval_days: 90
+
+  - index: ray_dalio_strategy
+    category: Greatest Investors
+    strategy: Dalio All Weather Portfolio
+    risk: Low
+    short_description: Diversified portfolio designed to withstand all economic cycles.
+    timeframe: Years
+    indicators: Asset allocation, macro signals
+    entry_rules: Allocate according to All-Weather model.
+    exit_rules: Rebalance periodically.
+    parameters:
+      fundamental:
+        stock_allocation_percent: 30%
+        bond_allocation_percent: 55%
+        gold_allocation_percent: 7.5%
+        commodities_allocation_percent: 7.5%
+      technical:
+        rebalance_interval_days: 180
+
+  - index: jesse_livermore_strategy
+    category: Greatest Investors
+    strategy: Livermore Trend & Breakout Trading
+    risk: High
+    short_description: Trade major trends, pyramiding into winners.
+    timeframe: Days to months
+    indicators: Support/resistance, tape reading, trend strength
+    entry_rules: Enter on major breakouts with strong volume.
+    exit_rules: Exit when trend reverses.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        breakout_threshold_percent: 2%
+        pyramid_scale_factor: 1.5
+        stop_loss_percent: 4%
+        trend_strength_minimum: 60
+
+  - index: john_bogle_strategy
+    category: Greatest Investors
+    strategy: Bogle Passive Index Investing
+    risk: Low
+    short_description: Buy index funds and hold with minimal fees.
+    timeframe: Decades
+    indicators: None
+    entry_rules: Allocate to broad index funds periodically.
+    exit_rules: Never; rebalance occasionally.
+    parameters:
+      fundamental:
+        stock_index_allocation_percent: 60%
+        bond_index_allocation_percent: 40%
+        cost_ratio_max: 0.05%
+      technical:
+        rebalance_interval_days: 365
+
+  - index: stanley_druckenmiller_strategy
+    category: Greatest Investors
+    strategy: Druckenmiller Macro Trend Trading
+    risk: High
+    short_description: Trade aggressively based on macroeconomic conviction.
+    timeframe: Days to months
+    indicators: Macro trends, liquidity, risk sentiment
+    entry_rules: Enter large positions when macro alignment is high.
+    exit_rules: Exit instantly when conviction weakens.
+    parameters:
+      fundamental:
+        conviction_score_minimum: 75
+        liquidity_filter: high
+      technical:
+        max_position_size_percent: 25%
+        stop_loss_percent: 4%
+
+  - index: jim_simons_strategy
+    category: Greatest Investors
+    strategy: Simons Quantitative Statistical Arbitrage
+    risk: Medium–High
+    short_description: Algorithmic trading based on statistical patterns.
+    timeframe: Minutes to days
+    indicators: Machine learning signals, historical patterns
+    entry_rules: Enter based on high-confidence statistical edges.
+    exit_rules: Exit when signal weakens.
+    parameters:
+      fundamental:
+        valuation_metric: none
+      technical:
+        signal_confidence_threshold: 0.85
+        max_hold_time_hours: 24
+        mean_reversion_factor: 0.5
+        volatility_filter: adaptive
