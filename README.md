@@ -2,14 +2,39 @@
 
 A comprehensive paper-trading platform that lets you learn by doing—teaching you about investing, trading, risk management, markets, portfolio management, and a wide range of investment strategies using real market data, all without risking real money. PaperProfit allows you to simulate trading across multiple strategies, from long-term investing to day trading, with real market data.
 
+Please note that this current version is a MVP and code still has a lots of bugs. 
+Also learning journey content is still incomlete.
+
 ## 🚀 Features
 
 ### Core Functionality
+- **21-Day Learning Journey**: Structured educational path with daily lessons, quizzes, and exercises
 - **Paper Trading**: Simulate buy/sell orders without real money
 - **Portfolio Management**: Track multiple accounts and positions
 - **Real Market Data**: Integration with Yahoo Finance, Alpha Vantage, and Financial Modeling Prep
 - **Automated Trading Bot**: Background jobs for order processing and strategy execution
 - **Performance Analytics**: Track your gains/losses and portfolio performance
+
+### 21-Day Learning Journey
+A structured educational program designed to take you from beginner to confident trader in 21 days:
+
+#### Features
+- **Daily Lessons**: Each day covers a specific topic with comprehensive study materials and visual aids
+- **Interactive Quizzes**: Test your knowledge with multiple-choice quizzes after each lesson
+- **Practical Exercises**: Apply what you've learned with hands-on exercises
+- **Progress Tracking**: Visual progress tracking with XP system and completion status
+- **Sequential Unlocking**: Days unlock as you master previous lessons (requires 80% quiz score to advance)
+- **Flexible Learning**: Review completed lessons anytime and retake quizzes
+
+#### Learning Path
+The 21-day journey covers essential topics including:
+- Market fundamentals and terminology
+- Portfolio management principles
+- Risk management strategies
+- Technical and fundamental analysis
+- Trading strategies and execution
+- Psychology of trading
+- And more...
 
 ### 30+ Investment Strategies
 PaperProfit includes implementation templates for various trading strategies across multiple categories:
@@ -142,6 +167,8 @@ paper_profit/
 │   │   │   ├── process_orders.py     # Order execution
 │   │   │   ├── update_market_data.py # Market data updates
 │   │   │   └── update_positions.py   # Position updates
+│   │   ├── neumann/                  # 21-Day Learning Journey content
+│   │   │   └── [1-21]/              # Daily lessons, quizzes, and exercises
 │   │   ├── octopus/                  # External service integrations
 │   │   │   ├── ai_platforms/         # AI service providers
 │   │   │   ├── brokers/              # Broker integrations
@@ -155,6 +182,11 @@ paper_profit/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/              # Vue components
+│   │   │   ├── LearningJourney.vue  # Learning journey dashboard
+│   │   │   ├── LearningDetails.vue  # Daily lesson viewer
+│   │   │   ├── AssetTrade.vue       # Trading interface
+│   │   │   └── ui/
+│   │   │       └── LearningStatus.vue # Progress visualization
 │   │   ├── App.vue                  # Root component
 │   │   └── main.js                  # Entry point
 │   ├── package.json                 # Node dependencies
@@ -193,8 +225,18 @@ paper_profit/
 - `GET /api/ai/market-insights` - Market insights
 - `POST /api/ai/compare-stocks` - Compare multiple stocks
 
+### Learning Journey
+- `GET /api/learning-days` - Get all learning days
+- `GET /api/learning-days/{day}/study` - Get study content for a specific day
+- `GET /api/learning-days/{day}/quiz` - Get quiz for a specific day
+- `GET /api/learning-days/{day}/exercise` - Get exercise for a specific day
+- `GET /api/learning-days/{day}/image` - Get image for a specific day
+- `GET /api/settings/learning_journey` - Get learning progress
+- `PUT /api/settings/learning_journey` - Update learning progress
+
 ### Configuration
 - `GET /api/settings` - Get settings
+- `POST /api/settings` - Create setting
 - `GET /api/service-list` - Get service list
 - `GET /api/strategy-list` - Get strategy templates
 - `GET /api/guide` - Investment guide

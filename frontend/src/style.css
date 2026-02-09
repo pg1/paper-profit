@@ -368,6 +368,17 @@ body {
     background-color: #d0d0d0;
 }
 
+.black-badge{
+  display: inline-block;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {

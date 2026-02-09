@@ -1,91 +1,97 @@
 #!/usr/bin/env python3
 
-"""
-Test script for parameter_functions module
+"""pytest tests for fundamental and technical parameter functions.
+
+These are lightweight integration-style tests that call the project's
+fundamental and technical functions for a real ticker (AAPL). The tests
+are resilient to missing external data: they assert that the functions
+return well-formed values (numbers, dicts, or None) rather than hard
+numeric expectations.
 """
 
 import sys
 import os
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from typing import Any, Dict
 
 # Add the parent directory to the path so we can import our modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from storage.database import SessionLocal, get_db
-from utils import ParameterFunctions, get_all_parameters_for_stock
+from storage.database import SessionLocal
+from analysis.fundamental_functions import FundamentalFunctions, get_all_parameters_for_stock
+from analysis.technical_functions import TechnicalFunctions, get_all_technical_indicators_for_stock
 
 
-def test_parameter_functions():
-    """Test the parameter functions with sample stocks"""
-    
-    # Initialize database
-    db_session = SessionLocal()
-    
+def _is_number_or_none(x: Any) -> bool:
+    return x is None or isinstance(x, (int, float))
+
+
+def test_fundamental_functions_aapl():
+    """Fundamental functions should return a well-formed parameters dict for AAPL."""
+    db = SessionLocal()
     try:
-        # Create parameter functions instance
-        pf = ParameterFunctions(db_session)
-        
-        # Test stocks
-        test_symbols = ['AAPL', 'MSFT', 'GOOGL', 'TSLA']
-        
-        print("Testing Parameter Functions")
-        print("=" * 50)
-        
-        for symbol in test_symbols:
-            print(f"\nTesting {symbol}:")
-            print("-" * 30)
-            
-            try:
-                # Test individual functions
-                quality_score = pf.get_quality_score(symbol)
-                pe_ratio = pf.get_pe_ratio(symbol)
-                current_price = pf.get_current_price(symbol)
-                sector = pf.get_sector(symbol)
-                market_cap = pf.get_market_cap(symbol)
-                
-                print(f"  Quality Score: {quality_score}")
-                print(f"  P/E Ratio: {pe_ratio}")
-                print(f"  Current Price: ${current_price:.2f}" if current_price else "  Current Price: N/A")
-                print(f"  Sector: {sector}")
-                print(f"  Market Cap: ${market_cap:,.0f}" if market_cap else "  Market Cap: N/A")
-                
-                # Test boolean functions
-                meets_quality = pf.meets_quality_requirement(symbol, 70)
-                meets_valuation = pf.meets_valuation_requirement(symbol, 25, 3)
-                
-                print(f"  Meets Quality (70+): {meets_quality}")
-                print(f"  Meets Valuation (P/E<25, P/B<3): {meets_valuation}")
-                
-            except Exception as e:
-                print(f"  Error testing {symbol}: {e}")
-        
-        print("\n" + "=" * 50)
-        print("Testing get_all_parameters_for_stock function:")
-        print("-" * 50)
-        
-        # Test the convenience function
-        for symbol in test_symbols[:2]:  # Just test first two to avoid too much output
-            print(f"\nAll parameters for {symbol}:")
-            all_params = get_all_parameters_for_stock(db_session, symbol)
-            
-            for param_name, param_value in all_params.items():
-                if param_value is not None:
-                    if isinstance(param_value, float):
-                        print(f"  {param_name}: {param_value:.2f}")
-                    else:
-                        print(f"  {param_name}: {param_value}")
-                else:
-                    print(f"  {param_name}: N/A")
-        
-    except Exception as e:
-        print(f"Error during testing: {e}")
-        import traceback
-        traceback.print_exc()
-    
-    finally:
-        db_session.close()
+        pf = FundamentalFunctions(db)
+        params = get_all_parameters_for_stock(db, "AAPL")
 
+        if __name__ == "__main__":
+            print(params)
+
+        assert isinstance(params, dict), "Expected dict of parameters"
+        # Basic required keys
+        for key in ["symbol", "pe_ratio", "market_cap", "quality_score", "current_price"]:
+            assert key in params
+
+        # symbol should match
+        assert params.get("symbol") == "AAPL"
+
+        # numeric-ish fields are either numbers or None
+        for num_key in ["pe_ratio", "pb_ratio", "dividend_yield", "beta", "market_cap", "current_price", "roe"]:
+            assert _is_number_or_none(params.get(num_key)), f"{num_key} should be number or None"
+
+        # quality and conviction scores should be int or None
+        q = params.get("quality_score")
+        if q is not None:
+            assert isinstance(q, int)
+            assert 0 <= q <= 100
+
+    finally:
+        db.close()
+
+
+def test_technical_functions_aapl():
+    """Technical functions should return well-formed indicators for AAPL."""
+    db = SessionLocal()
+    try:
+        tf = TechnicalFunctions(db)
+        indicators = get_all_technical_indicators_for_stock(db, "AAPL")
+        if __name__ == "__main__":
+            print(indicators)
+
+        assert isinstance(indicators, dict), "Expected dict of technical indicators"
+
+        # Basic keys
+        for key in ["symbol", "current_price", "sma_20", "rsi"]:
+            assert key in indicators
+
+        assert indicators.get("symbol") == "AAPL"
+
+        # numeric fields or None
+        for num_key in ["current_price", "sma_20", "sma_50", "sma_200", "ema_20", "rsi", "volatility"]:
+            assert _is_number_or_none(indicators.get(num_key)), f"{num_key} should be number or None"
+
+        # MACD if present should be dict with macd/signal/histogram
+        macd = indicators.get("macd")
+        if macd is not None:
+            assert isinstance(macd, dict)
+            for sub in ["macd", "signal", "histogram"]:
+                assert _is_number_or_none(macd.get(sub)), f"macd.{sub} should be number or None"
+
+    finally:
+        db.close()
 
 if __name__ == "__main__":
-    test_parameter_functions()
+    print("="*60)
+    print("Testing AI Parameter Implementation")
+    print("="*60)
+    
+    test_fundamental_functions_aapl()
+    test_technical_functions_aapl()

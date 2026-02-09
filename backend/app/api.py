@@ -1168,6 +1168,154 @@ async def compare_stocks_with_ai(comparison_request: Dict[str, Any], db: Session
         )
 
 
+@app.get("/api/learning-days/{day}/study")
+async def get_learning_day_study(day: int):
+    """Get study content for a learning day"""
+    try:
+        # Path to the study.txt file
+        study_path = Path(__file__).parent / "neumann" / str(day) / "study.txt"
+        
+        # Check if file exists
+        if not study_path.exists():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Study content for day {day} not found"
+            )
+        
+        # Read and return the study content
+        with open(study_path, 'r') as file:
+            study_content = file.read()
+        
+        return {
+            "day": day,
+            "content": study_content
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve study content: {str(e)}"
+        )
+
+
+@app.get("/api/learning-days/{day}/quiz")
+async def get_learning_day_quiz(day: int):
+    """Get quiz data for a learning day"""
+    try:
+        # Path to the quiz.json file
+        quiz_path = Path(__file__).parent / "neumann" / str(day) / "quiz.json"
+        
+        # Check if file exists
+        if not quiz_path.exists():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Quiz for day {day} not found"
+            )
+        
+        # Read and parse the quiz JSON
+        with open(quiz_path, 'r') as file:
+            import json
+            quiz_data = json.load(file)
+        
+        return {
+            "day": day,
+            **quiz_data
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve quiz data: {str(e)}"
+        )
+
+
+@app.get("/api/learning-days/{day}/exercise")
+async def get_learning_day_exercise(day: int):
+    """Get exercise HTML content for a learning day"""
+    try:
+        # Path to the exercise.html file
+        exercise_path = Path(__file__).parent / "neumann" / str(day) / "exercise.html"
+        
+        # Check if file exists
+        if not exercise_path.exists():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Exercise for day {day} not found"
+            )
+        
+        # Read and return the exercise HTML content
+        with open(exercise_path, 'r') as file:
+            exercise_content = file.read()
+        
+        return {
+            "day": day,
+            "content": exercise_content
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve exercise content: {str(e)}"
+        )
+
+
+@app.get("/api/learning-days/{day}/image")
+async def get_learning_day_image(day: int):
+    """Get image for a learning day"""
+    try:
+        # Path to the 1.png file
+        image_path = Path(__file__).parent / "neumann" / str(day) / "1.png"
+        
+        # Check if file exists
+        if not image_path.exists():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Image for day {day} not found"
+            )
+        
+        # Return the image file
+        return FileResponse(image_path)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve image: {str(e)}"
+        )
+
+
+@app.get("/api/learning-days", response_model=Dict[str, Any])
+async def get_learning_day_list():
+    """Get learning day list from YAML configuration"""
+    try:
+        # Path to the learning day list YAML file
+        yaml_path = os.path.join(os.path.dirname(__file__), 'neumann', 'learning-day-list.yaml')
+        
+        # Check if file exists
+        if not os.path.exists(yaml_path):
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Learning day list configuration file not found"
+            )
+        
+        # Read and parse YAML file
+        with open(yaml_path, 'r') as file:
+            learning_day_data = yaml.safe_load(file)
+        
+        # Return the learning day data
+        return learning_day_data
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve learning day list: {str(e)}"
+        )
+
+
 # Serve index.html for all other routes (SPA support)
 @app.get("/{full_path:path}")
 async def serve_spa(full_path: str):

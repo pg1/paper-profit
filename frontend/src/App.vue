@@ -15,8 +15,11 @@ import Settings from './components/Settings.vue'
 import InstrumentDetail from './components/InstrumentDetail.vue'
 import AccountEdit from './components/AccountEdit.vue'
 import Guide from './components/Guide.vue'
+import LearningJourney from './components/LearningJourney.vue'
+import LearningDetails from './components/LearningDetails.vue'
+import Trade from './components/AssetTrade.vue'
 
-const currentPage = ref('welcome')
+const currentPage = ref('learning')
 const navigationParams = ref({})
 
 const handleNavigation = (page, params = {}) => {
@@ -89,6 +92,21 @@ const handleNavigation = (page, params = {}) => {
         />
         <InstrumentDetail 
           v-else-if="currentPage === 'instrument-detail'" 
+          @navigate="handleNavigation"
+          :navigation-params="navigationParams"
+        />
+        <LearningJourney 
+          v-else-if="currentPage === 'learning'" 
+          @navigate="handleNavigation"
+          :navigation-params="navigationParams"
+        />
+        <LearningDetails 
+          v-else-if="currentPage === 'learning-details'" 
+          @navigate="handleNavigation"
+          :navigation-params="navigationParams"
+        />
+        <Trade 
+          v-else-if="currentPage === 'trade'" 
           @navigate="handleNavigation"
           :navigation-params="navigationParams"
         />
