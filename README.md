@@ -5,6 +5,9 @@ A comprehensive paper-trading platform that lets you learn by doing—teaching y
 Please note that this current version is a MVP and code still has a lots of bugs. 
 Also learning journey content is still incomlete.
 
+![screenshot](docs/media/screenshot_1.png)
+
+
 ## 🚀 Features
 
 ### Core Functionality
