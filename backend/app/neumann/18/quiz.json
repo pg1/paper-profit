@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What do economic indicators help investors understand?",
+        "options": [
+          "Individual company performance only",
+          "Current economic conditions and future trends",
+          "Stock prices for the next day",
+          "Which stocks to buy"
+        ],
+        "correct_answer": 1,
+        "explanation": "Economic indicators are statistical data points that help investors understand current conditions and anticipate future trends in the overall economy."
+      },
+      {
+        "question": "What is considered a healthy annual inflation rate?",
+        "options": [
+          "0%",
+          "Around 2%",
+          "5%",
+          "10%"
+        ],
+        "correct_answer": 1,
+        "explanation": "Moderate inflation around two percent annually is generally considered healthy for the economy."
+      },
+      {
+        "question": "What typically happens to stock prices when the Federal Reserve raises interest rates?",
+        "options": [
+          "They always rise",
+          "They are unaffected",
+          "They can fall because borrowing becomes expensive and future profits are discounted",
+          "They double immediately"
+        ],
+        "correct_answer": 2,
+        "explanation": "When the Fed raises interest rates, stocks can fall because borrowing becomes more expensive, growth slows, and future company profits are worth less in today's dollars."
+      },
+      {
+        "question": "What does GDP measure?",
+        "options": [
+          "Government debt only",
+          "The total value of all goods and services produced in a country",
+          "Only stock market value",
+          "Unemployment rates"
+        ],
+        "correct_answer": 1,
+        "explanation": "Gross Domestic Product (GDP) measures the total value of all goods and services produced in a country and indicates overall economic health."
+      },
+      {
+        "question": "What does low unemployment typically lead to?",
+        "options": [
+          "Economic recession",
+          "Deflation",
+          "Wage growth, consumer spending, and corporate growth",
+          "Stock market crashes"
+        ],
+        "correct_answer": 2,
+        "explanation": "Low unemployment suggests a strong economy with job opportunities, leading to consumer spending and corporate growth. It can also lead to wage growth."
+      },
+      {
+        "question": "What are CPI and PPI used to track?",
+        "options": [
+          "Stock prices",
+          "Inflation (how fast prices are rising)",
+          "Unemployment",
+          "Interest rates"
+        ],
+        "correct_answer": 1,
+        "explanation": "The Consumer Price Index (CPI) and Producer Price Index (PPI) are used to track inflation by measuring how fast prices are rising across the economy."
+      },
+      {
+        "question": "What can deflation (falling prices) cause?",
+        "options": [
+          "Economic boom",
+          "People to delay purchases, slowing economic growth",
+          "Immediate stock market rallies",
+          "Increased consumer spending"
+        ],
+        "correct_answer": 1,
+        "explanation": "Deflation can be harmful as it encourages people to delay purchases (expecting lower prices), which slows economic growth."
+      },
+      {
+        "question": "When the Fed lowers interest rates, what typically happens?",
+        "options": [
+          "Economic recession begins",
+          "Borrowing becomes cheaper, businesses expand, and stocks often rise",
+          "Stocks always crash",
+          "Unemployment increases"
+        ],
+        "correct_answer": 1,
+        "explanation": "When the Fed lowers rates to stimulate growth, borrowing becomes cheaper, businesses expand, and stocks often rise."
+      },
+      {
+        "question": "Which type of stocks often struggle in high-interest-rate environments?",
+        "options": [
+          "Dividend-paying stocks",
+          "Value stocks",
+          "Growth stocks",
+          "All stocks equally"
+        ],
+        "correct_answer": 2,
+        "explanation": "Growth stocks often struggle in high-interest-rate environments, while value stocks and dividend payers may outperform."
+      },
+      {
+        "question": "What do housing starts indicate?",
+        "options": [
+          "Stock market performance",
+          "Economic confidence",
+          "Interest rates",
+          "Inflation only"
+        ],
+        "correct_answer": 1,
+        "explanation": "Housing starts (new home construction) are an indicator of economic confidence and future economic activity."
+      }
+    ]
+  }
+}

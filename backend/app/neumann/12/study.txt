@@ -1,0 +1,13 @@
+Support and resistance are fundamental concepts in technical analysis that represent psychological price levels where buying or selling pressure tends to emerge.
+Support is a price level where a stock tends to stop falling because enough buyers believe it's undervalued at that price and step in to buy, creating a "floor." For example, if a stock repeatedly bounces off fifty dollars, that becomes a support level—buyers see it as a good deal at that price.
+Resistance is the opposite—a "ceiling" where selling pressure prevents further price increases.
+If a stock repeatedly fails to break above sixty dollars, that's resistance—sellers think it's overvalued at that price or traders take profits there.
+These levels aren't exact numbers but rather zones, and they can be identified using previous highs and lows, moving averages, or round psychological numbers (like one hundred dollars).
+When a stock breaks through resistance with strong volume, that level often becomes the new support, and vice versa.
+Chart patterns are formations created by price movements that tend to repeat and suggest potential future direction.
+The Head and Shoulders pattern is one of the most reliable reversal patterns, consisting of three peaks—a left shoulder, a higher head, and a right shoulder at approximately the same height as the left.
+When the "neckline" (the support connecting the lows between peaks) is broken, it signals a potential trend reversal from bullish to bearish.
+Other common patterns include double tops and bottoms (reversal patterns), triangles (continuation patterns suggesting the current trend will resume), and flags and pennants (short-term continuation patterns).
+Recognizing these patterns takes practice, and they're more reliable on higher timeframes (daily or weekly charts) with confirmation from volume.
+Understanding support, resistance, and patterns helps you identify potential entry and exit points and anticipate where a stock might find buyers or sellers.
+

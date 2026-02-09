@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What percentage of trading success is attributed to psychology versus strategy?",
+        "options": [
+          "50% psychology, 50% strategy",
+          "70% psychology, 30% strategy",
+          "90% psychology, 10% strategy",
+          "10% psychology, 90% strategy"
+        ],
+        "correct": 2,
+        "explanation": "It's often said that trading is ten percent strategy and ninety percent psychology, emphasizing the critical importance of emotional control."
+      },
+      {
+        "question": "What does FOMO stand for in trading?",
+        "options": [
+          "Fear Of Market Oscillation",
+          "Fear Of Missing Out",
+          "Fear Of Money Outflow",
+          "Fear Of Major Opportunities"
+        ],
+        "correct": 1,
+        "explanation": "FOMO stands for Fear Of Missing Out, which causes traders to chase stocks that are already rising and often buy at the top just before crashes."
+      },
+      {
+        "question": "What is revenge trading?",
+        "options": [
+          "Trading to get back at a specific company",
+          "Trading with borrowed money after a loss",
+          "Immediately jumping into another trade after a loss to recover losses",
+          "Shorting stocks you previously owned"
+        ],
+        "correct": 2,
+        "explanation": "Revenge trading occurs when you immediately jump into another trade after a loss, trying to recover your losses, often with larger position sizes and less analysis, typically leading to even bigger losses."
+      },
+      {
+        "question": "Which bias causes you to only seek information that confirms what you already believe?",
+        "options": [
+          "Anchoring",
+          "Confirmation bias",
+          "Sunk cost fallacy",
+          "Recency bias"
+        ],
+        "correct": 1,
+        "explanation": "Confirmation bias is when you only seek information that confirms what you already believe, ignoring contradictory evidence."
+      },
+      {
+        "question": "What are the two primary emotions that drive markets and individual trading decisions?",
+        "options": [
+          "Hope and despair",
+          "Fear and greed",
+          "Confidence and doubt",
+          "Excitement and boredom"
+        ],
+        "correct": 1,
+        "explanation": "Fear and greed are the two primary emotions that drive markets and individual decisions."
+      },
+      {
+        "question": "What is the sunk cost fallacy in trading?",
+        "options": [
+          "Refusing to invest more money",
+          "Holding losing positions because you've already invested so much",
+          "Selling winners too early",
+          "Avoiding high-cost stocks"
+        ],
+        "correct": 1,
+        "explanation": "The sunk cost fallacy is holding losing positions because you've already invested so much, rather than cutting losses."
+      },
+      {
+        "question": "What is anchoring in trading psychology?",
+        "options": [
+          "Setting stop-loss orders",
+          "Fixating on a particular price point regardless of new information",
+          "Holding stocks long-term",
+          "Diversifying your portfolio"
+        ],
+        "correct": 1,
+        "explanation": "Anchoring is fixating on a particular price point regardless of new information, preventing objective decision-making."
+      },
+      {
+        "question": "How does greed typically manifest in trading?",
+        "options": [
+          "Exiting positions too early",
+          "Avoiding all risky trades",
+          "Holding winning positions too long hoping for bigger gains",
+          "Refusing to enter any trades"
+        ],
+        "correct": 2,
+        "explanation": "Greed makes you hold winning positions too long hoping for even bigger gains, ignore warning signs, or risk too much capital on a 'sure thing.'"
+      },
+      {
+        "question": "Which practice is recommended to develop emotional discipline?",
+        "options": [
+          "Trading more frequently to build experience",
+          "Following a written trading plan with predefined entry and exit rules",
+          "Watching financial news constantly",
+          "Copying other traders' strategies"
+        ],
+        "correct": 1,
+        "explanation": "Following a written trading plan with predefined entry and exit rules helps develop emotional discipline by providing structure during emotional moments."
+      },
+      {
+        "question": "What should you do when emotions are running high while trading?",
+        "options": [
+          "Make more trades to practice emotional control",
+          "Double down on your positions",
+          "Step away from the markets entirely",
+          "Switch to different stocks"
+        ],
+        "correct": 2,
+        "explanation": "Sometimes stepping away from the markets entirely when emotions are running high is the best decision. Markets will always be there tomorrow—preserving capital and mental health is more important than any single trade."
+      }
+    ]
+  }
+}

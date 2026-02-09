@@ -1,0 +1,175 @@
+<div class="black-badge">Do</div>
+Let's do a simulation. See what happens if there is a bad and a good year on the market.
+<br /><br />
+  <style>
+   
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: transform 0.4s ease;
+    }
+
+    .title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .return {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    .note {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .up {
+      color: #2e7d32;
+    }
+
+    .down {
+      color: #c62828;
+    }
+  </style>
+
+<div class="container">
+  <h1>Risk Simulator</h1>
+  <p class="subtitle">Same year. Different outcomes.</p>
+
+  <div class="controls" id="controls">
+    <button onclick="goodYear()">🎉 Good Year</button>
+    <button onclick="badYear()">😬 Bad Year</button>
+  </div>
+
+  <div class="cards">
+    <div class="card" id="stockCard">
+      <div class="title">Stock</div>
+      <div class="return" id="stockReturn">—</div>
+      <div class="note">Higher risk, higher swings</div>
+    </div>
+
+    <div class="card" id="bondCard">
+      <div class="title">Bond</div>
+      <div class="return" id="bondReturn">—</div>
+      <div class="note">Lower risk, steadier returns</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  console.log('Day 3 exercise script loading...');
+  
+  // Global functions for onclick handlers
+  window.goodYear = function() {
+    const stockReturn = document.getElementById("stockReturn");
+    const bondReturn = document.getElementById("bondReturn");
+    const stockCard = document.getElementById("stockCard");
+    const bondCard = document.getElementById("bondCard");
+    
+    if (stockReturn && bondReturn && stockCard && bondCard) {
+      stockReturn.textContent = "+18%";
+      stockReturn.className = "return up";
+
+      bondReturn.textContent = "+3%";
+      bondReturn.className = "return up";
+
+      stockCard.style.transform = "translateY(-15px)";
+      bondCard.style.transform = "translateY(-3px)";
+    }
+  };
+
+  window.badYear = function() {
+    const stockReturn = document.getElementById("stockReturn");
+    const bondReturn = document.getElementById("bondReturn");
+    const stockCard = document.getElementById("stockCard");
+    const bondCard = document.getElementById("bondCard");
+    
+    if (stockReturn && bondReturn && stockCard && bondCard) {
+      stockReturn.textContent = "-22%";
+      stockReturn.className = "return down";
+
+      bondReturn.textContent = "+2%";
+      bondReturn.className = "return up";
+
+      stockCard.style.transform = "translateY(18px)";
+      bondCard.style.transform = "translateY(-2px)";
+    }
+  };
+  
+  // Wait for DOM to be ready
+  function initExercise() {
+    console.log('Initializing Day 3 exercise...');
+    const controls = document.getElementById("controls");
+    if (!controls) {
+      console.error('controls element not found!');
+      setTimeout(initExercise, 100);
+      return;
+    }
+    
+    // Initialize with default state
+    const stockReturn = document.getElementById("stockReturn");
+    const bondReturn = document.getElementById("bondReturn");
+    
+    if (stockReturn && bondReturn) {
+      stockReturn.textContent = "—";
+      bondReturn.textContent = "—";
+    }
+    
+    console.log('Day 3 exercise initialized successfully');
+  }
+
+  // Start initialization
+  if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initExercise);
+  } else {
+      // DOM already loaded
+      setTimeout(initExercise, 100);
+  }
+
+})();
+
+</script>

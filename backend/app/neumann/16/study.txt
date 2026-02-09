@@ -1,0 +1,17 @@
+Options are derivative contracts that give you the right, but not the obligation, to buy or sell an underlying asset (usually stocks) at a predetermined price before a specific date.
+They're called derivatives because their value is derived from the underlying asset.
+There are two types: calls and puts.
+A call option gives you the right to buy shares at a specific price (called the strike price) before the expiration date.
+Investors buy calls when they believe a stock will rise significantly.
+For example, if a stock is trading at fifty dollars and you buy a call option with a fifty-five dollar strike price expiring in one month for two dollars per share (since options contracts control 100 shares, this costs two hundred dollars total), you're betting the stock will rise above fifty-five dollars.
+If it rises to sixty-five dollars, you can exercise your option to buy at fifty-five and immediately sell at sixty-five, making ten dollars per share (one thousand dollars), minus your two hundred dollar premium for a net profit of eight hundred dollars—a four hundred percent return on your investment.
+But if the stock stays at or below fifty-five dollars, your option expires worthless and you lose your entire two hundred dollar investment.
+A put option gives you the right to sell shares at the strike price, so investors buy puts when they expect a stock to decline.
+Options are leveraged instruments, meaning small moves in the underlying stock create large percentage moves in the option's value, which cuts both ways—you can make or lose money very quickly.
+They also have time decay (theta), meaning they lose value as expiration approaches, even if the stock doesn't move.
+Options can be used for speculation (betting on price direction), hedging (protecting an existing stock position), or income generation (selling options to collect premium).
+However, options are significantly more complex and risky than stocks.
+You can lose your entire investment quickly, they require more knowledge and monitoring, and selling options can expose you to unlimited losses.
+Most financial advisors recommend beginners master stock investing thoroughly before touching options, and even then, starting with simple strategies and small positions.
+Many retail traders lose money on options because they underestimate the impact of time decay and volatility changes, or they treat them like lottery tickets rather than calculated risks.
+

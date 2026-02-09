@@ -1,0 +1,116 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What does owning a stock represent?",
+        "options": [
+          "A loan to the company",
+          "Partial ownership in the company",
+          "A guarantee of profits",
+          "Employment at the company"
+        ],
+        "correct": 1,
+        "explanation": "A stock represents a share of ownership in a company. When you buy stock, you become a part-owner of that business."
+      },
+      {
+        "question": "If a company has 1 million shares and you own 10,000 shares, what percentage of the company do you own?",
+        "options": [
+          "0.1%",
+          "1%",
+          "10%",
+          "0.01%"
+        ],
+        "correct": 1,
+        "explanation": "10,000 divided by 1,000,000 equals 0.01, or 1% ownership."
+      },
+      {
+        "question": "What happens to a stock price when more people want to buy than sell?",
+        "options": [
+          "The price decreases",
+          "The price stays the same",
+          "The price increases",
+          "The company goes bankrupt"
+        ],
+        "correct": 2,
+        "explanation": "When demand exceeds supply (more buyers than sellers), the price increases according to basic supply and demand principles."
+      },
+      {
+        "question": "What is an IPO?",
+        "options": [
+          "International Profit Organization",
+          "Initial Public Offering - when a company first sells stock to the public",
+          "Investment Protection Order",
+          "Insider Purchase Option"
+        ],
+        "correct": 1,
+        "explanation": "An IPO (Initial Public Offering) is when a private company first offers shares to the public, 'going public' and listing on an exchange."
+      },
+      {
+        "question": "What rights might shareholders have?",
+        "options": [
+          "Voting on major company decisions",
+          "Receiving dividends if distributed",
+          "Both of the above",
+          "None - shareholders have no rights"
+        ],
+        "correct": 2,
+        "explanation": "Shareholders typically have voting rights on major company decisions and may receive dividend payments if the company distributes profits."
+      },
+      {
+        "question": "What primarily drives stock prices up and down?",
+        "options": [
+          "Government mandates",
+          "Supply and demand",
+          "Company headquarters location",
+          "The CEO's salary"
+        ],
+        "correct": 1,
+        "explanation": "Stock prices are fundamentally driven by supply (how many people want to sell) and demand (how many people want to buy)."
+      },
+      {
+        "question": "Which of these factors can influence supply and demand for a stock?",
+        "options": [
+          "Company earnings reports",
+          "Industry news",
+          "Economic conditions and investor sentiment",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "All these factors and more can influence investor decisions to buy or sell, thereby affecting supply, demand, and ultimately price."
+      },
+      {
+        "question": "What happens to a stock price when more people want to sell than buy?",
+        "options": [
+          "Price increases due to high activity",
+          "Price decreases as supply exceeds demand",
+          "Price remains stable",
+          "Trading is halted"
+        ],
+        "correct": 1,
+        "explanation": "When supply exceeds demand (more sellers than buyers), sellers must lower prices to find willing buyers, causing the price to decrease."
+      },
+      {
+        "question": "What does a stock price represent?",
+        "options": [
+          "The exact value of the company",
+          "The collective opinion about the company's future value",
+          "The amount of cash the company has",
+          "The company's annual revenue"
+        ],
+        "correct": 1,
+        "explanation": "Stock prices reflect the collective opinions of millions of participants about what the company's future value will be, not its current exact worth."
+      },
+      {
+        "question": "True or False: A positive earnings report will always cause a stock price to increase.",
+        "options": [
+          "True",
+          "False"
+        ],
+        "correct": 1,
+        "explanation": "False. While positive earnings often increase prices, the market may have already expected those results, or other factors might outweigh the good news."
+      }
+    ]
+  }
+}

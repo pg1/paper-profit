@@ -115,7 +115,7 @@ const handleBackToWelcome = () => {
 
 // Handle new transaction
 const handleNewTransaction = () => {
-  emit('navigate', 'asset-buy')
+  emit('navigate', 'trade')
 }
 </script>
 

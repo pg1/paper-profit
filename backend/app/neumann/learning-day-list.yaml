@@ -1,0 +1,83 @@
+day_1:
+  title: What is Investing?
+  description: Understand that investing is the process of putting money into assets to grow wealth or generate income over time.
+
+day_2:
+  title: Investing vs. Trading
+  description: Learn that investing focuses on long-term economic growth and research, while trading involves shorter time horizons and specific risk profiles.
+
+day_3:
+  title: Stocks & Bonds
+  description: Study the basics of Common Stock and how Bonds act as loans to governments or corporations in exchange for interest.
+
+day_4:
+  title: Crypto, Gold, Silver and other commodities
+  description: Learn how commodities work.
+
+day_5:
+  title: ETFs & Index Funds
+  description: Learn why beginners prefer Index Funds (such as those tracking the S&P 500) for their low costs and instant diversification.
+
+day_6:
+  title: Stock Market Mechanics
+  description: Explore what a stock represents (partial ownership) and how supply and demand drive prices.
+
+day_7:
+  title: Market Participants
+  description: Identify the players in the market, from Retail Investors to Institutional Investors (hedge funds, pension funds) and Market Makers.
+
+day_8:
+  title: Exchanges & Order Types
+  description: Learn how the NYSE and NASDAQ operate, and study the difference between Market Orders (immediate execution) and Limit Orders (specific price).
+
+day_9:
+  title: Fundamental Analysis
+  description: Learn how to read an Income Statement and understand key ratios like P/E (Price-to-Earnings) and EPS (Earnings Per Share).
+
+day_10:
+  title: Reading Charts
+  description: Study Candlestick charts, which show the Open, High, Low, and Close prices for a specific period.
+
+day_11:
+  title: Technical Indicators
+  description: Learn about Moving Averages, RSI (Relative Strength Index), and MACD to identify trend strength and momentum.
+
+day_12:
+  title: Support, Resistance & Patterns
+  description: Learn to identify support (price floors), resistance (price ceilings), and common patterns like Head and Shoulders.
+
+day_13:
+  title: Risk Management Rules
+  description: Master the 1-2% Rule, which limits risk on any single trade to no more than 1-2% of your total account value.
+
+day_14:
+  title: Trading Psychology
+  description: Understand how fear and greed lead to mistakes such as FOMO (Fear of Missing Out) and revenge trading.
+
+day_15:
+  title: Trading Psychology II
+  description: Develop long-term psychological resilience through systematic approaches like trading plans, journaling, and understanding cognitive biases to overcome emotional trading.
+
+day_16:
+  title: Introduction to Options
+  description: Learn the basics of Calls and Puts, and why options carry higher risk than standard stock trading.
+
+day_17:
+  title: Diversification & Sectors
+  description: Learn why diversification matters and how to spread risk across sectors like Technology, Healthcare, and Energy.
+
+day_18:
+  title: Economic Indicators
+  description: Study how inflation, interest rates, and GDP growth influence the overall market.
+
+day_19:
+  title: Portfolio Building
+  description: Compare Growth portfolios with Income (dividend-focused) portfolios and choose what aligns with your goals.
+
+day_20:
+  title: Strategies
+  description: Learn different investment strategies including value investing, day trading, dollar-cost averaging, and momentum strategies to develop a systematic approach to investing.
+
+day_21:
+  title: Final Assessment
+  description: Review your paper trading results and decide whether to begin trading.

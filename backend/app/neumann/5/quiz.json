@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What do ETFs and Index Funds allow you to do?",
+        "options": [
+          "Buy individual stocks only",
+          "Buy a diversified basket of stocks in a single transaction",
+          "Avoid paying any fees",
+          "Guarantee investment returns"
+        ],
+        "correct": 1,
+        "explanation": "ETFs and index funds let you buy many stocks at once in a single transaction, providing instant diversification."
+      },
+      {
+        "question": "What does an S&P 500 index fund track?",
+        "options": [
+          "The 500 newest companies",
+          "The 500 largest U.S. companies",
+          "500 random companies",
+          "Only technology companies"
+        ],
+        "correct": 1,
+        "explanation": "The S&P 500 tracks 500 of the largest publicly traded U.S. companies across all sectors."
+      },
+      {
+        "question": "What does 'passively managed' mean for index funds?",
+        "options": [
+          "No one manages them at all",
+          "They simply match an index rather than trying to beat it",
+          "They trade very frequently",
+          "They only invest in passive companies"
+        ],
+        "correct": 1,
+        "explanation": "Passively managed means the fund simply replicates an index's holdings rather than actively picking stocks to try to outperform the market."
+      },
+      {
+        "question": "When you buy an S&P 500 index fund, how many companies do you own pieces of?",
+        "options": [
+          "1",
+          "50",
+          "500",
+          "5,000"
+        ],
+        "correct": 2,
+        "explanation": "An S&P 500 index fund gives you ownership in all 500 companies in the index with a single purchase."
+      },
+      {
+        "question": "What is a key difference between ETFs and traditional index funds?",
+        "options": [
+          "ETFs can be traded throughout the day like stocks; index funds trade once daily",
+          "ETFs are much more expensive",
+          "Index funds are riskier",
+          "There is no difference"
+        ],
+        "correct": 0,
+        "explanation": "ETFs trade on exchanges throughout the day at market prices, while traditional index funds only price and trade once per day after market close."
+      },
+      {
+        "question": "What is a typical expense ratio for a low-cost index fund?",
+        "options": [
+          "Less than 0.1% annually",
+          "5-10% annually",
+          "25% annually",
+          "50% annually"
+        ],
+        "correct": 0,
+        "explanation": "Low-cost index funds often have expense ratios below 0.1% (less than $10 per year for every $10,000 invested), making them very affordable."
+      },
+      {
+        "question": "How do index funds typically perform compared to actively managed funds over long periods?",
+        "options": [
+          "They always perform worse",
+          "They outperform the majority of actively managed funds",
+          "They perform identically",
+          "They're too new to compare"
+        ],
+        "correct": 1,
+        "explanation": "Studies show that over long periods, index funds outperform most actively managed funds primarily due to their much lower fees."
+      },
+      {
+        "question": "What famous investor recommended S&P 500 index funds for most investors?",
+        "options": [
+          "Warren Buffett",
+          "Bernie Madoff",
+          "Martha Stewart",
+          "Mark Zuckerberg"
+        ],
+        "correct": 0,
+        "explanation": "Warren Buffett has famously recommended that most investors simply put their money in low-cost S&P 500 index funds."
+      },
+      {
+        "question": "Why are index funds ideal for beginners?",
+        "options": [
+          "They're simple and provide instant diversification",
+          "They have low costs",
+          "They have strong historical performance",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Index funds are perfect for beginners because they're simple to understand, automatically diversified, have low fees, and historically perform well."
+      },
+      {
+        "question": "If one company in your index fund goes bankrupt, what happens to your investment?",
+        "options": [
+          "You lose everything",
+          "You lose only the small portion tied to that one company",
+          "The entire fund is liquidated",
+          "You must pay additional money"
+        ],
+        "correct": 1,
+        "explanation": "With an index fund holding hundreds of companies, one company's failure has minimal impact since it's only a tiny fraction of your total investment."
+      }
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What are commodities?",
+        "options": [
+          "Only precious metals",
+          "Basic goods and raw materials that are interchangeable",
+          "Only agricultural products",
+          "Technology stocks"
+        ],
+        "correct": 1,
+        "explanation": "Commodities are basic goods and raw materials like agricultural products, energy resources, and metals that are largely interchangeable."
+      },
+      {
+        "question": "What primarily drives commodity prices?",
+        "options": [
+          "Government regulations only",
+          "Real-world supply and demand",
+          "Social media trends",
+          "Celebrity endorsements"
+        ],
+        "correct": 1,
+        "explanation": "Commodity prices are driven by actual supply and demand - things like weather, production levels, and consumption needs."
+      },
+      {
+        "question": "Why are gold and silver often called 'safe haven' assets?",
+        "options": [
+          "They never lose value",
+          "They're physically safe to store",
+          "Investors buy them when stock markets crash or inflation rises",
+          "They're guaranteed by governments"
+        ],
+        "correct": 2,
+        "explanation": "Gold and silver are considered safe havens because investors traditionally flock to them during market turmoil or high inflation to preserve wealth."
+      },
+      {
+        "question": "How can you invest in commodities?",
+        "options": [
+          "Futures contracts",
+          "Commodity-focused ETFs",
+          "Purchasing physical metals",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Investors can access commodities through futures contracts, ETFs that track commodity prices, or by buying physical commodities like gold bars."
+      },
+      {
+        "question": "What is cryptocurrency?",
+        "options": [
+          "A type of commodity metal",
+          "A digital currency using blockchain technology",
+          "A traditional government currency",
+          "A stock market index"
+        ],
+        "correct": 1,
+        "explanation": "Cryptocurrency is a digital-only currency that uses blockchain technology to secure transactions, with no physical form."
+      },
+      {
+        "question": "How does cryptocurrency differ from traditional commodities?",
+        "options": [
+          "Crypto exists only digitally with no physical form",
+          "Crypto is less regulated",
+          "Crypto markets operate 24/7",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Cryptocurrency differs in being purely digital, less regulated, and trading around the clock unlike traditional commodities."
+      },
+      {
+        "question": "What is a key characteristic of cryptocurrency price movements?",
+        "options": [
+          "Very stable with minimal fluctuations",
+          "Extremely volatile with large daily swings possible",
+          "Government controlled",
+          "Always increases in value"
+        ],
+        "correct": 1,
+        "explanation": "Cryptocurrencies are known for extreme volatility, with prices sometimes swinging 20% or more in a single day."
+      },
+      {
+        "question": "What might cause wheat prices to increase?",
+        "options": [
+          "A drought reducing crop supply",
+          "Stock market crash",
+          "New cryptocurrency launch",
+          "Lower interest rates"
+        ],
+        "correct": 0,
+        "explanation": "A drought would reduce wheat supply, and with demand remaining constant, prices would increase according to supply and demand principles."
+      },
+      {
+        "question": "When do stock markets trade versus cryptocurrency markets?",
+        "options": [
+          "Both trade only during business hours",
+          "Stocks trade during set hours; crypto trades 24/7",
+          "Crypto trades during business hours; stocks trade 24/7",
+          "Both trade 24/7"
+        ],
+        "correct": 1,
+        "explanation": "Traditional stock markets have set trading hours (typically 9:30 AM - 4:00 PM EST), while cryptocurrency markets operate continuously."
+      },
+      {
+        "question": "What role should commodities and crypto play in most beginner portfolios?",
+        "options": [
+          "They should be the entire portfolio",
+          "They should be avoided completely",
+          "They can add diversification but should be a small portion",
+          "They should be at least 75% of holdings"
+        ],
+        "correct": 2,
+        "explanation": "Due to higher risk and volatility, commodities and crypto should typically represent only a small portion of most investors' portfolios, especially for beginners."
+      }
+    ]
+  }
+}

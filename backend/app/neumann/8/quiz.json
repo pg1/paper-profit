@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is a stock exchange?",
+        "options": [
+          "A place where stocks are manufactured",
+          "A marketplace where stocks are bought and sold",
+          "A government agency",
+          "A type of investment fund"
+        ],
+        "correct": 1,
+        "explanation": "A stock exchange is a marketplace that facilitates the buying and selling of stocks between investors."
+      },
+      {
+        "question": "What is a key difference between the NYSE and NASDAQ?",
+        "options": [
+          "NYSE has a physical trading floor while NASDAQ is fully electronic",
+          "NYSE only trades tech stocks",
+          "NASDAQ is located in Europe",
+          "There is no difference"
+        ],
+        "correct": 0,
+        "explanation": "The NYSE operates with a physical trading floor and designated market makers, while NASDAQ is entirely electronic with no physical floor."
+      },
+      {
+        "question": "What does a market order guarantee?",
+        "options": [
+          "A specific price",
+          "Execution of the trade",
+          "A profit",
+          "The lowest possible price"
+        ],
+        "correct": 1,
+        "explanation": "A market order guarantees your trade will be executed immediately but does not guarantee the exact price you'll get."
+      },
+      {
+        "question": "What is the main advantage of a limit order?",
+        "options": [
+          "Guaranteed execution",
+          "Price control - you specify the exact price you want",
+          "Faster execution than market orders",
+          "Lower commission fees"
+        ],
+        "correct": 1,
+        "explanation": "A limit order lets you control the price by specifying exactly what you're willing to pay (buy) or accept (sell)."
+      },
+      {
+        "question": "If a stock is trading at $50 and you place a limit buy order at $45, when will it execute?",
+        "options": [
+          "Immediately",
+          "Only if the price drops to $45 or lower",
+          "At the end of the trading day",
+          "Never"
+        ],
+        "correct": 1,
+        "explanation": "A limit buy order only executes when the stock price reaches your specified price ($45) or better (lower)."
+      },
+      {
+        "question": "What is a disadvantage of market orders for volatile stocks?",
+        "options": [
+          "They execute too slowly",
+          "You might get a price very different from what you expected",
+          "They cost more in commissions",
+          "They are illegal"
+        ],
+        "correct": 1,
+        "explanation": "In fast-moving, volatile markets, the price can change significantly between when you place a market order and when it executes."
+      },
+      {
+        "question": "What is a disadvantage of limit orders?",
+        "options": [
+          "They're more expensive than market orders",
+          "No guarantee the order will execute if the price doesn't reach your limit",
+          "They take longer to place",
+          "They're only available to institutional investors"
+        ],
+        "correct": 1,
+        "explanation": "Limit orders provide price control but no execution guarantee - if the stock never reaches your specified price, the order won't fill."
+      },
+      {
+        "question": "What must companies do to have their stock traded on an exchange?",
+        "options": [
+          "Pay a one-time fee",
+          "Meet specific listing requirements",
+          "Donate to charity",
+          "Be headquartered in New York"
+        ],
+        "correct": 1,
+        "explanation": "Each exchange has listing requirements regarding financial metrics, governance, and other criteria that companies must meet and maintain."
+      },
+      {
+        "question": "When you place an order, who routes it to the appropriate exchange?",
+        "options": [
+          "The company whose stock you're buying",
+          "Your broker",
+          "The government",
+          "You must route it yourself"
+        ],
+        "correct": 1,
+        "explanation": "Your broker receives your order and routes it to the appropriate exchange or market maker for execution."
+      },
+      {
+        "question": "Which order type would you use if you absolutely need to buy or sell immediately?",
+        "options": [
+          "Limit order",
+          "Market order",
+          "Stop order",
+          "Good-til-canceled order"
+        ],
+        "correct": 1,
+        "explanation": "A market order executes immediately at the best available current price, making it the choice when immediate execution is the priority."
+      }
+    ]
+  }
+}

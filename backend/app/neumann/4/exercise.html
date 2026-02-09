@@ -1,0 +1,191 @@
+<div class="black-badge">Do</div>
+Try to allocate your $100k for each instrument. See what happens each day on the market.
+<br /><br />
+<style>
+
+   
+    .exerciseContainer {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .exerciseContainer  table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .exerciseContainer th, td {
+        border-bottom: 1px solid #1e293b;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .exerciseContainer th {
+        background: #020617;
+        color: #7dd3fc;
+    }
+
+    .exerciseContainer input {
+        width: 90px;
+        padding: 5px;
+        background: #020617;
+        border: 1px solid #334155;
+        color: #e5e7eb;
+        border-radius: 5px;
+        text-align: right;
+    }
+
+    .exerciseContainer button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        background: #38bdf8;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        color: #020617;
+        font-weight: bold;
+    }
+
+    .exerciseContainer button:hover {
+        background: #0ea5e9;
+    }
+
+    .exerciseContainer .status {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #1e293b;
+    }
+
+    .exerciseContainer .profit { color: #22c55e; }
+    .exerciseContainer .loss { color: #ef4444; }
+</style>
+
+
+<div class="exerciseContainer">
+    <p><strong>Starting Capital:</strong> $100,000</p>
+
+    <table>
+        <tr>
+            <th>Asset</th>
+            <th>Price</th>
+            <th>Allocation ($)</th>
+        </tr>
+        <tr>
+            <td>Bitcoin</td>
+            <td>$70,000</td>
+            <td><input type="number" id="btc" value="0"></td>
+        </tr>
+        <tr>
+            <td>Ethereum</td>
+            <td>$2,200</td>
+            <td><input type="number" id="eth" value="0"></td>
+        </tr>
+        <tr>
+            <td>Gold</td>
+            <td>$5,000</td>
+            <td><input type="number" id="gold" value="0"></td>
+        </tr>
+        <tr>
+            <td>Silver</td>
+            <td>$83</td>
+            <td><input type="number" id="silver" value="0"></td>
+        </tr>
+        <tr>
+            <td>Oil</td>
+            <td>$75</td>
+            <td><input type="number" id="oil" value="0"></td>
+        </tr>
+    </table>
+
+    <button onclick="runSimulation()">Run Market Phase</button>
+
+    <div class="status" id="output">
+        Allocate capital and click “Run Market Phase”.
+    </div>
+</div>
+
+<script>
+(function() {
+    console.log('Day 4 exercise script loading...');
+    
+    const capital = 100000;
+
+    function randomMove(min, max) {
+        return (Math.random() * (max - min) + min) / 100;
+    }
+
+    // Make runSimulation available globally for onclick handler
+    window.runSimulation = function() {
+        const allocations = {
+            btc: Number(document.getElementById("btc").value),
+            eth: Number(document.getElementById("eth").value),
+            gold: Number(document.getElementById("gold").value),
+            silver: Number(document.getElementById("silver").value),
+            oil: Number(document.getElementById("oil").value)
+        };
+
+        const totalAllocated = Object.values(allocations).reduce((a,b) => a+b, 0);
+
+        if (totalAllocated > capital) {
+            document.getElementById("output").innerHTML =
+                "<span class='loss'>❌ You allocated more than $100,000.</span>";
+            return;
+        }
+
+        const marketMoves = {
+            btc: randomMove(-15, 20),
+            eth: randomMove(-18, 22),
+            gold: randomMove(-3, 5),
+            silver: randomMove(-6, 8),
+            oil: randomMove(-10, 12)
+        };
+
+        let pnl = 0;
+        let details = "";
+
+        for (let asset in allocations) {
+            const change = allocations[asset] * marketMoves[asset];
+            pnl += change;
+            details += `<br>${asset.toUpperCase()}: ${(marketMoves[asset]*100).toFixed(2)}%`;
+        }
+
+        const finalCapital = capital + pnl;
+        const resultClass = pnl >= 0 ? "profit" : "loss";
+
+        document.getElementById("output").innerHTML = `
+            <strong>Market Results</strong>
+            ${details}
+            <hr>
+            <strong class="${resultClass}">
+                P&L: ${pnl >= 0 ? "+" : ""}$${pnl.toFixed(2)}
+            </strong><br>
+            Final Capital: $${finalCapital.toFixed(2)}
+        `;
+    };
+    
+    // Initialize the exercise
+    function initExercise() {
+        console.log('Initializing Day 4 exercise...');
+        // Ensure the output div exists and has default content
+        const outputDiv = document.getElementById("output");
+        if (outputDiv && !outputDiv.innerHTML.trim()) {
+            outputDiv.innerHTML = "Allocate capital and click “Run Market Phase”.";
+        }
+        console.log('Day 4 exercise initialized successfully');
+    }
+    
+    // Start initialization
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initExercise);
+    } else {
+        // DOM already loaded
+        setTimeout(initExercise, 100);
+    }
+})();
+</script>

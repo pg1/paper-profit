@@ -1,0 +1,13 @@
+A stock represents a share of ownership in a company.
+When a company "goes public" through an Initial Public Offering (IPO), it divides ownership into millions of shares that people can buy and sell.
+If you own 100 shares of a company that has 1 million shares total, you own 0.01% of that company.
+As a shareholder, you have certain rights, including potentially voting on major company decisions and receiving dividends if the company distributes profits.
+Stock prices constantly fluctuate based on supply and demand—the most fundamental force in any market.
+When more people want to buy a stock than sell it (high demand, low supply), the price goes up.
+When more people want to sell than buy (high supply, low demand), the price goes down.
+But what drives this supply and demand? Many factors: company earnings reports, news about the industry, broader economic conditions, investor sentiment, analyst recommendations, and even rumors.
+A positive earnings report might cause everyone to want the stock, driving up demand and price.
+A scandal might cause everyone to sell, flooding the market with supply and crashing the price.
+Understanding that stock prices reflect collective opinions about a company's future value is crucial.
+The market is essentially a continuous voting machine where millions of participants express their views through buying and selling decisions every second the market is open.
+

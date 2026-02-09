@@ -1,0 +1,15 @@
+Stocks and bonds are the two fundamental building blocks of most investment portfolios, but they work very differently.
+Common stock represents equity ownership in a company.
+When you buy stock, you become a part-owner with the potential to profit in two ways: through price appreciation (the stock becoming more valuable) and through dividends (regular cash payments from company profits).
+However, stockholders are last in line if a company goes bankrupt—bondholders and creditors get paid first.
+Stocks are generally more volatile but offer higher long-term return potential.
+Bonds, on the other hand, represent debt.
+When you buy a bond, you're essentially lending money to a government or corporation.
+In exchange, they promise to pay you regular interest payments (called the coupon) and return your principal when the bond matures.
+For example, a ten-year government bond might pay you three percent interest annually and then return your original investment after ten years.
+Bonds are generally considered safer than stocks because bondholders have priority claims on company assets, and the returns are more predictable.
+However, bonds also offer lower long-term returns than stocks.
+Bond prices move inversely to interest rates—when rates rise, existing bond prices fall, and vice versa.
+Most financial advisors recommend holding both stocks and bonds, with the ratio depending on your age, risk tolerance, and financial goals.
+Younger investors typically hold more stocks for growth, while older investors approaching retirement hold more bonds for stability and income.
+

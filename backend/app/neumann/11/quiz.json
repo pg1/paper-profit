@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What are technical indicators?",
+        "options": [
+          "Mathematical calculations based on price, volume, or open interest",
+          "Company financial ratios",
+          "News headlines",
+          "Social media sentiment"
+        ],
+        "correct": 0,
+        "explanation": "Technical indicators are mathematical formulas applied to price and volume data to identify trends, momentum, and potential reversals."
+      },
+      {
+        "question": "What does a simple moving average (SMA) calculate?",
+        "options": [
+          "The future price",
+          "The average closing price over a specific number of periods",
+          "The company's average revenue",
+          "The average number of trades"
+        ],
+        "correct": 1,
+        "explanation": "A simple moving average adds up closing prices over a set number of periods and divides by that number to smooth out price fluctuations."
+      },
+      {
+        "question": "What does it generally mean when price is above its moving average?",
+        "options": [
+          "Bearish trend",
+          "Bullish trend",
+          "No trend",
+          "The company is bankrupt"
+        ],
+        "correct": 1,
+        "explanation": "When price trades above its moving average, it generally indicates an upward/bullish trend; below suggests a downward/bearish trend."
+      },
+      {
+        "question": "What is a 'golden cross'?",
+        "options": [
+          "When a stock reaches all-time highs",
+          "When a shorter-term moving average crosses above a longer-term one",
+          "When volume doubles",
+          "When a company pays a dividend"
+        ],
+        "correct": 1,
+        "explanation": "A golden cross occurs when a shorter-term MA crosses above a longer-term MA, suggesting potential upward momentum."
+      },
+      {
+        "question": "What does the RSI (Relative Strength Index) measure?",
+        "options": [
+          "Company strength versus competitors",
+          "The speed and magnitude of price changes on a 0-100 scale",
+          "Total revenue",
+          "Number of employees"
+        ],
+        "correct": 1,
+        "explanation": "RSI measures the velocity and magnitude of price movements on a scale from 0 to 100 to identify overbought or oversold conditions."
+      },
+      {
+        "question": "What does an RSI above 70 typically suggest?",
+        "options": [
+          "The stock is oversold and might bounce",
+          "The stock might be overbought and due for a decline",
+          "The stock will definitely crash",
+          "Nothing - RSI is meaningless"
+        ],
+        "correct": 1,
+        "explanation": "RSI above 70 generally indicates overbought conditions where the stock might be due for a pullback, though it can stay elevated in strong trends."
+      },
+      {
+        "question": "What does an RSI below 30 typically suggest?",
+        "options": [
+          "The stock might be oversold and due for a bounce",
+          "The stock is definitely going to zero",
+          "The stock is overbought",
+          "Time to sell everything"
+        ],
+        "correct": 0,
+        "explanation": "RSI below 30 suggests oversold conditions where selling pressure may be exhausted and a bounce could occur, though it can remain low in downtrends."
+      },
+      {
+        "question": "What does MACD stand for?",
+        "options": [
+          "Moving Average Convergence Divergence",
+          "Market Analysis and Company Data",
+          "Monthly Average Calculated Daily",
+          "Maximum Annual Cash Dividend"
+        ],
+        "correct": 0,
+        "explanation": "MACD stands for Moving Average Convergence Divergence and shows the relationship between two moving averages."
+      },
+      {
+        "question": "When does MACD generate a bullish signal?",
+        "options": [
+          "When it reaches zero",
+          "When the MACD line crosses above the signal line",
+          "When volume increases",
+          "When the stock pays a dividend"
+        ],
+        "correct": 1,
+        "explanation": "A bullish MACD signal occurs when the MACD line crosses above the signal line, suggesting potential upward momentum."
+      },
+      {
+        "question": "Should technical indicators be used alone for trading decisions?",
+        "options": [
+          "Yes, one indicator is always enough",
+          "No, they work best when combined with other analysis and used for confirmation",
+          "Yes, but only MACD",
+          "No, they should never be used"
+        ],
+        "correct": 1,
+        "explanation": "Technical indicators are most effective when used together and combined with other forms of analysis rather than as standalone decision-making tools."
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+Risk management is arguably more important than picking winning trades because it protects your capital and keeps you in the game long enough to profit from your successful trades.
+The 1-2% rule is a foundational principle: never risk more than one to two percent of your total trading account on any single trade.
+If you have ten thousand dollars, you should risk no more than one hundred to two hundred dollars per trade.
+This doesn't mean you can only invest that much—it means your potential loss (the difference between your entry price and stop-loss price, multiplied by shares) should be limited to that amount.
+This might seem overly conservative, but it's what allows traders to survive inevitable losing streaks.
+If you risk ten percent per trade and lose three times in a row, you've lost nearly thirty percent of your capital and need a forty-three percent gain just to break even.
+With the 1-2% rule, even ten consecutive losses only costs you ten to twenty percent, and you can recover with disciplined trading.
+Other crucial risk management practices include always using stop-loss orders (predetermined prices where you'll exit a losing trade to prevent further damage), never risking money you can't afford to lose (like rent money or emergency funds), maintaining a proper position size based on your account size and the trade's risk, diversifying across different stocks or sectors rather than putting everything in one position, and keeping detailed records of all trades to learn from both successes and failures.
+The risk-reward ratio is also important—ideally, your potential profit should be at least twice your potential loss on each trade.
+If you're risking one hundred dollars, you should be targeting at least a two hundred dollar profit.
+This way, you can be wrong half the time and still be profitable.
+Professional traders often say that amateurs focus on how much they can make, while professionals focus on how much they can lose.
+Protecting your capital through disciplined risk management is what separates long-term successful traders from those who blow up their accounts.
+

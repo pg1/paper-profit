@@ -1,0 +1,12 @@
+The stock market is an ecosystem with different types of players, each with different goals, resources, and strategies.
+Retail investors are individual people like you and me who invest their personal money, typically through brokerage accounts.
+We generally have less capital, less sophisticated tools, and less market influence than larger players.
+Institutional investors are the big players—hedge funds, mutual funds, pension funds, insurance companies, and endowments—that manage billions of dollars.
+They have teams of analysts, advanced technology, and can move markets with their large trades.
+For example, when a major pension fund decides to buy or sell millions of shares, it can significantly impact a stock's price.
+Market makers are specialized firms that facilitate trading by always being ready to buy or sell particular stocks.
+They profit from the "spread"—the tiny difference between the buying and selling price—and they help ensure there's always liquidity in the market so you can buy or sell when you want.
+Investment banks help companies raise money by issuing stocks or bonds and provide advisory services for mergers and acquisitions.
+High-frequency traders use powerful computers and algorithms to execute thousands of trades per second, profiting from tiny price discrepancies.
+Understanding who you're trading with and against helps you realize that the market is competitive and that different participants have different advantages and information.
+

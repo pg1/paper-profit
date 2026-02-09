@@ -1,0 +1,13 @@
+Fundamental analysis is the process of evaluating a company's financial health and intrinsic value to determine if its stock is worth buying.
+At its core, you're trying to answer: "Is this company financially sound and does its stock price reflect its true value?" The income statement is one of three crucial financial statements (along with the balance sheet and cash flow statement) and shows revenue, expenses, and profit over a specific period.
+Key items include revenue (total sales), cost of goods sold, operating expenses, and net income (the bottom line profit).
+The Price-to-Earnings ratio (P/E) is calculated by dividing the stock price by earnings per share (EPS).
+If a stock trades at fifty dollars and the company earned five dollars per share last year, the P/E is ten.
+This means investors are willing to pay ten times the annual earnings for the stock.
+A high P/E might indicate investors expect strong future growth, or it might mean the stock is overvalued.
+A low P/E might signal a bargain or indicate the company has problems.
+EPS (Earnings Per Share) shows how much profit the company generates for each share of stock—it's calculated by dividing net income by the number of outstanding shares.
+Rising EPS over time generally indicates a healthy, growing company.
+Other important ratios include debt-to-equity (how much debt versus shareholder equity the company has), return on equity (how efficiently the company uses shareholder money), and profit margins (what percentage of revenue becomes profit).
+Learning to read and interpret these financial metrics helps you make informed decisions based on a company's actual performance rather than hype or speculation.
+

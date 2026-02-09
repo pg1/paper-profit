@@ -1,0 +1,116 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is the primary purpose of investing?",
+        "options": [
+          "To keep money completely safe",
+          "To grow wealth or generate income over time",
+          "To spend money on consumer goods",
+          "To avoid paying taxes"
+        ],
+        "correct": 1,
+        "explanation": "Investing aims to put money to work to grow wealth or generate income over time, though it involves some risk."
+      },
+      {
+        "question": "How does investing differ from saving money in a bank account?",
+        "options": [
+          "Investing has no risk while saving does",
+          "Saving offers higher returns than investing",
+          "Investing involves purchasing assets with potential for growth, while saving typically earns minimal interest",
+          "There is no difference"
+        ],
+        "correct": 2,
+        "explanation": "Investing involves buying assets that can grow in value or generate returns, while bank savings typically earn very low interest rates."
+      },
+      {
+        "question": "Which of the following is an example of an investment asset?",
+        "options": [
+          "Cash in your wallet",
+          "Stocks",
+          "A checking account",
+          "Your monthly groceries"
+        ],
+        "correct": 1,
+        "explanation": "Stocks are investment assets that can grow in value over time. Cash and checking accounts don't grow meaningfully, and groceries are expenses."
+      },
+      {
+        "question": "True or False: Investing always guarantees you will make money.",
+        "options": [
+          "True",
+          "False"
+        ],
+        "correct": 1,
+        "explanation": "False. Investing always involves some level of risk, and there's no guarantee that your investments will grow or that you won't lose money."
+      },
+      {
+        "question": "What is a fundamental principle behind investing?",
+        "options": [
+          "Getting rich quickly with no effort",
+          "Being willing to tie up money now for the possibility of having more later",
+          "Never taking any risks",
+          "Only investing in companies you personally know"
+        ],
+        "correct": 1,
+        "explanation": "Investing requires you to commit money now in exchange for potential future gains, understanding that this involves risk and patience."
+      },
+      {
+        "question": "Which of these can investing help you achieve?",
+        "options": [
+          "Saving for retirement",
+          "Funding education",
+          "Building long-term wealth",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Investing can help with all these financial goals and more when done thoughtfully over appropriate time periods."
+      },
+      {
+        "question": "Over long periods, well-chosen investments have historically:",
+        "options": [
+          "Lost value compared to inflation",
+          "Stayed exactly even with inflation",
+          "Outpaced inflation",
+          "Had no relationship to inflation"
+        ],
+        "correct": 2,
+        "explanation": "Historically, well-chosen investments have grown faster than inflation, helping investors build real wealth over time."
+      },
+      {
+        "question": "What three things are essential for successful investing?",
+        "options": [
+          "Luck, timing, and connections",
+          "Patience, education, and understanding your goals",
+          "Large amounts of money, insider information, and quick decisions",
+          "Daily trading, market predictions, and leverage"
+        ],
+        "correct": 1,
+        "explanation": "Successful investing requires patience to let investments grow, education to make informed decisions, and clear understanding of your financial goals and risk tolerance."
+      },
+      {
+        "question": "What should you understand before you start investing?",
+        "options": [
+          "Your risk tolerance",
+          "Your financial goals",
+          "That investing involves potential losses",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Before investing, you need to understand your risk tolerance, define your financial goals, and accept that all investing carries some risk of loss."
+      },
+      {
+        "question": "Which statement best describes the relationship between risk and investing?",
+        "options": [
+          "Risk can be completely eliminated through smart choices",
+          "Some level of risk is always present when investing",
+          "Only foolish investors face any risk",
+          "Risk only exists in stock market investing"
+        ],
+        "correct": 1,
+        "explanation": "All investing involves some degree of risk. While risk can be managed and reduced through diversification and research, it cannot be eliminated entirely."
+      }
+    ]
+  }
+}

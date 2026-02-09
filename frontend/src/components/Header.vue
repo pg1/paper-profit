@@ -10,15 +10,15 @@ const showPortfolioDropdown = ref(false)
 const portfolioDropdownRef = ref(null)
 
 const navigationItems = [
+  { id: 'learning', label: 'Learning' },
   { id: 'welcome', label: 'Accounts' },
-  { id: 'portfolio', label: 'Portfolio' },
-  { id: 'asset-buy', label: 'Buy' },
-  { id: 'asset-sell', label: 'Sell' },
+ // { id: 'portfolio', label: 'Portfolio' },
+  { id: 'trade', label: 'Trade' },
   { id: 'strategy-list', label: 'Strategies' }
 ]
 
 // Fetch accounts from API
-const fetchAccounts = async () => {
+/*const fetchAccounts = async () => {
   isLoading.value = true
   try {
     const response = await fetch('http://localhost:5000/api/accounts')
@@ -31,7 +31,7 @@ const fetchAccounts = async () => {
   } finally {
     isLoading.value = false
   }
-}
+}*/
 
 const handleNavigation = (page, params = {}) => {
   currentPage.value = page
@@ -43,7 +43,7 @@ const isActive = computed(() => (page) => {
   return currentPage.value === page
 })
 
-const togglePortfolioDropdown = (event) => {
+/*const togglePortfolioDropdown = (event) => {
   event.stopPropagation() // Prevent event from bubbling up to document
   if (accounts.value.length > 1) {
     showPortfolioDropdown.value = !showPortfolioDropdown.value
@@ -69,7 +69,7 @@ const closePortfolioDropdown = () => {
 const handleClickOutside = (event) => {
   showPortfolioDropdown.value = false
 }
-
+*/
 const props = defineProps({
   navigationParams: {
     type: Object,
@@ -81,14 +81,14 @@ const openSettings = () => {
   handleNavigation('settings')
 }
 
-onMounted(() => {
+/*onMounted(() => {
   fetchAccounts()
   document.addEventListener('click', handleClickOutside)
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
-})
+})*/
 </script>
 
 <template>
@@ -107,31 +107,11 @@ onUnmounted(() => {
                 v-for="item in navigationItems" 
                 :key="item.id"      
                 :class="['nav-link', { active: isActive(item.id) }]"
-                @click="item.id === 'portfolio' ? togglePortfolioDropdown($event) : handleNavigation(item.id)"
+                @click="handleNavigation(item.id)"
               >
                 {{ item.label }}
-                <div v-if="item.id === 'portfolio' && showPortfolioDropdown" ref="portfolioDropdownRef" class="portfolio-dropdown">
-                  <div v-if="isLoading" class="dropdown-loading">
-                    Loading accounts...
-                  </div>
-                  <div v-else-if="accounts.length === 0" class="dropdown-empty">
-                    No accounts found
-                    <button class="dropdown-add-btn" @click="handleNavigation('welcome')">
-                      Add Account
-                    </button>
-                  </div>
-                  <div v-else class="dropdown-accounts">
-                    <div 
-                      v-for="account in accounts" 
-                      :key="account.account_id"
-                      class="dropdown-account"
-                      @click="handleAccountSelect(account)"
-                    >
-                      <span class="account-id">{{ account.account_id }}</span>
-                      <span class="account-balance">${{ account.cash_balance?.toLocaleString() || '0' }}</span>
-                    </div>
-                  </div>
-                </div>
+               
+                
               </li> 
             </ul>
             <button class="settings-button" @click="openSettings" aria-label="Settings">

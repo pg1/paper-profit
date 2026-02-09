@@ -1,0 +1,194 @@
+<div class="black-badge">Think</div>
+<br /><br />
+The following chart shows what happens when you put $10,000 into different money jars and let them grow for 10 years. Each line is a different way to save or invest money.
+<br />
+Try to understand this chart and think about the following:<br /><br />
+- Which line would you want your money to follow? Why?”<br />
+- Would you rather have a bumpy ride that ends with more money, or a smooth ride with less money?<br />
+- Why do you think saving money doesn’t grow as fast as the other lines?<br />
+- What do you think inflation means if money can buy less over time?<br /><br />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #2c3e50; }
+      .axis-label { font: 14px sans-serif; fill: #555; }
+      .legend-text { font: 13px sans-serif; fill: #333; }
+      .grid-line { stroke: #e0e0e0; stroke-width: 1; }
+      .axis-line { stroke: #333; stroke-width: 2; }
+      .value-label { font: 11px sans-serif; fill: #666; }
+    </style>
+    
+    <!-- Gradient for stocks -->
+    <linearGradient id="stockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:0.05" />
+    </linearGradient>
+    
+    <!-- Gradient for bonds -->
+    <linearGradient id="bondGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:0.05" />
+    </linearGradient>
+    
+    <!-- Gradient for real estate -->
+    <linearGradient id="realEstateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#e74c3c;stop-opacity:0.05" />
+    </linearGradient>
+    
+    <!-- Gradient for savings -->
+    <linearGradient id="savingsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f39c12;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#f39c12;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="600" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" class="title" text-anchor="middle">10-Year Investment Projections</text>
+  <text x="500" y="65" class="axis-label" text-anchor="middle" style="font-size: 12px; fill: #777;">Initial Investment: $10,000</text>
+  
+  <!-- Chart area background -->
+  <rect x="100" y="100" width="750" height="380" fill="white" stroke="#ddd" stroke-width="1"/>
+  
+  <!-- Horizontal grid lines and Y-axis labels -->
+  <line x1="100" y1="480" x2="850" y2="480" class="grid-line"/>
+  <text x="85" y="485" class="value-label" text-anchor="end">$10k</text>
+  
+  <line x1="100" y1="404" x2="850" y2="404" class="grid-line"/>
+  <text x="85" y="409" class="value-label" text-anchor="end">$15k</text>
+  
+  <line x1="100" y1="328" x2="850" y2="328" class="grid-line"/>
+  <text x="85" y="333" class="value-label" text-anchor="end">$20k</text>
+  
+  <line x1="100" y1="252" x2="850" y2="252" class="grid-line"/>
+  <text x="85" y="257" class="value-label" text-anchor="end">$25k</text>
+  
+  <line x1="100" y1="176" x2="850" y2="176" class="grid-line"/>
+  <text x="85" y="181" class="value-label" text-anchor="end">$30k</text>
+  
+  <line x1="100" y1="100" x2="850" y2="100" class="grid-line"/>
+  <text x="85" y="105" class="value-label" text-anchor="end">$35k</text>
+  
+  <!-- Vertical grid lines and X-axis labels -->
+  <line x1="100" y1="100" x2="100" y2="480" class="grid-line"/>
+  <text x="100" y="500" class="value-label" text-anchor="middle">0</text>
+  
+  <line x1="175" y1="100" x2="175" y2="480" class="grid-line"/>
+  <text x="175" y="500" class="value-label" text-anchor="middle">1</text>
+  
+  <line x1="250" y1="100" x2="250" y2="480" class="grid-line"/>
+  <text x="250" y="500" class="value-label" text-anchor="middle">2</text>
+  
+  <line x1="325" y1="100" x2="325" y2="480" class="grid-line"/>
+  <text x="325" y="500" class="value-label" text-anchor="middle">3</text>
+  
+  <line x1="400" y1="100" x2="400" y2="480" class="grid-line"/>
+  <text x="400" y="500" class="value-label" text-anchor="middle">4</text>
+  
+  <line x1="475" y1="100" x2="475" y2="480" class="grid-line"/>
+  <text x="475" y="500" class="value-label" text-anchor="middle">5</text>
+  
+  <line x1="550" y1="100" x2="550" y2="480" class="grid-line"/>
+  <text x="550" y="500" class="value-label" text-anchor="middle">6</text>
+  
+  <line x1="625" y1="100" x2="625" y2="480" class="grid-line"/>
+  <text x="625" y="500" class="value-label" text-anchor="middle">7</text>
+  
+  <line x1="700" y1="100" x2="700" y2="480" class="grid-line"/>
+  <text x="700" y="500" class="value-label" text-anchor="middle">8</text>
+  
+  <line x1="775" y1="100" x2="775" y2="480" class="grid-line"/>
+  <text x="775" y="500" class="value-label" text-anchor="middle">9</text>
+  
+  <line x1="850" y1="100" x2="850" y2="480" class="grid-line"/>
+  <text x="850" y="500" class="value-label" text-anchor="middle">10</text>
+  
+  <!-- Axis labels -->
+  <text x="475" y="530" class="axis-label" text-anchor="middle">Years</text>
+  <text x="40" y="290" class="axis-label" text-anchor="middle" transform="rotate(-90 40 290)">Portfolio Value ($)</text>
+  
+  <!-- Savings Account (2% annual return) - filled area -->
+  <polygon points="100,480 175,464.8 250,450.3 325,436.4 400,423.2 475,410.6 550,398.6 625,387.1 700,376.2 775,365.8 850,355.9 850,480" fill="url(#savingsGrad)"/>
+  
+  <!-- Real Estate (6% annual return with volatility) - filled area -->
+  <polygon points="100,480 175,438.2 250,385.6 325,362.8 400,318.4 475,288.2 550,275.3 625,238.6 700,218.4 775,195.2 850,186.8 850,480" fill="url(#realEstateGrad)"/>
+  
+  <!-- Bonds (4% annual return) - filled area -->
+  <polygon points="100,480 175,449.6 250,422.4 325,398.1 400,376.5 475,357.4 550,340.6 625,325.7 700,312.8 775,301.5 850,291.8 850,480" fill="url(#bondGrad)"/>
+  
+  <!-- Stocks (8% annual return with volatility) - filled area -->
+  <polygon points="100,480 175,424.8 250,352.4 325,328.6 400,258.2 475,236.4 550,218.6 625,168.2 700,142.8 775,118.4 850,102.6 850,480" fill="url(#stockGrad)"/>
+  
+  <!-- Data lines -->
+  <!-- Inflation baseline (3% annual) - dashed line showing required growth to maintain purchasing power -->
+  <line x1="100" y1="480" x2="850" y2="480" stroke="#95a5a6" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+  <polyline points="100,480 175,457.2 250,436.4 325,417.2 400,399.6 475,383.4 550,368.4 625,354.4 700,341.6 775,329.6 850,318.4" 
+            fill="none" stroke="#95a5a6" stroke-width="2" stroke-dasharray="8,4" opacity="0.7"/>
+  
+  <!-- Savings Account line -->
+  <polyline points="100,480 175,464.8 250,450.3 325,436.4 400,423.2 475,410.6 550,398.6 625,387.1 700,376.2 775,365.8 850,355.9" 
+            fill="none" stroke="#f39c12" stroke-width="3"/>
+  
+  <!-- Real Estate line (with volatility) -->
+  <polyline points="100,480 175,438.2 250,385.6 325,362.8 400,318.4 475,288.2 550,275.3 625,238.6 700,218.4 775,195.2 850,186.8" 
+            fill="none" stroke="#e74c3c" stroke-width="3"/>
+  
+  <!-- Bonds line -->
+  <polyline points="100,480 175,449.6 250,422.4 325,398.1 400,376.5 475,357.4 550,340.6 625,325.7 700,312.8 775,301.5 850,291.8" 
+            fill="none" stroke="#2ecc71" stroke-width="3"/>
+  
+  <!-- Stocks line (with volatility) -->
+  <polyline points="100,480 175,424.8 250,352.4 325,328.6 400,258.2 475,236.4 550,218.6 625,168.2 700,142.8 775,118.4 850,102.6" 
+            fill="none" stroke="#3498db" stroke-width="3"/>
+  
+  <!-- Data points -->
+  <!-- Stocks points -->
+  <circle cx="100" cy="480" r="4" fill="#3498db"/>
+  <circle cx="175" cy="424.8" r="4" fill="#3498db"/>
+  <circle cx="250" cy="352.4" r="4" fill="#3498db"/>
+  <circle cx="325" cy="328.6" r="4" fill="#3498db"/>
+  <circle cx="400" cy="258.2" r="4" fill="#3498db"/>
+  <circle cx="475" cy="236.4" r="4" fill="#3498db"/>
+  <circle cx="550" cy="218.6" r="4" fill="#3498db"/>
+  <circle cx="625" cy="168.2" r="4" fill="#3498db"/>
+  <circle cx="700" cy="142.8" r="4" fill="#3498db"/>
+  <circle cx="775" cy="118.4" r="4" fill="#3498db"/>
+  <circle cx="850" cy="102.6" r="4" fill="#3498db"/>
+  
+  <!-- Legend -->
+  <rect x="120" y="110" width="250" height="135" fill="white" stroke="#ddd" stroke-width="1" rx="5"/>
+  
+  <line x1="135" y1="130" x2="165" y2="130" stroke="#3498db" stroke-width="3"/>
+  <circle cx="150" cy="130" r="4" fill="#3498db"/>
+  <text x="175" y="135" class="legend-text">Stocks (8% avg, volatile)</text>
+  
+  <line x1="135" y1="155" x2="165" y2="155" stroke="#2ecc71" stroke-width="3"/>
+  <circle cx="150" cy="155" r="4" fill="#2ecc71"/>
+  <text x="175" y="160" class="legend-text">Bonds (4% annual)</text>
+  
+  <line x1="135" y1="180" x2="165" y2="180" stroke="#e74c3c" stroke-width="3"/>
+  <circle cx="150" cy="180" r="4" fill="#e74c3c"/>
+  <text x="175" y="185" class="legend-text">Real Estate (6% avg, volatile)</text>
+  
+  <line x1="135" y1="205" x2="165" y2="205" stroke="#f39c12" stroke-width="3"/>
+  <circle cx="150" cy="205" r="4" fill="#f39c12"/>
+  <text x="175" y="210" class="legend-text">Savings (2% annual)</text>
+  
+  <line x1="135" y1="230" x2="165" y2="230" stroke="#95a5a6" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="175" y="235" class="legend-text">Inflation (3% annual)</text>
+  
+  <!-- Final values annotation -->
+  <text x="860" y="106" class="value-label" fill="#3498db" font-weight="bold">$22,436</text>
+  <text x="860" y="295" class="value-label" fill="#2ecc71" font-weight="bold">$14,802</text>
+  <text x="860" y="190" class="value-label" fill="#e74c3c" font-weight="bold">$18,562</text>
+  <text x="860" y="359" class="value-label" fill="#f39c12" font-weight="bold">$12,190</text>
+  <text x="860" y="322" class="value-label" fill="#95a5a6" font-weight="bold">$13,439</text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="480" x2="850" y2="480" class="axis-line"/>
+  <line x1="100" y1="100" x2="100" y2="480" class="axis-line"/>
+</svg>

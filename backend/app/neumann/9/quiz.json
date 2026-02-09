@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is fundamental analysis?",
+        "options": [
+          "Analyzing chart patterns",
+          "Evaluating a company's financial health and intrinsic value",
+          "Following social media trends",
+          "Predicting short-term price movements"
+        ],
+        "correct": 1,
+        "explanation": "Fundamental analysis involves examining a company's financial statements, business model, and prospects to determine its true value."
+      },
+      {
+        "question": "What does an income statement show?",
+        "options": [
+          "The company's assets and liabilities",
+          "Revenue, expenses, and profit over a specific period",
+          "Future stock price predictions",
+          "Employee satisfaction scores"
+        ],
+        "correct": 1,
+        "explanation": "An income statement shows how much revenue a company generated, what expenses it had, and the resulting profit or loss over a period."
+      },
+      {
+        "question": "What is the P/E ratio?",
+        "options": [
+          "Profit divided by Employees",
+          "Price divided by Earnings per share",
+          "Products divided by Expenses",
+          "Purchases divided by Equity"
+        ],
+        "correct": 1,
+        "explanation": "The Price-to-Earnings (P/E) ratio divides the stock price by earnings per share, showing how much investors pay for each dollar of earnings."
+      },
+      {
+        "question": "If a stock trades at $100 and the company earned $10 per share, what is the P/E ratio?",
+        "options": [
+          "1",
+          "10",
+          "100",
+          "1,000"
+        ],
+        "correct": 1,
+        "explanation": "P/E = Price ($100) / Earnings per share ($10) = 10. Investors are paying 10 times annual earnings for the stock."
+      },
+      {
+        "question": "What might a high P/E ratio indicate?",
+        "options": [
+          "The stock is definitely overvalued",
+          "Investors expect strong future growth, or the stock might be overvalued",
+          "The company is bankrupt",
+          "The stock will definitely decrease"
+        ],
+        "correct": 1,
+        "explanation": "A high P/E can mean investors expect strong growth (willing to pay more for future earnings) or that the stock is overpriced relative to current earnings."
+      },
+      {
+        "question": "What does EPS stand for and measure?",
+        "options": [
+          "Earnings Per Share - profit generated per share of stock",
+          "Employees Per Sale",
+          "Equity Per Sector",
+          "Expected Price Soon"
+        ],
+        "correct": 0,
+        "explanation": "EPS (Earnings Per Share) is calculated by dividing net income by outstanding shares, showing how much profit each share represents."
+      },
+      {
+        "question": "What does rising EPS over time generally indicate?",
+        "options": [
+          "The company is struggling",
+          "A healthy, growing company",
+          "The stock price will fall",
+          "The company should be avoided"
+        ],
+        "correct": 1,
+        "explanation": "Consistently rising EPS typically indicates a healthy company that's growing its profitability, which is generally positive for investors."
+      },
+      {
+        "question": "What does the debt-to-equity ratio measure?",
+        "options": [
+          "How much stock versus bonds a company issues",
+          "How much debt the company has relative to shareholder equity",
+          "The company's profit margins",
+          "Employee compensation"
+        ],
+        "correct": 1,
+        "explanation": "Debt-to-equity ratio compares a company's total debt to shareholders' equity, showing how leveraged the company is."
+      },
+      {
+        "question": "What are the three crucial financial statements?",
+        "options": [
+          "Income statement, balance sheet, and cash flow statement",
+          "Tax return, employee handbook, and marketing plan",
+          "Stock chart, news articles, and social media",
+          "CEO letter, product catalog, and website"
+        ],
+        "correct": 0,
+        "explanation": "The three key financial statements are the income statement (profitability), balance sheet (assets/liabilities), and cash flow statement (cash movements)."
+      },
+      {
+        "question": "Why is fundamental analysis important?",
+        "options": [
+          "It guarantees profits",
+          "It helps make informed decisions based on actual company performance rather than speculation",
+          "It's required by law",
+          "It predicts exact future stock prices"
+        ],
+        "correct": 1,
+        "explanation": "Fundamental analysis provides factual basis for investment decisions by examining real financial data rather than relying on hype or speculation."
+      }
+    ]
+  }
+}

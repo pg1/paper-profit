@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "Who are retail investors?",
+        "options": [
+          "People who own retail stores",
+          "Individual people investing their personal money",
+          "Professional fund managers",
+          "Market makers"
+        ],
+        "correct": 1,
+        "explanation": "Retail investors are individual people like you and me who invest their own personal money through brokerage accounts."
+      },
+      {
+        "question": "Which type of market participant typically manages billions of dollars?",
+        "options": [
+          "Retail investors",
+          "Institutional investors",
+          "Individual day traders",
+          "Market makers"
+        ],
+        "correct": 1,
+        "explanation": "Institutional investors like pension funds, hedge funds, and mutual funds manage billions of dollars in assets."
+      },
+      {
+        "question": "What advantages do institutional investors have over retail investors?",
+        "options": [
+          "Teams of professional analysts",
+          "Advanced technology and tools",
+          "Ability to move markets with large trades",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Institutional investors have significant advantages including professional staff, sophisticated technology, and market-moving capital."
+      },
+      {
+        "question": "What is the primary role of market makers?",
+        "options": [
+          "To predict future stock prices",
+          "To facilitate trading by always being ready to buy or sell",
+          "To regulate the stock market",
+          "To provide investment advice"
+        ],
+        "correct": 1,
+        "explanation": "Market makers ensure liquidity by always being willing to buy or sell particular stocks, helping facilitate smooth trading."
+      },
+      {
+        "question": "How do market makers typically profit?",
+        "options": [
+          "From the spread between buying and selling prices",
+          "From government subsidies",
+          "From company dividends",
+          "From predicting stock movements"
+        ],
+        "correct": 0,
+        "explanation": "Market makers profit from the 'spread' - the small difference between the price they'll pay to buy (bid) and the price they'll sell for (ask)."
+      },
+      {
+        "question": "Which type of participant includes pension funds and mutual funds?",
+        "options": [
+          "Retail investors",
+          "Market makers",
+          "Institutional investors",
+          "High-frequency traders"
+        ],
+        "correct": 2,
+        "explanation": "Pension funds and mutual funds are types of institutional investors that manage money for many clients or beneficiaries."
+      },
+      {
+        "question": "What do investment banks help companies do?",
+        "options": [
+          "Predict stock prices",
+          "Raise money by issuing stocks or bonds",
+          "Execute high-frequency trades",
+          "Provide personal financial advice to individuals"
+        ],
+        "correct": 1,
+        "explanation": "Investment banks help companies raise capital through stock and bond offerings and provide services like merger and acquisition advisory."
+      },
+      {
+        "question": "What are high-frequency traders known for?",
+        "options": [
+          "Holding stocks for decades",
+          "Using algorithms to execute thousands of trades per second",
+          "Only buying dividend stocks",
+          "Avoiding technology"
+        ],
+        "correct": 1,
+        "explanation": "High-frequency traders use powerful computers and algorithms to execute thousands of trades per second, profiting from tiny price differences."
+      },
+      {
+        "question": "When a major pension fund buys or sells millions of shares, what can happen?",
+        "options": [
+          "Nothing - large trades have no impact",
+          "The stock price can be significantly affected",
+          "Trading is automatically halted",
+          "Other investors are prohibited from trading"
+        ],
+        "correct": 1,
+        "explanation": "Large institutional trades can significantly move stock prices because the sudden increase in supply or demand affects the market balance."
+      },
+      {
+        "question": "Why is it important for retail investors to understand market participants?",
+        "options": [
+          "To realize the market is competitive with participants having different advantages",
+          "To know who to blame for losses",
+          "To copy their exact strategies",
+          "It's not important at all"
+        ],
+        "correct": 0,
+        "explanation": "Understanding market participants helps retail investors realize they're competing with well-resourced professionals and should approach the market accordingly."
+      }
+    ]
+  }
+}

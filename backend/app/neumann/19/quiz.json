@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What do growth portfolios focus on?",
+        "options": [
+          "Generating dividend income",
+          "Capital appreciation from companies expected to increase in value significantly",
+          "Only bonds",
+          "Short-term trading"
+        ],
+        "correct_answer": 1,
+        "explanation": "Growth portfolios focus on capital appreciation—they hold stocks of companies expected to increase in value significantly, even if they don't pay dividends currently."
+      },
+      {
+        "question": "What is the classic '60/40 portfolio' composition?",
+        "options": [
+          "60% bonds, 40% stocks",
+          "60% stocks, 40% bonds",
+          "60% cash, 40% stocks",
+          "60% real estate, 40% stocks"
+        ],
+        "correct_answer": 1,
+        "explanation": "The classic '60/40 portfolio' holds sixty percent stocks for growth and forty percent bonds for income and stability."
+      },
+      {
+        "question": "Which type of portfolio is typically popular with retirees?",
+        "options": [
+          "Growth portfolios",
+          "Speculative portfolios",
+          "Income portfolios",
+          "Aggressive portfolios"
+        ],
+        "correct_answer": 2,
+        "explanation": "Income portfolios are popular with retirees who need their investments to generate regular spending money through dividends and interest."
+      },
+      {
+        "question": "What is the common rule of thumb for determining stock allocation percentage?",
+        "options": [
+          "Your age",
+          "Subtract your age from 100 or 110",
+          "Always 50%",
+          "Double your age"
+        ],
+        "correct_answer": 1,
+        "explanation": "A common rule of thumb is to subtract your age from 100 or 110 to determine your stock allocation percentage (so a 30-year-old might hold 70-80% stocks)."
+      },
+      {
+        "question": "What does rebalancing involve?",
+        "options": [
+          "Buying only new stocks",
+          "Periodically selling winners and buying laggards to maintain target allocation",
+          "Selling all positions yearly",
+          "Never adjusting your portfolio"
+        ],
+        "correct_answer": 1,
+        "explanation": "Rebalancing involves periodically selling winners and buying laggards to maintain your target allocation, forcing you to 'sell high and buy low' systematically."
+      },
+      {
+        "question": "Which sectors are commonly held in income portfolios?",
+        "options": [
+          "Technology and Healthcare",
+          "Utilities, Consumer Staples, and Financials",
+          "Only Energy",
+          "Only Real Estate"
+        ],
+        "correct_answer": 1,
+        "explanation": "Income portfolios often hold dividend-paying stocks from sectors like Utilities, Consumer Staples, or Financials, which are established companies with steady dividends."
+      },
+      {
+        "question": "If you need money in three years for a house down payment, what should you avoid?",
+        "options": [
+          "Savings accounts",
+          "Having it heavily in stocks",
+          "Bonds",
+          "Cash"
+        ],
+        "correct_answer": 1,
+        "explanation": "If you need money in three years, you shouldn't have it heavily in stocks because a market crash at the wrong time could devastate your plans."
+      },
+      {
+        "question": "What is asset allocation?",
+        "options": [
+          "Choosing which specific stocks to buy",
+          "How you divide your portfolio among different asset types",
+          "The total value of your portfolio",
+          "Your trading frequency"
+        ],
+        "correct_answer": 1,
+        "explanation": "Asset allocation is how you divide your portfolio among different asset types and is often more important than which specific investments you choose."
+      },
+      {
+        "question": "What are growth investors typically willing to accept?",
+        "options": [
+          "Lower returns for safety",
+          "Higher valuations (high P/E ratios) for potential future gains",
+          "Only dividend-paying stocks",
+          "No volatility"
+        ],
+        "correct_answer": 1,
+        "explanation": "Growth investors are willing to pay higher valuations (high P/E ratios) for the potential of substantial future gains from rapidly expanding companies."
+      },
+      {
+        "question": "What do target-date funds automatically do?",
+        "options": [
+          "Pick individual stocks for you",
+          "Adjust your allocation as you approach retirement",
+          "Guarantee returns",
+          "Trade daily"
+        ],
+        "correct_answer": 1,
+        "explanation": "Target-date funds automatically adjust your allocation as you approach retirement, becoming more conservative over time."
+      }
+    ]
+  }
+}

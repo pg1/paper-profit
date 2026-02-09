@@ -20,7 +20,7 @@ const emit = defineEmits(['navigate'])
 
 
 const handleAddAsset = () => {
-  emit('navigate', 'asset-buy', { account_id: accountName.value })
+  emit('navigate', 'trade', { account_id: accountName.value })
 }
 
 const handleSymbolClick = (symbol) => {

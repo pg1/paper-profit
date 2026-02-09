@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is a support level?",
+        "options": [
+          "A price level where buying pressure tends to prevent further declines",
+          "A price ceiling where selling pressure emerges",
+          "The company's customer service",
+          "The stock's all-time high"
+        ],
+        "correct": 0,
+        "explanation": "Support is a price 'floor' where enough buyers believe the stock is undervalued and step in to buy, preventing further price drops."
+      },
+      {
+        "question": "What is a resistance level?",
+        "options": [
+          "A price floor where buyers emerge",
+          "A price ceiling where selling pressure prevents further increases",
+          "The stock's all-time low",
+          "Government regulation"
+        ],
+        "correct": 1,
+        "explanation": "Resistance is a price 'ceiling' where selling pressure (from profit-takers or skeptics) prevents the price from rising further."
+      },
+      {
+        "question": "If a stock repeatedly bounces off $50, what is $50?",
+        "options": [
+          "Resistance",
+          "Support",
+          "The exact fair value",
+          "Meaningless"
+        ],
+        "correct": 1,
+        "explanation": "If a stock consistently stops falling and bounces at $50, that price level is acting as support where buyers repeatedly step in."
+      },
+      {
+        "question": "Are support and resistance exact prices or zones?",
+        "options": [
+          "Always exact prices to the penny",
+          "Zones or areas rather than exact numbers",
+          "Only round numbers like $100",
+          "They don't actually exist"
+        ],
+        "correct": 1,
+        "explanation": "Support and resistance are better thought of as zones or areas rather than exact prices, since human behavior isn't perfectly precise."
+      },
+      {
+        "question": "What often happens when a stock breaks through resistance with strong volume?",
+        "options": [
+          "It immediately crashes back down",
+          "That level often becomes the new support",
+          "Trading is halted",
+          "Nothing changes"
+        ],
+        "correct": 1,
+        "explanation": "When resistance is broken with conviction, it often 'flips' to become new support, as previous sellers become buyers at that level."
+      },
+      {
+        "question": "What is the Head and Shoulders pattern?",
+        "options": [
+          "A continuation pattern",
+          "A reversal pattern with three peaks",
+          "A company organizational chart",
+          "A volume indicator"
+        ],
+        "correct": 1,
+        "explanation": "Head and Shoulders is a reversal pattern consisting of three peaks - a left shoulder, higher head, and right shoulder at similar height to the left."
+      },
+      {
+        "question": "What does a Head and Shoulders pattern typically signal?",
+        "options": [
+          "Continuation of the current trend",
+          "Potential trend reversal from bullish to bearish",
+          "Increased volatility",
+          "Nothing - it's meaningless"
+        ],
+        "correct": 1,
+        "explanation": "A completed Head and Shoulders pattern, especially when the neckline breaks, typically signals a reversal from an uptrend to a downtrend."
+      },
+      {
+        "question": "What are double tops and double bottoms?",
+        "options": [
+          "Continuation patterns",
+          "Reversal patterns showing two peaks or troughs",
+          "Volume patterns",
+          "Moving averages"
+        ],
+        "correct": 1,
+        "explanation": "Double tops and bottoms are reversal patterns where price tests a level twice and fails to break through, suggesting a trend change."
+      },
+      {
+        "question": "What makes chart patterns more reliable?",
+        "options": [
+          "Using them on very short timeframes like 1-minute charts",
+          "Seeing them on higher timeframes (daily/weekly) with volume confirmation",
+          "Drawing as many patterns as possible",
+          "Ignoring volume"
+        ],
+        "correct": 1,
+        "explanation": "Patterns on higher timeframes (daily or weekly charts) with confirming volume are generally more reliable than those on very short timeframes."
+      },
+      {
+        "question": "How can you identify potential support and resistance levels?",
+        "options": [
+          "Previous highs and lows",
+          "Moving averages",
+          "Round psychological numbers",
+          "All of the above"
+        ],
+        "correct": 3,
+        "explanation": "Support and resistance can be identified using previous price highs/lows, moving averages, and psychological round numbers where traders often place orders."
+      }
+    ]
+  }
+}

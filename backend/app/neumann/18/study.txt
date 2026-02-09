@@ -1,0 +1,21 @@
+Economic indicators are statistical data points about the overall economy that help investors understand current conditions and anticipate future trends.
+These macro forces create the environment in which all companies operate, so understanding them is crucial for making informed investment decisions.
+Inflation measures how fast prices are rising across the economy, typically tracked by the Consumer Price Index (CPI) or Producer Price Index (PPI).
+Moderate inflation (around two percent annually) is generally considered healthy, but high inflation erodes purchasing power and often leads to interest rate increases, which can hurt stock prices.
+Deflation (falling prices) can also be harmful as it encourages people to delay purchases, slowing economic growth.
+Interest rates, set by central banks like the Federal Reserve, are the cost of borrowing money.
+When the Fed raises interest rates to fight inflation, borrowing becomes more expensive for both companies and consumers.
+This typically slows economic growth and can cause stock prices to fall because future company profits are worth less in today's dollars (a concept called discounting).
+Higher rates also make bonds more attractive relative to stocks, causing money to flow out of equities.
+Conversely, when the Fed lowers rates to stimulate growth, borrowing becomes cheaper, businesses expand, and stocks often rise.
+Gross Domestic Product (GDP) measures the total value of all goods and services produced in a country and indicates overall economic health.
+Rising GDP suggests a growing economy where companies can increase sales and profits, which is bullish for stocks.
+Declining or negative GDP growth signals recession, which typically hurts corporate earnings and stock prices.
+The unemployment rate shows the percentage of people actively seeking work who can't find jobs.
+Low unemployment suggests a strong economy with plenty of job opportunities, which leads to consumer spending and corporate growth.
+High unemployment indicates economic weakness.
+Other important indicators include housing starts (new home construction, an indicator of economic confidence), manufacturing indices (like the ISM Manufacturing Index, showing factory activity), consumer confidence (how optimistic people feel about the economy), and retail sales (consumer spending patterns).
+These indicators are interconnected—for example, low unemployment typically leads to wage growth, which can cause inflation, which might prompt interest rate increases.
+Investors monitor economic calendars to know when key data releases are scheduled, as they can cause significant market volatility.
+Understanding how these indicators interact helps you anticipate market conditions and adjust your portfolio accordingly—for instance, growth stocks often struggle in high-interest-rate environments, while value stocks and dividend payers may outperform.
+

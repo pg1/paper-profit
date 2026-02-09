@@ -1,0 +1,15 @@
+Technical indicators are mathematical calculations based on price, volume, or open interest that help traders identify trends, momentum, and potential reversal points.
+Moving averages are among the simplest and most widely used indicators.
+A simple moving average (SMA) calculates the average closing price over a specific number of periods—for example, a 50-day moving average adds up the closing prices from the last 50 days and divides by 50.
+This smooths out daily price fluctuations to reveal the underlying trend.
+When the price is above the moving average, the trend is generally considered bullish; when below, bearish.
+Traders often watch for crossovers—when a shorter-term moving average crosses above a longer-term one (a "golden cross"), it suggests upward momentum; when it crosses below (a "death cross"), it suggests downward momentum.
+The Relative Strength Index (RSI) measures the speed and magnitude of price changes on a scale from 0 to 100.
+Generally, an RSI above 70 indicates a stock might be overbought (due for a price decline), while below 30 suggests it might be oversold (due for a bounce).
+However, in strong trends, RSI can remain in extreme territory for extended periods.
+The Moving Average Convergence Divergence (MACD) shows the relationship between two moving averages and helps identify trend changes and momentum.
+It consists of the MACD line, signal line, and histogram.
+When the MACD line crosses above the signal line, it generates a bullish signal; when it crosses below, a bearish signal.
+These indicators aren't crystal balls—they work best when combined with other forms of analysis and used to confirm what you're seeing in price action rather than as standalone decision-making tools.
+No single indicator is right all the time, which is why experienced traders use multiple indicators together to increase their probability of success.
+

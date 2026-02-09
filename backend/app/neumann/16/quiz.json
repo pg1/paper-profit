@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What are options?",
+        "options": [
+          "Mandatory contracts to buy or sell stocks",
+          "Derivative contracts giving you the right, but not obligation, to buy or sell an asset",
+          "A type of bond",
+          "Savings accounts with higher interest"
+        ],
+        "correct": 1,
+        "explanation": "Options are derivative contracts that give you the right, but not the obligation, to buy or sell an underlying asset at a predetermined price before a specific date."
+      },
+      {
+        "question": "When would an investor buy a call option?",
+        "options": [
+          "When they believe a stock will decline",
+          "When they believe a stock will rise significantly",
+          "When they want guaranteed returns",
+          "When they want to avoid all risk"
+        ],
+        "correct": 1,
+        "explanation": "Investors buy calls when they believe a stock will rise significantly, giving them the right to buy at a lower strike price."
+      },
+      {
+        "question": "In the example given, if you buy a $55 strike call for $2 and the stock rises to $65, what is your net profit?",
+        "options": [
+          "$200",
+          "$500",
+          "$800",
+          "$1,000"
+        ],
+        "correct": 2,
+        "explanation": "You make $10 per share ($65 - $55) × 100 shares = $1,000, minus the $200 premium paid = $800 net profit (a 400% return)."
+      },
+      {
+        "question": "What happens if an option expires out of the money?",
+        "options": [
+          "You get a partial refund",
+          "You can extend the expiration date",
+          "The option expires worthless and you lose your entire investment",
+          "You automatically buy the stock"
+        ],
+        "correct": 2,
+        "explanation": "If the stock stays at or below the strike price for a call (or above for a put), your option expires worthless and you lose your entire premium investment."
+      },
+      {
+        "question": "What is theta in options trading?",
+        "options": [
+          "The volatility measure",
+          "Time decay - options lose value as expiration approaches",
+          "The strike price",
+          "The premium cost"
+        ],
+        "correct": 1,
+        "explanation": "Theta represents time decay, meaning options lose value as expiration approaches, even if the stock doesn't move."
+      },
+      {
+        "question": "When would an investor buy a put option?",
+        "options": [
+          "When they expect a stock to rise",
+          "When they expect a stock to decline",
+          "When they want dividends",
+          "When they want guaranteed income"
+        ],
+        "correct": 1,
+        "explanation": "A put option gives you the right to sell shares at the strike price, so investors buy puts when they expect a stock to decline."
+      },
+      {
+        "question": "How many shares does one standard options contract control?",
+        "options": [
+          "10 shares",
+          "50 shares",
+          "100 shares",
+          "1,000 shares"
+        ],
+        "correct": 2,
+        "explanation": "Options contracts control 100 shares, which is why the premium is multiplied by 100 to get the total cost."
+      },
+      {
+        "question": "What are the three main uses of options mentioned?",
+        "options": [
+          "Gambling, speculation, and betting",
+          "Speculation, hedging, and income generation",
+          "Saving, investing, and trading",
+          "Day trading, swing trading, and position trading"
+        ],
+        "correct": 1,
+        "explanation": "Options can be used for speculation (betting on price direction), hedging (protecting existing positions), or income generation (selling options to collect premium)."
+      },
+      {
+        "question": "Why do many retail traders lose money on options?",
+        "options": [
+          "Options are illegal",
+          "They're too expensive",
+          "They underestimate time decay and volatility changes, or treat them like lottery tickets",
+          "Brokers charge too much commission"
+        ],
+        "correct": 2,
+        "explanation": "Many retail traders lose money because they underestimate the impact of time decay and volatility changes, or they treat options like lottery tickets rather than calculated risks."
+      },
+      {
+        "question": "What do most financial advisors recommend before trading options?",
+        "options": [
+          "Start with options immediately",
+          "Avoid options entirely",
+          "Master stock investing thoroughly first, then start with simple strategies and small positions",
+          "Only trade options with borrowed money"
+        ],
+        "correct": 2,
+        "explanation": "Most financial advisors recommend beginners master stock investing thoroughly before touching options, and even then, starting with simple strategies and small positions."
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+Diversification is the practice of spreading your investments across different assets, sectors, and geographies to reduce risk.
+The old saying "don't put all your eggs in one basket" captures the essence—if you own stock in just one company and it goes bankrupt, you lose everything.
+But if you own twenty companies across different industries and one fails, you've only lost five percent of your portfolio.
+Modern Portfolio Theory, developed by Harry Markowitz, mathematically proved that diversification can reduce risk without necessarily reducing returns.
+The stock market is divided into sectors, which are groups of companies in related industries.
+The eleven main sectors are: Technology (Apple, Microsoft, software and hardware companies), Healthcare (pharmaceutical companies, hospitals, medical device makers), Financials (banks, insurance companies, investment firms), Consumer Discretionary (retailers, restaurants, entertainment companies that sell non-essential goods), Consumer Staples (food, beverage, and household product companies that sell essentials), Energy (oil, gas, and renewable energy companies), Industrials (manufacturers, aerospace, defense, construction companies), Materials (mining, chemical, forestry companies that produce raw materials), Real Estate (REITs and property companies), Utilities (electric, water, and gas companies), and Communication Services (telecom and media companies).
+Different sectors perform differently under various economic conditions.
+During economic growth, Consumer Discretionary and Technology often outperform because people spend more on non-essentials and technology.
+During recessions, Consumer Staples and Utilities tend to hold up better because people still need food and electricity regardless of the economy.
+Energy performs well when oil prices are rising.
+Healthcare tends to be defensive because people need medical care in any economy.
+A well-diversified portfolio might hold stocks or ETFs across multiple sectors so that weakness in one area can be offset by strength in another.
+Geographic diversification is also important—holding both U.S.
+and international stocks protects against country-specific risks.
+Many investors also diversify across asset classes, holding stocks, bonds, real estate, and perhaps commodities.
+However, over-diversification is possible—if you own too many individual stocks, you dilute your returns from your best ideas and might as well just own an index fund.
+Most experts suggest ten to thirty stocks provides adequate diversification for individual stock pickers, while index fund investors are automatically diversified across hundreds or thousands of holdings.
+

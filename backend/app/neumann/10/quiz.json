@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What do charts show?",
+        "options": [
+          "Company revenue only",
+          "Visual representations of price movements over time",
+          "Employee headcount",
+          "Future guaranteed prices"
+        ],
+        "correct": 1,
+        "explanation": "Charts visually display how an asset's price has moved over time, making patterns and trends easier to identify."
+      },
+      {
+        "question": "Where did candlestick charts originate?",
+        "options": [
+          "United States",
+          "18th-century Japan",
+          "Ancient Rome",
+          "Modern-day China"
+        ],
+        "correct": 1,
+        "explanation": "Candlestick charts were developed by Japanese rice traders in the 18th century and are now used worldwide."
+      },
+      {
+        "question": "What four prices does each candlestick show?",
+        "options": [
+          "Buy, sell, hold, transfer",
+          "Open, high, low, close",
+          "Bid, ask, spread, volume",
+          "Start, middle, end, average"
+        ],
+        "correct": 1,
+        "explanation": "Each candlestick displays four key prices: opening price, highest price, lowest price, and closing price for the period."
+      },
+      {
+        "question": "What does the 'body' of a candlestick represent?",
+        "options": [
+          "The company's headquarters",
+          "The range between opening and closing prices",
+          "The total volume traded",
+          "The company's market cap"
+        ],
+        "correct": 1,
+        "explanation": "The candlestick body shows the range between where the period opened and where it closed."
+      },
+      {
+        "question": "What does a green or white candlestick typically indicate?",
+        "options": [
+          "The price closed lower than it opened (bearish)",
+          "The price closed higher than it opened (bullish)",
+          "No trading occurred",
+          "The company paid a dividend"
+        ],
+        "correct": 1,
+        "explanation": "Green or white candlesticks indicate a bullish period where the closing price was higher than the opening price."
+      },
+      {
+        "question": "What are the thin lines extending from a candlestick body called?",
+        "options": [
+          "Wicks or shadows",
+          "Tails or roots",
+          "Branches or stems",
+          "Lines or markers"
+        ],
+        "correct": 0,
+        "explanation": "The thin lines are called wicks (or shadows) and show the high and low extremes beyond the open-close range."
+      },
+      {
+        "question": "What does a long upper wick suggest?",
+        "options": [
+          "Strong buying pressure throughout",
+          "Buyers pushed prices high but sellers drove them back down",
+          "No trading activity",
+          "The stock will definitely rise tomorrow"
+        ],
+        "correct": 1,
+        "explanation": "A long upper wick indicates buyers pushed prices higher but couldn't sustain it, and sellers drove prices back down."
+      },
+      {
+        "question": "What do volume bars at the bottom of charts show?",
+        "options": [
+          "Company revenue",
+          "Number of shares traded during each period",
+          "Number of investors",
+          "Stock price"
+        ],
+        "correct": 1,
+        "explanation": "Volume bars show how many shares were traded during each time period, indicating the level of trading activity."
+      },
+      {
+        "question": "Why is high volume significant with a price move?",
+        "options": [
+          "It means nothing",
+          "It confirms the strength and conviction behind the price move",
+          "It always means the price will reverse",
+          "It indicates a company is issuing new shares"
+        ],
+        "correct": 1,
+        "explanation": "High volume accompanying a price move suggests strong conviction from many participants, making the move more significant and reliable."
+      },
+      {
+        "question": "What might a series of small-bodied candlesticks indicate?",
+        "options": [
+          "Strong bullish momentum",
+          "Strong bearish momentum",
+          "Market indecision or consolidation",
+          "Trading has stopped"
+        ],
+        "correct": 2,
+        "explanation": "Small candlestick bodies with little difference between open and close suggest uncertainty and indecision among market participants."
+      }
+    ]
+  }
+}

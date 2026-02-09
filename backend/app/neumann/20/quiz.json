@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is an investment strategy?",
+        "options": [
+          "A random approach to buying stocks",
+          "A plan or method that guides how you buy and sell assets to achieve financial goals",
+          "A guarantee of making money",
+          "A type of stock"
+        ],
+        "correct": 1,
+        "explanation": "A strategy is a plan or method that guides how you buy and sell assets to try to make money or achieve specific financial goals, like a game plan for investing."
+      },
+      {
+        "question": "What does a value investing strategy involve?",
+        "options": [
+          "Buying and selling within the same day",
+          "Buying stocks that seem underpriced and holding until the market recognizes their true worth",
+          "Only investing in expensive stocks",
+          "Trading based on momentum"
+        ],
+        "correct": 1,
+        "explanation": "Value investing means buying stocks that seem underpriced and holding them until the market recognizes their true worth. Warren Buffett is famous for this approach."
+      },
+      {
+        "question": "Which famous investor is known for value investing?",
+        "options": [
+          "Elon Musk",
+          "Jeff Bezos",
+          "Warren Buffett",
+          "Mark Zuckerberg"
+        ],
+        "correct": 2,
+        "explanation": "Warren Buffett is famous for the value investing approach of buying underpriced stocks and holding them long-term."
+      },
+      {
+        "question": "What is day trading?",
+        "options": [
+          "Holding stocks for years",
+          "Buying and selling within the same day to profit from small price movements",
+          "Investing only during daytime hours",
+          "Buying stocks on sunny days"
+        ],
+        "correct": 1,
+        "explanation": "Day trading means buying and selling within the same day, trying to profit from small price movements, often using technical indicators."
+      },
+      {
+        "question": "What does dollar-cost averaging involve?",
+        "options": [
+          "Investing all your money at once",
+          "Investing a fixed amount at regular intervals regardless of price",
+          "Only buying when prices are low",
+          "Averaging your gains and losses"
+        ],
+        "correct": 1,
+        "explanation": "Dollar-cost averaging means investing a fixed amount of money at regular intervals, regardless of the price, which removes the stress of trying to time the market perfectly."
+      },
+      {
+        "question": "What is a momentum strategy?",
+        "options": [
+          "Buying assets that are falling in price",
+          "Holding investments forever",
+          "Buying assets that are rising in price, betting the trend will continue",
+          "Only investing in slow-moving stocks"
+        ],
+        "correct": 2,
+        "explanation": "A momentum strategy means buying assets that are rising in price, betting that the trend will continue, at least in the short term."
+      },
+      {
+        "question": "Why are strategies important in investing?",
+        "options": [
+          "They guarantee profits",
+          "They give you rules to follow for consistent decisions rather than emotional ones",
+          "They are required by law",
+          "They eliminate all risk"
+        ],
+        "correct": 1,
+        "explanation": "Strategies give you rules to follow, which helps you make consistent decisions rather than emotional ones. Without a strategy, you're essentially gambling rather than investing with purpose."
+      },
+      {
+        "question": "Which question does an investment strategy NOT typically answer?",
+        "options": [
+          "When should I buy or sell?",
+          "How much money should I put into each investment?",
+          "What will the stock price be tomorrow?",
+          "How long will I hold onto my investments?"
+        ],
+        "correct": 2,
+        "explanation": "Strategies answer questions like when to buy/sell, how much to invest, and how long to hold, but they cannot predict exact future prices."
+      },
+      {
+        "question": "What are you doing if you invest without a strategy?",
+        "options": [
+          "Investing wisely",
+          "Following best practices",
+          "Essentially gambling rather than investing with purpose",
+          "Guaranteed to make money"
+        ],
+        "correct": 2,
+        "explanation": "Without a strategy, you're essentially gambling rather than investing with purpose, making random moves instead of following a plan."
+      },
+      {
+        "question": "Why is an investment strategy compared to a chess game plan?",
+        "options": [
+          "Both involve luck only",
+          "Both require making random moves",
+          "Just like chess, you shouldn't invest by making random moves - you need an approach guiding your decisions",
+          "They are both very easy"
+        ],
+        "correct": 2,
+        "explanation": "Just like you wouldn't play chess by making random moves, you shouldn't invest or trade without some approach guiding your decisions. Both require strategic planning."
+      }
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is diversification?",
+        "options": [
+          "Buying only tech stocks",
+          "Spreading investments across different assets, sectors, and geographies to reduce risk",
+          "Investing all money in one stock",
+          "Only investing in bonds"
+        ],
+        "correct": 1,
+        "explanation": "Diversification is the practice of spreading your investments across different assets, sectors, and geographies to reduce risk."
+      },
+      {
+        "question": "Who developed Modern Portfolio Theory?",
+        "options": [
+          "Warren Buffett",
+          "Benjamin Graham",
+          "Harry Markowitz",
+          "Peter Lynch"
+        ],
+        "correct": 2,
+        "explanation": "Modern Portfolio Theory was developed by Harry Markowitz, who mathematically proved that diversification can reduce risk without necessarily reducing returns."
+      },
+      {
+        "question": "How many main sectors is the stock market divided into?",
+        "options": [
+          "5",
+          "8",
+          "11",
+          "15"
+        ],
+        "correct": 2,
+        "explanation": "The stock market is divided into eleven main sectors including Technology, Healthcare, Financials, Consumer Discretionary, Consumer Staples, Energy, Industrials, Materials, Real Estate, Utilities, and Communication Services."
+      },
+      {
+        "question": "Which sectors tend to outperform during economic growth?",
+        "options": [
+          "Utilities and Consumer Staples",
+          "Consumer Discretionary and Technology",
+          "Only Energy",
+          "Only Healthcare"
+        ],
+        "correct": 1,
+        "explanation": "During economic growth, Consumer Discretionary and Technology often outperform because people spend more on non-essentials and technology."
+      },
+      {
+        "question": "Which sectors tend to hold up better during recessions?",
+        "options": [
+          "Technology and Consumer Discretionary",
+          "Energy and Materials",
+          "Consumer Staples and Utilities",
+          "Real Estate and Financials"
+        ],
+        "correct": 2,
+        "explanation": "Consumer Staples and Utilities tend to hold up better during recessions because people still need food and electricity regardless of the economy."
+      },
+      {
+        "question": "If you own 20 companies across different industries and one fails, what percentage of your portfolio have you lost?",
+        "options": [
+          "1%",
+          "5%",
+          "10%",
+          "20%"
+        ],
+        "correct": 1,
+        "explanation": "If you own 20 companies equally weighted and one fails, you've only lost 5% (1/20) of your portfolio."
+      },
+      {
+        "question": "What is the suggested range of stocks for adequate diversification for individual stock pickers?",
+        "options": [
+          "3 to 5 stocks",
+          "5 to 10 stocks",
+          "10 to 30 stocks",
+          "50 to 100 stocks"
+        ],
+        "correct": 2,
+        "explanation": "Most experts suggest ten to thirty stocks provides adequate diversification for individual stock pickers."
+      },
+      {
+        "question": "Which sector includes companies like Apple and Microsoft?",
+        "options": [
+          "Consumer Discretionary",
+          "Technology",
+          "Communication Services",
+          "Industrials"
+        ],
+        "correct": 1,
+        "explanation": "Technology sector includes Apple, Microsoft, and other software and hardware companies."
+      },
+      {
+        "question": "What does REIT stand for?",
+        "options": [
+          "Real Estate Investment Trust",
+          "Regional Economic Investment Tool",
+          "Retail Energy Investment Team",
+          "Regulated Equity Income Trade"
+        ],
+        "correct": 0,
+        "explanation": "REIT stands for Real Estate Investment Trust, which are property companies that distribute rental income to investors."
+      },
+      {
+        "question": "What is the risk of over-diversification?",
+        "options": [
+          "Too much profit",
+          "Diluting returns from your best ideas",
+          "Increased volatility",
+          "Higher taxes"
+        ],
+        "correct": 1,
+        "explanation": "If you own too many individual stocks, you dilute your returns from your best ideas and might as well just own an index fund."
+      }
+    ]
+  }
+}

@@ -189,15 +189,6 @@ const openGuide = (section) => {
           </div>
 
           <div class="empty-help">
-            <h3>Quick start guide</h3>
-            <p>If you're new to trading, try to read the guide understand the basics of how investment and trading works. Open any of the sections below to learn more.</p>
-
-            <ul class="guide-links">
-              <li><button class="link-button" @click="openGuide('markets')">Markets & exchanges</button></li>
-              <li><button class="link-button" @click="openGuide('stocks')">Instruments (stocks, ETFs)</button></li>
-              <li><button class="link-button" @click="openGuide('exchanges')">Placing orders — buy & sell</button></li>
-              <li><button class="link-button" @click="openGuide('losses')">Risk management & best practices</button></li>
-            </ul>
 
             <h4>Quick steps</h4>
             <ol class="quick-steps">
@@ -209,7 +200,6 @@ const openGuide = (section) => {
 
             <div class="empty-actions">
               <button class="btn btn-primary" @click="handleAddAccount">Add Your First Account</button>
-              <button class="btn btn-outline" @click="openGuide('getting-started')">Open Guide</button>
             </div>
 
             <img src="/images/to-the-moon.png" class="welcome-image" @click="handleAddAccount" alt="Start your journey" />

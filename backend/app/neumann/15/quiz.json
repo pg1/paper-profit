@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What should a comprehensive trading plan include?",
+        "options": [
+          "Only your profit targets",
+          "Just entry and exit prices",
+          "Goals, risk tolerance, strategies, entry/exit criteria, position sizing rules, and markets to trade",
+          "Only the stocks you want to buy"
+        ],
+        "correct": 2,
+        "explanation": "A comprehensive trading plan should outline your goals, risk tolerance, strategies, entry and exit criteria, position sizing rules, and what markets or assets you'll trade."
+      },
+      {
+        "question": "What should you record in a trading journal besides technical details?",
+        "options": [
+          "Only profit and loss",
+          "Just stock symbols",
+          "Your emotional state, thoughts, and whether you followed your plan",
+          "Only winning trades"
+        ],
+        "correct": 2,
+        "explanation": "After every trade, record not just technical details but also your emotional state, what you were thinking, and whether you followed your plan to identify patterns over time."
+      },
+      {
+        "question": "What is overconfidence bias?",
+        "options": [
+          "Being too scared to trade",
+          "Believing you're better than you actually are after a winning streak",
+          "Doubting all your decisions",
+          "Copying other traders"
+        ],
+        "correct": 1,
+        "explanation": "Overconfidence bias makes you believe you're better than you actually are after a winning streak, leading to excessive risk-taking."
+      },
+      {
+        "question": "What is recency bias?",
+        "options": [
+          "Only trading recent IPOs",
+          "Giving too much weight to recent events",
+          "Ignoring historical data",
+          "Trading only during market hours"
+        ],
+        "correct": 1,
+        "explanation": "Recency bias causes you to give too much weight to recent events—if the last three trades were losers, you might avoid a great setup, or if they were winners, you might think you can't lose."
+      },
+      {
+        "question": "What is the disposition effect?",
+        "options": [
+          "Holding all positions equally",
+          "Selling winners too quickly and holding losers too long",
+          "Never selling any positions",
+          "Only buying dividend stocks"
+        ],
+        "correct": 1,
+        "explanation": "The disposition effect causes traders to sell winners too quickly (to lock in the good feeling) and hold losers too long (to avoid the pain of admitting defeat)."
+      },
+      {
+        "question": "If you tend to revenge trade, what environmental control is suggested?",
+        "options": [
+          "Trade more to get over it",
+          "Implement a waiting period of 30 minutes to an hour after closing a position",
+          "Increase your position sizes",
+          "Switch to options trading"
+        ],
+        "correct": 1,
+        "explanation": "If you revenge trade, implement a rule that you must wait thirty minutes or an hour after closing a position before opening a new one."
+      },
+      {
+        "question": "Why is having a life outside of trading important?",
+        "options": [
+          "It wastes time that could be spent trading",
+          "It helps maintain perspective and reduces the psychological weight of any single trade",
+          "It's not important for successful trading",
+          "It only matters for professional traders"
+        ],
+        "correct": 1,
+        "explanation": "Having relationships, hobbies, and interests outside trading helps maintain perspective and reduces the psychological weight of any single trade."
+      },
+      {
+        "question": "What should you accept to remove tremendous psychological pressure?",
+        "options": [
+          "That you'll win every trade",
+          "That perfection is impossible and losses are inevitable",
+          "That trading is purely luck",
+          "That you should never make mistakes"
+        ],
+        "correct": 1,
+        "explanation": "Accepting that perfection is impossible and losses are inevitable removes tremendous psychological pressure. You just need to be slightly more right than wrong over time with proper risk management."
+      },
+      {
+        "question": "What is the purpose of accountability partners in trading?",
+        "options": [
+          "To make trades for you",
+          "To consult before placing trades, especially larger ones",
+          "To share profits with",
+          "To compete against"
+        ],
+        "correct": 1,
+        "explanation": "Some traders have accountability partners who they must consult before placing trades, especially larger ones, to provide objective perspective."
+      },
+      {
+        "question": "When should you refer back to your trading plan?",
+        "options": [
+          "Only when losing money",
+          "When emotions run high during a trade",
+          "Never, once it's written",
+          "Only at the end of each month"
+        ],
+        "correct": 1,
+        "explanation": "When emotions run high during a trade, you can refer back to your plan written during a calm, rational moment for guidance."
+      }
+    ]
+  }
+}

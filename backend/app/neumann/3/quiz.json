@@ -1,0 +1,118 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What does common stock represent?",
+        "options": [
+          "A loan to the company",
+          "Equity ownership in the company",
+          "A government security",
+          "A guaranteed fixed income"
+        ],
+        "correct": 1,
+        "explanation": "Common stock represents equity ownership - when you buy stock, you own a piece of the company."
+      },
+      {
+        "question": "What are the two main ways stockholders can profit?",
+        "options": [
+          "Price appreciation and dividends",
+          "Interest payments and tax refunds",
+          "Salaries and bonuses",
+          "Rent and royalties"
+        ],
+        "correct": 0,
+        "explanation": "Stockholders profit through price appreciation (the stock becoming more valuable) and dividends (cash payments from company profits)."
+      },
+      {
+        "question": "What does buying a bond represent?",
+        "options": [
+          "Ownership in a company",
+          "Lending money to a government or corporation",
+          "Purchasing real estate",
+          "Buying commodities"
+        ],
+        "correct": 1,
+        "explanation": "When you buy a bond, you're essentially lending money to the issuer (government or corporation) in exchange for interest payments."
+      },
+      {
+        "question": "What is the 'coupon' on a bond?",
+        "options": [
+          "A discount code",
+          "The regular interest payment",
+          "The bond's maturity date",
+          "The initial purchase price"
+        ],
+        "correct": 1,
+        "explanation": "The coupon is the regular interest payment that bondholders receive, typically paid semi-annually or annually."
+      },
+      {
+        "question": "If a company goes bankrupt, who gets paid first?",
+        "options": [
+          "Common stockholders",
+          "The CEO and executives",
+          "Bondholders and creditors",
+          "Everyone gets paid equally"
+        ],
+        "correct": 2,
+        "explanation": "Bondholders and creditors have priority claims on company assets in bankruptcy; stockholders are last in line and often receive nothing."
+      },
+      {
+        "question": "Which is generally considered riskier?",
+        "options": [
+          "Stocks",
+          "Bonds",
+          "Both have identical risk",
+          "Neither has any risk"
+        ],
+        "correct": 0,
+        "explanation": "Stocks are generally riskier because their value fluctuates more and stockholders are last in line if the company fails."
+      },
+      {
+        "question": "Which typically offers higher long-term returns?",
+        "options": [
+          "Bonds",
+          "Stocks",
+          "They offer identical returns",
+          "Cash savings accounts"
+        ],
+        "correct": 1,
+        "explanation": "Historically, stocks have provided higher long-term returns than bonds, though with greater volatility and risk."
+      },
+      {
+        "question": "What happens when a bond reaches maturity?",
+        "options": [
+          "It becomes worthless",
+          "The issuer returns your principal (original investment)",
+          "You must buy another bond",
+          "It automatically converts to stock"
+        ],
+        "correct": 1,
+        "explanation": "At maturity, the bond issuer repays the principal (the amount you originally lent) along with any final interest payment."
+      },
+      {
+        "question": "Why are bonds considered more predictable than stocks?",
+        "options": [
+          "Their prices never change",
+          "They offer fixed interest payments and return of principal at maturity",
+          "They're guaranteed by the government",
+          "They always increase in value"
+        ],
+        "correct": 1,
+        "explanation": "Bonds provide predictable fixed interest payments and return of principal at maturity, unlike stocks whose dividends and prices fluctuate."
+      },
+      {
+        "question": "What do most financial advisors recommend regarding stocks and bonds?",
+        "options": [
+          "Only invest in stocks",
+          "Only invest in bonds",
+          "Hold both stocks and bonds in your portfolio",
+          "Avoid both entirely"
+        ],
+        "correct": 2,
+        "explanation": "Most advisors recommend a mix of stocks and bonds, with the ratio depending on your age, goals, and risk tolerance."
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+Stock exchanges are the marketplaces where stocks are bought and sold.
+The New York Stock Exchange (NYSE) is the world's largest stock exchange by market capitalization and operates with a physical trading floor where designated market makers facilitate trades.
+The NASDAQ is an electronic exchange with no physical trading floor—all transactions happen through computer networks.
+Each exchange has listing requirements that companies must meet to have their stock traded there.
+When you want to buy or sell a stock, you place an order through your broker, who routes it to the appropriate exchange.
+Understanding order types is crucial for executing trades effectively.
+A market order tells your broker to buy or sell immediately at the best currently available price.
+It guarantees execution but not price—if you place a market order for a volatile stock, you might get a price quite different from what you expected, especially if the stock is moving quickly.
+A limit order specifies the exact price you're willing to pay (for a buy) or accept (for a sell).
+For example, if a stock is trading at fifty dollars but you only want to buy it at forty-five dollars, you'd place a limit buy order at forty-five.
+Your order will only execute if the price drops to your specified level.
+This gives you price control but no guarantee of execution—the stock might never reach your target price.
+There are also stop orders (which become market orders when a certain price is reached) and stop-limit orders (which combine features of both), useful for limiting losses or protecting profits.
+Understanding these tools helps you execute your strategy more precisely.
+

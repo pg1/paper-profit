@@ -1,0 +1,116 @@
+{
+  "chapter": "What is Investing?",
+  "quiz": {
+    "instructions": "Choose the best answer for each question.",
+    "questions": [
+      {
+        "question": "What is the primary difference between investing and trading?",
+        "options": [
+          "Investing is illegal while trading is legal",
+          "Investing focuses on long-term growth while trading focuses on short-term price movements",
+          "Investing is only for rich people while trading is for everyone",
+          "There is no difference"
+        ],
+        "correct": 1,
+        "explanation": "The key difference is the time horizon: investing involves holding assets for years or decades, while trading involves much shorter holding periods."
+      },
+      {
+        "question": "How long does a typical investor hold their assets?",
+        "options": [
+          "Minutes to hours",
+          "Days to weeks",
+          "Years to decades",
+          "Only until the next market dip"
+        ],
+        "correct": 2,
+        "explanation": "Investors typically hold assets for years or even decades, focusing on long-term value creation rather than short-term price fluctuations."
+      },
+      {
+        "question": "What do investors primarily focus on when making decisions?",
+        "options": [
+          "Daily price charts and technical patterns",
+          "Company fundamentals, business models, and long-term prospects",
+          "Social media hype",
+          "Quick profit opportunities"
+        ],
+        "correct": 1,
+        "explanation": "Investors analyze company fundamentals including business models, competitive advantages, management quality, and long-term growth potential."
+      },
+      {
+        "question": "What is a trader most concerned with?",
+        "options": [
+          "A company's 10-year growth plan",
+          "Short-term price movements and momentum",
+          "Dividend payments decades from now",
+          "Long-term economic cycles"
+        ],
+        "correct": 1,
+        "explanation": "Traders focus on short-term price movements, technical patterns, and market momentum rather than long-term fundamentals."
+      },
+      {
+        "question": "Why do investors typically accept short-term volatility?",
+        "options": [
+          "They enjoy losing money temporarily",
+          "They believe in the asset's long-term value and can wait out fluctuations",
+          "They don't pay attention to their portfolios",
+          "They have no other choice"
+        ],
+        "correct": 1,
+        "explanation": "Long-term investors accept short-term market volatility because they have confidence in their investments' long-term value and don't need the money immediately."
+      },
+      {
+        "question": "Which approach generally requires more time and active monitoring?",
+        "options": [
+          "Long-term investing",
+          "Trading",
+          "Both require exactly the same time commitment",
+          "Neither requires any time"
+        ],
+        "correct": 1,
+        "explanation": "Trading requires constant market monitoring and quick decision-making, while long-term investing can be more passive once positions are established."
+      },
+      {
+        "question": "What is a disadvantage of frequent trading compared to long-term investing?",
+        "options": [
+          "Lower potential returns",
+          "Higher transaction costs due to frequent buying and selling",
+          "Less exciting",
+          "Requires less knowledge"
+        ],
+        "correct": 1,
+        "explanation": "Frequent trading generates higher transaction costs through commissions and fees, which can significantly reduce overall returns."
+      },
+      {
+        "question": "Warren Buffett is an example of which approach?",
+        "options": [
+          "Day trading",
+          "Long-term investing, often holding stocks for decades",
+          "Cryptocurrency speculation",
+          "High-frequency trading"
+        ],
+        "correct": 1,
+        "explanation": "Warren Buffett is famous for his long-term investment approach, often holding quality stocks for decades."
+      },
+      {
+        "question": "What do most financial advisors recommend for beginners?",
+        "options": [
+          "Start with day trading to learn quickly",
+          "Focus on long-term investing rather than trading",
+          "Only trade options and futures",
+          "Avoid both investing and trading"
+        ],
+        "correct": 1,
+        "explanation": "Financial advisors typically recommend beginners start with long-term investing as it's less risky, requires less time, and has historically proven more reliable for building wealth."
+      },
+      {
+        "question": "True or False: Trading is generally considered riskier than long-term investing.",
+        "options": [
+          "True",
+          "False"
+        ],
+        "correct": 0,
+        "explanation": "True. Trading involves higher risk due to shorter time horizons, more frequent decisions under pressure, and inability to ride out market volatility."
+      }
+    ]  
+  }
+}
