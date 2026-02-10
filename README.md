@@ -1,12 +1,11 @@
 # 📈 PaperProfit
 
-A comprehensive paper-trading platform that lets you learn by doing—teaching you about investing, trading, risk management, markets, portfolio management, and a wide range of investment strategies using real market data, all without risking real money. PaperProfit allows you to simulate trading across multiple strategies, from long-term investing to day trading, with real market data.
-
-Please note that this current version is a MVP and code still has a lots of bugs. 
-Also learning journey content is still incomlete.
+Learn investing and trading by doing. Practice with a virtual account, test real strategies risk-free, and complete a 21-day challenge with daily lessons and exercises.
+PaperProfit can teach you about investing, trading, risk management, markets, portfolio management, and a wide range of investment strategies using real market data, all without risking real money. 
 
 ![screenshot](docs/media/screenshot_1.png)
 
+Please note that current version is a MVP and code still has bugs and learning journey content is still incomlete.
 
 ## 🚀 Features
 
@@ -185,11 +184,6 @@ paper_profit/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/              # Vue components
-│   │   │   ├── LearningJourney.vue  # Learning journey dashboard
-│   │   │   ├── LearningDetails.vue  # Daily lesson viewer
-│   │   │   ├── AssetTrade.vue       # Trading interface
-│   │   │   └── ui/
-│   │   │       └── LearningStatus.vue # Progress visualization
 │   │   ├── App.vue                  # Root component
 │   │   └── main.js                  # Entry point
 │   ├── package.json                 # Node dependencies
