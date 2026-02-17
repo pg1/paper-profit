@@ -774,8 +774,6 @@ watch(() => props.navigationParams, (newParams) => {
 </template>
 
 <style scoped>
-.learning-details-page {
-}
 
 .card-container {
   max-width: 1200px;

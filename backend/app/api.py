@@ -863,6 +863,119 @@ async def get_instrument_market_data(symbol: str, period: str = "1mo", db: Sessi
         )
 
 
+@app.get("/api/instruments/list/winners", response_model=List[Dict[str, Any]])
+async def get_top_gainers(limit: int = 20):
+    """Get top gainers (winners) using Yahoo Finance screener"""
+    try:
+        from yfinance import screener
+        
+        # Get day gainers using yfinance screener
+        result = screener.screen('day_gainers', count=limit)
+        
+        if not result or 'quotes' not in result:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="No gainers data available"
+            )
+        
+        quotes = result['quotes']
+        
+        # Format the response to match frontend expectations
+        formatted_results = []
+        for quote in quotes:
+            symbol = quote.get('symbol')
+            name = quote.get('longName') or quote.get('shortName') or symbol
+            price = quote.get('regularMarketPrice')
+            change = quote.get('regularMarketChange')
+            change_percent = quote.get('regularMarketChangePercent')
+            volume = quote.get('regularMarketVolume')
+             
+            formatted_results.append({
+                "symbol": symbol,
+                "name": name,
+                "price": price,
+                "volume": format_volume(volume) if volume else "N/A",
+                "change_percent": change_percent,
+                "change_amount": change,
+                "market_cap": quote.get('marketCap'),
+                "exchange": quote.get('fullExchangeName') or quote.get('exchange'),
+                "sector": quote.get('sector') or quote.get('sectorDisp', 'N/A')
+            })
+        
+        return formatted_results
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve top gainers: {str(e)}"
+        )
+
+
+@app.get("/api/instruments/list/losers", response_model=List[Dict[str, Any]])
+async def get_top_losers(limit: int = 20):
+    """Get top losers using Yahoo Finance screener"""
+    try:
+        from yfinance import screener
+        
+        # Get day losers using yfinance screener
+        result = screener.screen('day_losers', count=limit)
+        
+        if not result or 'quotes' not in result:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="No losers data available"
+            )
+        
+        quotes = result['quotes']
+        
+        # Format the response to match frontend expectations
+        formatted_results = []
+        for quote in quotes:
+            symbol = quote.get('symbol')
+            name = quote.get('longName') or quote.get('shortName') or symbol
+            price = quote.get('regularMarketPrice')
+            change = quote.get('regularMarketChange')
+            change_percent = quote.get('regularMarketChangePercent')
+            volume = quote.get('regularMarketVolume')
+            
+            
+            formatted_results.append({
+                "symbol": symbol,
+                "name": name,
+                "price": price,
+                "volume": format_volume(volume) if volume else "N/A",
+                "change_percent": change_percent,
+                "change_amount": change,
+                "market_cap": quote.get('marketCap'),
+                "exchange": quote.get('fullExchangeName') or quote.get('exchange'),
+                "sector": quote.get('sector') or quote.get('sectorDisp', 'N/A')
+            })
+        
+        return formatted_results
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve top losers: {str(e)}"
+        )
+
+
+def format_volume(volume):
+    """Format volume to human readable format (K, M, B)"""
+    if volume >= 1_000_000_000:
+        return f"{volume/1_000_000_000:.2f}B"
+    elif volume >= 1_000_000:
+        return f"{volume/1_000_000:.2f}M"
+    elif volume >= 1_000:
+        return f"{volume/1_000:.2f}K"
+    else:
+        return str(volume)
+
+
 @app.get("/api/service-list", response_model=List[Dict[str, Any]])
 async def get_service_list():
     """Get service list from YAML configuration"""

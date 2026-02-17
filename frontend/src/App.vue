@@ -18,6 +18,7 @@ import Guide from './components/Guide.vue'
 import LearningJourney from './components/LearningJourney.vue'
 import LearningDetails from './components/LearningDetails.vue'
 import Trade from './components/AssetTrade.vue'
+import InstrumentList from './components/InstrumentList.vue'
 
 const currentPage = ref('learning')
 const navigationParams = ref({})
@@ -107,6 +108,11 @@ const handleNavigation = (page, params = {}) => {
         />
         <Trade 
           v-else-if="currentPage === 'trade'" 
+          @navigate="handleNavigation"
+          :navigation-params="navigationParams"
+        />
+        <InstrumentList 
+          v-else-if="currentPage === 'list'" 
           @navigate="handleNavigation"
           :navigation-params="navigationParams"
         />

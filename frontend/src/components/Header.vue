@@ -11,6 +11,7 @@ const portfolioDropdownRef = ref(null)
 
 const navigationItems = [
   { id: 'learning', label: 'Learning' },
+  { id: 'list', label: 'List' },
   { id: 'welcome', label: 'Accounts' },
  // { id: 'portfolio', label: 'Portfolio' },
   { id: 'trade', label: 'Trade' },

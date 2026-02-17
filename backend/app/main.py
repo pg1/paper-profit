@@ -23,8 +23,8 @@ def run_migration():
         original_argv = sys.argv.copy()
         
         # Set up arguments for the migration script
-        # Default to 'init' action if no specific migration action provided
-        sys.argv = ['migrate.py', 'init']
+        # Use 'migrate-all' action to run all migration files
+        sys.argv = ['migrate.py', 'migrate-all']
         
         # Run the migration
         migrate_main()
