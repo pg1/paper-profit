@@ -976,6 +976,154 @@ def format_volume(volume):
         return str(volume)
 
 
+@app.get("/api/watchlist", response_model=List[Dict[str, Any]])
+async def get_watchlist(db: Session = Depends(get_db)):
+    """Get all instruments in the watchlist"""
+    try:
+        repo_factory = RepositoryFactory(db)
+        watchlist_instruments = repo_factory.instruments.get_watchlist()
+        
+        result = []
+        for instrument in watchlist_instruments:
+            # Try to get current price from Yahoo Finance
+            current_price = None
+            try:
+                from octopus.data_providers.yahoo_finance import YahooFinanceService
+                yahoo_service = YahooFinanceService(db)
+                price_data = yahoo_service.fetch_current_price(instrument.symbol)
+                if price_data:
+                    current_price = price_data.get("price")
+            except:
+                current_price = None
+            
+            result.append({
+                "id": instrument.id,
+                "symbol": instrument.symbol,
+                "name": instrument.name,
+                "exchange": instrument.exchange,
+                "currency": instrument.currency,
+                "watch_list": instrument.watch_list,
+                "current_price": current_price,
+                "overall_score": instrument.overall_score,
+                "risk_score": instrument.risk_score,
+                "sector": instrument.sector,
+                "is_active": instrument.is_active,
+                "created_at": instrument.created_at,
+                "updated_at": instrument.updated_at
+            })
+        
+        return result
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve watchlist: {str(e)}"
+        )
+
+
+@app.post("/api/watchlist/{symbol}", response_model=Dict[str, Any])
+async def add_to_watchlist(symbol: str, db: Session = Depends(get_db)):
+    """Add an instrument to the watchlist"""
+    try:
+        repo_factory = RepositoryFactory(db)
+        instrument = repo_factory.instruments.add_to_watchlist(symbol)
+        
+        if not instrument:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Failed to add {symbol} to watchlist"
+            )
+        
+        return {
+            "id": instrument.id,
+            "symbol": instrument.symbol,
+            "name": instrument.name,
+            "exchange": instrument.exchange,
+            "currency": instrument.currency,
+            "watch_list": instrument.watch_list,
+            "overall_score": instrument.overall_score,
+            "risk_score": instrument.risk_score,
+            "sector": instrument.sector,
+            "is_active": instrument.is_active,
+            "created_at": instrument.created_at,
+            "updated_at": instrument.updated_at,
+            "message": f"Successfully added {symbol} to watchlist"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to add {symbol} to watchlist: {str(e)}"
+        )
+
+
+@app.delete("/api/watchlist/{symbol}", response_model=Dict[str, Any])
+async def remove_from_watchlist(symbol: str, db: Session = Depends(get_db)):
+    """Remove an instrument from the watchlist"""
+    try:
+        repo_factory = RepositoryFactory(db)
+        instrument = repo_factory.instruments.remove_from_watchlist(symbol)
+        
+        if not instrument:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Instrument {symbol} not found"
+            )
+        
+        return {
+            "id": instrument.id,
+            "symbol": instrument.symbol,
+            "name": instrument.name,
+            "exchange": instrument.exchange,
+            "currency": instrument.currency,
+            "watch_list": instrument.watch_list,
+            "is_active": instrument.is_active,
+            "created_at": instrument.created_at,
+            "updated_at": instrument.updated_at,
+            "message": f"Successfully removed {symbol} from watchlist"
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to remove {symbol} from watchlist: {str(e)}"
+        )
+
+
+@app.get("/api/watchlist/{symbol}/status", response_model=Dict[str, Any])
+async def check_watchlist_status(symbol: str, db: Session = Depends(get_db)):
+    """Check if an instrument is in the watchlist"""
+    try:
+        repo_factory = RepositoryFactory(db)
+        is_in_watchlist = repo_factory.instruments.is_in_watchlist(symbol)
+        
+        # Get instrument details if it exists
+        instrument = repo_factory.instruments.get_by_symbol(symbol)
+        
+        response = {
+            "symbol": symbol,
+            "in_watchlist": is_in_watchlist
+        }
+        
+        if instrument:
+            response.update({
+                "id": instrument.id,
+                "name": instrument.name,
+                "exchange": instrument.exchange,
+                "currency": instrument.currency,
+                "watch_list": instrument.watch_list,
+                "is_active": instrument.is_active
+            })
+        
+        return response
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to check watchlist status for {symbol}: {str(e)}"
+        )
+
+
 @app.get("/api/service-list", response_model=List[Dict[str, Any]])
 async def get_service_list():
     """Get service list from YAML configuration"""

@@ -1,0 +1,185 @@
+# Stock Bucketing Configuration
+# Extracted from stock_bucketing_improved.py
+
+# Scoring thresholds for stock bucketing system
+scoring_thresholds:
+  # Beta scoring
+  beta_baseline: 1.0
+  beta_sensitivity: 50
+  
+  # Dividend scoring
+  div_yield_target: 4.0
+  
+  # Debt scoring
+  debt_to_equity_healthy: 1.0
+  debt_sensitivity: 25
+  
+  # Margin scoring
+  margin_excellent: 20.0
+  margin_sensitivity: 5
+  
+  # PE scoring
+  pe_fair_value: 20.0
+  pe_expensive: 40.0
+  pe_sensitivity: 2.5
+  
+  # Growth scoring
+  growth_excellent: 20.0
+  growth_sensitivity: 5
+  
+  # ROE scoring
+  roe_excellent: 20.0
+  roe_sensitivity: 5
+  
+  # Risk style boundaries
+  risk_safe_threshold: 70
+  risk_moderate_threshold: 50
+  
+  # Overall grade boundaries
+  grade_a_plus: 90
+  grade_a: 80
+  grade_b_plus: 70
+  grade_b: 60
+  grade_c: 50
+
+# Market cap threshold for mega tech classification
+mega_cap_threshold: 1000000000000  # $1 trillion
+
+# Sector overrides for specific tickers
+sector_overrides:
+  AAPL: MEGA TECH
+  GOOGL: MEGA TECH
+  META: MEGA TECH
+  MSFT: MEGA TECH
+  AMZN: MEGA TECH
+  XOM: OLD ECONOMY
+  BA: OLD ECONOMY
+  GE: OLD ECONOMY
+  DOW: OLD ECONOMY
+  UNP: OLD ECONOMY
+  TSLA: NEW ECONOMY
+  NFLX: NEW ECONOMY
+  UBER: NEW ECONOMY
+  DASH: NEW ECONOMY
+  SQ: NEW ECONOMY
+  SBUX: CONSUMER FAVORITES
+  MCD: CONSUMER FAVORITES
+  NKE: CONSUMER FAVORITES
+  LVMH: CONSUMER FAVORITES
+  HD: CONSUMER FAVORITES
+  PFE: HEALTHCARE
+  GILD: HEALTHCARE
+  MDT: HEALTHCARE
+  UNH: HEALTHCARE
+  CRSP: HEALTHCARE
+  JPM: FINANCIAL GIANTS
+  V: FINANCIAL GIANTS
+  GS: FINANCIAL GIANTS
+  BRK.A: FINANCIAL GIANTS
+  BRK.B: FINANCIAL GIANTS
+  PYPL: FINANCIAL GIANTS
+  NEE: INFRASTRUCTURE
+  VZ: INFRASTRUCTURE
+  AWK: INFRASTRUCTURE
+  AMT: INFRASTRUCTURE
+  DUK: INFRASTRUCTURE
+  DLR: REAL ESTATE
+  EQR: REAL ESTATE
+  SPG: REAL ESTATE
+  BXP: REAL ESTATE
+  PSA: REAL ESTATE
+  NEM: MATERIALS & MINING
+  X: MATERIALS & MINING
+  FCX: MATERIALS & MINING
+  AA: MATERIALS & MINING
+  CF: MATERIALS & MINING
+  DIS: ENTERTAINMENT & MEDIA
+  EA: ENTERTAINMENT & MEDIA
+  SPOT: ENTERTAINMENT & MEDIA
+  DKNG: ENTERTAINMENT & MEDIA
+  NYT: ENTERTAINMENT & MEDIA
+
+# Sector keywords for classification
+sector_keywords:
+  MEGA TECH:
+    - technology
+    - software
+    - internet
+    - cloud
+    - search
+    - social media
+    - e-commerce
+  
+  OLD ECONOMY:
+    - energy
+    - oil
+    - industrial
+    - aerospace
+    - chemical
+    - railroad
+    - manufacturing
+  
+  NEW ECONOMY:
+    - electric vehicle
+    - streaming
+    - ride-sharing
+    - delivery
+    - fintech
+    - disrupt
+  
+  CONSUMER FAVORITES:
+    - retail
+    - food
+    - beverage
+    - apparel
+    - home improvement
+    - restaurant
+  
+  HEALTHCARE:
+    - pharmaceutical
+    - biotech
+    - medical device
+    - health insurance
+    - gene
+  
+  FINANCIAL GIANTS:
+    - bank
+    - credit card
+    - investment
+    - insurance
+    - payment
+  
+  INFRASTRUCTURE:
+    - utility
+    - telecom
+    - water
+    - tower
+    - natural gas
+    - electric
+  
+  REAL ESTATE:
+    - reit
+    - property
+    - apartment
+    - mall
+    - office
+    - storage
+    - data center
+  
+  MATERIALS & MINING:
+    - mining
+    - metal
+    - steel
+    - copper
+    - aluminum
+    - agricultural
+    - commodity
+  
+  ENTERTAINMENT & MEDIA:
+    - entertainment
+    - media
+    - studio
+    - gaming
+    - music
+    - sports
+    - publishing

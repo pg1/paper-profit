@@ -36,6 +36,10 @@ class Instrument(Base):
     name = Column(String)  # Full company name
     exchange = Column(String)  # e.g., 'NASDAQ', 'NYSE'
     currency = Column(String, default='USD')
+    watch_list = Column(Integer, default=0)  # Watchlist flag: 0 = not in watchlist, 1 = in watchlist
+    overall_score = Column(Integer, nullable=True)  # Quantitative score 0-100
+    risk_score = Column(Integer, nullable=True)     # Risk score 0-100, higher = safer
+    sector = Column(String, nullable=True)          # Sector bucket classification
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.current_timestamp())
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())

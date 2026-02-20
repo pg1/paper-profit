@@ -1,5 +1,5 @@
 #DB file
-backend/PaperProfit.db
+backend/PaperProfit.d*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

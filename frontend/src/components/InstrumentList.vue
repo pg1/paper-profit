@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 
 const props = defineProps({
   navigationParams: {
@@ -13,14 +13,13 @@ const emit = defineEmits(['navigate'])
 const activeTab = ref('winners')
 const isLoading = ref(false)
 const error = ref(null)
+const showAddModal = ref(false)
+const newSymbol = ref('')
 
 const winners = ref([])
 const losers = ref([])
-const watchList = ref([
-  { symbol: 'AAPL', name: 'Apple Inc.', price: 185.25, change: '+3.45%', added: '2024-01-15' },
-  { symbol: 'MSFT', name: 'Microsoft Corp.', price: 415.86, change: '+2.87%', added: '2024-01-10' },
-  { symbol: 'GOOGL', name: 'Alphabet Inc.', price: 152.34, change: '+2.15%', added: '2024-01-05' }
-])
+const watchList = ref([])
+const watchlistStatus = ref({}) // Track watchlist status for winners/losers
 
 const handleNavigation = (page, params = {}) => {
   emit('navigate', page, params)
@@ -45,8 +44,12 @@ const fetchWinners = async () => {
       name: item.name || item.symbol,
       price: item.price || 0,
       change: item.change_percent || 0,
-      volume: item.volume || 'N/A'
+      volume: item.volume || 'N/A',
+      inWatchlist: false // Will be updated after fetching watchlist status
     }))
+    
+    // Check watchlist status for each winner
+    await updateWatchlistStatusForInstruments(winners.value)
   } catch (err) {
     console.error('Error fetching winners:', err)
     error.value = 'Failed to load winners data. Please try again.'
@@ -71,8 +74,12 @@ const fetchLosers = async () => {
       name: item.name || item.symbol,
       price: item.price || 0,
       change: item.change_percent || 0,
-      volume: item.volume || 'N/A'
+      volume: item.volume || 'N/A',
+      inWatchlist: false // Will be updated after fetching watchlist status
     }))
+    
+    // Check watchlist status for each loser
+    await updateWatchlistStatusForInstruments(losers.value)
   } catch (err) {
     console.error('Error fetching losers:', err)
     error.value = 'Failed to load losers data. Please try again.'
@@ -82,13 +89,181 @@ const fetchLosers = async () => {
   }
 }
 
+const fetchWatchlist = async () => {
+  isLoading.value = true
+  error.value = null
+  try {
+    const response = await fetch('http://localhost:5000/api/watchlist')
+    if (!response.ok) {
+      throw new Error(`Failed to fetch watchlist: ${response.status}`)
+    }
+    const data = await response.json()
+    // Transform API data to match frontend format
+    watchList.value = data.map(item => ({
+      id: item.id,
+      symbol: item.symbol,
+      name: item.name || item.symbol,
+      price: item.current_price || 0,
+      change: 0, // We don't have change data in watchlist API
+      added: new Date(item.created_at).toLocaleDateString(),
+      exchange: item.exchange || '—',
+      currency: item.currency || 'USD',
+      sector: item.sector || '—',
+      overall_score: item.overall_score,
+      risk_score: item.risk_score
+    }))
+  } catch (err) {
+    console.error('Error fetching watchlist:', err)
+    error.value = 'Failed to load watchlist data. Please try again.'
+    
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const updateWatchlistStatusForInstruments = async (instruments) => {
+  for (const instrument of instruments) {
+    try {
+      const response = await fetch(`http://localhost:5000/api/watchlist/${instrument.symbol}/status`)
+      if (response.ok) {
+        const data = await response.json()
+        instrument.inWatchlist = data.in_watchlist
+        watchlistStatus.value[instrument.symbol] = data.in_watchlist
+      }
+    } catch (err) {
+      console.error(`Error checking watchlist status for ${instrument.symbol}:`, err)
+      instrument.inWatchlist = false
+      watchlistStatus.value[instrument.symbol] = false
+    }
+  }
+}
+
+const addToWatchlist = async (symbol) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/watchlist/${symbol}`, {
+      method: 'POST'
+    })
+    
+    if (!response.ok) {
+      throw new Error(`Failed to add ${symbol} to watchlist: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log(`Added ${symbol} to watchlist:`, data)
+    
+    // Update watchlist status
+    watchlistStatus.value[symbol] = true
+    
+    // Update inWatchlist property for current tab
+    if (activeTab.value === 'winners') {
+      const winner = winners.value.find(w => w.symbol === symbol)
+      if (winner) winner.inWatchlist = true
+    } else if (activeTab.value === 'losers') {
+      const loser = losers.value.find(l => l.symbol === symbol)
+      if (loser) loser.inWatchlist = true
+    }
+    
+    // Refresh watchlist if we're on the watchlist tab
+    if (activeTab.value === 'watchlist') {
+      await fetchWatchlist()
+    }
+    
+    return true
+  } catch (err) {
+    console.error(`Error adding ${symbol} to watchlist:`, err)
+    error.value = `Failed to add ${symbol} to watchlist. Please try again.`
+    return false
+  }
+}
+
+const removeFromWatchlist = async (symbol) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/watchlist/${symbol}`, {
+      method: 'DELETE'
+    })
+    
+    if (!response.ok) {
+      throw new Error(`Failed to remove ${symbol} from watchlist: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log(`Removed ${symbol} from watchlist:`, data)
+    
+    // Update watchlist status
+    watchlistStatus.value[symbol] = false
+    
+    // Update inWatchlist property for current tab
+    if (activeTab.value === 'winners') {
+      const winner = winners.value.find(w => w.symbol === symbol)
+      if (winner) winner.inWatchlist = false
+    } else if (activeTab.value === 'losers') {
+      const loser = losers.value.find(l => l.symbol === symbol)
+      if (loser) loser.inWatchlist = false
+    }
+    
+    // Refresh watchlist if we're on the watchlist tab
+    if (activeTab.value === 'watchlist') {
+      await fetchWatchlist()
+    }
+    
+    return true
+  } catch (err) {
+    console.error(`Error removing ${symbol} from watchlist:`, err)
+    error.value = `Failed to remove ${symbol} from watchlist. Please try again.`
+    return false
+  }
+}
+
+const handleAddToWatchlist = async (symbol) => {
+  const success = await addToWatchlist(symbol)
+  if (success) {
+    // Show success message or update UI
+    console.log(`Successfully added ${symbol} to watchlist`)
+  }
+}
+
+const handleRemoveFromWatchlist = async (symbol) => {
+  const success = await removeFromWatchlist(symbol)
+  if (success) {
+    // Show success message or update UI
+    console.log(`Successfully removed ${symbol} from watchlist`)
+  }
+}
+
+const openAddModal = () => {
+  showAddModal.value = true
+  newSymbol.value = ''
+}
+
+const closeAddModal = () => {
+  showAddModal.value = false
+  newSymbol.value = ''
+}
+
+const handleAddNewSymbol = async () => {
+  if (!newSymbol.value.trim()) {
+    error.value = 'Please enter a symbol'
+    return
+  }
+  
+  const symbol = newSymbol.value.trim().toUpperCase()
+  const success = await addToWatchlist(symbol)
+  
+  if (success) {
+    closeAddModal()
+    // Refresh watchlist
+    await fetchWatchlist()
+  }
+}
+
 const fetchData = () => {
   if (activeTab.value === 'winners') {
     fetchWinners()
   } else if (activeTab.value === 'losers') {
     fetchLosers()
+  } else if (activeTab.value === 'watchlist') {
+    fetchWatchlist()
   }
-  // Watchlist remains as placeholder for now
 }
 
 // Watch for tab changes to fetch appropriate data
@@ -118,12 +293,12 @@ onMounted(() => {
       >
         Losers
       </button>
-      <!--<button 
+      <button 
         :class="['tab', { active: activeTab === 'watchlist' }]" 
         @click="activeTab = 'watchlist'"
       >
         WatchList
-      </button>-->
+      </button>
     </div>
 
     <!-- Tab Content -->
@@ -169,6 +344,22 @@ onMounted(() => {
                   <td class="volume">{{ instrument.volume }}</td>
                   <td class="action">
                     <button class="view-btn" @click="navigateToInstrument(instrument.symbol)">View</button>
+                    <button 
+                      v-if="!instrument.inWatchlist"
+                      class="watchlist-btn"
+                      @click="handleAddToWatchlist(instrument.symbol)"
+                      title="Add to Watchlist"
+                    >
+                      +
+                    </button>
+                    <button 
+                      v-else
+                      class="watchlist-btn active"
+                      @click="handleRemoveFromWatchlist(instrument.symbol)"
+                      title="Remove from Watchlist"
+                    >
+                      ✓
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -207,6 +398,22 @@ onMounted(() => {
                   <td class="volume">{{ instrument.volume }}</td>
                   <td class="action">
                     <button class="view-btn" @click="navigateToInstrument(instrument.symbol)">View</button>
+                    <button 
+                      v-if="!instrument.inWatchlist"
+                      class="watchlist-btn"
+                      @click="handleAddToWatchlist(instrument.symbol)"
+                      title="Add to Watchlist"
+                    >
+                      +
+                    </button>
+                    <button 
+                      v-else
+                      class="watchlist-btn active"
+                      @click="handleRemoveFromWatchlist(instrument.symbol)"
+                      title="Remove from Watchlist"
+                    >
+                      ✓
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -217,14 +424,21 @@ onMounted(() => {
 
       <!-- WatchList Tab -->
       <div v-if="activeTab === 'watchlist'" class="tab-pane">
-        <div class="table-container">
+        <div v-if="watchList.length === 0 && !isLoading" class="empty-state">
+          <p>Your watchlist is empty. Add stocks to track them here.</p>
+        </div>
+        
+        <div v-if="watchList.length > 0" class="table-container">
           <table class="instrument-table">
             <thead>
               <tr>
                 <th>Symbol</th>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Change</th>
+                <th>Sector</th>
+                <th>Score</th>
+                <th>Risk</th>
+                <th>Exchange</th>
                 <th>Added</th>
                 <th>Action</th>
               </tr>
@@ -234,18 +448,64 @@ onMounted(() => {
                 <td class="symbol">{{ instrument.symbol }}</td>
                 <td class="name">{{ instrument.name }}</td>
                 <td class="price">${{ instrument.price.toFixed(2) }}</td>
-                <td class="change positive">{{ instrument.change }}</td>
+                <td class="sector">{{ instrument.sector }}</td>
+                <td class="score">
+                  <span v-if="instrument.overall_score != null" class="score-badge">
+                    {{ instrument.overall_score }}/100
+                  </span>
+                  <span v-else class="score-na">—</span>
+                </td>
+                <td class="score">
+                  <span v-if="instrument.risk_score != null" class="score-badge risk">
+                    {{ instrument.risk_score }}/100
+                  </span>
+                  <span v-else class="score-na">—</span>
+                </td>
+                <td class="exchange">{{ instrument.exchange }}</td>
                 <td class="added">{{ instrument.added }}</td>
                 <td class="action">
                   <button class="view-btn" @click="navigateToInstrument(instrument.symbol)">View</button>
-                  <button class="remove-btn">Remove</button>
+                  <button
+                    class="remove-btn"
+                    @click="handleRemoveFromWatchlist(instrument.symbol)"
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+        
         <div class="watchlist-actions">
-          <button class="add-btn">Add to WatchList</button>
+          <button class="add-btn" @click="openAddModal">Add to WatchList</button>
+        </div>
+        
+        <!-- Add Symbol Modal -->
+        <div v-if="showAddModal" class="modal-overlay">
+          <div class="modal">
+            <div class="modal-header">
+              <h3>Add Symbol to Watchlist</h3>
+              <button class="modal-close" @click="closeAddModal">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="symbol">Stock Symbol</label>
+                <input 
+                  type="text" 
+                  id="symbol" 
+                  v-model="newSymbol" 
+                  placeholder="e.g., AAPL, TSLA, MSFT"
+                  @keyup.enter="handleAddNewSymbol"
+                />
+                <p class="form-hint">Enter the stock symbol (ticker) you want to add to your watchlist.</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-secondary" @click="closeAddModal">Cancel</button>
+              <button class="btn-primary" @click="handleAddNewSymbol">Add to Watchlist</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -463,6 +723,212 @@ h1 {
   background-color: #059669;
 }
 
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #e0e0e0;
+}
+
+.watchlist-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  color: #666;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.watchlist-btn:hover {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.watchlist-btn.active {
+  background-color: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.watchlist-btn.active:hover {
+  background-color: #059669;
+  border-color: #059669;
+}
+
+.exchange {
+  color: #666;
+}
+
+.sector {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.score-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.score-badge.risk {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.score-na {
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.modal-close:hover {
+  background-color: #f3f4f6;
+  color: #333;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-hint {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #10b981;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #059669;
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
 @media (max-width: 768px) {
   .instrument-list-container {
     padding: 1rem;
@@ -488,9 +954,26 @@ h1 {
     gap: 0.25rem;
   }
   
-  .view-btn, .remove-btn {
+  .view-btn, .remove-btn, .watchlist-btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.8rem;
+  }
+  
+  .watchlist-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+  
+  .modal {
+    width: 95%;
+    margin: 1rem;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1rem;
   }
 }
 </style>

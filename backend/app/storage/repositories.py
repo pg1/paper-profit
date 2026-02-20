@@ -45,6 +45,82 @@ class InstrumentRepository:
             self.db.commit()
             self.db.refresh(instrument)
         return instrument
+    
+    def get_watchlist(self) -> List[Instrument]:
+        """Get all instruments in the watchlist"""
+        return self.db.query(Instrument).filter(Instrument.watch_list == 1).all()
+    
+    def add_to_watchlist(self, symbol: str) -> Optional[Instrument]:
+        """Add instrument to watchlist by symbol. Creates instrument if it doesn't exist.
+        Also computes and stores overall_score, risk_score and sector."""
+        import logging as _logging
+        _logger = _logging.getLogger(__name__)
+
+        instrument = self.get_by_symbol(symbol)
+
+        if not instrument:
+            # Instrument doesn't exist — try to fetch basic info first
+            try:
+                import yfinance as yf
+                ticker = yf.Ticker(symbol)
+                info = ticker.info
+
+                instrument_data = {
+                    "symbol": symbol,
+                    "name": info.get('longName') or info.get('shortName') or symbol,
+                    "exchange": info.get('exchange') or 'Unknown',
+                    "currency": info.get('currency') or 'USD',
+                    "watch_list": 1,
+                }
+                instrument = self.create(instrument_data)
+            except Exception:
+                instrument_data = {
+                    "symbol": symbol,
+                    "name": symbol,
+                    "exchange": "Unknown",
+                    "currency": "USD",
+                    "watch_list": 1,
+                }
+                instrument = self.create(instrument_data)
+        else:
+            # Instrument already exists — just flag it as watched
+            instrument.watch_list = 1
+            self.db.commit()
+            self.db.refresh(instrument)
+
+        # Compute and persist scores + sector classification
+        try:
+            from analysis.stock_scoring import score_and_classify_stock
+            scores = score_and_classify_stock(symbol)
+            instrument.overall_score = scores['overall_score']
+            instrument.risk_score = scores['risk_score']
+            instrument.sector = scores['sector_bucket']
+            self.db.commit()
+            self.db.refresh(instrument)
+        except Exception as e:
+            _logger.warning(f"Could not compute scores for {symbol}: {e}")
+            # Set default values when scoring fails
+            instrument.overall_score = None
+            instrument.risk_score = None
+            instrument.sector = 'Unknown'
+            self.db.commit()
+            self.db.refresh(instrument)
+
+        return instrument
+    
+    def remove_from_watchlist(self, symbol: str) -> Optional[Instrument]:
+        """Remove instrument from watchlist by symbol"""
+        instrument = self.get_by_symbol(symbol)
+        if instrument:
+            instrument.watch_list = 0
+            self.db.commit()
+            self.db.refresh(instrument)
+        return instrument
+    
+    def is_in_watchlist(self, symbol: str) -> bool:
+        """Check if instrument is in watchlist"""
+        instrument = self.get_by_symbol(symbol)
+        return instrument is not None and instrument.watch_list == 1
 
 
 class MarketDataRepository:
