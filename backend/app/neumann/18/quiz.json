@@ -11,7 +11,7 @@
           "Stock prices for the next day",
           "Which stocks to buy"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Economic indicators are statistical data points that help investors understand current conditions and anticipate future trends in the overall economy."
       },
       {
@@ -22,7 +22,7 @@
           "5%",
           "10%"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Moderate inflation around two percent annually is generally considered healthy for the economy."
       },
       {
@@ -33,7 +33,7 @@
           "They can fall because borrowing becomes expensive and future profits are discounted",
           "They double immediately"
         ],
-        "correct_answer": 2,
+        "correct": 2,
         "explanation": "When the Fed raises interest rates, stocks can fall because borrowing becomes more expensive, growth slows, and future company profits are worth less in today's dollars."
       },
       {
@@ -44,7 +44,7 @@
           "Only stock market value",
           "Unemployment rates"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Gross Domestic Product (GDP) measures the total value of all goods and services produced in a country and indicates overall economic health."
       },
       {
@@ -55,7 +55,7 @@
           "Wage growth, consumer spending, and corporate growth",
           "Stock market crashes"
         ],
-        "correct_answer": 2,
+        "correct": 2,
         "explanation": "Low unemployment suggests a strong economy with job opportunities, leading to consumer spending and corporate growth. It can also lead to wage growth."
       },
       {
@@ -66,7 +66,7 @@
           "Unemployment",
           "Interest rates"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "The Consumer Price Index (CPI) and Producer Price Index (PPI) are used to track inflation by measuring how fast prices are rising across the economy."
       },
       {
@@ -77,7 +77,7 @@
           "Immediate stock market rallies",
           "Increased consumer spending"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Deflation can be harmful as it encourages people to delay purchases (expecting lower prices), which slows economic growth."
       },
       {
@@ -88,7 +88,7 @@
           "Stocks always crash",
           "Unemployment increases"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "When the Fed lowers rates to stimulate growth, borrowing becomes cheaper, businesses expand, and stocks often rise."
       },
       {
@@ -99,7 +99,7 @@
           "Growth stocks",
           "All stocks equally"
         ],
-        "correct_answer": 2,
+        "correct": 2,
         "explanation": "Growth stocks often struggle in high-interest-rate environments, while value stocks and dividend payers may outperform."
       },
       {
@@ -110,7 +110,7 @@
           "Interest rates",
           "Inflation only"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Housing starts (new home construction) are an indicator of economic confidence and future economic activity."
       }
     ]

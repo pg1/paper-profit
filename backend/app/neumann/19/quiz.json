@@ -11,7 +11,7 @@
           "Only bonds",
           "Short-term trading"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Growth portfolios focus on capital appreciation—they hold stocks of companies expected to increase in value significantly, even if they don't pay dividends currently."
       },
       {
@@ -22,7 +22,7 @@
           "60% cash, 40% stocks",
           "60% real estate, 40% stocks"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "The classic '60/40 portfolio' holds sixty percent stocks for growth and forty percent bonds for income and stability."
       },
       {
@@ -33,7 +33,7 @@
           "Income portfolios",
           "Aggressive portfolios"
         ],
-        "correct_answer": 2,
+        "correct": 2,
         "explanation": "Income portfolios are popular with retirees who need their investments to generate regular spending money through dividends and interest."
       },
       {
@@ -44,7 +44,7 @@
           "Always 50%",
           "Double your age"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "A common rule of thumb is to subtract your age from 100 or 110 to determine your stock allocation percentage (so a 30-year-old might hold 70-80% stocks)."
       },
       {
@@ -55,7 +55,7 @@
           "Selling all positions yearly",
           "Never adjusting your portfolio"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Rebalancing involves periodically selling winners and buying laggards to maintain your target allocation, forcing you to 'sell high and buy low' systematically."
       },
       {
@@ -66,7 +66,7 @@
           "Only Energy",
           "Only Real Estate"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Income portfolios often hold dividend-paying stocks from sectors like Utilities, Consumer Staples, or Financials, which are established companies with steady dividends."
       },
       {
@@ -77,7 +77,7 @@
           "Bonds",
           "Cash"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "If you need money in three years, you shouldn't have it heavily in stocks because a market crash at the wrong time could devastate your plans."
       },
       {
@@ -88,7 +88,7 @@
           "The total value of your portfolio",
           "Your trading frequency"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Asset allocation is how you divide your portfolio among different asset types and is often more important than which specific investments you choose."
       },
       {
@@ -99,7 +99,7 @@
           "Only dividend-paying stocks",
           "No volatility"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Growth investors are willing to pay higher valuations (high P/E ratios) for the potential of substantial future gains from rapidly expanding companies."
       },
       {
@@ -110,7 +110,7 @@
           "Guarantee returns",
           "Trade daily"
         ],
-        "correct_answer": 1,
+        "correct": 1,
         "explanation": "Target-date funds automatically adjust your allocation as you approach retirement, becoming more conservative over time."
       }
     ]
