@@ -10,7 +10,7 @@ const props = defineProps({
 
 const emit = defineEmits(['navigate'])
 
-const activeTab = ref('winners')
+const activeTab = ref('find')
 const isLoading = ref(false)
 const error = ref(null)
 const showAddModal = ref(false)
@@ -18,8 +18,123 @@ const newSymbol = ref('')
 
 const winners = ref([])
 const losers = ref([])
+const find = ref([])
 const watchList = ref([])
 const watchlistStatus = ref({}) // Track watchlist status for winners/losers
+
+// Filter dropdown values
+const marketCapFilter = ref('')
+const peFilter = ref('')
+const dividendFilter = ref('')
+const pegFilter = ref('')
+const exchangeFilter = ref('')
+
+// Dropdown options
+const marketCapOptions = [
+  { value: '', label: 'All Market Caps' },
+  { value: '200B+', label: '200B and above' },
+  { value: '10B-200B', label: '10B to 200B' },
+  { value: '2B-10B', label: '2B to 10B' },
+  { value: '300M-2B', label: '300M to 2B' },
+  { value: '50M-300M', label: '50M to 300M' },
+  { value: '50M', label: '50M and below' }
+]
+
+const peOptions = [
+  { value: '', label: 'All P/E Ratios' },
+  { value: '50+', label: '50+' },
+  { value: '35-50', label: '35-50' },
+  { value: '25-35', label: '25-35' },
+  { value: '15-25', label: '15-25' },
+  { value: '5-15', label: '5-15' },
+  { value: '0-5', label: '0-5' }
+]
+
+const dividendOptions = [
+  { value: '', label: 'All Dividend Yields' },
+  { value: '15%+', label: '15%+' },
+  { value: '10%-15%', label: '10%-15%' },
+  { value: '5%-10%', label: '5%-10%' },
+  { value: '2%-5%', label: '2%-5%' },
+  { value: '0%-2%', label: '0%-2%' },
+  { value: '0%', label: '0% (No Dividend)' }
+]
+
+const pegOptions = [
+  { value: '', label: 'All PEG Ratios' },
+  { value: '3+', label: '3+' },
+  { value: '2-3', label: '2-3' },
+  { value: '1.5-2', label: '1.5-2' },
+  { value: '1-1.5', label: '1-1.5' },
+  { value: '0.5-1', label: '0.5-1' },
+  { value: '0-0.5', label: '0-0.5' },
+  { value: 'under0', label: 'Under 0' }
+]
+
+const exchangeOptions = [
+  { value: '', label: 'All Exchanges' },
+
+// US Exchanges (verified working)
+{ value: 'NMS', label: 'NASDAQ Global Select' },
+{ value: 'NGM', label: 'NASDAQ Global Market' },
+{ value: 'NCM', label: 'NASDAQ Capital Market' },
+{ value: 'NYQ', label: 'NYSE' },
+{ value: 'ASE', label: 'NYSE American (AMEX)' },
+{ value: 'PCX', label: 'NYSE Arca' },
+{ value: 'BTS', label: 'BATS Global Markets' },
+
+// OTC Markets (verified working)
+{ value: 'PNK', label: 'OTC Pink Sheets' },
+{ value: 'OQB', label: 'OTCQB' },
+{ value: 'OQX', label: 'OTCQX' },
+
+// International - Asia Pacific (verified working)
+{ value: 'ASX', label: 'Australian Stock Exchange' },
+{ value: 'SHH', label: 'Shanghai Stock Exchange' },
+{ value: 'SHZ', label: 'Shenzhen Stock Exchange' },
+{ value: 'HKG', label: 'Hong Kong Stock Exchange' },
+{ value: 'BSE', label: 'Bombay Stock Exchange' },
+{ value: 'NSI', label: 'National Stock Exchange of India' },
+{ value: 'JKT', label: 'Indonesia Stock Exchange' },
+{ value: 'KSC', label: 'Korea Stock Exchange' },
+{ value: 'KOE', label: 'KOSDAQ' },
+{ value: 'TWO', label: 'Taiwan OTC Exchange' },
+{ value: 'TAI', label: 'Taiwan Stock Exchange' },
+{ value: 'SET', label: 'Stock Exchange of Thailand' },
+{ value: 'NZE', label: 'New Zealand Stock Exchange' },
+{ value: 'KLS', label: 'Malaysia Stock Exchange' },
+{ value: 'SES', label: 'Singapore Stock Exchange' },
+
+// Europe (verified working)
+{ value: 'LSE', label: 'London Stock Exchange' },
+{ value: 'GER', label: 'XETRA (Germany)' },
+{ value: 'FRA', label: 'Frankfurt Stock Exchange' },
+{ value: 'PAR', label: 'Euronext Paris' },
+{ value: 'AMS', label: 'Euronext Amsterdam' },
+{ value: 'BRU', label: 'Euronext Brussels' },
+{ value: 'LIS', label: 'Euronext Lisbon' },
+{ value: 'STO', label: 'Stockholm Stock Exchange' },
+{ value: 'CPH', label: 'Copenhagen Stock Exchange' },
+{ value: 'VIE', label: 'Vienna Stock Exchange' },
+{ value: 'VTX', label: 'Swiss Exchange (SIX)' },
+{ value: 'MIL', label: 'Milan Stock Exchange' },
+{ value: 'MCE', label: 'Madrid Stock Exchange' },
+{ value: 'OSL', label: 'Oslo Stock Exchange' },
+{ value: 'ATH', label: 'Athens Stock Exchange' },
+{ value: 'IST', label: 'Istanbul Stock Exchange' },
+
+// Americas (verified working)
+{ value: 'TOR', label: 'Toronto Stock Exchange' },
+{ value: 'VAN', label: 'TSX Venture Exchange' },
+{ value: 'SAO', label: 'São Paulo Stock Exchange (BOVESPA)' },
+{ value: 'BUE', label: 'Buenos Aires Stock Exchange' },
+{ value: 'MEX', label: 'Mexico Stock Exchange' },
+{ value: 'SNT', label: 'Santiago Stock Exchange' },
+
+// Middle East & Africa (verified working)
+{ value: 'TLV', label: 'Tel Aviv Stock Exchange' },
+{ value: 'JSE', label: 'Johannesburg Stock Exchange' }
+]
 
 const handleNavigation = (page, params = {}) => {
   emit('navigate', page, params)
@@ -83,6 +198,147 @@ const fetchLosers = async () => {
   } catch (err) {
     console.error('Error fetching losers:', err)
     error.value = 'Failed to load losers data. Please try again.'
+    
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const fetchFind = async () => {
+  isLoading.value = true
+  error.value = null
+  try {
+    // Build query parameters based on selected filters
+    const params = new URLSearchParams()
+    
+    // Market cap filter
+    if (marketCapFilter.value) {
+      const marketCapRange = marketCapFilter.value
+      if (marketCapRange === '200B+') {
+        params.append('market_cap_min', '200')
+      } else if (marketCapRange === '10B-200B') {
+        params.append('market_cap_min', '10')
+        params.append('market_cap_max', '200')
+      } else if (marketCapRange === '2B-10B') {
+        params.append('market_cap_min', '2')
+        params.append('market_cap_max', '10')
+      } else if (marketCapRange === '300M-2B') {
+        params.append('market_cap_min', '0.3')
+        params.append('market_cap_max', '2')
+      } else if (marketCapRange === '50M-300M') {
+        params.append('market_cap_min', '0.05')
+        params.append('market_cap_max', '0.3')
+      } else if (marketCapRange === '50M') {
+        params.append('market_cap_max', '0.05')
+      }
+    } else {
+      // Default market cap filter
+      params.append('market_cap_min', '10')
+    }
+    
+    // P/E ratio filter
+    if (peFilter.value) {
+      const peRange = peFilter.value
+      if (peRange === '50+') {
+        params.append('pe_min', '50')
+      } else if (peRange === '35-50') {
+        params.append('pe_min', '35')
+        params.append('pe_max', '50')
+      } else if (peRange === '25-35') {
+        params.append('pe_min', '25')
+        params.append('pe_max', '35')
+      } else if (peRange === '15-25') {
+        params.append('pe_min', '15')
+        params.append('pe_max', '25')
+      } else if (peRange === '5-15') {
+        params.append('pe_min', '5')
+        params.append('pe_max', '15')
+      } else if (peRange === '0-5') {
+        params.append('pe_min', '0')
+        params.append('pe_max', '5')
+      }
+    }
+    
+    // Dividend yield filter
+    if (dividendFilter.value) {
+      const dividendRange = dividendFilter.value
+      if (dividendRange === '15%+') {
+        params.append('dividend_min', '15')
+      } else if (dividendRange === '10%-15%') {
+        params.append('dividend_min', '10')
+        params.append('dividend_max', '15')
+      } else if (dividendRange === '5%-10%') {
+        params.append('dividend_min', '5')
+        params.append('dividend_max', '10')
+      } else if (dividendRange === '2%-5%') {
+        params.append('dividend_min', '2')
+        params.append('dividend_max', '5')
+      } else if (dividendRange === '0%-2%') {
+        params.append('dividend_min', '0')
+        params.append('dividend_max', '2')
+      } else if (dividendRange === '0%') {
+        params.append('dividend_max', '0')
+      }
+    }
+    
+    // PEG ratio filter
+    if (pegFilter.value) {
+      const pegRange = pegFilter.value
+      if (pegRange === '3+') {
+        params.append('peg_min', '3')
+      } else if (pegRange === '2-3') {
+        params.append('peg_min', '2')
+        params.append('peg_max', '3')
+      } else if (pegRange === '1.5-2') {
+        params.append('peg_min', '1.5')
+        params.append('peg_max', '2')
+      } else if (pegRange === '1-1.5') {
+        params.append('peg_min', '1')
+        params.append('peg_max', '1.5')
+      } else if (pegRange === '0.5-1') {
+        params.append('peg_min', '0.5')
+        params.append('peg_max', '1')
+      } else if (pegRange === '0-0.5') {
+        params.append('peg_min', '0')
+        params.append('peg_max', '0.5')
+      } else if (pegRange === 'under0') {
+        params.append('peg_max', '0')
+      }
+    }
+    
+    // Exchange filter
+    if (exchangeFilter.value) {
+      params.append('exchange', exchangeFilter.value)
+    }
+    
+    const url = `http://localhost:5000/api/instruments/list/search?${params.toString()}`
+    const response = await fetch(url)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch find data: ${response.status}`)
+    }
+    const data = await response.json()
+    // Transform API data to match frontend format
+    find.value = data.map(item => ({
+      symbol: item.symbol,
+      name: item.name || item.symbol,
+      price: item.price || 0,
+      change: item.change_percent || 0,
+      volume: item.volume || 'N/A',
+      market_cap: item.market_cap || 0,
+      pe_ratio: item.pe_ratio || 'N/A',
+      dividend_yield: item.dividend_yield || 'N/A',
+      peg_ratio: item.peg_ratio || 'N/A',
+      sector: item.sector || 'N/A',
+      exchange: item.exchange || 'N/A',
+      inWatchlist: false // Will be updated after fetching watchlist status
+    }))
+    
+    // Check watchlist status for each find result
+    await updateWatchlistStatusForInstruments(find.value)
+  } catch (err) {
+    console.error('Error fetching find data:', err)
+    error.value = 'Failed to load find data. Please try again.'
     
   } finally {
     isLoading.value = false
@@ -161,6 +417,9 @@ const addToWatchlist = async (symbol) => {
     } else if (activeTab.value === 'losers') {
       const loser = losers.value.find(l => l.symbol === symbol)
       if (loser) loser.inWatchlist = true
+    } else if (activeTab.value === 'find') {
+      const findInstrument = find.value.find(f => f.symbol === symbol)
+      if (findInstrument) findInstrument.inWatchlist = true
     }
     
     // Refresh watchlist if we're on the watchlist tab
@@ -199,6 +458,9 @@ const removeFromWatchlist = async (symbol) => {
     } else if (activeTab.value === 'losers') {
       const loser = losers.value.find(l => l.symbol === symbol)
       if (loser) loser.inWatchlist = false
+    } else if (activeTab.value === 'find') {
+      const findInstrument = find.value.find(f => f.symbol === symbol)
+      if (findInstrument) findInstrument.inWatchlist = false
     }
     
     // Refresh watchlist if we're on the watchlist tab
@@ -256,11 +518,53 @@ const handleAddNewSymbol = async () => {
   }
 }
 
+const formatMarketCap = (value) => {
+  if (value === 'N/A' || value === null || value === undefined) return 'N/A'
+  const num = Number(value)
+  if (isNaN(num)) return 'N/A'
+  if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`
+  if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`
+  if (num >= 1e6) return `$${(num / 1e6).toFixed(2)}M`
+  return `$${num.toFixed(2)}`
+}
+
+const formatPERatio = (value) => {
+  if (value === 'N/A' || value === null || value === undefined) return 'N/A'
+  const num = Number(value)
+  if (isNaN(num)) return 'N/A'
+  return num.toFixed(2)
+}
+
+const formatDividendYield = (value) => {
+  if (value === 'N/A' || value === null || value === undefined) return 'N/A'
+  const num = Number(value)
+  if (isNaN(num)) return 'N/A'
+  return `${(num * 100).toFixed(2)}%`
+}
+
+const formatPEGRatio = (value) => {
+  if (value === 'N/A' || value === null || value === undefined) return 'N/A'
+  const num = Number(value)
+  if (isNaN(num)) return 'N/A'
+  return num.toFixed(2)
+}
+
+const clearFilters = () => {
+  marketCapFilter.value = ''
+  peFilter.value = ''
+  dividendFilter.value = ''
+  pegFilter.value = ''
+  exchangeFilter.value = ''
+  fetchFind()
+}
+
 const fetchData = () => {
   if (activeTab.value === 'winners') {
     fetchWinners()
   } else if (activeTab.value === 'losers') {
     fetchLosers()
+  } else if (activeTab.value === 'find') {
+    fetchFind()
   } else if (activeTab.value === 'watchlist') {
     fetchWatchlist()
   }
@@ -282,6 +586,12 @@ onMounted(() => {
     <!-- Tabs Navigation -->
     <div class="tabs">
       <button 
+        :class="['tab', { active: activeTab === 'find' }]" 
+        @click="activeTab = 'find'"
+      >
+        Find
+      </button>
+      <button 
         :class="['tab', { active: activeTab === 'winners' }]" 
         @click="activeTab = 'winners'"
       >
@@ -293,6 +603,7 @@ onMounted(() => {
       >
         Losers
       </button>
+      
       <button 
         :class="['tab', { active: activeTab === 'watchlist' }]" 
         @click="activeTab = 'watchlist'"
@@ -396,6 +707,127 @@ onMounted(() => {
                   <td class="price">${{ instrument.price.toFixed(2) }}</td>
                   <td class="change negative">{{ instrument.change.toFixed(2) }}%</td>
                   <td class="volume">{{ instrument.volume }}</td>
+                  <td class="action">
+                    <button class="view-btn" @click="navigateToInstrument(instrument.symbol)">View</button>
+                    <button 
+                      v-if="!instrument.inWatchlist"
+                      class="watchlist-btn"
+                      @click="handleAddToWatchlist(instrument.symbol)"
+                      title="Add to Watchlist"
+                    >
+                      +
+                    </button>
+                    <button 
+                      v-else
+                      class="watchlist-btn active"
+                      @click="handleRemoveFromWatchlist(instrument.symbol)"
+                      title="Remove from Watchlist"
+                    >
+                      ✓
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Find Tab -->
+      <div v-if="activeTab === 'find' && !isLoading" class="tab-pane">
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <h2>Stock Finder</h2>
+              <p>Use filters to find stocks.</p>
+            </div>
+          </div>
+          
+          <!-- Filter Dropdowns -->
+          <div class="filter-container">
+            <div class="filter-row">
+              <div class="filter-group">
+                <label for="market-cap-filter">Market Cap</label>
+                <select id="market-cap-filter" v-model="marketCapFilter" @change="fetchFind" class="filter-select">
+                  <option v-for="option in marketCapOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="pe-filter">P/E Ratio</label>
+                <select id="pe-filter" v-model="peFilter" @change="fetchFind" class="filter-select">
+                  <option v-for="option in peOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="dividend-filter">Dividend Yield</label>
+                <select id="dividend-filter" v-model="dividendFilter" @change="fetchFind" class="filter-select">
+                  <option v-for="option in dividendOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="peg-filter">PEG Ratio</label>
+                <select id="peg-filter" v-model="pegFilter" @change="fetchFind" class="filter-select">
+                  <option v-for="option in pegOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+              
+              <div class="filter-group">
+                <label for="exchange-filter">Exchange</label>
+                <select id="exchange-filter" v-model="exchangeFilter" @change="fetchFind" class="filter-select">
+                  <option v-for="option in exchangeOptions" :key="option.value" :value="option.value">
+                    {{ option.label }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="filter-actions">
+              <button class="filter-clear-btn" @click="clearFilters">
+                Clear Filters
+              </button>
+            </div>
+          </div>
+          
+          <div class="table-container">
+            <table class="instrument-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Change</th>
+                  <th>Market Cap</th>
+                  <th>P/E Ratio</th>
+                  <th>Dividend Yield</th>
+                  <th>PEG Ratio</th>
+                  <th>Sector</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="instrument in find" :key="instrument.symbol">
+                  <td class="symbol">{{ instrument.symbol }}</td>
+                  <td class="name">{{ instrument.name }}</td>
+                  <td class="price">${{ instrument.price.toFixed(2) }}</td>
+                  <td :class="['change', instrument.change >= 0 ? 'positive' : 'negative']">
+                    {{ instrument.change.toFixed(2) }}%
+                  </td>
+                  <td class="market-cap">{{ formatMarketCap(instrument.market_cap) }}</td>
+                  <td class="pe-ratio">{{ formatPERatio(instrument.pe_ratio) }}</td>
+                  <td class="dividend-yield">{{ formatDividendYield(instrument.dividend_yield) }}</td>
+                  <td class="peg-ratio">{{ formatPEGRatio(instrument.peg_ratio) }}</td>
+                  <td class="sector">{{ instrument.sector }}</td>
                   <td class="action">
                     <button class="view-btn" @click="navigateToInstrument(instrument.symbol)">View</button>
                     <button 
@@ -929,6 +1361,75 @@ h1 {
   background-color: #e5e7eb;
 }
 
+/* Filter Container Styles */
+.filter-container {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e0e0e0;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 180px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-clear-btn {
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  color: #666;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-clear-btn:hover {
+  background-color: #e5e7eb;
+  color: #333;
+}
+
 @media (max-width: 768px) {
   .instrument-list-container {
     padding: 1rem;
@@ -973,6 +1474,19 @@ h1 {
   .modal-header,
   .modal-body,
   .modal-footer {
+    padding: 1rem;
+  }
+  
+  .filter-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .filter-group {
+    min-width: 100%;
+  }
+  
+  .filter-container {
     padding: 1rem;
   }
 }

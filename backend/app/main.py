@@ -50,7 +50,7 @@ def start_api():
         
         # Import and run the API directly
         import uvicorn
-        uvicorn.run("api:app", host="0.0.0.0", port=5000, reload=False)
+        uvicorn.run("api:app", host="0.0.0.0", port=5000, reload=True)
         
         return True
         

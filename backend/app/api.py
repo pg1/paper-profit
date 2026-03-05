@@ -976,6 +976,125 @@ def format_volume(volume):
         return str(volume)
 
 
+
+
+
+@app.get("/api/instruments/list/search", response_model=List[Dict[str, Any]])
+async def get_search_stocks(
+    limit: int = 30,
+    market_cap_min: Optional[float] = 10,
+    market_cap_max: Optional[float] = None,
+    pe_min: Optional[float] = None,
+    pe_max: Optional[float] = None,
+    dividend_min: Optional[float] = None,
+    dividend_max: Optional[float] = None,
+    peg_min: Optional[float] = None,
+    peg_max: Optional[float] = None,
+    exchange: Optional[str] = "NYQ"
+):
+    """Search stocks using fundamental filters: Market Cap (billions), P/E ratio, Dividend yield (%), PEG ratio (5y)"""
+    try:
+        from yfscreen import create_query, create_payload, get_data
+
+        filters = []
+
+        # Market cap (input in billions, convert to absolute value)
+        if market_cap_min is not None and market_cap_max is not None:
+            # Use btwn operator when both min and max are provided
+            filters.append(["btwn", ["intradaymarketcap", market_cap_min * 1_000_000_000, market_cap_max * 1_000_000_000]])
+        elif market_cap_min is not None:
+            filters.append(["gt", ["intradaymarketcap", market_cap_min * 1_000_000_000]])
+        elif market_cap_max is not None:
+            filters.append(["lt", ["intradaymarketcap", market_cap_max * 1_000_000_000]])
+
+        # P/E ratio (trailing twelve months)
+        if pe_min is not None and pe_max is not None:
+            # Use btwn operator when both min and max are provided
+            filters.append(["btwn", ["peratio.lasttwelvemonths", pe_min, pe_max]])
+        elif pe_min is not None:
+            filters.append(["gt", ["peratio.lasttwelvemonths", pe_min]])
+        elif pe_max is not None:
+            filters.append(["lt", ["peratio.lasttwelvemonths", pe_max]])
+
+        # Dividend yield (input as %, stored as decimal in Yahoo Finance)
+        if dividend_min is not None and dividend_max is not None:
+            # Use btwn operator when both min and max are provided
+            filters.append(["btwn", ["dividendyield", dividend_min / 100, dividend_max / 100]])
+        elif dividend_min is not None:
+            filters.append(["gt", ["dividendyield", dividend_min / 100]])
+        elif dividend_max is not None:
+            filters.append(["lt", ["dividendyield", dividend_max / 100]])
+
+        # PEG ratio (5-year)
+        if peg_min is not None and peg_max is not None:
+            # Use btwn operator when both min and max are provided
+            filters.append(["btwn", ["pegratio_5y", peg_min, peg_max]])
+        elif peg_min is not None:
+            filters.append(["gt", ["pegratio_5y", peg_min]])
+        elif peg_max is not None:
+            filters.append(["lt", ["pegratio_5y", peg_max]])
+
+        # Exchange filter
+        if exchange is not None:
+            filters.append(["eq", ["exchange", exchange]])
+
+        # Default to US large-cap equities when no filters provided
+        if not filters:
+            filters = [["gt", ["intradaymarketcap", 1_000_000_000]]]
+
+        query = create_query(filters)
+        payload = create_payload(
+            sec_type="equity",
+            query=query,
+            size=limit,
+            sort_field="intradaymarketcap",
+            sort_type="DESC",
+        )
+        df = get_data(payload)
+
+        if df is None or df.empty:
+            return []
+
+        def col_val(row, field):
+            """Return raw numeric value, handling formatted Yahoo Finance fields."""
+            raw = row.get(f"{field}.raw")
+            if raw is not None:
+                return raw
+            return row.get(field)
+
+        formatted_results = []
+        for row in df.to_dict(orient="records"):
+            symbol = row.get("symbol")
+            name = row.get("longName") or row.get("shortName") or symbol
+            price = col_val(row, "regularMarketPrice")
+            change = col_val(row, "regularMarketChange")
+            change_percent = col_val(row, "regularMarketChangePercent")
+            volume = col_val(row, "regularMarketVolume")
+            market_cap = col_val(row, "marketCap")
+
+            formatted_results.append({
+                "symbol": symbol,
+                "name": name,
+                "price": price,
+                "volume": format_volume(int(volume)) if volume else "N/A",
+                "change_percent": change_percent,
+                "change_amount": change,
+                "market_cap": market_cap,
+                "pe_ratio": col_val(row, "trailingPE"),
+                "dividend_yield": col_val(row, "dividendYield"),
+                "peg_ratio": col_val(row, "pegRatio"),
+                "exchange": row.get("fullExchangeName") or row.get("exchange"),
+                "sector": row.get("sector") or row.get("sectorDisp") or "N/A",
+            })
+
+        return formatted_results
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to search stocks: {str(e)}"
+        )
+
 @app.get("/api/watchlist", response_model=List[Dict[str, Any]])
 async def get_watchlist(db: Session = Depends(get_db)):
     """Get all instruments in the watchlist"""
