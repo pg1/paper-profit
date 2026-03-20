@@ -10,12 +10,12 @@ from storage.database import get_session
 from storage.repositories import RepositoryFactory
 
 # Import the new modules
-from trading_bot.instrument_discovery import InstrumentDiscovery
-from trading_bot.data_collector import DataCollector
-from trading_bot.strategy_signal import StrategySignal
-from trading_bot.portfolio_manager import PortfolioManager
-from trading_bot.risk_manager import RiskManager
-from trading_bot.execution_manager import ExecutionManager
+from jobs.trading_bot.instrument_discovery import InstrumentDiscovery
+from jobs.trading_bot.data_collector import DataCollector
+from jobs.trading_bot.strategy_signal import StrategySignal
+from jobs.trading_bot.portfolio_manager import PortfolioManager
+from jobs.trading_bot.risk_manager import RiskManager
+from jobs.trading_bot.execution_manager import ExecutionManager
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
