@@ -7,14 +7,15 @@ This module provides functions for calculating technical indicators and paramete
 using data from various third-party services via the octopus data providers.
 
 Each function takes a stock symbol as input and returns the calculated technical indicator value.
+
+Optimized to use DataFetcher for efficient API calls with caching.
 """
 
 import logging
 from typing import Optional, Union, Dict, Any, List
 from sqlalchemy.orm import Session
-from octopus.data_providers.alpha_vantage import AlphaVantageService
-from octopus.data_providers.financialmodelingprep import FinancialModelingPrepService
-from octopus.data_providers.yahoo_finance import YahooFinanceService
+
+from analysis.data_fetcher import DataFetcher
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -26,101 +27,129 @@ class TechnicalFunctions:
     
     def __init__(self, db_session: Session):
         self.db = db_session
-        self.alpha_vantage = AlphaVantageService(db_session)
-        self.fmp = FinancialModelingPrepService(db_session)
-        self.yahoo = YahooFinanceService(db_session)
+        self.data_fetcher = DataFetcher(db_session)
+        
+        # Cache for calculated indicators to avoid redundant calculations
+        self._calculated_cache = {}
     
-    def _get_best_data_provider(self, symbol: str, data_type: str = "technical") -> Dict[str, Any]:
+    def _get_historical_prices(self, symbol: str, period: str = "6mo", refresh_rate_minutes: Optional[int] = None) -> Optional[List[float]]:
         """
-        Try multiple data providers to get the best available data for a symbol
+        Get historical closing prices for a symbol using DataFetcher with caching
         
         Args:
             symbol: Stock symbol
-            data_type: Type of data needed ("technical", "price", "historical")
+            period: Time period (e.g., "6mo", "1y")
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
-            Dictionary with the best available data
+            List of closing prices or None if unavailable
         """
-        data = None
-        
-        # Try Alpha Vantage first for technical data
-        if data_type == "technical":
-            try:
-                data = self.alpha_vantage.get_technical_indicators(symbol)
-                if data and data.get('rsi') is not None:
-                    logger.info(f"Using Alpha Vantage technical data for {symbol}")
-                    return data
-            except Exception as e:
-                logger.debug(f"Alpha Vantage technical indicators failed for {symbol}: {e}")
-        
-        # Try Yahoo Finance for price/historical data
-        try:
-            if data_type == "price":
-                data = self.yahoo.fetch_current_price(symbol)
-            elif data_type == "historical":
-                data = self.yahoo.fetch_historical_data(symbol, "6mo")
-            else:
-                data = self.yahoo.get_stock_analysis(symbol)
-                
-            if data:
-                logger.info(f"Using Yahoo Finance data for {symbol}")
-                return data
-        except Exception as e:
-            logger.debug(f"Yahoo Finance failed for {symbol}: {e}")
-        
-        # Try Financial Modeling Prep
-        try:
-            data = self.fmp.get_stock_analysis(symbol)
-            if data:
-                logger.info(f"Using Financial Modeling Prep data for {symbol}")
-                return data
-        except Exception as e:
-            logger.debug(f"Financial Modeling Prep failed for {symbol}: {e}")
-        
-        logger.warning(f"No technical data available for {symbol} from any provider")
-        return {}
+        return self.data_fetcher.fetch_historical_prices(symbol, period, refresh_rate_minutes)
     
-    def _get_historical_prices(self, symbol: str, period: str = "6mo") -> Optional[List[float]]:
-        """Get historical closing prices for a symbol"""
-        try:
-            # Try Yahoo Finance first
-            historical_data = self.yahoo.fetch_historical_data(symbol, period)
-            if historical_data:
-                close_prices = [data['close_price'] for data in historical_data]
-                return close_prices
-            
-            # Try Alpha Vantage
-            historical_data = self.alpha_vantage.fetch_historical_data(symbol, period)
-            if historical_data:
-                close_prices = [data['close_price'] for data in historical_data]
-                return close_prices
-            
-            # Try Financial Modeling Prep
-            historical_data = self.fmp.fetch_historical_data(symbol, period)
-            if historical_data:
-                close_prices = [data['close_price'] for data in historical_data]
-                return close_prices
-                
-        except Exception as e:
-            logger.error(f"Error getting historical prices for {symbol}: {e}")
+    def _get_current_price(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """
+        Get current price for a symbol using DataFetcher with caching
         
-        return None
+        Args:
+            symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
+            
+        Returns:
+            Current price or None if unavailable
+        """
+        return self.data_fetcher.fetch_current_price(symbol, refresh_rate_minutes)
+    
+    def _get_technical_indicators(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Dict[str, Any]:
+        """
+        Get technical indicators for a symbol using DataFetcher with caching
+        
+        Args:
+            symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
+            
+        Returns:
+            Dictionary with technical indicators or empty dict if unavailable
+        """
+        return self.data_fetcher.fetch_technical_indicators(symbol, refresh_rate_minutes)
+    
+    def _get_calculated_cache_key(self, symbol: str, indicator_name: str, *args) -> str:
+        """Generate cache key for calculated indicators"""
+        args_str = "_".join(str(arg) for arg in args)
+        return f"{symbol}_{indicator_name}_{args_str}" if args_str else f"{symbol}_{indicator_name}"
+    
+    def _get_calculated_indicator(self, symbol: str, indicator_name: str, calculator_func, *args, **kwargs):
+        """
+        Get calculated indicator with caching to avoid redundant calculations
+        
+        Args:
+            symbol: Stock symbol
+            indicator_name: Name of the indicator
+            calculator_func: Function to calculate the indicator
+            *args, **kwargs: Arguments to pass to calculator_func
+            
+        Returns:
+            Calculated indicator value
+        """
+        cache_key = self._get_calculated_cache_key(symbol, indicator_name, *args)
+        
+        if cache_key in self._calculated_cache:
+            return self._calculated_cache[cache_key]
+        
+        result = calculator_func(symbol, *args, **kwargs)
+        self._calculated_cache[cache_key] = result
+        return result
+    
+    def clear_calculated_cache(self, symbol: str = None):
+        """
+        Clear calculated cache for specific symbol or all symbols
+        
+        Args:
+            symbol: Optional stock symbol to clear
+        """
+        if symbol is None:
+            self._calculated_cache.clear()
+            logger.debug("Cleared all calculated cache")
+        else:
+            keys_to_delete = [k for k in self._calculated_cache.keys() if k.startswith(f"{symbol}_")]
+            for key in keys_to_delete:
+                del self._calculated_cache[key]
+            logger.debug(f"Cleared calculated cache for {symbol}")
+    
+    def _calculate_ema(self, prices: List[float], window: int) -> Optional[float]:
+        """Helper function to calculate EMA"""
+        if not prices or len(prices) < window:
+            return None
+        
+        multiplier = 2 / (window + 1)
+        ema = prices[0]
+        
+        for price in prices[1:]:
+            ema = (price - ema) * multiplier + ema
+        
+        return ema
     
     # Technical Indicators
     
-    def get_simple_moving_average(self, symbol: str, window: int = 20) -> Optional[float]:
+    def get_simple_moving_average(self, symbol: str, window: int = 20, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
         """
         Calculate Simple Moving Average (SMA)
         
         Args:
             symbol: Stock symbol
             window: Number of periods for SMA calculation
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             SMA value or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, f'sma_{window}', self._calculate_sma, window, refresh_rate_minutes
+        )
+    
+    def _calculate_sma(self, symbol: str, window: int = 20, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Internal method to calculate SMA"""
         try:
-            close_prices = self._get_historical_prices(symbol, "6mo")
+            close_prices = self._get_historical_prices(symbol, "6mo", refresh_rate_minutes)
             if not close_prices or len(close_prices) < window:
                 return None
             
@@ -131,19 +160,26 @@ class TechnicalFunctions:
             logger.error(f"Error calculating SMA for {symbol}: {e}")
             return None
     
-    def get_exponential_moving_average(self, symbol: str, window: int = 20) -> Optional[float]:
+    def get_exponential_moving_average(self, symbol: str, window: int = 20, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
         """
         Calculate Exponential Moving Average (EMA)
         
         Args:
             symbol: Stock symbol
             window: Number of periods for EMA calculation
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             EMA value or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, f'ema_{window}', self._calculate_ema_method, window, refresh_rate_minutes
+        )
+    
+    def _calculate_ema_method(self, symbol: str, window: int = 20, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Internal method to calculate EMA"""
         try:
-            close_prices = self._get_historical_prices(symbol, "6mo")
+            close_prices = self._get_historical_prices(symbol, "6mo", refresh_rate_minutes)
             if not close_prices or len(close_prices) < window:
                 return None
             
@@ -160,25 +196,32 @@ class TechnicalFunctions:
             logger.error(f"Error calculating EMA for {symbol}: {e}")
             return None
     
-    def get_relative_strength_index(self, symbol: str, period: int = 14) -> Optional[float]:
+    def get_relative_strength_index(self, symbol: str, period: int = 14, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
         """
         Calculate Relative Strength Index (RSI)
         
         Args:
             symbol: Stock symbol
             period: RSI period (typically 14)
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             RSI value (0-100) or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, f'rsi_{period}', self._calculate_rsi, period, refresh_rate_minutes
+        )
+    
+    def _calculate_rsi(self, symbol: str, period: int = 14, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Internal method to calculate RSI"""
         try:
             # Try to get RSI directly from data providers
-            data = self._get_best_data_provider(symbol, "technical")
+            data = self._get_technical_indicators(symbol, refresh_rate_minutes)
             if data and data.get('rsi') is not None:
                 return data.get('rsi')
             
             # Calculate RSI manually if we have historical data
-            close_prices = self._get_historical_prices(symbol, "6mo")
+            close_prices = self._get_historical_prices(symbol, "6mo", refresh_rate_minutes)
             if not close_prices or len(close_prices) < period + 1:
                 return None
             
@@ -205,18 +248,25 @@ class TechnicalFunctions:
             logger.error(f"Error calculating RSI for {symbol}: {e}")
             return None
     
-    def get_moving_average_convergence_divergence(self, symbol: str) -> Optional[Dict[str, float]]:
+    def get_moving_average_convergence_divergence(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[Dict[str, float]]:
         """
         Calculate MACD (Moving Average Convergence Divergence)
         
         Args:
             symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Dictionary with MACD, signal line, and histogram values or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, 'macd', self._calculate_macd, refresh_rate_minutes
+        )
+    
+    def _calculate_macd(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[Dict[str, float]]:
+        """Internal method to calculate MACD"""
         try:
-            close_prices = self._get_historical_prices(symbol, "1y")
+            close_prices = self._get_historical_prices(symbol, "1y", refresh_rate_minutes)
             if not close_prices or len(close_prices) < 26:
                 return None
             
@@ -258,20 +308,7 @@ class TechnicalFunctions:
             logger.error(f"Error calculating MACD for {symbol}: {e}")
             return None
     
-    def _calculate_ema(self, prices: List[float], window: int) -> Optional[float]:
-        """Helper function to calculate EMA"""
-        if not prices or len(prices) < window:
-            return None
-        
-        multiplier = 2 / (window + 1)
-        ema = prices[0]
-        
-        for price in prices[1:]:
-            ema = (price - ema) * multiplier + ema
-        
-        return ema
-    
-    def get_bollinger_bands(self, symbol: str, window: int = 20, num_std: float = 2.0) -> Optional[Dict[str, float]]:
+    def get_bollinger_bands(self, symbol: str, window: int = 20, num_std: float = 2.0, refresh_rate_minutes: Optional[int] = None) -> Optional[Dict[str, float]]:
         """
         Calculate Bollinger Bands
         
@@ -279,12 +316,19 @@ class TechnicalFunctions:
             symbol: Stock symbol
             window: Moving average window
             num_std: Number of standard deviations for bands
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Dictionary with upper, middle, and lower band values or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, f'bollinger_{window}_{num_std}', self._calculate_bollinger_bands, window, num_std, refresh_rate_minutes
+        )
+    
+    def _calculate_bollinger_bands(self, symbol: str, window: int = 20, num_std: float = 2.0, refresh_rate_minutes: Optional[int] = None) -> Optional[Dict[str, float]]:
+        """Internal method to calculate Bollinger Bands"""
         try:
-            close_prices = self._get_historical_prices(symbol, "6mo")
+            close_prices = self._get_historical_prices(symbol, "6mo", refresh_rate_minutes)
             if not close_prices or len(close_prices) < window:
                 return None
             
@@ -306,56 +350,38 @@ class TechnicalFunctions:
                 'middle': middle_band,
                 'lower': lower_band
             }
-            
         except Exception as e:
             logger.error(f"Error calculating Bollinger Bands for {symbol}: {e}")
             return None
     
-    def get_current_price(self, symbol: str) -> Optional[float]:
+    def get_current_price(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
         """
         Get current price for a stock (technical perspective)
         
         Args:
             symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Current price or None if data unavailable
         """
-        try:
-            # Try Yahoo Finance first for price data
-            price_data = self.yahoo.fetch_current_price(symbol)
-            if price_data and price_data.get('price'):
-                return price_data['price']
-            
-            # Try Alpha Vantage
-            price_data = self.alpha_vantage.fetch_current_price(symbol)
-            if price_data and price_data.get('price'):
-                return price_data['price']
-            
-            # Try Financial Modeling Prep
-            price_data = self.fmp.fetch_current_price(symbol)
-            if price_data and price_data.get('price'):
-                return price_data['price']
-                
-        except Exception as e:
-            logger.error(f"Error getting current price for {symbol}: {e}")
-        
-        return None
+        return self._get_current_price(symbol, refresh_rate_minutes)
     
-    def get_price_trend(self, symbol: str) -> Optional[str]:
+    def get_price_trend(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[str]:
         """
         Determine price trend based on moving averages
         
         Args:
             symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Trend ("BULLISH", "BEARISH", "SIDEWAYS") or None if data unavailable
         """
         try:
-            sma_20 = self.get_simple_moving_average(symbol, 20)
-            sma_50 = self.get_simple_moving_average(symbol, 50)
-            current_price = self.get_current_price(symbol)
+            sma_20 = self.get_simple_moving_average(symbol, 20, refresh_rate_minutes)
+            sma_50 = self.get_simple_moving_average(symbol, 50, refresh_rate_minutes)
+            current_price = self.get_current_price(symbol, refresh_rate_minutes)
             
             if not all([sma_20, sma_50, current_price]):
                 return None
@@ -372,30 +398,22 @@ class TechnicalFunctions:
             logger.error(f"Error determining price trend for {symbol}: {e}")
             return None
     
-    def get_volume_trend(self, symbol: str) -> Optional[str]:
+    def get_volume_trend(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[str]:
         """
         Determine volume trend
         
         Args:
             symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Volume trend ("HIGH", "LOW", "AVERAGE") or None if data unavailable
         """
         try:
-            # Get stock analysis which includes volume trend
-            analysis = self.yahoo.get_stock_analysis(symbol)
-            if analysis and analysis.get('volume_trend'):
-                return analysis.get('volume_trend')
-            
-            # Try other providers
-            analysis = self.fmp.get_stock_analysis(symbol)
-            if analysis and analysis.get('volume_trend'):
-                return analysis.get('volume_trend')
-            
-            analysis = self.alpha_vantage.get_stock_analysis(symbol)
-            if analysis and analysis.get('volume_trend'):
-                return analysis.get('volume_trend')
+            # Get technical indicators which might include volume trend
+            data = self._get_technical_indicators(symbol, refresh_rate_minutes)
+            if data and data.get('volume_trend'):
+                return data.get('volume_trend')
             
             return None
             
@@ -403,18 +421,25 @@ class TechnicalFunctions:
             logger.error(f"Error determining volume trend for {symbol}: {e}")
             return None
     
-    def get_support_resistance_levels(self, symbol: str) -> Optional[Dict[str, float]]:
+    def get_support_resistance_levels(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[Dict[str, float]]:
         """
         Identify support and resistance levels
         
         Args:
             symbol: Stock symbol
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Dictionary with support and resistance levels or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, 'support_resistance', self._calculate_support_resistance, refresh_rate_minutes
+        )
+    
+    def _calculate_support_resistance(self, symbol: str, refresh_rate_minutes: Optional[int] = None) -> Optional[Dict[str, float]]:
+        """Internal method to calculate support and resistance levels"""
         try:
-            close_prices = self._get_historical_prices(symbol, "3mo")
+            close_prices = self._get_historical_prices(symbol, "3mo", refresh_rate_minutes)
             if not close_prices or len(close_prices) < 20:
                 return None
             
@@ -446,19 +471,26 @@ class TechnicalFunctions:
             logger.error(f"Error calculating support/resistance levels for {symbol}: {e}")
             return None
     
-    def get_volatility(self, symbol: str, window: int = 20) -> Optional[float]:
+    def get_volatility(self, symbol: str, window: int = 20, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
         """
         Calculate price volatility
         
         Args:
             symbol: Stock symbol
             window: Number of periods for volatility calculation
+            refresh_rate_minutes: Optional refresh rate in minutes from YAML config
             
         Returns:
             Volatility (standard deviation of returns) or None if data unavailable
         """
+        return self._get_calculated_indicator(
+            symbol, f'volatility_{window}', self._calculate_volatility, window, refresh_rate_minutes
+        )
+    
+    def _calculate_volatility(self, symbol: str, window: int = 20, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Internal method to calculate volatility"""
         try:
-            close_prices = self._get_historical_prices(symbol, "3mo")
+            close_prices = self._get_historical_prices(symbol, "3mo", refresh_rate_minutes)
             if not close_prices or len(close_prices) < window + 1:
                 return None
             

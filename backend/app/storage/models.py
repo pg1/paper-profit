@@ -141,7 +141,7 @@ class Strategy(Base):
     stock_list_mode = Column(String)  # 'Manual', 'AI'
     stock_list = Column(Text)  # List of stocks for the strategy
     stock_list_ai_prompt = Column(Text)  # Ai prompt to get a stock list
-    parameters_json = Column(Text)  # Parameters in JSON format
+    #parameters_json = Column(Text)  # Parameters in JSON format
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.current_timestamp())
 
@@ -349,3 +349,21 @@ class Setting(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.current_timestamp())
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
+
+
+class QuantitativeData(Base):
+    """Quantitative data table for storing calculated parameter values"""
+    __tablename__ = "quantitative_data"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    symbol_id = Column(Integer, ForeignKey("instruments.id"), nullable=False)
+    timestamp = Column(DateTime, nullable=False)  # Time of the data point
+    meta = Column(Text)  # Parameter name (e.g., 'sma_short', 'min_dividend_yield')
+    value = Column(Text)  # Calculated value (stored as text)
+    created_at = Column(DateTime, default=func.current_timestamp())
+
+    # Relationships
+    instrument = relationship("Instrument", backref="quantitative_data")
+
+    # Unique constraint
+    __table_args__ = (UniqueConstraint('symbol_id', 'timestamp', 'meta', name='uq_quantitative_data_symbol_timestamp_meta'),)

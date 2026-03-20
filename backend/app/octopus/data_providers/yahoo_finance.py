@@ -239,6 +239,74 @@ class YahooFinanceService:
         
         return saved_count
     
+    def fetch_quantitative_data(self, symbol):
+        """Fetch quantitative fundamental metrics for a symbol via yfinance"""
+        try:
+            stock = yf.Ticker(symbol)
+            info = stock.info
+
+            current_price = info.get('currentPrice') or info.get('regularMarketPrice')
+
+            # --- dividend_growth_rate: 5-year CAGR from dividends history ---
+            dividend_growth_rate = None
+            try:
+                dividends = stock.dividends
+                if dividends is not None and len(dividends) >= 2:
+                    import pandas as pd
+                    dividends.index = dividends.index.tz_localize(None) if dividends.index.tzinfo else dividends.index
+                    cutoff = dividends.index[-1] - pd.DateOffset(years=1)
+                    recent = dividends.loc[dividends.index >= cutoff].sum()
+                    older = dividends.loc[(dividends.index >= cutoff - pd.DateOffset(years=1)) & (dividends.index < cutoff)].sum()
+                    if older and older > 0:
+                        dividend_growth_rate = (recent - older) / older
+            except Exception as e:
+                logger.debug(f"Could not calculate dividend_growth_rate for {symbol}: {e}")
+
+            # --- net_net_discount_percent: (NCAV/share - price) / price * 100 ---
+            net_net_discount_percent = None
+            try:
+                balance_sheet = stock.balance_sheet
+                if balance_sheet is not None and not balance_sheet.empty:
+                    col = balance_sheet.columns[0]
+                    current_assets = balance_sheet.loc['Current Assets', col] if 'Current Assets' in balance_sheet.index else None
+                    total_liabilities = balance_sheet.loc['Total Liabilities Net Minority Interest', col] if 'Total Liabilities Net Minority Interest' in balance_sheet.index else None
+                    shares = info.get('sharesOutstanding')
+                    if current_assets is not None and total_liabilities is not None and shares and current_price:
+                        ncav_per_share = (current_assets - total_liabilities) / shares
+                        net_net_discount_percent = (ncav_per_share - current_price) / current_price * 100
+            except Exception as e:
+                logger.debug(f"Could not calculate net_net_discount_percent for {symbol}: {e}")
+
+            # --- discount_to_intrinsic_value: (target_price - current_price) / current_price * 100 ---
+            discount_to_intrinsic_value = None
+            try:
+                target_price = info.get('targetMeanPrice')
+                if target_price and current_price:
+                    discount_to_intrinsic_value = (target_price - current_price) / current_price * 100
+            except Exception as e:
+                logger.debug(f"Could not calculate discount_to_intrinsic_value for {symbol}: {e}")
+
+            roe_raw = info.get('returnOnEquity')
+
+            return {
+                'dividend_growth_rate': dividend_growth_rate,
+                'payout_ratio': info.get('payoutRatio'),
+                'dividend_yield': info.get('dividendYield'),
+                'pe': info.get('trailingPE'),
+                'pb': info.get('priceToBook'),
+                'discount_to_intrinsic_value': discount_to_intrinsic_value,
+                'revenue_growth': info.get('revenueGrowth'),
+                'eps_growth': info.get('earningsGrowth'),
+                'pe_ratio': info.get('forwardPE'),
+                'peg': info.get('pegRatio'),
+                'roe_percent': roe_raw * 100 if roe_raw is not None else None,
+                'net_net_discount_percent': net_net_discount_percent,
+            }
+
+        except Exception as e:
+            logger.error(f"Error fetching quantitative data for {symbol}: {e}")
+            return {}
+
     def get_stock_analysis(self, symbol):
         """Get technical analysis for a stock using storage model"""
         try:

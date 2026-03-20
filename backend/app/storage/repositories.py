@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_, desc, asc, func
 from .models import (
     Instrument, MarketData, TechnicalIndicator, Strategy, TradingSignal,
-    Order, Position, Trade, Account, AccountSummary, NewsSentiment, SystemLog, Setting
+    Order, Position, Trade, Account, AccountSummary, NewsSentiment, SystemLog, Setting,
+    QuantitativeData
 )
 
 
@@ -520,6 +521,87 @@ class SettingsRepository:
         return False
 
 
+class QuantitativeDataRepository:
+    """Repository for quantitative data operations"""
+    
+    def __init__(self, db: Session):
+        self.db = db
+    
+    def get_latest(self, symbol_id: int, meta: Optional[str] = None, limit: int = 100) -> List[QuantitativeData]:
+        """Get latest quantitative data for a symbol"""
+        query = self.db.query(QuantitativeData).filter(QuantitativeData.symbol_id == symbol_id)
+        
+        if meta:
+            query = query.filter(QuantitativeData.meta == meta)
+        
+        return query.order_by(desc(QuantitativeData.timestamp)).limit(limit).all()
+    
+    def get_by_meta(self, symbol_id: int, meta: str, limit: int = 100) -> List[QuantitativeData]:
+        """Get quantitative data for a specific meta parameter"""
+        return (self.db.query(QuantitativeData)
+                .filter(QuantitativeData.symbol_id == symbol_id, QuantitativeData.meta == meta)
+                .order_by(desc(QuantitativeData.timestamp))
+                .limit(limit)
+                .all())
+    
+    def get_by_timestamp_range(self, symbol_id: int, meta: str, 
+                              start_time: str, end_time: str) -> List[QuantitativeData]:
+        """Get quantitative data for a time range"""
+        return (self.db.query(QuantitativeData)
+                .filter(
+                    QuantitativeData.symbol_id == symbol_id,
+                    QuantitativeData.meta == meta,
+                    QuantitativeData.timestamp >= start_time,
+                    QuantitativeData.timestamp <= end_time
+                )
+                .order_by(asc(QuantitativeData.timestamp))
+                .all())
+    
+    def create(self, quantitative_data: Dict[str, Any]) -> QuantitativeData:
+        """Create new quantitative data entry"""
+        data = QuantitativeData(**quantitative_data)
+        self.db.add(data)
+        self.db.commit()
+        self.db.refresh(data)
+        return data
+    
+    def create_bulk(self, quantitative_data_list: List[Dict[str, Any]]) -> List[QuantitativeData]:
+        """Create multiple quantitative data entries"""
+        data_objects = [QuantitativeData(**data) for data in quantitative_data_list]
+        self.db.bulk_save_objects(data_objects)
+        self.db.commit()
+        return data_objects
+    
+    def upsert(self, symbol_id: int, timestamp: str, meta: str, value: str) -> QuantitativeData:
+        """Create or update quantitative data entry"""
+        # Check if entry already exists
+        existing = (self.db.query(QuantitativeData)
+                   .filter(
+                       QuantitativeData.symbol_id == symbol_id,
+                       QuantitativeData.timestamp == timestamp,
+                       QuantitativeData.meta == meta
+                   ).first())
+        
+        if existing:
+            # Update existing entry
+            existing.value = value
+            self.db.commit()
+            self.db.refresh(existing)
+            return existing
+        else:
+            # Create new entry
+            data = QuantitativeData(
+                symbol_id=symbol_id,
+                timestamp=timestamp,
+                meta=meta,
+                value=value
+            )
+            self.db.add(data)
+            self.db.commit()
+            self.db.refresh(data)
+            return data
+
+
 # Repository factory for easy access
 class RepositoryFactory:
     """Factory class to provide repository instances"""
@@ -571,3 +653,7 @@ class RepositoryFactory:
     @property
     def settings(self) -> SettingsRepository:
         return SettingsRepository(self.db)
+    
+    @property
+    def quantitative_data(self) -> QuantitativeDataRepository:
+        return QuantitativeDataRepository(self.db)

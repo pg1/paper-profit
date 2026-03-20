@@ -11,6 +11,8 @@ const props = defineProps({
 
 const instrumentData = ref(null)
 const marketData = ref([])
+const lastTradingSignal = ref(null)
+const quantitativeData = ref([])
 const isLoading = ref(false)
 const error = ref(null)
 const symbol = ref('')
@@ -77,6 +79,48 @@ const fetchMarketData = async () => {
   }
 }
 
+// Fetch trading signals for the instrument
+const fetchTradingSignals = async () => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/instruments/${symbol.value}/trading-signals?limit=1`)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch trading signals: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log('Trading Signals API Response:', data)
+    
+    // Get the last (most recent) signal
+    if (data && data.length > 0) {
+      lastTradingSignal.value = data[0]
+    } else {
+      lastTradingSignal.value = null
+    }
+  } catch (err) {
+    console.error('Error fetching trading signals:', err)
+    // Don't set error for trading signals as it's optional
+  }
+}
+
+// Fetch quantitative data for the instrument
+const fetchQuantitativeData = async () => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/instruments/${symbol.value}/quantitative-data?limit=100`)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch quantitative data: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log('Quantitative Data API Response:', data)
+    quantitativeData.value = data
+  } catch (err) {
+    console.error('Error fetching quantitative data:', err)
+    // Don't set error for quantitative data as it's optional
+  }
+}
+
 // Handle period change
 const handlePeriodChange = (period) => {
   selectedPeriod.value = period
@@ -94,8 +138,12 @@ const fetchData = async () => {
     // First load basic instrument data
     await fetchInstrumentData()
     
-    // Then load market data for graph after basic info is loaded
-    await fetchMarketData()
+    // Then load other data in parallel after basic info is loaded
+    await Promise.all([
+      fetchMarketData(),
+      fetchTradingSignals(),
+      fetchQuantitativeData()
+    ])
   } catch (err) {
     console.error('Error fetching instrument detail data:', err)
     error.value = 'Failed to load instrument data. Please try again.'
@@ -264,6 +312,57 @@ onMounted(() => {
                 {{ formatPercentage(priceChangeFrom52WeekHigh) }}
               </span>
             </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Last Trading Signal -->
+      <div class="trading-signal-section" v-if="lastTradingSignal">
+        <h3 class="subsection-header">Last Trading Signal</h3>
+        <div class="signal-card">
+          <div class="signal-header">
+            <span class="signal-strategy">{{ lastTradingSignal.strategy }}</span>
+            <span class="signal-type" :class="{
+              'signal-buy': lastTradingSignal.signal_type === 'BUY',
+              'signal-sell': lastTradingSignal.signal_type === 'SELL',
+              'signal-hold': lastTradingSignal.signal_type === 'HOLD'
+            }">
+              {{ lastTradingSignal.signal_type }}
+            </span>
+          </div>
+          <div class="signal-details">
+            <div class="signal-detail">
+              <span class="detail-label">Timestamp:</span>
+              <span class="detail-value">{{ new Date(lastTradingSignal.timestamp).toLocaleString() }}</span>
+            </div>
+            <div class="signal-detail" v-if="lastTradingSignal.price">
+              <span class="detail-label">Price:</span>
+              <span class="detail-value">{{ formatCurrency(lastTradingSignal.price) }}</span>
+            </div>
+            <div class="signal-detail" v-if="lastTradingSignal.confidence">
+              <span class="detail-label">Confidence:</span>
+              <span class="detail-value">{{ (lastTradingSignal.confidence * 100).toFixed(1) }}%</span>
+            </div>
+            <div class="signal-detail" v-if="lastTradingSignal.strength">
+              <span class="detail-label">Strength:</span>
+              <span class="detail-value">{{ lastTradingSignal.strength.toFixed(4) }}</span>
+            </div>
+            <div class="signal-reason" v-if="lastTradingSignal.reason">
+              <span class="detail-label">Reason:</span>
+              <span class="detail-value">{{ lastTradingSignal.reason }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quantitative Data -->
+      <div class="quantitative-data-section" v-if="quantitativeData && quantitativeData.length > 0">
+        <h3 class="subsection-header">Quantitative Data</h3>
+        <div class="quantitative-grid">
+          <div class="quantitative-item" v-for="item in quantitativeData" :key="item.id">
+            <span class="quantitative-meta">{{ item.meta }}</span>
+            <span class="quantitative-value">{{ item.value }}</span>
+            <span class="quantitative-timestamp">{{ new Date(item.timestamp).toLocaleDateString() }}</span>
           </div>
         </div>
       </div>
@@ -553,6 +652,144 @@ onMounted(() => {
   color: #dc3545;
 }
 
+.trading-signal-section {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+}
+
+.signal-card {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.signal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.signal-strategy {
+  font-weight: 600;
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+.signal-type {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.signal-buy {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.signal-sell {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.signal-hold {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.signal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.signal-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #000000;
+  opacity: 0.8;
+}
+
+.detail-value {
+  color: #000000;
+  opacity: 0.9;
+}
+
+.signal-reason {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.signal-reason .detail-label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.signal-reason .detail-value {
+  display: block;
+  line-height: 1.5;
+  color: #000000;
+  opacity: 0.8;
+}
+
+.quantitative-data-section {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+}
+
+.quantitative-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.quantitative-item {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quantitative-meta {
+  font-weight: 600;
+  color: #000000;
+  font-size: 1rem;
+}
+
+.quantitative-value {
+  color: #000000;
+  opacity: 0.9;
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+.quantitative-timestamp {
+  color: #000000;
+  opacity: 0.6;
+  font-size: 0.85rem;
+}
+
 .additional-info {
   background-color: #ffffff;
   padding: 2rem;
@@ -650,10 +887,26 @@ onMounted(() => {
     grid-template-columns: 1fr;
   }
   
+  .quantitative-grid {
+    grid-template-columns: 1fr;
+  }
+  
   .exchange-info {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+  }
+  
+  .signal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .signal-detail {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
   
   .price {

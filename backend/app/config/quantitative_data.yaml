@@ -1,0 +1,210 @@
+quantitative_data:
+  technical:
+    trend:
+      sma_20: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      sma_50: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      sma_200: {type: float, typical_range: [0, 10000], refresh_rate: 15, unit: price}
+      ema_12: {type: float, typical_range: [0, 10000], refresh_rate: 1, unit: price}
+      ema_26: {type: float, typical_range: [0, 10000], refresh_rate: 1, unit: price}
+      adx: {type: float, typical_range: [0, 100], refresh_rate: 5, unit: index}
+      aroon_up: {type: float, typical_range: [0, 100], refresh_rate: 5, unit: index}
+      aroon_down: {type: float, typical_range: [0, 100], refresh_rate: 5, unit: index}
+      parabolic_sar: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+
+    momentum:
+      rsi: {type: float, typical_range: [0, 100], refresh_rate: 1, unit: index}
+      stochastic_k: {type: float, typical_range: [0, 100], refresh_rate: 1, unit: index}
+      stochastic_d: {type: float, typical_range: [0, 100], refresh_rate: 1, unit: index}
+      williams_r: {type: float, typical_range: [-100, 0], refresh_rate: 1, unit: index}
+      cci: {type: float, typical_range: [-200, 200], refresh_rate: 1, unit: index}
+      roc: {type: float, typical_range: [-50, 50], refresh_rate: 1, unit: percentage}
+      momentum: {type: float, typical_range: [-100, 100], refresh_rate: 1, unit: index}
+      mfi: {type: float, typical_range: [0, 100], refresh_rate: 1, unit: index}
+      tsi: {type: float, typical_range: [-100, 100], refresh_rate: 5, unit: index}
+
+    volatility:
+      atr: {type: float, typical_range: [0, 500], refresh_rate: 5, unit: price}
+      atr_percent: {type: float, typical_range: [0, 20], refresh_rate: 5, unit: percentage}
+      bb_upper: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      bb_middle: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      bb_lower: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      bb_width: {type: float, typical_range: [0, 100], refresh_rate: 5, unit: percentage}
+      keltner_upper: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      keltner_lower: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      historical_volatility: {type: float, typical_range: [0, 200], refresh_rate: 60, unit: percentage}
+
+    volume:
+      volume: {type: integer, typical_range: [0, 1000000000], refresh_rate: 1, unit: shares}
+      volume_sma_20: {type: integer, typical_range: [0, 1000000000], refresh_rate: 5, unit: shares}
+      volume_ratio: {type: float, typical_range: [0, 10], refresh_rate: 1, unit: ratio}
+      obv: {type: float, typical_range: [-1000000000, 1000000000], refresh_rate: 5, unit: cumulative}
+      vwap: {type: float, typical_range: [0, 10000], refresh_rate: 1, unit: price}
+      cmf: {type: float, typical_range: [-1, 1], refresh_rate: 5, unit: index}
+      adl: {type: float, typical_range: [-1000000000, 1000000000], refresh_rate: 5, unit: cumulative}
+      
+    oscillators:
+      macd: {type: float, typical_range: [-100, 100], refresh_rate: 1, unit: price}
+      macd_signal: {type: float, typical_range: [-100, 100], refresh_rate: 1, unit: price}
+      macd_histogram: {type: float, typical_range: [-50, 50], refresh_rate: 1, unit: price}
+      ppo: {type: float, typical_range: [-10, 10], refresh_rate: 1, unit: percentage}
+      ppo_signal: {type: float, typical_range: [-10, 10], refresh_rate: 1, unit: percentage}
+
+    structure:
+      support: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      resistance: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      pivot_point: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      fib_23_6: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      fib_38_2: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      fib_50: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      fib_61_8: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+      fib_78_6: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: price}
+
+    ichimoku:
+      conversion_line: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      base_line: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      leading_span_a: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      leading_span_b: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+      lagging_span: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: price}
+
+  fundamental:
+    valuation:
+      pe: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: ratio}
+      pe_forward: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: ratio}
+      peg: {type: float, typical_range: [0, 5], refresh_rate: 1440, unit: ratio}
+      pb: {type: float, typical_range: [0, 20], refresh_rate: 1440, unit: ratio}
+      ps: {type: float, typical_range: [0, 50], refresh_rate: 1440, unit: ratio}
+      pcf: {type: float, typical_range: [0, 50], refresh_rate: 1440, unit: ratio}
+      ev_ebitda: {type: float, typical_range: [0, 50], refresh_rate: 1440, unit: ratio}
+      ev_sales: {type: float, typical_range: [0, 50], refresh_rate: 1440, unit: ratio}
+      ev_fcf: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: ratio}
+
+    profitability:
+      revenue: {type: float, typical_range: [0, 1000000000000], refresh_rate: 1440, unit: usd}
+      revenue_ttm: {type: float, typical_range: [0, 1000000000000], refresh_rate: 1440, unit: usd}
+      net_income: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      net_income_ttm: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      ebitda: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      gross_margin: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: percentage}
+      operating_margin: {type: float, typical_range: [-50, 50], refresh_rate: 1440, unit: percentage}
+      net_margin: {type: float, typical_range: [-50, 50], refresh_rate: 1440, unit: percentage}
+      ebitda_margin: {type: float, typical_range: [-50, 50], refresh_rate: 1440, unit: percentage}
+      roe: {type: float, typical_range: [-50, 100], refresh_rate: 1440, unit: percentage}
+      roa: {type: float, typical_range: [-20, 30], refresh_rate: 1440, unit: percentage}
+      roic: {type: float, typical_range: [-20, 50], refresh_rate: 1440, unit: percentage}
+
+    growth:
+      revenue_growth_yoy: {type: float, typical_range: [-50, 200], refresh_rate: 1440, unit: percentage}
+      revenue_growth_qoq: {type: float, typical_range: [-50, 100], refresh_rate: 1440, unit: percentage}
+      eps_growth_yoy: {type: float, typical_range: [-100, 200], refresh_rate: 1440, unit: percentage}
+      eps_growth_qoq: {type: float, typical_range: [-100, 100], refresh_rate: 1440, unit: percentage}
+      fcf_growth_yoy: {type: float, typical_range: [-100, 200], refresh_rate: 1440, unit: percentage}
+      revenue_cagr_3y: {type: float, typical_range: [-50, 100], refresh_rate: 1440, unit: percentage}
+      revenue_cagr_5y: {type: float, typical_range: [-50, 100], refresh_rate: 1440, unit: percentage}
+
+    financial_health:
+      debt_to_equity: {type: float, typical_range: [0, 5], refresh_rate: 1440, unit: ratio}
+      debt_to_assets: {type: float, typical_range: [0, 1], refresh_rate: 1440, unit: ratio}
+      current_ratio: {type: float, typical_range: [0, 10], refresh_rate: 1440, unit: ratio}
+      quick_ratio: {type: float, typical_range: [0, 10], refresh_rate: 1440, unit: ratio}
+      interest_coverage: {type: float, typical_range: [-10, 50], refresh_rate: 1440, unit: ratio}
+      altman_z_score: {type: float, typical_range: [-5, 10], refresh_rate: 1440, unit: score}
+
+    cash_flow:
+      free_cash_flow: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      free_cash_flow_ttm: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      operating_cash_flow: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      operating_cash_flow_ttm: {type: float, typical_range: [-100000000000, 100000000000], refresh_rate: 1440, unit: usd}
+      capex: {type: float, typical_range: [0, 100000000000], refresh_rate: 1440, unit: usd}
+      cash_flow_margin: {type: float, typical_range: [-50, 50], refresh_rate: 1440, unit: percentage}
+      fcf_margin: {type: float, typical_range: [-50, 50], refresh_rate: 1440, unit: percentage}
+
+    dividends:
+      dividend_yield: {type: float, typical_range: [0, 20], refresh_rate: 1440, unit: percentage}
+      dividend_per_share: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: usd}
+      payout_ratio: {type: float, typical_range: [0, 200], refresh_rate: 1440, unit: percentage}
+      dividend_growth_rate: {type: float, typical_range: [-50, 100], refresh_rate: 1440, unit: percentage}
+
+    shares:
+      shares_outstanding: {type: float, typical_range: [0, 50000000000], refresh_rate: 1440, unit: shares}
+      float: {type: float, typical_range: [0, 50000000000], refresh_rate: 1440, unit: shares}
+      shares_dilution: {type: float, typical_range: [-10, 10], refresh_rate: 1440, unit: percentage}
+
+  market:
+    risk:
+      beta: {type: float, typical_range: [-1, 5], refresh_rate: 1440, unit: ratio}
+      alpha: {type: float, typical_range: [-50, 50], refresh_rate: 1440, unit: percentage}
+      sharpe_ratio: {type: float, typical_range: [-5, 10], refresh_rate: 1440, unit: ratio}
+      sortino_ratio: {type: float, typical_range: [-5, 10], refresh_rate: 1440, unit: ratio}
+      correlation_spy: {type: float, typical_range: [-1, 1], refresh_rate: 60, unit: correlation}
+
+    market_data:
+      market_cap: {type: float, typical_range: [1000000, 3000000000000], refresh_rate: 1440, unit: usd}
+      enterprise_value: {type: float, typical_range: [1000000, 3000000000000], refresh_rate: 1440, unit: usd}
+      avg_volume_30d: {type: integer, typical_range: [0, 1000000000], refresh_rate: 1440, unit: shares}
+      short_interest: {type: float, typical_range: [0, 50], refresh_rate: 1440, unit: percentage}
+      short_ratio: {type: float, typical_range: [0, 50], refresh_rate: 1440, unit: days}
+      institutional_ownership: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: percentage}
+      insider_ownership: {type: float, typical_range: [0, 100], refresh_rate: 1440, unit: percentage}
+
+  microstructure:
+    order_book:
+      bid: {type: float, typical_range: [0, 10000], refresh_rate: 1, unit: usd}
+      ask: {type: float, typical_range: [0, 10000], refresh_rate: 1, unit: usd}
+      bid_size: {type: integer, typical_range: [0, 10000000], refresh_rate: 1, unit: shares}
+      ask_size: {type: integer, typical_range: [0, 10000000], refresh_rate: 1, unit: shares}
+      bid_ask_spread: {type: float, typical_range: [0, 10], refresh_rate: 1, unit: usd}
+      bid_ask_spread_pct: {type: float, typical_range: [0, 5], refresh_rate: 1, unit: percentage}
+      
+    execution:
+      tick_direction: {type: float, typical_range: [1, -1, 0], refresh_rate: 1, unit: categorical} # up:1, down:-1, neutral:0
+      vwap_distance: {type: float, typical_range: [-10, 10], refresh_rate: 1, unit: percentage}
+      twap: {type: float, typical_range: [0, 10000], refresh_rate: 5, unit: usd}
+
+  options:
+    greeks:
+      implied_volatility: {type: float, typical_range: [0, 300], refresh_rate: 15, unit: percentage}
+      implied_volatility_rank: {type: float, typical_range: [0, 100], refresh_rate: 60, unit: percentile}
+      delta: {type: float, typical_range: [-1, 1], refresh_rate: 5, unit: sensitivity}
+      gamma: {type: float, typical_range: [0, 1], refresh_rate: 5, unit: sensitivity}
+      theta: {type: float, typical_range: [-10, 0], refresh_rate: 5, unit: usd_per_day}
+      vega: {type: float, typical_range: [0, 10], refresh_rate: 5, unit: sensitivity}
+      rho: {type: float, typical_range: [-1, 1], refresh_rate: 5, unit: sensitivity}
+
+    activity:
+      put_call_ratio: {type: float, typical_range: [0, 5], refresh_rate: 60, unit: ratio}
+      put_call_ratio_volume: {type: float, typical_range: [0, 5], refresh_rate: 60, unit: ratio}
+      options_volume: {type: integer, typical_range: [0, 10000000], refresh_rate: 5, unit: contracts}
+      options_open_interest: {type: integer, typical_range: [0, 50000000], refresh_rate: 1440, unit: contracts}
+
+  sentiment:
+    analyst:
+      consensus_rating: {type: float, typical_range: [1, 5], refresh_rate: 1440, unit: score}
+      num_analysts: {type: integer, typical_range: [0, 100], refresh_rate: 1440, unit: count}
+      price_target_avg: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: usd}
+      price_target_high: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: usd}
+      price_target_low: {type: float, typical_range: [0, 10000], refresh_rate: 1440, unit: usd}
+      upside_potential: {type: float, typical_range: [-50, 200], refresh_rate: 1440, unit: percentage}
+
+    insider:
+      insider_transactions_3m: {type: integer, typical_range: [-100, 100], refresh_rate: 1440, unit: count}
+      insider_net_buy_value: {type: float, typical_range: [-1000000000, 1000000000], refresh_rate: 1440, unit: usd}
+      
+    social:
+      social_sentiment_score: {type: float, typical_range: [-1, 1], refresh_rate: 60, unit: score}
+      social_volume: {type: integer, typical_range: [0, 1000000], refresh_rate: 60, unit: mentions}
+      news_sentiment: {type: float, typical_range: [-1, 1], refresh_rate: 60, unit: score}
+
+metadata:
+  data_quality:
+    last_updated: {type: timestamp, refresh_rate: 1, unit: unix_timestamp}
+    data_source: {type: string, refresh_rate: null, unit: categorical}
+    confidence_score: {type: float, typical_range: [0, 1], refresh_rate: null, unit: score}
+    staleness: {type: integer, typical_range: [0, 10000], refresh_rate: 1, unit: minutes}
+    
+  identifiers:
+    symbol: {type: string, refresh_rate: null, unit: categorical}
+    exchange: {type: string, refresh_rate: null, unit: categorical}
+    sector: {type: string, refresh_rate: null, unit: categorical}
+    industry: {type: string, refresh_rate: null, unit: categorical}
+    cusip: {type: string, refresh_rate: null, unit: categorical}
+    isin: {type: string, refresh_rate: null, unit: categorical}

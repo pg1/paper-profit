@@ -1,0 +1,378 @@
+indicators:
+  # =========================
+  # TECHNICAL - TREND
+  # =========================
+  - name: Simple Moving Average
+    parameter: sma
+    description: Average closing price over a defined period
+    type: float
+    typical_values: "20, 50, 100, 200 periods"
+
+  - name: Exponential Moving Average
+    parameter: ema
+    description: Weighted moving average emphasizing recent prices
+    type: float
+    typical_values: "12, 26, 50, 200 periods"
+
+  - name: MACD
+    parameter: macd
+    description: Difference between fast and slow EMAs
+    type: float
+    typical_values: "12-26 EMA with 9 signal line"
+
+  - name: MACD Signal
+    parameter: macd_signal
+    description: Signal line of MACD
+    type: float
+    typical_values: "9-period EMA of MACD"
+
+  - name: MACD Histogram
+    parameter: macd_histogram
+    description: Difference between MACD and signal line
+    type: float
+    typical_values: "Positive or negative values"
+
+  - name: ADX
+    parameter: adx
+    description: Average Directional Index measuring trend strength
+    type: float
+    typical_values: "0-100 (above 25 strong trend)"
+
+  - name: Ichimoku Cloud
+    parameter: ichimoku
+    description: Multi-component indicator for trend and support/resistance
+    type: text
+    typical_values: "Tenkan, Kijun, Senkou spans"
+
+  - name: Parabolic SAR
+    parameter: psar
+    description: Trend-following indicator showing potential reversals
+    type: float
+    typical_values: "Dots above/below price"
+
+  # =========================
+  # TECHNICAL - MOMENTUM
+  # =========================
+  - name: RSI
+    parameter: rsi
+    description: Measures overbought/oversold conditions
+    type: float
+    typical_values: "0-100 (70/30 thresholds)"
+
+  - name: Stochastic Oscillator
+    parameter: stochastic
+    description: Compares closing price to price range
+    type: float
+    typical_values: "0-100 (80/20 thresholds)"
+
+  - name: Williams %R
+    parameter: williams_r
+    description: Momentum indicator similar to stochastic
+    type: float
+    typical_values: "-100 to 0"
+
+  - name: CCI
+    parameter: cci
+    description: Commodity Channel Index for momentum deviation
+    type: float
+    typical_values: "-100 to +100"
+
+  - name: Momentum
+    parameter: momentum
+    description: Rate of change in price
+    type: float
+    typical_values: "Positive/negative values"
+
+  - name: Rate of Change
+    parameter: roc
+    description: Percentage change in price over time
+    type: percentage
+    typical_values: "-20% to +20% typical"
+
+  # =========================
+  # TECHNICAL - VOLATILITY
+  # =========================
+  - name: Bollinger Bands Upper
+    parameter: bb_upper
+    description: Upper volatility band
+    type: float
+    typical_values: "SMA + 2 std dev"
+
+  - name: Bollinger Bands Lower
+    parameter: bb_lower
+    description: Lower volatility band
+    type: float
+    typical_values: "SMA - 2 std dev"
+
+  - name: ATR
+    parameter: atr
+    description: Average True Range measuring volatility
+    type: float
+    typical_values: "Varies by asset"
+
+  - name: Keltner Channel
+    parameter: keltner
+    description: Volatility-based channel using ATR
+    type: float
+    typical_values: "EMA ± ATR"
+
+  - name: Donchian Channel
+    parameter: donchian
+    description: High-low range over period
+    type: float
+    typical_values: "20-period high/low"
+
+  # =========================
+  # TECHNICAL - VOLUME
+  # =========================
+  - name: Volume
+    parameter: volume
+    description: Number of shares traded
+    type: integer
+    typical_values: "Thousands to millions"
+
+  - name: VWAP
+    parameter: vwap
+    description: Volume-weighted average price
+    type: float
+    typical_values: "Intraday value"
+
+  - name: OBV
+    parameter: obv
+    description: On-Balance Volume cumulative indicator
+    type: float
+    typical_values: "Trend direction"
+
+  - name: Chaikin Money Flow
+    parameter: cmf
+    description: Volume-weighted accumulation/distribution
+    type: float
+    typical_values: "-1 to +1"
+
+  - name: Accumulation Distribution Line
+    parameter: adl
+    description: Flow of money into/out of asset
+    type: float
+    typical_values: "Cumulative value"
+
+  # =========================
+  # TECHNICAL - STRUCTURE
+  # =========================
+  - name: Fibonacci Retracement
+    parameter: fibonacci
+    description: Key retracement levels
+    type: percentage
+    typical_values: "23.6%, 38.2%, 50%, 61.8%, 78.6%"
+
+  - name: Pivot Points
+    parameter: pivot_points
+    description: Intraday support/resistance levels
+    type: float
+    typical_values: "S1, S2, R1, R2"
+
+  - name: Support Level
+    parameter: support
+    description: Price level where demand is strong
+    type: float
+    typical_values: "Price-dependent"
+
+  - name: Resistance Level
+    parameter: resistance
+    description: Price level where selling pressure appears
+    type: float
+    typical_values: "Price-dependent"
+
+  # =========================
+  # FUNDAMENTAL - VALUATION
+  # =========================
+  - name: P/E Ratio
+    parameter: pe
+    description: Price to earnings ratio
+    type: float
+    typical_values: "5-25 typical"
+
+  - name: PEG Ratio
+    parameter: peg
+    description: Price/earnings to growth ratio
+    type: float
+    typical_values: "<1 undervalued"
+
+  - name: Price to Book
+    parameter: pb
+    description: Market value vs book value
+    type: float
+    typical_values: "1-3 typical"
+
+  - name: Price to Sales
+    parameter: ps
+    description: Market value vs revenue
+    type: float
+    typical_values: "1-10 typical"
+
+  - name: EV/EBITDA
+    parameter: ev_ebitda
+    description: Enterprise value to EBITDA
+    type: float
+    typical_values: "6-15 typical"
+
+  # =========================
+  # FUNDAMENTAL - PROFITABILITY
+  # =========================
+  - name: Revenue
+    parameter: revenue
+    description: Total company income
+    type: float
+    typical_values: "Millions to billions"
+
+  - name: Net Income
+    parameter: net_income
+    description: Profit after expenses
+    type: float
+    typical_values: "Positive preferred"
+
+  - name: Gross Margin
+    parameter: gross_margin
+    description: Revenue after cost of goods sold
+    type: percentage
+    typical_values: "20%-60%"
+
+  - name: Operating Margin
+    parameter: operating_margin
+    description: Operating income margin
+    type: percentage
+    typical_values: "10%-30%"
+
+  - name: ROE
+    parameter: roe
+    description: Return on equity
+    type: percentage
+    typical_values: "10%-20%"
+
+  - name: ROA
+    parameter: roa
+    description: Return on assets
+    type: percentage
+    typical_values: "5%-15%"
+
+  # =========================
+  # FUNDAMENTAL - GROWTH
+  # =========================
+  - name: Revenue Growth
+    parameter: revenue_growth
+    description: Year-over-year revenue growth
+    type: percentage
+    typical_values: "5%-20%"
+
+  - name: EPS Growth
+    parameter: eps_growth
+    description: Earnings per share growth
+    type: percentage
+    typical_values: "10%-25%"
+
+  - name: Free Cash Flow Growth
+    parameter: fcf_growth
+    description: Growth in free cash flow
+    type: percentage
+    typical_values: "Positive preferred"
+
+  # =========================
+  # FUNDAMENTAL - HEALTH
+  # =========================
+  - name: Debt to Equity
+    parameter: debt_to_equity
+    description: Financial leverage ratio
+    type: float
+    typical_values: "0.5-1.5"
+
+  - name: Current Ratio
+    parameter: current_ratio
+    description: Ability to pay short-term liabilities
+    type: float
+    typical_values: "1-3"
+
+  - name: Quick Ratio
+    parameter: quick_ratio
+    description: Liquidity excluding inventory
+    type: float
+    typical_values: "1+ preferred"
+
+  - name: Interest Coverage
+    parameter: interest_coverage
+    description: Ability to pay interest expenses
+    type: float
+    typical_values: "2-10"
+
+  # =========================
+  # FUNDAMENTAL - CASH FLOW
+  # =========================
+  - name: Free Cash Flow
+    parameter: free_cash_flow
+    description: Cash after capital expenditures
+    type: float
+    typical_values: "Positive and growing"
+
+  - name: Operating Cash Flow
+    parameter: operating_cash_flow
+    description: Cash from operations
+    type: float
+    typical_values: "Positive preferred"
+
+  - name: Cash Flow Margin
+    parameter: cash_flow_margin
+    description: Cash flow relative to revenue
+    type: percentage
+    typical_values: "10%-30%"
+
+  # =========================
+  # FUNDAMENTAL - DIVIDENDS
+  # =========================
+  - name: Dividend Yield
+    parameter: dividend_yield
+    description: Annual dividend relative to price
+    type: percentage
+    typical_values: "2%-6%"
+
+  - name: Payout Ratio
+    parameter: payout_ratio
+    description: Earnings paid as dividends
+    type: percentage
+    typical_values: "30%-60%"
+
+  - name: Dividend Growth
+    parameter: dividend_growth
+    description: Growth rate of dividends
+    type: percentage
+    typical_values: "5%-10%"
+
+  # =========================
+  # HYBRID / MARKET
+  # =========================
+  - name: Beta
+    parameter: beta
+    description: Volatility relative to market
+    type: float
+    typical_values: "<1 low, >1 high"
+
+  - name: Market Cap
+    parameter: market_cap
+    description: Total market value of company
+    type: float
+    typical_values: "Millions to trillions"
+
+  - name: Short Interest
+    parameter: short_interest
+    description: Percentage of shares shorted
+    type: percentage
+    typical_values: "0%-20%"
+
+  - name: Analyst Rating
+    parameter: analyst_rating
+    description: Consensus analyst recommendation
+    type: text
+    typical_values: "Buy, Hold, Sell"
+
+  - name: Insider Ownership
+    parameter: insider_ownership
+    description: Percentage of shares held by insiders
+    type: percentage
+    typical_values: "0%-50%"

@@ -20,7 +20,7 @@ class FinancialModelingPrepService:
         self.repo = RepositoryFactory(db_session)
         self.api_key = self._get_api_key_from_settings()
         self.base_url = "https://financialmodelingprep.com/stable/"
-        logger.info(f"Financial Modeling Prep API key loaded: {'***' + self.api_key[-4:] if self.api_key != 'demo' else 'demo key'}")
+        #logger.info(f"Financial Modeling Prep API key loaded: {'***' + self.api_key[-4:] if self.api_key != 'demo' else 'demo key'}")
     
     def _get_api_key_from_settings(self):
         """Get Financial Modeling Prep API key from settings table"""
@@ -30,7 +30,7 @@ class FinancialModelingPrepService:
                 # Parse the JSON parameters field
                 params = json.loads(setting.parameters)
                 api_key = params.get('key', 'demo')
-                logger.info(f"Loaded Financial Modeling Prep API key from settings table")
+                #logger.info(f"Loaded Financial Modeling Prep API key from settings table")
                 return api_key
             else:
                 logger.warning("Financial_modeling_prep setting not found in database, using demo key")

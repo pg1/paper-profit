@@ -20,7 +20,7 @@ class AlphaVantageService:
         self.db = db_session
         self.repo = RepositoryFactory(db_session)
         self.api_key = self._get_api_key_from_settings()
-        logger.info(f"Alpha Vantage API key loaded: {'***' + self.api_key[-4:] if self.api_key != 'demo' else 'demo key'}")
+        #logger.info(f"Alpha Vantage API key loaded: {'***' + self.api_key[-4:] if self.api_key != 'demo' else 'demo key'}")
         self.ts = TimeSeries(key=self.api_key, output_format='pandas')
         self.fd = FundamentalData(key=self.api_key, output_format='pandas')
     
@@ -32,7 +32,7 @@ class AlphaVantageService:
                 # Parse the JSON parameters field
                 params = json.loads(setting.parameters)
                 api_key = params.get('key', 'demo')
-                logger.info(f"Loaded Alpha Vantage API key from settings table")
+                #logger.info(f"Loaded Alpha Vantage API key from settings table")
                 return api_key
             else:
                 logger.warning("Alpha_vantage setting not found in database, using demo key")

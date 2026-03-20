@@ -1,5 +1,13 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
+import { 
+  strategyParameters, 
+  getParametersByGroup, 
+  getAllGroups,
+  createEmptyParameters,
+  parametersToJson,
+  jsonToParameters 
+} from '../utils/strategyParameters.js'
 
 const props = defineProps({
   navigationParams: {
@@ -14,13 +22,19 @@ const selectedStrategy = ref('')
 const stockListMode = ref('Manual')
 const stockList = ref('')
 const stockListAiPrompt = ref('')
+const parameters = ref(createEmptyParameters())
 const parametersJson = ref('{}')
+const activeTab = ref('strategy')
 const isLoading = ref(false)
 const isSaving = ref(false)
 const strategies = ref([])
 const loadingStrategies = ref(false)
 
 const emit = defineEmits(['navigate'])
+
+// Get parameter groups for tabs
+const parameterGroups = computed(() => getParametersByGroup())
+const groupTabs = computed(() => getAllGroups())
 
 // Load available strategies from the API
 const loadStrategies = async () => {
@@ -44,12 +58,21 @@ const onStrategySelect = () => {
   const strategy = strategies.value.find(s => s.index === selectedStrategy.value)
   if (strategy) {
     // Auto-fill the form with strategy details
-    strategyName.value = strategy.strategy
+    //strategyName.value = strategy.strategy
     
     // Set default parameters from YAML configuration
     const defaultParams = strategy.parameters || {}
-    parametersJson.value = JSON.stringify(defaultParams, null, 2)
+    // Convert default params to our structured format
+    const structuredParams = createEmptyParameters()
+    Object.keys(defaultParams).forEach(key => {
+      if (key in structuredParams) {
+        structuredParams[key] = defaultParams[key]
+      }
+    })
+    parameters.value = structuredParams
+    updateJsonFromParameters()
   }
+  // When "No Strategy" is selected, keep existing parameters - don't reset them
 }
 
 const handleBack = () => {
@@ -76,22 +99,32 @@ const fetchStrategy = async () => {
     
     const data = await response.json()
     strategyName.value = data.name
-    selectedStrategy.value = data.strategy_type
+    selectedStrategy.value = data.strategy_type || ''
     stockListMode.value = data.stock_list_mode || 'Manual'
     stockList.value = data.stock_list || ''
     stockListAiPrompt.value = data.stock_list_ai_prompt || ''
     
     // Handle parameters - they might be stored as string or object
+    let parsedParams = {}
     if (typeof data.parameters === 'string') {
       try {
-        const parsedParams = JSON.parse(data.parameters)
-        parametersJson.value = JSON.stringify(parsedParams, null, 2)
+        parsedParams = JSON.parse(data.parameters)
       } catch {
-        parametersJson.value = '{}'
+        parsedParams = {}
       }
     } else {
-      parametersJson.value = JSON.stringify(data.parameters || {}, null, 2)
+      parsedParams = data.parameters || {}
     }
+    
+    // Convert to structured parameters
+    const structuredParams = createEmptyParameters()
+    Object.keys(parsedParams).forEach(key => {
+      if (key in structuredParams) {
+        structuredParams[key] = parsedParams[key]
+      }
+    })
+    parameters.value = structuredParams
+    updateJsonFromParameters()
   } catch (err) {
     console.error('Error fetching strategy:', err)
     alert('Failed to load strategy. Please try again.')
@@ -101,6 +134,25 @@ const fetchStrategy = async () => {
   }
 }
 
+// Update JSON from parameters object
+const updateJsonFromParameters = () => {
+  parametersJson.value = parametersToJson(parameters.value)
+}
+
+// Update parameters from JSON
+const updateParametersFromJson = () => {
+  try {
+    parameters.value = jsonToParameters(parametersJson.value)
+  } catch (error) {
+    console.error('Error parsing JSON:', error)
+  }
+}
+
+// Watch for JSON changes
+watch(parametersJson, () => {
+  updateParametersFromJson()
+})
+
 // Update strategy
 const handleUpdateStrategy = async () => {
   if (!strategyName.value.trim()) {
@@ -108,21 +160,10 @@ const handleUpdateStrategy = async () => {
     return
   }
 
-  if (!selectedStrategy.value) {
+  /*if (!selectedStrategy.value) {
     alert('Please select a strategy type')
     return
-  }
-
-  // Validate JSON parameters
-  let parsedParameters = {}
-  try {
-    if (parametersJson.value.trim()) {
-      parsedParameters = JSON.parse(parametersJson.value)
-    }
-  } catch (error) {
-    alert('Invalid JSON format in Parameters field. Please check your JSON syntax.')
-    return
-  }
+  }*/
 
   isSaving.value = true
 
@@ -138,7 +179,7 @@ const handleUpdateStrategy = async () => {
         stock_list_mode: stockListMode.value,
         stock_list: stockList.value,
         stock_list_ai_prompt: stockListAiPrompt.value,
-        parameters: parsedParameters
+        parameters: parameters.value
       })
     })
 
@@ -182,6 +223,49 @@ onMounted(() => {
     </div>
     
     <div v-else class="form-section">
+
+      <div class="form-group">
+        <label for="strategy-name">Strategy Name</label>
+        <input 
+          id="strategy-name"
+          v-model="strategyName"
+          type="text" 
+          placeholder="Enter strategy name"
+        >
+      </div>
+
+      <!--<div class="form-group">
+        <label for="stock-list-mode">Stock List Mode</label>
+        <select 
+          id="stock-list-mode" 
+          v-model="stockListMode"
+        >
+          <option value="Manual">Manual</option>
+          <option value="AI">AI</option>
+        </select>
+      </div>-->
+
+      <div class="form-group" v-if="stockListMode === 'Manual'">
+        <label for="stock-list">Stock List</label>
+        <textarea 
+          id="stock-list"
+          v-model="stockList"
+          placeholder="Enter stock symbols separated by commas (e.g., AAPL, TSLA, MSFT)"
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div class="form-group" v-if="stockListMode === 'AI'">
+        <label for="stock-list-ai-prompt">AI Prompt for Stock List</label>
+        <textarea 
+          id="stock-list-ai-prompt"
+          v-model="stockListAiPrompt"
+          placeholder="Enter a prompt for AI to generate stock list (e.g., 'Find me tech stocks with strong growth potential')"
+          rows="4"
+        ></textarea>
+        <small class="form-help">AI will use this prompt to generate a stock list for your strategy.</small>
+      </div>
+
       <!-- Strategy Template Selection -->
       <div class="form-group">
         <label for="strategy-template">Strategy</label>
@@ -222,57 +306,103 @@ onMounted(() => {
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="strategy-name">Strategy Name</label>
-        <input 
-          id="strategy-name"
-          v-model="strategyName"
-          type="text" 
-          placeholder="Enter strategy name"
-        >
-      </div>
+      <!-- Strategy Parameters Tabs -->
+      <div class="parameters-section">
+        <h3>Strategy Parameters</h3>
+        
+        <!-- Tab Navigation -->
+        <div class="tabs">
+          <button
+            v-for="group in groupTabs"
+            :key="group"
+            :class="['tab-button', { active: activeTab === group }]"
+            @click="activeTab = group"
+          >
+            {{ group.charAt(0).toUpperCase() + group.slice(1) }}
+          </button>
+          <button
+            :class="['tab-button', { active: activeTab === 'json' }]"
+            @click="activeTab = 'json'"
+          >
+            JSON View
+          </button>
+        </div>
 
-      <div class="form-group">
-        <label for="stock-list-mode">Stock List Mode</label>
-        <select 
-          id="stock-list-mode" 
-          v-model="stockListMode"
-        >
-          <option value="Manual">Manual</option>
-          <option value="AI">AI</option>
-        </select>
-      </div>
+        <!-- Tab Content -->
+        <div class="tab-content">
+          <!-- Parameter Groups -->
+          <div v-if="activeTab !== 'json'" class="parameter-group">
+            <div v-for="param in parameterGroups[activeTab]" :key="param.name" class="form-group">
+              <label :for="param.name">
+                {{ param.name.replace(/_/g, ' ') }}
+                <span class="param-type">({{ param.type }})</span>
+              </label>
+              
+              <!-- String Input -->
+              <input
+                v-if="param.type === 'string'"
+                :id="param.name"
+                v-model="parameters[param.name]"
+                type="text"
+                :placeholder="`Enter ${param.name.replace(/_/g, ' ')}`"
+              >
+              
+              <!-- Boolean Input -->
+              <div v-else-if="param.type === 'boolean'" class="boolean-input">
+                <label class="checkbox-label">
+                  <input
+                    type="checkbox"
+                    :id="param.name"
+                    v-model="parameters[param.name]"
+                  >
+                  <span>{{ parameters[param.name] ? 'Enabled' : 'Disabled' }}</span>
+                </label>
+              </div>
+              
+              <!-- Number/Integer/Percentage Input -->
+              <input
+                v-else-if="['number', 'integer', 'percentage'].includes(param.type)"
+                :id="param.name"
+                v-model="parameters[param.name]"
+                type="number"
+                :step="param.type === 'integer' ? '1' : '0.01'"
+                :placeholder="`Enter ${param.name.replace(/_/g, ' ')}`"
+              >
+              
+              <!-- List Input -->
+              <textarea
+                v-else-if="param.type === 'list'"
+                :id="param.name"
+                v-model="parameters[param.name]"
+                :placeholder="`Enter ${param.name.replace(/_/g, ' ')} separated by commas`"
+                rows="3"
+              ></textarea>
+              
+              <small class="form-help">
+                {{ param.description }}
+                <span v-if="param.typical_values" class="typical-values">
+                  Typical values: {{ param.typical_values }}
+                </span>
+              </small>
+            </div>
+          </div>
 
-      <div class="form-group" v-if="stockListMode === 'Manual'">
-        <label for="stock-list">Stock List</label>
-        <textarea 
-          id="stock-list"
-          v-model="stockList"
-          placeholder="Enter stock symbols separated by commas (e.g., AAPL, TSLA, MSFT)"
-          rows="4"
-        ></textarea>
-      </div>
-
-      <div class="form-group" v-if="stockListMode === 'AI'">
-        <label for="stock-list-ai-prompt">AI Prompt for Stock List</label>
-        <textarea 
-          id="stock-list-ai-prompt"
-          v-model="stockListAiPrompt"
-          placeholder="Enter a prompt for AI to generate stock list (e.g., 'Find me tech stocks with strong growth potential')"
-          rows="4"
-        ></textarea>
-        <small class="form-help">AI will use this prompt to generate a stock list for your strategy.</small>
-      </div>
-
-      <div class="form-group">
-        <label for="parameters-json">Parameters (JSON)</label>
-        <textarea 
-          id="parameters-json"
-          v-model="parametersJson"
-          placeholder='Strategy parameters will be auto-filled when you select a template'
-          rows="8"
-        ></textarea>
-        <small class="form-help">Strategy parameters in JSON format. These will be auto-filled when you select a template.</small>
+          <!-- JSON View -->
+          <div v-if="activeTab === 'json'" class="json-view">
+            <div class="form-group">
+              <label for="parameters-json">Parameters (JSON)</label>
+              <textarea 
+                id="parameters-json"
+                v-model="parametersJson"
+                placeholder='Strategy parameters in JSON format'
+                rows="12"
+              ></textarea>
+              <small class="form-help">
+                Edit parameters directly in JSON format. Changes will be reflected in the form tabs.
+              </small>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-actions">
@@ -404,9 +534,114 @@ optgroup option {
   100% { transform: rotate(360deg); }
 }
 
+.parameters-section {
+  margin-top: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 1.5rem;
+  background: #f8f9fa;
+}
+
+.parameters-section h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.tab-button {
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #495057;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.tab-button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.tab-content {
+  min-height: 300px;
+}
+
+.parameter-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.param-type {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-weight: normal;
+  margin-left: 0.5rem;
+}
+
+.boolean-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.typical-values {
+  display: block;
+  color: #28a745;
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+.json-view textarea {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
 @media (max-width: 768px) {
   .form-actions {
     flex-direction: column;
+  }
+  
+  .parameter-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  
+  .tab-button {
+    white-space: nowrap;
   }
 }
 </style>

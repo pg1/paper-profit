@@ -1,150 +1,410 @@
 parameters:
-  # Fundamental Parameters
+  # ==================== STRATEGY ====================
+  category:
+    type: string
+    description: Strategy category that drives signal logic
+    typical_values: "swing, long_term, day_trading, mean_reversion, famous_investors"
+    values: ["swing", "long_term", "day_trading", "mean_reversion", "famous_investors"]
+    group: strategy
+  diversification_mode:
+    type: string
+    description: How to spread capital across positions
+    typical_values: "diversified, sector_focused, concentrated, equal_weight"
+    values: ["diversified", "sector_focused", "concentrated", "equal_weight"]
+    group: portfolio
+  rebalance:
+    type: boolean
+    description: Enable automatic rebalancing of portfolio
+    typical_values: true/false
+    values: [true, false]
+    group: portfolio
+  use_ai_signals:
+    type: boolean
+    description: Enhance signals with AI sentiment/news
+    typical_values: true/false
+    values: [true, false]
+    group: strategy
+  run_frequency_minutes:
+    type: integer
+    description: How often the bot runs (in minutes) during market hours
+    typical_values: 5
+    values: [1, 5, 15, 30, 60]
+    group: strategy
+  signal_min_confidence:
+    type: number
+    description: Minimum confidence (0–1) required to act on a signal
+    typical_values: 0.6
+    values: []
+    group: strategy
+  conviction_score_minimum:
+    type: integer
+    description: Minimum conviction score for a trade (0–100)
+    typical_values: 75
+    values: []
+    group: strategy
+  narrative_match_required:
+    type: boolean
+    description: Require growth narrative match (for famous investors)
+    typical_values: true/false
+    values: [true, false]
+    group: strategy
+
+  # ==================== TECHNICAL ====================
+  sma_short:
+    type: integer
+    description: Short simple moving average period
+    typical_values: 20
+    values: [10, 20, 50]
+    group: technical
+  sma_long:
+    type: integer
+    description: Long simple moving average period
+    typical_values: 200
+    values: [50, 100, 200]
+    group: technical
+  rsi_period:
+    type: integer
+    description: RSI calculation period
+    typical_values: 14
+    values: [7, 14, 21]
+    group: technical
+  rsi_overbought:
+    type: integer
+    description: RSI overbought threshold
+    typical_values: 70
+    values: []
+    group: technical
+  rsi_oversold:
+    type: integer
+    description: RSI oversold threshold
+    typical_values: 30
+    values: []
+    group: technical
+  atr_period:
+    type: integer
+    description: Average True Range period
+    typical_values: 14
+    values: [7, 14, 21]
+    group: technical
+
+  # ==================== FUNDAMENTAL ====================
   min_quality_score:
     type: integer
-    description: Minimum fundamental quality score
+    description: Minimum fundamental quality score (0–100)
     typical_values: 70
-
+    values: []
+    group: fundamental
   sell_on_fundamental_shift:
     type: boolean
-    description: Sell if fundamentals deteriorate
+    description: Sell if fundamentals deteriorate significantly
     typical_values: true/false
-
-  allocation_percent:
-    type: percentage
-    description: Portfolio allocation percentage
-    typical_values: 100
-
-  investment_amount:
-    type: number
-    description: Fixed investment amount
-    typical_values: 100
-
+    values: [true, false]
+    group: fundamental
   min_dividend_growth_rate:
     type: percentage
-    description: Minimum dividend growth rate
+    description: Minimum annual dividend growth rate
     typical_values: 5%
-
+    values: []
+    group: fundamental
   max_payout_ratio:
     type: percentage
     description: Maximum dividend payout ratio
     typical_values: 70%
-
+    values: []
+    group: fundamental
   min_dividend_yield:
     type: percentage
     description: Minimum dividend yield
     typical_values: 2%
-
+    values: []
+    group: fundamental
   auto_reinvest_dividends:
     type: boolean
     description: Automatically reinvest dividends
     typical_values: true/false
-
+    values: [true, false]
+    group: execution
   max_pe:
     type: number
-    description: Maximum P/E ratio
+    description: Maximum trailing P/E ratio
     typical_values: 15-20
-
+    values: []
+    group: fundamental
   max_pb:
     type: number
-    description: Maximum P/B ratio
+    description: Maximum price/book ratio
     typical_values: 1.5-2
-
+    values: []
+    group: fundamental
   discount_to_intrinsic_value:
     type: percentage
-    description: Discount to intrinsic value
+    description: Required discount to estimated intrinsic value
     typical_values: 20%
-
+    values: []
+    group: fundamental
   min_revenue_growth:
     type: percentage
-    description: Minimum revenue growth
+    description: Minimum year-over-year revenue growth
     typical_values: 15%
-
+    values: []
+    group: fundamental
   min_eps_growth:
     type: percentage
     description: Minimum EPS growth
     typical_values: 10-15%
-
+    values: []
+    group: fundamental
   max_pe_ratio:
     type: number
-    description: Maximum P/E ratio for growth
+    description: Maximum P/E ratio for growth strategies
     typical_values: 70
-
-  sector_strength_threshold:
-    type: integer
-    description: Sector strength score threshold
-    typical_values: 60
-
-  target_stock_allocation:
-    type: percentage
-    description: Target stock allocation
-    typical_values: 30-60%
-
-  target_bond_allocation:
-    type: percentage
-    description: Target bond allocation
-    typical_values: 40-55%
-
-  gold_allocation_percent:
-    type: percentage
-    description: Gold allocation percentage
-    typical_values: 7.5%
-
-  commodities_allocation_percent:
-    type: percentage
-    description: Commodities allocation percentage
-    typical_values: 7.5%
-
-  underlying_quality_required:
-    type: boolean
-    description: Require quality underlying
-    typical_values: true/false
-
-  required_margin_of_safety_percent:
-    type: percentage
-    description: Required margin of safety
-    typical_values: 25%
-
+    values: []
+    group: fundamental
+  max_peg:
+    type: number
+    description: Maximum PEG ratio (P/E / growth)
+    typical_values: 1
+    values: []
+    group: fundamental
   minimum_roe_percent:
     type: percentage
     description: Minimum return on equity
     typical_values: 10%
-
-  preferred_industry_moat:
-    type: string
-    description: Industry moat strength
-    typical_values: "strong"
-
+    values: []
+    group: fundamental
   net_net_discount_percent:
     type: percentage
-    description: Net-net discount percentage
+    description: Discount to net-net working capital (deep value)
     typical_values: 20%
-
-  max_peg:
-    type: number
-    description: Maximum PEG ratio
-    typical_values: 1
-
-  narrative_match_required:
-    type: boolean
-    description: Require growth narrative match
-    typical_values: true/false
-
-  cost_ratio_max:
-    type: percentage
-    description: Maximum cost ratio
-    typical_values: 0.05%
-
+    values: []
+    group: fundamental
   macro_signal_strength_threshold:
     type: integer
-    description: Macro signal strength
+    description: Minimum macro signal strength (0–100)
     typical_values: 70
+    values: []
+    group: fundamental
+  underlying_quality_required:
+    type: boolean
+    description: Require high underlying quality (moat, balance sheet)
+    typical_values: true/false
+    values: [true, false]
+    group: fundamental
+  preferred_industry_moat:
+    type: string
+    description: Preferred industry moat strength
+    typical_values: "strong"
+    values: ["strong", "moderate", "weak", "none"]
+    group: fundamental
 
-  conviction_score_minimum:
+  # ==================== PORTFOLIO / ALLOCATION ====================
+  allocation_percent:
+    type: percentage
+    description: Portfolio allocation percentage for this strategy
+    typical_values: 100%
+    values: []
+    group: portfolio
+  investment_amount:
+    type: number
+    description: Fixed dollar amount to invest per trade
+    typical_values: 100
+    values: []
+    group: execution
+  target_stock_allocation:
+    type: percentage
+    description: Target allocation to stocks (multi-asset)
+    typical_values: 30-60%
+    values: []
+    group: portfolio
+  target_bond_allocation:
+    type: percentage
+    description: Target allocation to bonds
+    typical_values: 40-55%
+    values: []
+    group: portfolio
+  gold_allocation_percent:
+    type: percentage
+    description: Allocation to gold
+    typical_values: 7.5%
+    values: []
+    group: portfolio
+  commodities_allocation_percent:
+    type: percentage
+    description: Allocation to commodities
+    typical_values: 7.5%
+    values: []
+    group: portfolio
+
+  # ==================== RISK MANAGEMENT ====================
+  max_position_pct:
+    type: percentage
+    description: Maximum percentage of portfolio in a single stock
+    typical_values: 5%
+    values: []
+    group: risk
+  max_positions:
     type: integer
-    description: Minimum conviction score
-    typical_values: 75
+    description: Maximum number of open positions
+    typical_values: 20
+    values: []
+    group: risk
+  cash_reserve_pct:
+    type: percentage
+    description: Minimum cash reserve percentage
+    typical_values: 10%
+    values: []
+    group: risk
+  max_sector_pct:
+    type: percentage
+    description: Maximum percentage of portfolio in any single sector
+    typical_values: 20%
+    values: []
+    group: risk
+  sector_cap_strictness:
+    type: string
+    description: How to handle sector cap breaches (hard = reject, soft = reduce)
+    typical_values: "hard, soft"
+    values: ["hard", "soft"]
+    group: risk
+  max_drawdown_pct:
+    type: percentage
+    description: Maximum drawdown before halting new BUYs
+    typical_values: 15%
+    values: []
+    group: risk
+  stop_loss_pct:
+    type: percentage
+    description: Automatic stop loss percentage from entry
+    typical_values: 8%
+    values: []
+    group: risk
+  take_profit_pct:
+    type: percentage
+    description: Automatic take profit percentage
+    typical_values: 20%
+    values: []
+    group: risk
+  trailing_stop_pct:
+    type: percentage
+    description: Trailing stop percentage (0 = disabled)
+    typical_values: 0%
+    values: []
+    group: risk
+  halt_on_drawdown:
+    type: boolean
+    description: Halt BUY orders when drawdown limit is exceeded
+    typical_values: true/false
+    values: [true, false]
+    group: risk
+  enable_stop_loss:
+    type: boolean
+    description: Master switch for stop loss logic
+    typical_values: true/false
+    values: [true, false]
+    group: risk
+  enable_take_profit:
+    type: boolean
+    description: Master switch for take profit logic
+    typical_values: true/false
+    values: [true, false]
+    group: risk
+  required_margin_of_safety_percent:
+    type: percentage
+    description: Required margin of safety for value investments
+    typical_values: 25%
+    values: []
+    group: risk
 
+  # ==================== SCREENING / STOCK PICKER ====================
+  stock_universe:
+    type: string
+    description: Source of candidate stocks
+    typical_values: "strategy_list, sector_filters, watchlist, screener, winners, losers"
+    values: ["strategy_list", "sector_filters", "watchlist", "screener", "winners", "losers"]
+    group: screening
+  sector_include:
+    type: list
+    description: Sectors to include (from stock-bucketing taxonomy)
+    typical_values: "Technology, Healthcare"
+    values: []
+    group: screening
+  sector_exclude:
+    type: list
+    description: Sectors to exclude
+    typical_values: "Energy"
+    values: []
+    group: screening
+  sector_strength_threshold:
+    type: integer
+    description: Minimum sector strength score (0–100)
+    typical_values: 60
+    values: []
+    group: screening
+  score_threshold:
+    type: integer
+    description: Minimum overall score (0–100) for a stock to be considered
+    typical_values: 50
+    values: []
+    group: screening
+  risk_score_max:
+    type: integer
+    description: Maximum allowed risk score (0–100, lower is safer)
+    typical_values: 40
+    values: []
+    group: screening
+  top_n_candidates:
+    type: integer
+    description: Number of top-ranked stocks to pass to strategy engine
+    typical_values: 10
+    values: []
+    group: screening
+  enable_fundamental_filter:
+    type: boolean
+    description: Use fundamental metrics in screening (PE, yield, etc.)
+    typical_values: true/false
+    values: [true, false]
+    group: screening
+  min_volume:
+    type: integer
+    description: Minimum average daily volume (liquidity filter)
+    typical_values: 100000
+    values: []
+    group: screening
   liquidity_filter:
     type: string
-    description: Liquidity requirement
+    description: Liquidity requirement description
+    typical_values: "e.g., avg volume > 1M"
+    values: []
+    group: screening
+
+  # ==================== EXECUTION / REBALANCING ====================
+  min_order_value:
+    type: number
+    description: Minimum order value in dollars (ignore smaller)
+    typical_values: 100
+    values: []
+    group: execution
+  round_shares:
+    type: boolean
+    description: Round to whole shares
+    typical_values: true/false
+    values: [true, false]
+    group: execution
+  rebalance_threshold:
+    type: percentage
+    description: Deviation from target weight that triggers rebalance
+    typical_values: 5%
+    values: []
+    group: portfolio
+  order_type:
+    type: string
+    description: Default order type for bot executions
+    typical_values: "MARKET, LIMIT, STOP"
+    values: ["MARKET", "LIMIT", "STOP"]
+    group: execution
+  cost_ratio_max:
+    type: percentage
+    description: Maximum allowed cost ratio (expenses)
+    typical_values: 0.05%
+    values: []
+    group: execution

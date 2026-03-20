@@ -67,12 +67,8 @@ const handleUpdateAccount = async () => {
   try {
     const accountId = props.navigationParams.accountId
     const updateData = {
-      account_name: accountName.value
-    }
-
-    // Only include strategy_id if a strategy is selected
-    if (selectedStrategy.value) {
-      updateData.strategy_id = selectedStrategy.value
+      account_name: accountName.value,
+      strategy_id: selectedStrategy.value  // Always include strategy_id, even when null
     }
 
     const response = await fetch(`http://localhost:5000/api/accounts/${accountId}`, {

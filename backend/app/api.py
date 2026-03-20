@@ -820,6 +820,89 @@ async def get_instrument(symbol: str, db: Session = Depends(get_db)):
         )
 
 
+@app.get("/api/instruments/{symbol}/trading-signals", response_model=List[Dict[str, Any]])
+async def get_instrument_trading_signals(symbol: str, limit: int = 10, db: Session = Depends(get_db)):
+    """Get trading signals for an instrument by symbol"""
+    try:
+        repo_factory = RepositoryFactory(db)
+        
+        # Get the instrument by symbol
+        instrument = repo_factory.instruments.get_by_symbol(symbol)
+        if not instrument:
+            return []
+        
+        # Get trading signals for this instrument
+        signals = repo_factory.trading_signals.get_recent_signals(symbol_id=instrument.id, limit=limit)
+        
+        result = []
+        for signal in signals:
+            # Get strategy name
+            strategy = repo_factory.strategies.get_by_id(signal.strategy_id)
+            
+            # Parse indicators_used JSON if it exists
+            indicators_used = {}
+            if signal.indicators_used:
+                try:
+                    import json
+                    indicators_used = json.loads(signal.indicators_used) if isinstance(signal.indicators_used, str) else signal.indicators_used
+                except:
+                    indicators_used = {}
+            
+            result.append({
+                "id": signal.id,
+                "symbol": symbol,
+                "strategy": strategy.name if strategy else f"ID:{signal.strategy_id}",
+                "timestamp": signal.timestamp.isoformat() if signal.timestamp else None,
+                "signal_type": signal.signal_type,
+                "strength": float(signal.strength) if signal.strength else None,
+                "price": float(signal.price) if signal.price else None,
+                "confidence": float(signal.confidence) if signal.confidence else None,
+                "reason": signal.reason,
+                "indicators_used": indicators_used,
+                "created_at": signal.created_at.isoformat() if signal.created_at else None
+            })
+        
+        return result
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve trading signals: {str(e)}"
+        )
+
+
+@app.get("/api/instruments/{symbol}/quantitative-data", response_model=List[Dict[str, Any]])
+async def get_instrument_quantitative_data(symbol: str, limit: int = 100, db: Session = Depends(get_db)):
+    """Get quantitative data for an instrument by symbol"""
+    try:
+        repo_factory = RepositoryFactory(db)
+        
+        # Get the instrument by symbol
+        instrument = repo_factory.instruments.get_by_symbol(symbol)
+        if not instrument:
+            return []
+        
+        # Get quantitative data for this instrument
+        quant_data = repo_factory.quantitative_data.get_latest(symbol_id=instrument.id, limit=limit)
+        
+        result = []
+        for data in quant_data:
+            result.append({
+                "id": data.id,
+                "symbol": symbol,
+                "timestamp": data.timestamp.isoformat() if data.timestamp else None,
+                "meta": data.meta,
+                "value": data.value,
+                "created_at": data.created_at.isoformat() if data.created_at else None
+            })
+        
+        return result
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve quantitative data: {str(e)}"
+        )
+
+
 @app.get("/api/instruments/{symbol}/market-data", response_model=List[Dict[str, Any]])
 async def get_instrument_market_data(symbol: str, period: str = "1mo", db: Session = Depends(get_db)):
     """Get market data for an instrument with time period controls"""
