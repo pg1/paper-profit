@@ -1,6 +1,7 @@
 import json
 import logging
 import yaml
+import os
 from typing import Dict, Any, Optional, List, Tuple
 from sqlalchemy.orm import Session
 
@@ -16,7 +17,13 @@ logger = logging.getLogger(__name__)
 class QuantitativeDataMapper:
     """Maps quantitative data YAML configuration to database queries"""
     
-    def __init__(self, config_path: str = "backend/app/config/quantitative_data.yaml"):
+    def __init__(self, config_path: str = None):
+        if config_path is None:
+            # Calculate absolute path like data_collector.py does
+            config_path = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+                'config', 'quantitative_data.yaml'
+            )
         self.config_path = config_path
         self.config = self._load_config()
     
