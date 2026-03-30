@@ -141,7 +141,7 @@ if __name__ == "__main__":
     controller.add_job_from_file("order_process", "jobs/process_orders.py", interval=5.0)
     controller.add_job_from_file("update_positions", "jobs/update_positions.py", interval=30.0)
     controller.add_job_from_file("update_market_data", "jobs/update_market_data.py", interval=60.0)  # Run every minute
-    controller.add_job_from_file("trading_bot", "jobs/trading_bot.py", interval=300.0)  # Run every 5 minutes
+    controller.add_job_from_file("trading_bot", "jobs/ralph_trading_bot.py", interval=300.0)  # Run every 5 minutes
     #controller.add_job_from_file("monitor", "jobs/monitor_job.py", function_name="process", interval=3.0, args=(80,))
     #def process(threshold):
     #   print(f"Monitoring system... threshold: {threshold}")

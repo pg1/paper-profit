@@ -108,9 +108,9 @@ const calculateTotalCost = () => {
 }
 
 
-// Handle back to welcome
+// Handle back 
 const handleBackToWelcome = () => {
-  emit('navigate', 'welcome')
+  emit('navigate', 'accounts')
 }
 
 // Handle new transaction

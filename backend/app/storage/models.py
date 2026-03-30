@@ -16,7 +16,7 @@ class Account(Base):
     status = Column(String, default='active')  # 'active', 'inactive', 'suspended'
     description = Column(Text)  # Optional account description
     strategy_id = Column(Integer, ForeignKey("strategies.id"), nullable=True)  # Associated strategy
-    is_active = Column(Boolean, default=True)  # Soft delete flag
+    is_active = Column(Boolean, default=False)  # Bot running flag
     created_at = Column(DateTime, default=func.current_timestamp())
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
 

@@ -13,7 +13,7 @@ const showAlpacaPopup = ref(false)
 const emit = defineEmits(['navigate'])
 
 const handleBack = () => {
-  emit('navigate', 'welcome')
+  emit('navigate', 'accounts')
 }
 
 // Watch for account type changes
@@ -59,7 +59,8 @@ const handleAddAccount = async () => {
   try {
     const accountData = {
       account_id: accountName.value,
-      cash_balance: initialBalance.value
+      cash_balance: initialBalance.value,
+      is_active: false
     }
 
     // Add strategy_id if a strategy is selected
@@ -77,7 +78,7 @@ const handleAddAccount = async () => {
 
     if (response.ok) {
       // Navigate to welcome page with success state
-      emit('navigate', 'welcome', { 
+      emit('navigate', 'accounts', { 
         showSuccess: true, 
         successMessage: 'Account added successfully!' 
       })

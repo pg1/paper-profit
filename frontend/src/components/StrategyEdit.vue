@@ -18,6 +18,7 @@ const props = defineProps({
 
 const strategyId = ref('')
 const strategyName = ref('')
+const strategyCategory = ref('')
 const selectedStrategy = ref('')
 const stockListMode = ref('Manual')
 const stockList = ref('')
@@ -99,6 +100,7 @@ const fetchStrategy = async () => {
     
     const data = await response.json()
     strategyName.value = data.name
+    strategyCategory.value = data.category || ''
     selectedStrategy.value = data.strategy_type || ''
     stockListMode.value = data.stock_list_mode || 'Manual'
     stockList.value = data.stock_list || ''
@@ -175,6 +177,7 @@ const handleUpdateStrategy = async () => {
       },
       body: JSON.stringify({
         name: strategyName.value,
+        category: strategyCategory.value,
         strategy_type: selectedStrategy.value,
         stock_list_mode: stockListMode.value,
         stock_list: stockList.value,
@@ -234,6 +237,17 @@ onMounted(() => {
         >
       </div>
 
+      <div class="form-group">
+        <label for="strategy-category">Strategy Type</label>
+        <select 
+          id="strategy-category" 
+          v-model="strategyCategory"
+        >
+          <option value="Investing">Investing</option>
+          <option value="Trading">Trading</option>
+        </select>
+      </div>
+
       <!--<div class="form-group">
         <label for="stock-list-mode">Stock List Mode</label>
         <select 
@@ -250,7 +264,7 @@ onMounted(() => {
         <textarea 
           id="stock-list"
           v-model="stockList"
-          placeholder="Enter stock symbols separated by commas (e.g., AAPL, TSLA, MSFT)"
+          placeholder="Enter stock symbols separated by commas (e.g., AAPL, TSLA, MSFT)\n or use Screening/stock universe settings"
           rows="4"
         ></textarea>
       </div>
@@ -260,7 +274,8 @@ onMounted(() => {
         <textarea 
           id="stock-list-ai-prompt"
           v-model="stockListAiPrompt"
-          placeholder="Enter a prompt for AI to generate stock list (e.g., 'Find me tech stocks with strong growth potential')"
+           placeholder="Enter stock symbols separated by commas (e.g., AAPL, TSLA, MSFT) 
+or use Strategy Parameters: Screening > stock universe settings"          
           rows="4"
         ></textarea>
         <small class="form-help">AI will use this prompt to generate a stock list for your strategy.</small>
@@ -275,7 +290,7 @@ onMounted(() => {
           @change="onStrategySelect"
           :disabled="loadingStrategies"
         >
-          <option value="">Select a strategy</option>
+          <option value="">Custom strategy</option>
           <optgroup v-for="category in ['Long Term', 'Swing Trading', 'Day Trading', 'Greatest Investors', 'Options']" :key="category" :label="category">
             <option 
               v-for="strategy in strategies.filter(s => s.category === category)" 

@@ -17,7 +17,7 @@ const props = defineProps({
 })
 
 const handleBack = () => {
-  emit('navigate', 'welcome')
+  emit('navigate', 'accounts')
 }
 
 const fetchStrategies = async () => {
@@ -81,7 +81,7 @@ const handleUpdateAccount = async () => {
 
     if (response.ok) {
       // Navigate to welcome page with success state
-      emit('navigate', 'welcome', { 
+      emit('navigate', 'accounts', { 
         showSuccess: true, 
         successMessage: 'Account updated successfully!' 
       })
@@ -91,6 +91,39 @@ const handleUpdateAccount = async () => {
   } catch (error) {
     console.error('Error updating account:', error)
     alert('Failed to update account. Please try again.')
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const handleDeleteAccount = async () => {
+  if (!confirm('Are you sure you want to delete this account? This action cannot be undone.')) {
+    return
+  }
+
+  isLoading.value = true
+
+  try {
+    const accountId = props.navigationParams.accountId
+    
+    
+      // If PUT fails, try a DELETE request as fallback
+      const deleteResponse = await fetch(`http://localhost:5000/api/accounts/${accountId}`, {
+        method: 'DELETE'
+      })
+      
+      if (deleteResponse.ok) {
+        emit('navigate', 'accounts', { 
+          showSuccess: true, 
+          successMessage: 'Account deleted successfully!' 
+        })
+      } else {
+        throw new Error('Failed to delete account')
+      }
+    
+  } catch (error) {
+    console.error('Error deleting account:', error)
+    alert('Failed to delete account. Please try again.')
   } finally {
     isLoading.value = false
   }
@@ -158,9 +191,19 @@ onMounted(() => {
         >
           {{ isLoading ? 'Updating...' : 'Update Account' }}
         </button>
+       
       </div>
     </div>
+    
+    <button 
+          class="btn-delete" 
+          @click="handleDeleteAccount"
+          :disabled="isLoading"
+        >
+          {{ isLoading ? 'Deleting...' : 'Delete Account' }}
+        </button>
   </section>
+
 </template>
 
 <style scoped>
@@ -269,8 +312,22 @@ onMounted(() => {
 }
 
 .form-actions {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 2rem;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -278,6 +335,29 @@ onMounted(() => {
 }
 
 .btn-primary:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  margin-top: 40px;
+  float:right;
+}
+
+.btn-delete:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.btn-delete:disabled {
   background: #6c757d;
   cursor: not-allowed;
 }

@@ -228,6 +228,37 @@ async def update_account(account_id: str, account_data: Dict[str, Any], db: Sess
         )
 
 
+@app.delete("/api/accounts/{account_id}")
+async def delete_account(account_id: str, db: Session = Depends(get_db)):
+    """Delete an account and all related data"""
+    try:
+        account_service = AccountService(db)
+        success = account_service.delete_account(account_id)
+        
+        if not success:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Account with ID {account_id} not found"
+            )
+        
+        return {
+            "message": f"Account {account_id} deleted successfully",
+            "details": "All related data (orders, positions, trades, account summaries) were deleted. System logs were preserved with account_id set to NULL."
+        }
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to delete account: {str(e)}"
+        )
+
+
 @app.get("/api/accounts/{account_id}/summary", response_model=Dict[str, Any])
 async def get_account_summary(account_id: str, db: Session = Depends(get_db)):
     """Get account summary including positions and performance"""

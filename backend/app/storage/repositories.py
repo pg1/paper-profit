@@ -362,6 +362,42 @@ class AccountRepository:
             self.db.commit()
             self.db.refresh(account)
         return account
+    
+    def delete(self, account_id: str) -> bool:
+        """Delete account and all related data"""
+        account = self.get_by_id(account_id)
+        if not account:
+            return False
+        
+        try:
+            # Start a transaction
+            # Delete related records in the correct order
+            # 1. Delete orders for this account
+            self.db.query(Order).filter(Order.account_id == account_id).delete()
+            
+            # 2. Delete positions for this account
+            self.db.query(Position).filter(Position.account_id == account_id).delete()
+            
+            # 3. Delete trades for this account
+            self.db.query(Trade).filter(Trade.account_id == account_id).delete()
+            
+            # 4. Delete account summaries for this account
+            self.db.query(AccountSummary).filter(AccountSummary.account_id == account_id).delete()
+            
+            # 5. Update system logs to remove account reference (set to NULL for audit purposes)
+            self.db.query(SystemLog).filter(SystemLog.account_id == account_id).update({SystemLog.account_id: None})
+            
+            # 6. Finally, delete the account itself
+            self.db.delete(account)
+            
+            # Commit the transaction
+            self.db.commit()
+            return True
+            
+        except Exception as e:
+            # Rollback on error
+            self.db.rollback()
+            raise e
 
 
 class StrategyRepository:

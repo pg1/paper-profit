@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import Header from './components/Header.vue'
-import WelcomePage from './components/WelcomePage.vue'
 import AccountAdd from './components/AccountAdd.vue'
 import AccountList from './components/AccountList.vue'
 import Portfolio from './components/Portfolio.vue'
@@ -34,19 +33,14 @@ const handleNavigation = (page, params = {}) => {
     <Header @navigate="handleNavigation" />
 
     <main class="container">
-        <WelcomePage 
-          v-if="currentPage === 'welcome'" 
+        <AccountList 
+          v-if="currentPage === 'accounts'" 
           @navigate="handleNavigation"
           :navigation-params="navigationParams"
         />
         <AccountAdd 
           v-else-if="currentPage === 'account-add'" 
           @navigate="handleNavigation"
-        />
-        <AccountList 
-          v-else-if="currentPage === 'account-list'" 
-          @navigate="handleNavigation"
-          :navigation-params="navigationParams"
         />
         <AccountEdit 
           v-else-if="currentPage === 'account-edit'" 

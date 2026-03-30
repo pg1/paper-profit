@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const emit = defineEmits(['navigate'])
 
-const currentPage = ref('welcome')
+const currentPage = ref('accounts')
 const accounts = ref([])
 const isLoading = ref(false)
 const showPortfolioDropdown = ref(false)
@@ -12,7 +12,7 @@ const portfolioDropdownRef = ref(null)
 const navigationItems = [
   { id: 'learning', label: 'Learning' },
   { id: 'list', label: 'List' },
-  { id: 'welcome', label: 'Accounts' },
+  { id: 'accounts', label: 'Accounts' },
  // { id: 'portfolio', label: 'Portfolio' },
   { id: 'trade', label: 'Trade' },
   { id: 'strategy-list', label: 'Strategies' }

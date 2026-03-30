@@ -423,3 +423,35 @@ class AccountService:
         if volatility == 0:
             return 0.0
         return (daily_return * 252) / (volatility * 16)  # Annualized Sharpe ratio
+    
+    def delete_account(self, account_id: str) -> bool:
+        """Delete an account and all related data"""
+        # Validate account exists
+        account = self.repository.get_by_id(account_id)
+        if not account:
+            raise ValueError(f"Account with ID {account_id} not found")
+        
+        try:
+            # Delete the account using repository
+            success = self.repository.delete(account_id)
+            
+            if success:
+                # Log successful account deletion
+                log_service = LogService(self.db)
+                log_service.log_info(
+                    module="AccountService",
+                    message=f"Account deleted successfully: {account_id}",
+                    details=f"Account {account_id} and all related data (orders, positions, trades, summaries) were deleted. System logs were preserved with account_id set to NULL."
+                )
+            
+            return success
+            
+        except Exception as e:
+            # Log error
+            log_service = LogService(self.db)
+            log_service.log_error(
+                module="AccountService",
+                message=f"Failed to delete account: {account_id}",
+                details=f"Error: {str(e)}"
+            )
+            raise ValueError(f"Failed to delete account {account_id}: {str(e)}")
