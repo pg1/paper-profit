@@ -10,7 +10,7 @@ export const strategyParameters = {
     description: 'Strategy category that drives signal logic',
     typical_values: 'swing, long_term, day_trading, mean_reversion, famous_investors',
     values: ['swing', 'long_term', 'day_trading', 'mean_reversion', 'famous_investors'],
-    group: 'strategy'
+    group: 'configuration'
   },
   diversification_mode: {
     type: 'string',
@@ -31,31 +31,32 @@ export const strategyParameters = {
     description: 'Enhance signals with AI sentiment/news',
     typical_values: 'true/false',
     values: [true, false],
-    group: 'strategy'
+    group: 'configuration'
   },
   run_frequency_minutes: {
     type: 'integer',
     description: 'How often the bot runs (in minutes) during market hours',
     typical_values: '5',
-    group: 'strategy'
+    group: 'configuration'
   },
   signal_min_confidence: {
     type: 'number',
     description: 'Minimum confidence (0–1) required to act on a signal',
     typical_values: '0.6',
-    group: 'strategy'
+    group: 'configuration'
   },
   conviction_score_minimum: {
     type: 'integer',
     description: 'Minimum conviction score for a trade (0–100)',
     typical_values: '75',
-    group: 'strategy'
+    group: 'configuration'
   },
   narrative_match_required: {
     type: 'boolean',
     description: 'Require growth narrative match (for famous investors)',
     typical_values: 'true/false',
-    group: 'strategy'
+    values: [true, false],
+    group: 'configuration'
   },
 
   // ==================== FUNDAMENTAL ====================
@@ -69,6 +70,7 @@ export const strategyParameters = {
     type: 'boolean',
     description: 'Sell if fundamentals deteriorate significantly',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'fundamental'
   },
   min_dividend_growth_rate: {
@@ -93,6 +95,7 @@ export const strategyParameters = {
     type: 'boolean',
     description: 'Automatically reinvest dividends',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'execution'
   },
   max_pe: {
@@ -247,18 +250,21 @@ export const strategyParameters = {
     type: 'boolean',
     description: 'Halt BUY orders when drawdown limit is exceeded',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'risk'
   },
   enable_stop_loss: {
     type: 'boolean',
     description: 'Master switch for stop loss logic',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'risk'
   },
   enable_take_profit: {
     type: 'boolean',
     description: 'Master switch for take profit logic',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'risk'
   },
   required_margin_of_safety_percent: {
@@ -353,6 +359,7 @@ export const strategyParameters = {
     type: 'boolean',
     description: 'Use fundamental metrics in screening (PE, yield, etc.)',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'screening'
   },
   min_volume: {
@@ -379,6 +386,7 @@ export const strategyParameters = {
     type: 'boolean',
     description: 'Round to whole shares',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'execution'
   },
   rebalance_threshold: {
@@ -411,6 +419,7 @@ export const strategyParameters = {
     type: 'boolean',
     description: 'Require high underlying quality (moat, balance sheet)',
     typical_values: 'true/false',
+    values: [true, false],
     group: 'fundamental'
   },
   preferred_industry_moat: {
@@ -458,7 +467,7 @@ export function getAllGroups() {
   });
   
   // Define the desired order
-  const desiredOrder = ['screening', 'strategy', 'technical', 'fundamental', 'portfolio', 'risk', 'execution'];
+  const desiredOrder = ['screening', 'configuration', 'technical', 'fundamental', 'portfolio', 'risk', 'execution'];
   
   // Filter and sort groups according to desired order
   const orderedGroups = desiredOrder.filter(group => groups.has(group));
@@ -477,6 +486,58 @@ export function createEmptyParameters() {
   Object.entries(strategyParameters).forEach(([key, config]) => {
     params[key] = getDefaultValueForType(config.type);
   });
+  
+  // Add entry conditions array for multiple conditions
+  params.entryConditions = [
+    {
+      id: 1,
+      indicator: 'RSI',
+      period: 14,
+      op: '>',
+      value: '30',
+      logic: 'AND'
+    }
+  ];
+  
+  // Keep existing strategy structure for exit, stopLoss, takeProfit
+  params.strategy = [
+    {
+      type: 'exit',
+      parameters: {
+        indicator: 'RSI',
+        operator: '<',
+        value: ''
+      }
+    },
+    {
+      type: 'stopLoss',
+      parameters: {
+        lossType: 'percent',
+        value: ''
+      }
+    },
+    {
+      type: 'takeProfit',
+      parameters: {
+        profitType: 'percent',
+        value: ''
+      }
+    }
+  ];
+  
+  params.signalMapping = {
+    buyTrigger: '',
+    sellTrigger: '',
+    stopLoss: {
+      lossType: 'percent',
+      value: ''
+    },
+    takeProfit: {
+      profitType: 'percent',
+      value: ''
+    }
+  };
+  
   return params;
 }
 
@@ -484,7 +545,46 @@ export function createEmptyParameters() {
  * Convert parameters object to JSON string
  */
 export function parametersToJson(parameters) {
-  return JSON.stringify(parameters, null, 2);
+  // Auto-generate signal mapping before converting to JSON
+  const paramsWithGeneratedMapping = { ...parameters };
+  
+  // Generate buy trigger from entry conditions
+  if (paramsWithGeneratedMapping.entryConditions && Array.isArray(paramsWithGeneratedMapping.entryConditions)) {
+    paramsWithGeneratedMapping.signalMapping = paramsWithGeneratedMapping.signalMapping || {};
+    
+    // Create a readable summary of entry conditions
+    const conditionStrings = paramsWithGeneratedMapping.entryConditions.map((cond, idx) => {
+      const periodStr = cond.period ? `(${cond.period})` : '';
+      const logicStr = idx < paramsWithGeneratedMapping.entryConditions.length - 1 ? ` ${cond.logic} ` : '';
+      return `${cond.indicator}${periodStr} ${cond.op} ${cond.value}${logicStr}`;
+    }).join('');
+    
+    paramsWithGeneratedMapping.signalMapping.buyTrigger = conditionStrings || '';
+  }
+  
+  if (paramsWithGeneratedMapping.strategy && Array.isArray(paramsWithGeneratedMapping.strategy)) {
+    const exitRule = paramsWithGeneratedMapping.strategy.find(s => s.type === 'exit');
+    const stopLossRule = paramsWithGeneratedMapping.strategy.find(s => s.type === 'stopLoss');
+    const takeProfitRule = paramsWithGeneratedMapping.strategy.find(s => s.type === 'takeProfit');
+    
+    if (exitRule && exitRule.parameters) {
+      paramsWithGeneratedMapping.signalMapping = paramsWithGeneratedMapping.signalMapping || {};
+      paramsWithGeneratedMapping.signalMapping.sellTrigger = 
+        `${exitRule.parameters.indicator} ${exitRule.parameters.operator} ${exitRule.parameters.value}`;
+    }
+    
+    if (stopLossRule && stopLossRule.parameters) {
+      paramsWithGeneratedMapping.signalMapping = paramsWithGeneratedMapping.signalMapping || {};
+      paramsWithGeneratedMapping.signalMapping.stopLoss = { ...stopLossRule.parameters };
+    }
+    
+    if (takeProfitRule && takeProfitRule.parameters) {
+      paramsWithGeneratedMapping.signalMapping = paramsWithGeneratedMapping.signalMapping || {};
+      paramsWithGeneratedMapping.signalMapping.takeProfit = { ...takeProfitRule.parameters };
+    }
+  }
+  
+  return JSON.stringify(paramsWithGeneratedMapping, null, 2);
 }
 
 /**
@@ -496,13 +596,32 @@ export function jsonToParameters(jsonString) {
       return createEmptyParameters();
     }
     const parsed = JSON.parse(jsonString);
+    
     // Ensure all expected parameters exist
     const result = createEmptyParameters();
+    
+    // Copy flat parameters
     Object.keys(result).forEach(key => {
-      if (parsed[key] !== undefined) {
+      if (parsed[key] !== undefined && key !== 'strategy' && key !== 'signalMapping' && key !== 'entryConditions') {
         result[key] = parsed[key];
       }
     });
+    
+    // Copy entry conditions if they exist
+    if (parsed.entryConditions && Array.isArray(parsed.entryConditions)) {
+      result.entryConditions = parsed.entryConditions;
+    }
+    
+    // Copy nested strategy structure if it exists
+    if (parsed.strategy && Array.isArray(parsed.strategy)) {
+      result.strategy = parsed.strategy;
+    }
+    
+    // Copy signal mapping if it exists
+    if (parsed.signalMapping && typeof parsed.signalMapping === 'object') {
+      result.signalMapping = parsed.signalMapping;
+    }
+    
     return result;
   } catch (error) {
     console.error('Error parsing JSON parameters:', error);

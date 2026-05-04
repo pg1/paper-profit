@@ -1,5 +1,6 @@
+import math
 import logging
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from typing import Dict, Any
 from sqlalchemy.orm import Session
 
@@ -16,13 +17,58 @@ class RiskManager:
         self.db = db
         self.repo_factory = repo_factory
     
+    def _safe_decimal(self, value: Any, default: Decimal = Decimal('0')) -> Decimal:
+        """Safely convert a value to Decimal, handling NaN, Infinity, empty strings, and invalid values.
+        
+        Args:
+            value: The value to convert (float, str, Decimal, etc.)
+            default: The default Decimal to return if conversion fails
+            
+        Returns:
+            A valid Decimal, or the default value if conversion fails
+        """
+        try:
+            # Handle None
+            if value is None:
+                return default
+            
+            # Handle NaN, Infinity, -Infinity (float or string representations)
+            if isinstance(value, float):
+                if math.isnan(value) or math.isinf(value):
+                    logger.warning(f"Invalid numeric value encountered: {value}, using default {default}")
+                    return default
+            
+            # Convert to string and check for empty/invalid string representations
+            str_value = str(value).strip().lower()
+            if not str_value:
+                logger.warning(f"Empty value encountered, using default {default}")
+                return default
+            if str_value in ('nan', 'inf', 'infinity', '-nan', '-inf', '-infinity', 'snan'):
+                logger.warning(f"Invalid numeric string encountered: '{value}', using default {default}")
+                return default
+            
+            return Decimal(str_value)
+        except (InvalidOperation, ValueError, TypeError) as e:
+            logger.warning(f"Could not convert '{value}' to Decimal: {e}, using default {default}")
+            return default
+    
     def calculate_position_size(self, account: Account, price: float, 
                                strategy_params: Dict[str, Any]) -> float:
         """Calculate position size based on risk management rules"""
 
         # Calculate maximum position value (use Decimal for precision)
-        max_position_pct = Decimal(str(strategy_params.get('max_position_pct', 10.0)))
-        price_decimal = Decimal(str(price))
+        # Default to 20% if max_position_pct is empty or not set
+        raw_max_pct = strategy_params.get('max_position_pct', '')
+        if raw_max_pct == '' or raw_max_pct is None:
+            raw_max_pct = 20.0
+        max_position_pct = self._safe_decimal(raw_max_pct)
+        price_decimal = self._safe_decimal(price)
+        
+        # If price is invalid (zero or default), return 0
+        if price_decimal <= Decimal('0'):
+            logger.warning(f"Invalid price ({price}) for position sizing, returning 0")
+            return 0
+        
         max_position_value = (account.cash_balance * max_position_pct) / Decimal('100')
         
         # Calculate number of shares

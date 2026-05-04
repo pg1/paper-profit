@@ -386,6 +386,9 @@ class DataCollector:
         
         Checks database freshness using refresh_rate from quantitative_data.yaml 
         before recalculating indicators.
+        
+        Note: Prefer get_technical_indicators_for_strategy() which only fetches
+        the indicators actually needed by the strategy.
         """
         try:
             # Get instrument symbol
@@ -453,6 +456,99 @@ class DataCollector:
             logger.error(f"Error getting technical indicators for symbol_id {symbol_id}: {str(e)}")
         
         return {}
+    
+    def get_technical_indicators_for_strategy(self, symbol_id: int, required_indicators: List[str]) -> Dict[str, Any]:
+        """Get only the technical indicators needed by a specific strategy.
+        
+        Args:
+            symbol_id: The instrument ID
+            required_indicators: List of indicator names needed (e.g. ['rsi', 'sma_20', 'sma_50'])
+            
+        Returns:
+            Dict of indicator_name -> value for the requested indicators
+        """
+        if not required_indicators:
+            return {}
+        
+        try:
+            instrument = self.repo_factory.instruments.get_by_id(symbol_id)
+            if not instrument:
+                return {}
+            
+            symbol = instrument.symbol
+            result = {}
+            
+            # Map common indicator names to their YAML config metric names
+            indicator_to_yaml = {
+                'rsi': 'technical.momentum.rsi',
+                'sma_20': 'technical.trend.sma_20',
+                'sma_50': 'technical.trend.sma_50',
+                'sma_200': 'technical.trend.sma_200',
+                'ema_12': 'technical.trend.ema_12',
+                'ema_26': 'technical.trend.ema_26',
+                'macd': 'technical.oscillators.macd',
+                'macd_signal': 'technical.oscillators.macd_signal',
+                'macd_histogram': 'technical.oscillators.macd_histogram',
+                'bb_upper': 'technical.volatility.bb_upper',
+                'bb_middle': 'technical.volatility.bb_middle',
+                'bb_lower': 'technical.volatility.bb_lower',
+                'volume_ratio': 'technical.volume.volume_ratio',
+                'price_trend': 'technical.trend.price_trend',
+                'current_price': 'market.pricing.last_price',
+            }
+            
+            config = self._load_quantitative_config()
+            needs_fresh_calc = False
+            indicators_to_calc = set()
+            
+            # Check cache first for each required indicator
+            for indicator in required_indicators:
+                yaml_name = indicator_to_yaml.get(indicator)
+                if yaml_name and config and yaml_name in config:
+                    refresh_rate = config[yaml_name].get('refresh_rate', 1)
+                    if not self._check_needs_refresh(symbol_id, yaml_name, refresh_rate):
+                        # Use cached value
+                        latest = self.repo_factory.quantitative_data.get_latest(
+                            symbol_id, meta=yaml_name, limit=1
+                        )
+                        if latest:
+                            try:
+                                result[indicator] = float(latest[0].value)
+                                continue
+                            except (ValueError, TypeError):
+                                result[indicator] = latest[0].value
+                                continue
+                
+                # Not cached or not in config — need to calculate
+                needs_fresh_calc = True
+                indicators_to_calc.add(indicator)
+            
+            # If we need fresh data, calculate only what's needed
+            if needs_fresh_calc and indicators_to_calc:
+                logger.debug(f"Calculating fresh indicators for {symbol}: {indicators_to_calc}")
+                
+                # Get all technical indicators (the underlying functions batch-calculate anyway)
+                all_indicators = self.technical_functions.get_all_technical_indicators(symbol)
+                
+                # Extract only what we need
+                for indicator in indicators_to_calc:
+                    if indicator in all_indicators:
+                        result[indicator] = all_indicators[indicator]
+                    elif indicator == 'current_price':
+                        price = self.technical_functions.get_current_price(symbol)
+                        if price is not None:
+                            result[indicator] = price
+                    elif indicator == 'price_trend':
+                        trend = self.technical_functions.get_price_trend(symbol)
+                        if trend is not None:
+                            result[indicator] = trend
+            
+            logger.debug(f"Returning {len(result)} strategy-specific indicators for {symbol}: {list(result.keys())}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"Error getting strategy-specific indicators for symbol_id {symbol_id}: {str(e)}")
+            return {}
     
     def get_fundamental_data(self, symbol: str) -> Dict[str, Any]:
         """Get fundamental data for a symbol.

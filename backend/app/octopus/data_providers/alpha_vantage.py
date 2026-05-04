@@ -20,9 +20,24 @@ class AlphaVantageService:
         self.db = db_session
         self.repo = RepositoryFactory(db_session)
         self.api_key = self._get_api_key_from_settings()
-        #logger.info(f"Alpha Vantage API key loaded: {'***' + self.api_key[-4:] if self.api_key != 'demo' else 'demo key'}")
-        self.ts = TimeSeries(key=self.api_key, output_format='pandas')
-        self.fd = FundamentalData(key=self.api_key, output_format='pandas')
+        self.available = False
+        
+        # Only initialize Alpha Vantage clients if a valid API key is available
+        if self.api_key:
+            try:
+                self.ts = TimeSeries(key=self.api_key, output_format='pandas')
+                self.fd = FundamentalData(key=self.api_key, output_format='pandas')
+                self.available = True
+                logger.info("Alpha Vantage service initialized successfully")
+            except Exception as e:
+                logger.warning(f"Failed to initialize Alpha Vantage clients: {e}")
+                self.ts = None
+                self.fd = None
+        else:
+            #logger.warning("No Alpha Vantage API key found. Alpha Vantage service will be unavailable.")
+            self.ts = None
+            self.fd = None
+
     
     def _get_api_key_from_settings(self):
         """Get Alpha Vantage API key from settings table"""
@@ -35,7 +50,7 @@ class AlphaVantageService:
                 #logger.info(f"Loaded Alpha Vantage API key from settings table")
                 return api_key
             else:
-                logger.warning("Alpha_vantage setting not found in database, using demo key")
+                #logger.warning("Alpha_vantage setting not found in database, using demo key")
                 return None
         except Exception as e:
             logger.error(f"Error loading Alpha Vantage API key from settings: {e}")
@@ -43,9 +58,13 @@ class AlphaVantageService:
     
     def fetch_stock_info(self, symbol):
         """Fetch basic stock information using Alpha Vantage"""
+        if not self.available:
+            logger.debug(f"Alpha Vantage not available, skipping fetch_stock_info for {symbol}")
+            return None
         try:
             # Get company overview
             overview, _ = self.fd.get_company_overview(symbol=symbol)
+
             
             if overview is None or overview.empty:
                 logger.warning(f"No company overview data available for {symbol}")
@@ -73,6 +92,9 @@ class AlphaVantageService:
     
     def fetch_current_price(self, symbol):
         """Fetch current stock price using Alpha Vantage"""
+        if not self.available:
+            logger.debug(f"Alpha Vantage not available, skipping fetch_current_price for {symbol}")
+            return None
         try:
             # Try to get real-time quote
             quote, _ = self.ts.get_quote_endpoint(symbol=symbol)
@@ -124,6 +146,9 @@ class AlphaVantageService:
     
     def fetch_historical_data(self, symbol, period="1mo"):
         """Fetch historical stock data for a given period using Alpha Vantage"""
+        if not self.available:
+            logger.debug(f"Alpha Vantage not available, skipping fetch_historical_data for {symbol}")
+            return []
         try:
             # Map period to Alpha Vantage output size
             output_size_map = {
@@ -262,6 +287,9 @@ class AlphaVantageService:
     
     def get_stock_analysis(self, symbol):
         """Get technical analysis for a stock using Alpha Vantage"""
+        if not self.available:
+            logger.debug(f"Alpha Vantage not available, skipping get_stock_analysis for {symbol}")
+            return None
         try:
             # Get historical data for analysis
             data, _ = self.ts.get_daily(symbol=symbol, outputsize='full')
@@ -292,6 +320,9 @@ class AlphaVantageService:
     
     def get_intraday_data(self, symbol, interval='5min'):
         """Get intraday stock data"""
+        if not self.available:
+            logger.debug(f"Alpha Vantage not available, skipping get_intraday_data for {symbol}")
+            return []
         try:
             data, _ = self.ts.get_intraday(symbol=symbol, interval=interval, outputsize='compact')
             
@@ -316,6 +347,9 @@ class AlphaVantageService:
     
     def get_technical_indicators(self, symbol):
         """Get technical indicators like RSI, MACD, etc."""
+        if not self.available:
+            logger.debug(f"Alpha Vantage not available, skipping get_technical_indicators for {symbol}")
+            return None
         try:
             # Note: This would require additional Alpha Vantage functions
             # For now, return basic indicators calculated from price data

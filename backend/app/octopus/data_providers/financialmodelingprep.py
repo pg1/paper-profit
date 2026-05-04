@@ -33,7 +33,7 @@ class FinancialModelingPrepService:
                 #logger.info(f"Loaded Financial Modeling Prep API key from settings table")
                 return api_key
             else:
-                logger.warning("Financial_modeling_prep setting not found in database, using demo key")
+                #logger.warning("Financial_modeling_prep setting not found in database, using demo key")
                 return 'demo'
         except Exception as e:
             logger.error(f"Error loading Financial Modeling Prep API key from settings: {e}")
