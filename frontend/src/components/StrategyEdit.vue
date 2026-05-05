@@ -53,6 +53,7 @@ const INDICATORS = [
   { id: 'ATR', label: 'ATR', hasPeriod: true, defaultPeriod: 14, valueType: 'number', valuePlaceholder: '2' },
   { id: 'VOLUME', label: 'Volume', hasPeriod: false, valueType: 'multiplier', valuePlaceholder: '1.5x avg' },
   { id: 'CLOSE', label: 'Close price', hasPeriod: false, valueType: 'price', valuePlaceholder: '100' },
+  { id: 'VWAP', label: 'VWAP', hasPeriod: false, valueType: 'price', valuePlaceholder: 'price' },
 ]
 
 const OPS_NUMBER = ['>', '<', '>=', '<=', '=', 'crosses_above', 'crosses_below']
@@ -65,7 +66,10 @@ const addCondition = () => {
     indicator: 'RSI',
     period: 14,
     op: '>',
+    compareType: 'value',
     value: '30',
+    compareIndicator: 'SMA',
+    comparePeriod: 50,
     logic: 'AND'
   })
 }
@@ -121,7 +125,13 @@ const conditionsPreview = computed(() => {
   return parameters.value.entryConditions.map((cond, idx) => {
     const meta = getIndicatorMeta(cond.indicator)
     const label = meta.hasPeriod && cond.period ? `${cond.indicator}(${cond.period})` : cond.indicator
-    const valDisplay = cond.value !== undefined && cond.value !== '' ? cond.value : '?'
+    let valDisplay
+    if (cond.compareType === 'indicator' && cond.compareIndicator) {
+      const cmpMeta = getIndicatorMeta(cond.compareIndicator)
+      valDisplay = cmpMeta.hasPeriod && cond.comparePeriod ? `${cond.compareIndicator}(${cond.comparePeriod})` : cond.compareIndicator
+    } else {
+      valDisplay = cond.value !== undefined && cond.value !== '' ? cond.value : '?'
+    }
     let parts = `<span class="tag tag-indicator">${label}</span> <span class="tag tag-op">${cond.op}</span> <span class="tag tag-val">${valDisplay}</span>`
     if (idx < parameters.value.entryConditions.length - 1) {
       parts += ` <span class="tag tag-logic">${parameters.value.entryConditions[idx + 1].logic}</span>`
@@ -194,8 +204,8 @@ const onStrategySelect = () => {
     // Auto-fill the form with strategy details
     //strategyName.value = strategy.strategy
     
-    // Set default parameters from YAML configuration
-    const defaultParams = strategy.parameters || {}
+    // Set default parameters from YAML configuration (prefer parameter_settings, fall back to parameters)
+    const defaultParams = strategy.parameter_settings || strategy.parameters || {}
     // Convert default params to our structured format
     const structuredParams = createEmptyParameters()
     Object.keys(defaultParams).forEach(key => {
@@ -346,6 +356,18 @@ onMounted(() => {
         <p>Modify your trading strategy</p>
       </div>
       <button class="btn-secondary" @click="handleBack">← Back</button>
+    </div>
+
+    <!-- Signal Mapping Summary -->
+    <div class="signal-mapping-summary">
+      <span class="signal-mapping-label">Signal Mapping:</span>
+      <span class="signal-mapping-item">Entry: <strong>{{ parameters.signalMapping?.buyTrigger || 'Not set' }}</strong></span>
+      <span class="signal-mapping-separator">|</span>
+      <span class="signal-mapping-item">Exit: <strong>{{ parameters.signalMapping?.sellTrigger || 'Not set' }}</strong></span>
+      <span class="signal-mapping-separator">|</span>
+      <span class="signal-mapping-item">SL: <strong>{{ parameters.signalMapping?.stopLoss?.value ? (parameters.signalMapping.stopLoss.lossType + ' ' + parameters.signalMapping.stopLoss.value) : 'Not set' }}</strong></span>
+      <span class="signal-mapping-separator">|</span>
+      <span class="signal-mapping-item">TP: <strong>{{ parameters.signalMapping?.takeProfit?.value ? (parameters.signalMapping.takeProfit.profitType + ' ' + parameters.signalMapping.takeProfit.value) : 'Not set' }}</strong></span>
     </div>
 
     <div v-if="isLoading" class="loading-state">
@@ -528,28 +550,62 @@ onMounted(() => {
                     </select>
                   </div>
                   
-                  <!-- Value input -->
+                  <!-- Compare type toggle + value/indicator input -->
                   <div class="form-group compact">
-                    <label class="field-label">Value</label>
-                    <template v-if="getIndicatorMeta(condition.indicator).valueType === 'select'">
-                      <select 
-                        class="value-select"
-                        :value="condition.value"
-                        @change="updateConditionField(condition.id, 'value', $event.target.value)"
-                      >
-                        <option v-for="opt in getIndicatorMeta(condition.indicator).options" :key="opt" :value="opt">
-                          {{ opt.replace(/_/g, ' ') }}
-                        </option>
-                      </select>
+                    <label class="field-label">
+                      Compare
+                      <button
+                        type="button"
+                        class="compare-type-toggle"
+                        :class="{ active: condition.compareType === 'indicator' }"
+                        @click="updateConditionField(condition.id, 'compareType', condition.compareType === 'indicator' ? 'value' : 'indicator')"
+                        title="Toggle between static value and indicator comparison"
+                      >{{ condition.compareType === 'indicator' ? 'vs Indicator' : 'vs Value' }}</button>
+                    </label>
+                    <!-- Compare against a static value -->
+                    <template v-if="condition.compareType !== 'indicator'">
+                      <template v-if="getIndicatorMeta(condition.indicator).valueType === 'select'">
+                        <select
+                          class="value-select"
+                          :value="condition.value"
+                          @change="updateConditionField(condition.id, 'value', $event.target.value)"
+                        >
+                          <option v-for="opt in getIndicatorMeta(condition.indicator).options" :key="opt" :value="opt">
+                            {{ opt.replace(/_/g, ' ') }}
+                          </option>
+                        </select>
+                      </template>
+                      <template v-else>
+                        <input
+                          type="number"
+                          class="value-input"
+                          :value="condition.value"
+                          @change="updateConditionField(condition.id, 'value', $event.target.value)"
+                          :placeholder="getIndicatorMeta(condition.indicator).valuePlaceholder"
+                        >
+                      </template>
                     </template>
+                    <!-- Compare against another indicator -->
                     <template v-else>
-                      <input
-                        type="number"
-                        class="value-input"
-                        :value="condition.value"
-                        @change="updateConditionField(condition.id, 'value', $event.target.value)"
-                        :placeholder="getIndicatorMeta(condition.indicator).valuePlaceholder"
-                      >
+                      <div class="indicator-compare-row">
+                        <select
+                          class="indicator-select"
+                          :value="condition.compareIndicator"
+                          @change="updateConditionField(condition.id, 'compareIndicator', $event.target.value)"
+                        >
+                          <option v-for="ind in INDICATORS" :key="ind.id" :value="ind.id">{{ ind.label }}</option>
+                        </select>
+                        <input
+                          v-if="getIndicatorMeta(condition.compareIndicator || 'RSI').hasPeriod"
+                          type="number"
+                          class="period-input"
+                          :value="condition.comparePeriod"
+                          @change="updateConditionField(condition.id, 'comparePeriod', $event.target.value)"
+                          min="1"
+                          max="200"
+                          placeholder="period"
+                        >
+                      </div>
                     </template>
                   </div>
                   
@@ -685,6 +741,25 @@ onMounted(() => {
                 </small>
                 <small class="form-help" v-else>
                   Fixed amount gain from entry price
+                </small>
+              </div>
+            </div>
+
+            <!-- Trailing Stop -->
+            <div class="strategy-rule-group">
+              <h4>Trailing Stop</h4>
+              <div class="form-group">
+                <label for="trailing-stop-pct">Trail %</label>
+                <input
+                  id="trailing-stop-pct"
+                  v-model="parameters.trailing_stop_pct"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  placeholder="e.g. 5 (0 = disabled)"
+                >
+                <small class="form-help">
+                  Sell if price drops this % below its highest point since entry. Leave blank or 0 to disable.
                 </small>
               </div>
             </div>
@@ -924,6 +999,39 @@ optgroup {
 optgroup option {
   font-weight: normal;
   padding-left: 1rem;
+}
+
+/* Signal Mapping Summary styles */
+.signal-mapping-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: #f0f7ff;
+  border: 1px solid #cce5ff;
+  border-radius: 4px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.signal-mapping-label {
+  font-weight: 600;
+  color: #495057;
+  margin-right: 0.25rem;
+}
+
+.signal-mapping-item {
+  color: #333;
+}
+
+.signal-mapping-item strong {
+  color: #0056b3;
+}
+
+.signal-mapping-separator {
+  color: #adb5bd;
+  font-weight: 300;
 }
 
 .loading-state {
@@ -1237,7 +1345,36 @@ optgroup option {
   font-weight: 500;
   color: #495057;
   margin-bottom: 0.25rem;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.compare-type-toggle {
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  border-radius: 3px;
+  border: 1px solid #adb5bd;
+  background: #f8f9fa;
+  color: #495057;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.compare-type-toggle.active {
+  background: #e8f4fd;
+  border-color: #4a90d9;
+  color: #1a6fb8;
+}
+
+.indicator-compare-row {
+  display: flex;
+  gap: 4px;
+}
+.indicator-compare-row .indicator-select {
+  flex: 1;
+}
+.indicator-compare-row .period-input {
+  width: 60px;
 }
 
 .indicator-select,

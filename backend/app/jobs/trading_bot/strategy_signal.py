@@ -875,10 +875,26 @@ class StrategySignal:
             return False
         
         try:
-            # Convert values to float for comparison
             indicator_float = float(indicator_value)
-            value_float = float(value)
-            
+
+            # Support indicator-vs-indicator comparisons (compareType: 'indicator')
+            compare_type = condition.get('compareType', 'value')
+            if compare_type == 'indicator':
+                compare_indicator = condition.get('compareIndicator', '').upper()
+                compare_period = condition.get('comparePeriod')
+                compare_key = compare_indicator.lower()
+                if compare_period and compare_indicator in ['RSI', 'EMA', 'SMA', 'BB_UPPER', 'BB_LOWER', 'STOCH', 'ATR']:
+                    compare_key = f"{compare_indicator.lower()}_{compare_period}"
+                compare_value = market_data.get(compare_key)
+                if compare_value is None:
+                    compare_value = market_data.get(compare_indicator.lower())
+                if compare_value is None:
+                    logger.debug(f"Compare indicator {compare_indicator} not found in market data")
+                    return False
+                value_float = float(compare_value)
+            else:
+                value_float = float(value)
+
             # Apply operator
             if op == '>':
                 return indicator_float > value_float
@@ -889,17 +905,15 @@ class StrategySignal:
             elif op == '<=':
                 return indicator_float <= value_float
             elif op == '=':
-                return abs(indicator_float - value_float) < 0.001  # Small tolerance for equality
+                return abs(indicator_float - value_float) < 0.001
             elif op == 'crosses_above':
-                # Simplified: current > value
                 return indicator_float > value_float
             elif op == 'crosses_below':
-                # Simplified: current < value
                 return indicator_float < value_float
             else:
                 logger.warning(f"Unknown operator {op} for condition")
                 return False
-                
+
         except (ValueError, TypeError) as e:
             logger.warning(f"Error evaluating condition {indicator} {op} {value}: {e}")
             return False
@@ -923,10 +937,16 @@ class StrategySignal:
             op = condition.get('op', '?')
             value = condition.get('value', '?')
             period = condition.get('period')
-            
             period_str = f"({period})" if period else ""
             status = "✓" if condition_met else "✗"
-            reasons.append(f"{status} {indicator}{period_str} {op} {value}")
+
+            if condition.get('compareType') == 'indicator' and condition.get('compareIndicator'):
+                comp_ind = condition.get('compareIndicator', '?')
+                comp_period = condition.get('comparePeriod', '')
+                comp_period_str = f"({comp_period})" if comp_period else ""
+                reasons.append(f"{status} {indicator}{period_str} {op} {comp_ind}{comp_period_str}")
+            else:
+                reasons.append(f"{status} {indicator}{period_str} {op} {value}")
             
             # Apply logic
             if i == 0:

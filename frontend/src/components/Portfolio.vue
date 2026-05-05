@@ -16,7 +16,16 @@ const isLoading = ref(false)
 const error = ref(null)
 const accountName = ref('test') 
 const isAccountActive = ref(null) // Account active status
+const strategyName = ref('') // Strategy name
 const activeTab = ref('holdings') // Tab state: 'holdings', 'orders', 'signals'
+
+// Signal filter state
+const signalFilterType = ref('')
+const signalFilterSymbol = ref('')
+
+// Order filter state
+const orderFilterSide = ref('')
+const orderFilterSymbol = ref('')
 
 const emit = defineEmits(['navigate'])
 
@@ -80,13 +89,6 @@ const fetchHoldings = async () => {
     const data = await response.json()
     console.log('Portfolio API Response:', data) // Debug log
     
-    // Extract orders data from portfolio response
-    if (data.recent_orders) {
-      ordersData.value = data.recent_orders
-    } else {
-      ordersData.value = []
-    }
-    
     // Transform the holdings data from object to array format
     if (data.holdings) {
       holdingsData.value = Object.entries(data.holdings).map(([symbol, holding]) => {
@@ -115,6 +117,31 @@ const fetchHoldings = async () => {
   }
 }
 
+// Fetch orders for the account with optional filters
+const fetchOrders = async () => {
+  try {
+    let url = `http://localhost:5000/api/accounts/${accountName.value}/orders?limit=100`
+    if (orderFilterSide.value) {
+      url += `&side=${orderFilterSide.value}`
+    }
+    if (orderFilterSymbol.value) {
+      url += `&symbol=${orderFilterSymbol.value.toUpperCase()}`
+    }
+    
+    const response = await fetch(url)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch orders: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log('Orders API Response:', data) // Debug log
+    ordersData.value = data
+  } catch (err) {
+    console.error('Error fetching orders:', err)
+  }
+}
+
 // Fetch trading signals for account's strategy
 const fetchTradingSignals = async () => {
   try {
@@ -133,13 +160,24 @@ const fetchTradingSignals = async () => {
       // Handle both boolean true/false and numeric 1/0 values
       isAccountActive.value = Boolean(accountData.is_active)
     }
+    // Set strategy name from account data
+    if (accountData.strategy_name) {
+      strategyName.value = accountData.strategy_name
+    }
     console.log(isAccountActive.value)
     const strategyId = accountData.strategy_id
     
-    // Build URL with strategy_id if available
-    let url = `http://localhost:5000/api/trading-signals?limit=25`
+    // Build URL with strategy_id and filter params if available
+    // Use a higher limit (100) so filtering has more data to work with
+    let url = `http://localhost:5000/api/trading-signals?limit=100`
     if (strategyId) {
       url += `&strategy_id=${strategyId}`
+    }
+    if (signalFilterType.value) {
+      url += `&signal_type=${signalFilterType.value}`
+    }
+    if (signalFilterSymbol.value) {
+      url += `&symbol=${signalFilterSymbol.value.toUpperCase()}`
     }
     
     const response = await fetch(url)
@@ -163,7 +201,7 @@ const fetchData = async () => {
   error.value = null
   
   try {
-    await Promise.all([fetchPerformance(), fetchHoldings(), fetchTradingSignals()])
+    await Promise.all([fetchPerformance(), fetchHoldings(), fetchTradingSignals(), fetchOrders()])
   } catch (err) {
     console.error('Error fetching portfolio data:', err)
     error.value = 'Failed to load portfolio data. Please try again.'
@@ -236,6 +274,24 @@ const dailyGainLossPercentage = computed(() => {
   return performanceData.value.profit_loss_percent || 0
 })
 
+// Filtered trading signals based on signal type and symbol
+const filteredSignals = computed(() => {
+  let signals = tradingSignalsData.value
+  
+  // Filter by signal type
+  if (signalFilterType.value) {
+    signals = signals.filter(s => s.signal_type === signalFilterType.value)
+  }
+  
+  // Filter by symbol (case-insensitive partial match)
+  if (signalFilterSymbol.value) {
+    const searchSymbol = signalFilterSymbol.value.toUpperCase()
+    signals = signals.filter(s => s.symbol && s.symbol.toUpperCase().includes(searchSymbol))
+  }
+  
+  return signals
+})
+
 // Watch for navigation params to update account name
 watch(() => props.navigationParams, (newParams) => {
   console.log('Portfolio navigation params:', newParams) // Debug log
@@ -246,6 +302,20 @@ watch(() => props.navigationParams, (newParams) => {
     fetchData()
   }
 }, { immediate: true })
+
+// Refetch trading signals when filters change
+watch([signalFilterType, signalFilterSymbol], () => {
+  if (activeTab.value === 'signals') {
+    fetchTradingSignals()
+  }
+})
+
+// Refetch orders when filters change
+watch([orderFilterSide, orderFilterSymbol], () => {
+  if (activeTab.value === 'orders') {
+    fetchOrders()
+  }
+})
 
 onMounted(() => {
   fetchData()
@@ -260,6 +330,10 @@ onMounted(() => {
         <p>View your investment performance and holdings</p>
       </div>
       <div class="header-actions">
+        <div class="strategy-name-display" v-if="strategyName">
+          <span class="strategy-label">Strategy:</span>
+          <span class="strategy-value">{{ strategyName }}</span>
+        </div>
         <div class="account-status-toggle">
           <label for="account-active-toggle">Bot active:</label>
           <input
@@ -389,6 +463,31 @@ onMounted(() => {
       <div v-if="activeTab === 'orders'" class="tab-pane">
         <h3 class="subsection-header">Recent Orders</h3>
         
+        <!-- Order Filters -->
+        <div class="signal-filters">
+          <div class="filter-group">
+            <label for="order-side-filter">Side:</label>
+            <select id="order-side-filter" v-model="orderFilterSide" class="filter-select">
+              <option value="">All</option>
+              <option value="BUY">Buy</option>
+              <option value="SELL">Sell</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="order-symbol-filter">Ticker:</label>
+            <input
+              id="order-symbol-filter"
+              type="text"
+              v-model="orderFilterSymbol"
+              placeholder="e.g. AAPL"
+              class="filter-input"
+            />
+          </div>
+          <div class="filter-info" v-if="ordersData.length > 0">
+            Showing {{ ordersData.length }} orders
+          </div>
+        </div>
+        
         <div v-if="isLoading" class="loading-state">
           <div class="loading-spinner"></div>
           <p>Loading orders...</p>
@@ -460,7 +559,33 @@ onMounted(() => {
 
       <!-- Signals Tab -->
       <div v-if="activeTab === 'signals'" class="tab-pane">
-        <h3 class="subsection-header">Bot Signals</h3>
+        <h3 class="subsection-header">Trading Bot Signals</h3>
+        
+        <!-- Signal Filters -->
+        <div class="signal-filters">
+          <div class="filter-group">
+            <label for="signal-type-filter">Signal Type:</label>
+            <select id="signal-type-filter" v-model="signalFilterType" class="filter-select">
+              <option value="">All</option>
+              <option value="BUY">Buy</option>
+              <option value="SELL">Sell</option>
+              <option value="HOLD">Hold</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="signal-symbol-filter">Ticker:</label>
+            <input
+              id="signal-symbol-filter"
+              type="text"
+              v-model="signalFilterSymbol"
+              placeholder="e.g. AAPL"
+              class="filter-input"
+            />
+          </div>
+          <div class="filter-info" v-if="tradingSignalsData.length > 0">
+            Showing {{ filteredSignals.length }} of {{ tradingSignalsData.length }} signals
+          </div>
+        </div>
         
         <div v-if="isLoading" class="loading-state">
           <div class="loading-spinner"></div>
@@ -469,6 +594,10 @@ onMounted(() => {
         
         <div v-else-if="tradingSignalsData.length === 0" class="empty-state">
           <p class="empty-message">No trading signals found</p>
+        </div>
+        
+        <div v-else-if="filteredSignals.length === 0" class="empty-state">
+          <p class="empty-message">No signals match the current filters</p>
         </div>
         
         <div v-else class="table-container">
@@ -487,7 +616,7 @@ onMounted(() => {
             </thead>
             <tbody>
               <tr 
-                v-for="signal in tradingSignalsData" 
+                v-for="signal in filteredSignals" 
                 :key="signal.id" 
                 class="clickable-row"
               >
@@ -829,6 +958,79 @@ th:nth-child(8) { /* % Gain/Loss */
 .gain-loss-cell,
 .gain-loss-percentage-cell {
   font-weight: 600;
+}
+
+/* Signal filter styles */
+.signal-filters {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-select,
+.filter-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #333;
+  min-width: 140px;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-input {
+  min-width: 160px;
+}
+
+.filter-info {
+  font-size: 0.85rem;
+  color: #666;
+  padding: 0.5rem 0;
+  align-self: center;
+}
+
+/* Strategy name display styles */
+.strategy-name-display {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.strategy-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.strategy-value {
+  color: #000;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 /* Account status toggle styles */

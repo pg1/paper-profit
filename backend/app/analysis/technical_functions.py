@@ -520,8 +520,70 @@ class TechnicalFunctions:
             logger.error(f"Error calculating volatility for {symbol}: {e}")
             return None
     
+    def get_average_true_range(self, symbol: str, period: int = 14, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Calculate Average True Range (ATR)"""
+        return self._get_calculated_indicator(
+            symbol, f'atr_{period}', self._calculate_atr, period, refresh_rate_minutes
+        )
+
+    def _calculate_atr(self, symbol: str, period: int = 14, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Internal method to calculate ATR"""
+        try:
+            # Try data provider first
+            data = self._get_technical_indicators(symbol, refresh_rate_minutes)
+            if data and data.get('atr') is not None:
+                return float(data.get('atr'))
+
+            # Fallback: approximate using close-to-close absolute differences
+            close_prices = self._get_historical_prices(symbol, "3mo", refresh_rate_minutes)
+            if not close_prices or len(close_prices) < period + 1:
+                return None
+
+            tr_values = [abs(close_prices[i] - close_prices[i - 1]) for i in range(1, len(close_prices))]
+            if len(tr_values) < period:
+                return None
+
+            return sum(tr_values[-period:]) / period
+
+        except Exception as e:
+            logger.error(f"Error calculating ATR for {symbol}: {e}")
+            return None
+
+    def get_stochastic(self, symbol: str, period: int = 14, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Calculate Stochastic %K"""
+        return self._get_calculated_indicator(
+            symbol, f'stoch_{period}', self._calculate_stochastic, period, refresh_rate_minutes
+        )
+
+    def _calculate_stochastic(self, symbol: str, period: int = 14, refresh_rate_minutes: Optional[int] = None) -> Optional[float]:
+        """Internal method to calculate Stochastic %K"""
+        try:
+            # Try data provider first
+            data = self._get_technical_indicators(symbol, refresh_rate_minutes)
+            if data and data.get('stochastic_k') is not None:
+                return float(data.get('stochastic_k'))
+
+            # Fallback: calculate from close prices (close as proxy for high/low)
+            close_prices = self._get_historical_prices(symbol, "3mo", refresh_rate_minutes)
+            if not close_prices or len(close_prices) < period:
+                return None
+
+            recent = close_prices[-period:]
+            highest_high = max(recent)
+            lowest_low = min(recent)
+
+            if highest_high == lowest_low:
+                return 50.0
+
+            stoch_k = (close_prices[-1] - lowest_low) / (highest_high - lowest_low) * 100
+            return stoch_k
+
+        except Exception as e:
+            logger.error(f"Error calculating Stochastic for {symbol}: {e}")
+            return None
+
     # Boolean parameter helpers for technical analysis
-    
+
     def is_overbought(self, symbol: str, rsi_threshold: float = 70.0) -> Optional[bool]:
         """
         Check if stock is overbought based on RSI
@@ -700,6 +762,8 @@ class TechnicalFunctions:
             'volume_trend': self.get_volume_trend(symbol),
             'support_resistance_levels': self.get_support_resistance_levels(symbol),
             'volatility': self.get_volatility(symbol),
+            'atr': self.get_average_true_range(symbol),
+            'stoch': self.get_stochastic(symbol),
             'is_overbought': self.is_overbought(symbol),
             'is_oversold': self.is_oversold(symbol),
             'is_above_moving_average': self.is_above_moving_average(symbol, 20),

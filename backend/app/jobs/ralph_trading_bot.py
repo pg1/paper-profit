@@ -147,7 +147,8 @@ class TradingBot:
         entry_conditions = strategy_params.get('entryConditions', [])
         for condition in entry_conditions:
             indicator = condition.get('indicator', '').lower()
-            if indicator:
+            compare_indicator = condition.get('compareIndicator', '').lower()
+            for indicator in [i for i in [indicator, compare_indicator] if i]:
                 # Map frontend indicator names to our internal names
                 indicator_map = {
                     'rsi': 'rsi',
@@ -157,6 +158,9 @@ class TradingBot:
                     'volume': 'volume_ratio',
                     'bb_upper': 'bb_upper',
                     'bb_lower': 'bb_lower',
+                    'atr': 'atr',
+                    'stoch': 'stoch',
+                    'vwap': 'vwap',
                 }
                 mapped = indicator_map.get(indicator)
                 if mapped:
@@ -177,6 +181,9 @@ class TradingBot:
                         'close': 'current_price',
                         'sma': 'sma_20',
                         'ema': 'ema_12',
+                        'atr': 'atr',
+                        'stoch': 'stoch',
+                        'vwap': 'vwap',
                     }
                     mapped = indicator_map.get(indicator)
                     if mapped:
@@ -261,6 +268,12 @@ class TradingBot:
                 account, strategy, instrument, market_data, indicators, strategy_params
             )
         
+        # Check trailing stop for positions that would otherwise HOLD
+        if signal and signal['action'] == 'HOLD' and has_position:
+            trailing_signal = self._check_trailing_stop(strategy_params, position_data, market_data)
+            if trailing_signal:
+                signal = trailing_signal
+
         # Log signal
         self.execution_manager.log_trading_signal(instrument, strategy, signal, indicators)
 
@@ -270,9 +283,63 @@ class TradingBot:
                 account, strategy, instrument, signal, strategy_params, current_positions, indicators
             )
 
-        
-# ── Try to execute trade                 
-    def _execute_trade_with_risk_management(self, account, strategy, instrument, signal, 
+
+    def _get_trailing_stop_pct(self, strategy_params: Dict[str, Any]) -> float:
+        """Safely extract trailing_stop_pct from strategy params (0 = disabled)"""
+        val = strategy_params.get('trailing_stop_pct', '')
+        if val == '' or val is None:
+            return 0.0
+        try:
+            return float(val)
+        except (ValueError, TypeError):
+            return 0.0
+
+    def _get_highest_price_since_entry(self, symbol_id: int, entry_date) -> float:
+        """Get the highest close price since the position was opened"""
+        try:
+            records = self.repo_factory.market_data.get_by_timestamp_range(
+                symbol_id, '1day', entry_date, datetime.now()
+            )
+            if not records:
+                return 0.0
+            return float(max(float(r.close) for r in records))
+        except Exception as e:
+            logger.debug(f"Error getting highest price since entry for symbol_id {symbol_id}: {e}")
+            return 0.0
+
+    def _check_trailing_stop(self, strategy_params: Dict[str, Any], position_data, market_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+        """Return a SELL signal if the trailing stop is triggered, otherwise None"""
+        trailing_stop_pct = self._get_trailing_stop_pct(strategy_params)
+        if trailing_stop_pct <= 0:
+            return None
+
+        current_price = market_data.get('close', 0)
+        if not current_price:
+            return None
+
+        try:
+            symbol_id = position_data.symbol_id
+            entry_date = position_data.created_at
+        except Exception:
+            return None
+
+        highest_price = self._get_highest_price_since_entry(symbol_id, entry_date)
+        if highest_price <= 0:
+            return None
+
+        trailing_stop_price = highest_price * (1 - trailing_stop_pct / 100)
+        if float(current_price) <= trailing_stop_price:
+            return {
+                'action': 'SELL',
+                'price': float(current_price),
+                'reason': f'Trailing stop: ${current_price:.2f} <= ${trailing_stop_price:.2f} ({trailing_stop_pct}% below high ${highest_price:.2f})',
+                'signal_score': -5,
+                'confidence': 0.9
+            }
+        return None
+
+# ── Try to execute trade
+    def _execute_trade_with_risk_management(self, account, strategy, instrument, signal,
                                            strategy_params, current_positions, indicators):
         """Execute a trade with risk management checks"""
         

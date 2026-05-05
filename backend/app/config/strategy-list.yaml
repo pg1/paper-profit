@@ -15,6 +15,21 @@ strategies:
       technical:
         max_drawdown: 30%
         rebalance_interval_days: 365
+    parameter_settings:
+      min_quality_score: 70
+      sell_on_fundamental_shift: true
+      max_drawdown_pct: 30
+      max_positions: 20
+      max_position_pct: 10
+      enable_stop_loss: false
+      enable_take_profit: false
+      halt_on_drawdown: true
+      rebalance: true
+      rebalance_threshold: 5
+      run_frequency_minutes: 1440
+      min_volume: 100000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: index_fund_investing
     category: Long Term
@@ -32,6 +47,17 @@ strategies:
         dca_interval_days: 30
         auto_rebalance: yearly
         max_slippage: 0.5%
+    parameter_settings:
+      allocation_percent: 100
+      rebalance: true
+      rebalance_threshold: 5
+      max_positions: 10
+      max_position_pct: 15
+      enable_stop_loss: false
+      enable_take_profit: false
+      run_frequency_minutes: 1440
+      order_type: MARKET
+      round_shares: true
 
   - index: dollar_cost_averaging
     category: Long Term
@@ -48,6 +74,16 @@ strategies:
       technical:
         investment_interval_days: 30
         auto_buy: true
+    parameter_settings:
+      investment_amount: 100
+      max_positions: 10
+      max_position_pct: 15
+      enable_stop_loss: false
+      enable_take_profit: false
+      rebalance: false
+      run_frequency_minutes: 43200
+      order_type: MARKET
+      round_shares: true
 
   - index: dividend_growth_investing
     category: Long Term
@@ -66,6 +102,22 @@ strategies:
         auto_reinvest_dividends: true
       technical:
         rebalance_interval_days: 365
+    parameter_settings:
+      min_dividend_growth_rate: 5
+      max_payout_ratio: 70
+      min_dividend_yield: 2
+      auto_reinvest_dividends: true
+      sell_on_fundamental_shift: true
+      max_positions: 20
+      max_position_pct: 10
+      enable_stop_loss: false
+      enable_take_profit: false
+      rebalance: true
+      rebalance_threshold: 5
+      run_frequency_minutes: 1440
+      min_volume: 100000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: value_investing
     category: Long Term
@@ -83,6 +135,23 @@ strategies:
         discount_to_intrinsic_value: 20%
       technical:
         rebalance_interval_days: 180
+    parameter_settings:
+      max_pe: 20
+      max_pb: 2
+      discount_to_intrinsic_value: 20
+      min_quality_score: 60
+      sell_on_fundamental_shift: true
+      max_positions: 15
+      max_position_pct: 10
+      enable_stop_loss: false
+      enable_take_profit: true
+      take_profit_pct: 50
+      rebalance: true
+      rebalance_threshold: 5
+      run_frequency_minutes: 1440
+      min_volume: 100000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: growth_investing
     category: Long Term
@@ -100,6 +169,21 @@ strategies:
         max_pe_ratio: 70
       technical:
         recheck_interval_days: 90
+    parameter_settings:
+      min_revenue_growth: 15
+      min_eps_growth: 10
+      max_pe_ratio: 70
+      sell_on_fundamental_shift: true
+      max_positions: 15
+      max_position_pct: 10
+      stop_loss_pct: 15
+      enable_stop_loss: true
+      enable_take_profit: false
+      trailing_stop_pct: 10
+      run_frequency_minutes: 1440
+      min_volume: 200000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: sector_rotation
     category: Long Term
@@ -116,6 +200,18 @@ strategies:
       technical:
         rotation_interval_days: 90
         max_sector_allocation: 30%
+    parameter_settings:
+      sector_strength_threshold: 60
+      max_sector_pct: 30
+      sector_cap_strictness: hard
+      max_positions: 10
+      max_position_pct: 15
+      enable_stop_loss: false
+      rebalance: true
+      rebalance_threshold: 5
+      run_frequency_minutes: 1440
+      min_volume: 500000
+      order_type: MARKET
 
   - index: asset_allocation_rebalancing
     category: Long Term
@@ -133,6 +229,17 @@ strategies:
       technical:
         rebalance_trigger_percent: 5%
         rebalance_interval_days: 365
+    parameter_settings:
+      target_stock_allocation: 60
+      target_bond_allocation: 40
+      rebalance: true
+      rebalance_threshold: 5
+      max_positions: 15
+      max_position_pct: 15
+      enable_stop_loss: false
+      enable_take_profit: false
+      run_frequency_minutes: 1440
+      order_type: MARKET
 
   - index: trend_following
     category: Swing Trading
@@ -151,6 +258,56 @@ strategies:
         slow_ma: 50
         stop_loss_percent: 5%
         take_profit_percent: 15%
+    parameter_settings:
+      sma_short: 20
+      sma_long: 50
+      stop_loss_pct: 5
+      take_profit_pct: 15
+      trailing_stop_pct: 3
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 10
+      max_position_pct: 10
+      cash_reserve_pct: 10
+      min_volume: 500000
+      run_frequency_minutes: 60
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: CLOSE
+          op: ">"
+          compareType: indicator
+          compareIndicator: SMA
+          comparePeriod: 50
+          logic: AND
+        - id: 2
+          indicator: SMA
+          period: 20
+          op: ">"
+          compareType: indicator
+          compareIndicator: SMA
+          comparePeriod: 50
+          logic: AND
+        - id: 3
+          indicator: MACD
+          op: "="
+          compareType: value
+          value: crossover_up
+          logic: AND
+      strategy:
+        - type: exit
+          parameters:
+            indicator: Close
+            operator: "<"
+            value: ""
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "5"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "15"
 
   - index: breakout_trading
     category: Swing Trading
@@ -169,6 +326,45 @@ strategies:
         volume_multiplier: 2
         stop_loss_percent: 3%
         take_profit_percent: 10%
+    parameter_settings:
+      stop_loss_pct: 3
+      take_profit_pct: 10
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 8
+      max_position_pct: 12
+      cash_reserve_pct: 10
+      min_volume: 1000000
+      run_frequency_minutes: 30
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "1.5"
+          logic: AND
+        - id: 2
+          indicator: ATR
+          period: 14
+          op: ">"
+          compareType: value
+          value: "1"
+          logic: AND
+      strategy:
+        - type: exit
+          parameters:
+            indicator: Close
+            operator: "<"
+            value: ""
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "3"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "10"
 
   - index: momentum_trading
     category: Swing Trading
@@ -187,6 +383,56 @@ strategies:
         rsi_exit: 50
         min_volume_increase_percent: 30%
         stop_loss_percent: 4%
+    parameter_settings:
+      rsi_period: 14
+      rsi_oversold: 50
+      rsi_overbought: 75
+      stop_loss_pct: 4
+      trailing_stop_pct: 3
+      enable_stop_loss: true
+      enable_take_profit: true
+      take_profit_pct: 12
+      max_positions: 8
+      max_position_pct: 12
+      cash_reserve_pct: 10
+      min_volume: 1000000
+      run_frequency_minutes: 30
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: RSI
+          period: 14
+          op: ">"
+          compareType: value
+          value: "60"
+          logic: AND
+        - id: 2
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "1.3"
+          logic: AND
+        - id: 3
+          indicator: CLOSE
+          op: ">"
+          compareType: indicator
+          compareIndicator: SMA
+          comparePeriod: 20
+          logic: AND
+      strategy:
+        - type: exit
+          parameters:
+            indicator: RSI
+            operator: "<"
+            value: "50"
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "4"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "12"
 
   - index: mean_reversion
     category: Swing Trading
@@ -205,6 +451,49 @@ strategies:
         bollinger_stddev: 2
         rsi_buy: 30
         rsi_sell: 50
+    parameter_settings:
+      rsi_period: 14
+      rsi_oversold: 30
+      rsi_overbought: 70
+      stop_loss_pct: 4
+      take_profit_pct: 8
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 10
+      max_position_pct: 10
+      cash_reserve_pct: 10
+      min_volume: 500000
+      run_frequency_minutes: 60
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: RSI
+          period: 14
+          op: "<"
+          compareType: value
+          value: "30"
+          logic: AND
+        - id: 2
+          indicator: CLOSE
+          op: "<"
+          compareType: indicator
+          compareIndicator: BB_LOWER
+          comparePeriod: 20
+          logic: AND
+      strategy:
+        - type: exit
+          parameters:
+            indicator: RSI
+            operator: ">"
+            value: "50"
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "4"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "8"
 
   - index: rsi_strategy
     category: Swing Trading
@@ -223,6 +512,42 @@ strategies:
         rsi_buy: 30
         rsi_sell: 70
         stop_loss_percent: 5%
+    parameter_settings:
+      rsi_period: 14
+      rsi_oversold: 30
+      rsi_overbought: 70
+      stop_loss_pct: 5
+      take_profit_pct: 10
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 10
+      max_position_pct: 10
+      cash_reserve_pct: 10
+      min_volume: 500000
+      run_frequency_minutes: 60
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: RSI
+          period: 14
+          op: "<"
+          compareType: value
+          value: "30"
+          logic: AND
+      strategy:
+        - type: exit
+          parameters:
+            indicator: RSI
+            operator: ">"
+            value: "70"
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "5"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "10"
 
   - index: scalping
     category: Day Trading
@@ -241,6 +566,39 @@ strategies:
         target_profit_ticks: 3
         stop_loss_ticks: 2
         max_slippage_ticks: 1
+    parameter_settings:
+      stop_loss_pct: 0.3
+      take_profit_pct: 0.6
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 3
+      max_position_pct: 20
+      cash_reserve_pct: 20
+      min_volume: 5000000
+      run_frequency_minutes: 1
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: CLOSE
+          op: ">"
+          compareType: indicator
+          compareIndicator: VWAP
+          logic: AND
+        - id: 2
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "2"
+          logic: AND
+      strategy:
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "0.3"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "0.6"
 
   - index: vwap_strategy
     category: Day Trading
@@ -258,6 +616,44 @@ strategies:
         vwap_buffer_percent: 0.2%
         stop_loss_percent: 0.5%
         take_profit_percent: 1%
+    parameter_settings:
+      stop_loss_pct: 0.5
+      take_profit_pct: 1
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 5
+      max_position_pct: 15
+      cash_reserve_pct: 20
+      min_volume: 2000000
+      run_frequency_minutes: 5
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: CLOSE
+          op: ">"
+          compareType: indicator
+          compareIndicator: VWAP
+          logic: AND
+        - id: 2
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "1.5"
+          logic: AND
+      strategy:
+        - type: exit
+          parameters:
+            indicator: Close
+            operator: "<"
+            value: ""
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "0.5"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "1"
 
   - index: opening_range_breakout
     category: Day Trading
@@ -276,6 +672,33 @@ strategies:
         breakout_buffer_percent: 0.3%
         stop_loss_percent: 0.8%
         take_profit_percent: 2%
+    parameter_settings:
+      stop_loss_pct: 0.8
+      take_profit_pct: 2
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 5
+      max_position_pct: 15
+      cash_reserve_pct: 20
+      min_volume: 2000000
+      run_frequency_minutes: 5
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "2"
+          logic: AND
+      strategy:
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "0.8"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "2"
 
   - index: news_trading
     category: Day Trading
@@ -293,6 +716,33 @@ strategies:
         min_volume_spike_percent: 200%
         max_hold_time_minutes: 30
         stop_loss_percent: 1.5%
+    parameter_settings:
+      stop_loss_pct: 1.5
+      take_profit_pct: 3
+      enable_stop_loss: true
+      enable_take_profit: true
+      max_positions: 3
+      max_position_pct: 15
+      cash_reserve_pct: 20
+      min_volume: 3000000
+      run_frequency_minutes: 5
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "3"
+          logic: AND
+      strategy:
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "1.5"
+        - type: takeProfit
+          parameters:
+            profitType: percent
+            value: "3"
 
   - index: covered_calls
     category: Options
@@ -311,6 +761,17 @@ strategies:
         days_to_expiration: 30
         take_profit_percent: 50%
         roll_if_itm: true
+    parameter_settings:
+      underlying_quality_required: true
+      min_quality_score: 70
+      max_positions: 10
+      max_position_pct: 10
+      enable_take_profit: true
+      take_profit_pct: 50
+      enable_stop_loss: false
+      run_frequency_minutes: 1440
+      order_type: LIMIT
+      enable_fundamental_filter: true
 
   - index: cash_secured_puts
     category: Options
@@ -329,6 +790,18 @@ strategies:
         days_to_expiration: 30
         take_profit_percent: 50%
         accept_assignment: true
+    parameter_settings:
+      underlying_quality_required: true
+      min_quality_score: 70
+      max_positions: 10
+      max_position_pct: 10
+      cash_reserve_pct: 100
+      enable_take_profit: true
+      take_profit_pct: 50
+      enable_stop_loss: false
+      run_frequency_minutes: 1440
+      order_type: LIMIT
+      enable_fundamental_filter: true
 
   - index: iron_condor
     category: Options
@@ -348,6 +821,15 @@ strategies:
         days_to_expiration: 35
         take_profit_percent: 55%
         max_loss_percent: 100%
+    parameter_settings:
+      max_positions: 5
+      max_position_pct: 15
+      enable_take_profit: true
+      take_profit_pct: 55
+      enable_stop_loss: true
+      stop_loss_pct: 100
+      run_frequency_minutes: 1440
+      order_type: LIMIT
 
   - index: warren_buffett_strategy
     category: Greatest Investors
@@ -365,6 +847,23 @@ strategies:
         preferred_industry_moat: strong
       technical:
         rebalance_interval_days: 365
+    parameter_settings:
+      required_margin_of_safety_percent: 25
+      minimum_roe_percent: 10
+      preferred_industry_moat: strong
+      min_quality_score: 80
+      sell_on_fundamental_shift: true
+      underlying_quality_required: true
+      max_positions: 10
+      max_position_pct: 15
+      enable_stop_loss: false
+      enable_take_profit: false
+      rebalance: true
+      rebalance_threshold: 5
+      run_frequency_minutes: 1440
+      min_volume: 500000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: ben_graham_strategy
     category: Greatest Investors
@@ -382,6 +881,22 @@ strategies:
         net_net_discount_percent: 20%
       technical:
         rebalance_interval_days: 180
+    parameter_settings:
+      max_pe: 15
+      max_pb: 1.5
+      net_net_discount_percent: 20
+      min_quality_score: 60
+      enable_stop_loss: false
+      enable_take_profit: true
+      take_profit_pct: 50
+      max_positions: 20
+      max_position_pct: 8
+      rebalance: true
+      rebalance_threshold: 5
+      run_frequency_minutes: 1440
+      min_volume: 100000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: peter_lynch_strategy
     category: Greatest Investors
@@ -399,6 +914,21 @@ strategies:
         narrative_match_required: true
       technical:
         review_interval_days: 90
+    parameter_settings:
+      max_peg: 1
+      min_eps_growth: 15
+      narrative_match_required: true
+      sell_on_fundamental_shift: true
+      max_positions: 10
+      max_position_pct: 12
+      stop_loss_pct: 20
+      enable_stop_loss: true
+      enable_take_profit: false
+      trailing_stop_pct: 10
+      run_frequency_minutes: 1440
+      min_volume: 100000
+      order_type: MARKET
+      enable_fundamental_filter: true
 
   - index: ray_dalio_strategy
     category: Greatest Investors
@@ -417,6 +947,19 @@ strategies:
         commodities_allocation_percent: 7.5%
       technical:
         rebalance_interval_days: 180
+    parameter_settings:
+      target_stock_allocation: 30
+      target_bond_allocation: 55
+      gold_allocation_percent: 7.5
+      commodities_allocation_percent: 7.5
+      rebalance: true
+      rebalance_threshold: 5
+      max_positions: 20
+      max_position_pct: 15
+      enable_stop_loss: false
+      enable_take_profit: false
+      run_frequency_minutes: 1440
+      order_type: MARKET
 
   - index: jesse_livermore_strategy
     category: Greatest Investors
@@ -435,6 +978,37 @@ strategies:
         pyramid_scale_factor: 1.5
         stop_loss_percent: 4%
         trend_strength_minimum: 60
+    parameter_settings:
+      stop_loss_pct: 4
+      trailing_stop_pct: 5
+      enable_stop_loss: true
+      enable_take_profit: false
+      conviction_score_minimum: 60
+      max_positions: 5
+      max_position_pct: 20
+      cash_reserve_pct: 10
+      min_volume: 1000000
+      run_frequency_minutes: 60
+      order_type: MARKET
+      entryConditions:
+        - id: 1
+          indicator: VOLUME
+          op: ">"
+          compareType: value
+          value: "2"
+          logic: AND
+        - id: 2
+          indicator: CLOSE
+          op: ">"
+          compareType: indicator
+          compareIndicator: SMA
+          comparePeriod: 50
+          logic: AND
+      strategy:
+        - type: stopLoss
+          parameters:
+            lossType: percent
+            value: "4"
 
   - index: john_bogle_strategy
     category: Greatest Investors
@@ -452,6 +1026,18 @@ strategies:
         cost_ratio_max: 0.05%
       technical:
         rebalance_interval_days: 365
+    parameter_settings:
+      allocation_percent: 100
+      cost_ratio_max: 0.05
+      rebalance: true
+      rebalance_threshold: 5
+      max_positions: 10
+      max_position_pct: 15
+      enable_stop_loss: false
+      enable_take_profit: false
+      run_frequency_minutes: 1440
+      order_type: MARKET
+      round_shares: true
 
   - index: stanley_druckenmiller_strategy
     category: Greatest Investors
@@ -469,6 +1055,20 @@ strategies:
       technical:
         max_position_size_percent: 25%
         stop_loss_percent: 4%
+    parameter_settings:
+      conviction_score_minimum: 75
+      signal_min_confidence: 0.75
+      max_position_pct: 25
+      stop_loss_pct: 4
+      trailing_stop_pct: 5
+      enable_stop_loss: true
+      enable_take_profit: false
+      max_positions: 5
+      cash_reserve_pct: 10
+      min_volume: 2000000
+      run_frequency_minutes: 60
+      order_type: MARKET
+      macro_signal_strength_threshold: 70
 
   - index: jim_simons_strategy
     category: Greatest Investors
@@ -487,3 +1087,14 @@ strategies:
         max_hold_time_hours: 24
         mean_reversion_factor: 0.5
         volatility_filter: adaptive
+    parameter_settings:
+      signal_min_confidence: 0.85
+      max_positions: 20
+      max_position_pct: 5
+      stop_loss_pct: 2
+      take_profit_pct: 4
+      enable_stop_loss: true
+      enable_take_profit: true
+      min_volume: 1000000
+      run_frequency_minutes: 30
+      order_type: MARKET

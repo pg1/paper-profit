@@ -495,6 +495,9 @@ class DataCollector:
                 'volume_ratio': 'technical.volume.volume_ratio',
                 'price_trend': 'technical.trend.price_trend',
                 'current_price': 'market.pricing.last_price',
+                'atr': 'technical.volatility.atr',
+                'stoch': 'technical.momentum.stochastic_k',
+                'vwap': 'technical.volume.vwap',
             }
             
             config = self._load_quantitative_config()

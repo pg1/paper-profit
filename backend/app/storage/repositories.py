@@ -184,6 +184,7 @@ class TradingSignalRepository:
     
     def get_recent_signals(self, symbol_id: Optional[int] = None, 
                           strategy_id: Optional[int] = None,
+                          signal_type: Optional[str] = None,
                           limit: int = 50) -> List[TradingSignal]:
         """Get recent trading signals"""
         query = self.db.query(TradingSignal)
@@ -192,6 +193,8 @@ class TradingSignalRepository:
             query = query.filter(TradingSignal.symbol_id == symbol_id)
         if strategy_id:
             query = query.filter(TradingSignal.strategy_id == strategy_id)
+        if signal_type:
+            query = query.filter(TradingSignal.signal_type == signal_type.upper())
         
         return query.order_by(desc(TradingSignal.timestamp)).limit(limit).all()
     

@@ -139,6 +139,7 @@ async def get_account(account_id: str, db: Session = Depends(get_db)):
             "status": account.status,
             "is_active": account.is_active,
             "strategy_id": account.strategy_id,
+            "strategy_name": account.strategy.name if account.strategy else None,
             "created_at": account.created_at,
             "updated_at": account.updated_at
         }
@@ -354,6 +355,61 @@ async def get_account_performance(account_id: str, db: Session = Depends(get_db)
         )
 
 
+@app.get("/api/accounts/{account_id}/orders", response_model=List[Dict[str, Any]])
+async def get_account_orders(account_id: str, side: Optional[str] = None, symbol: Optional[str] = None, limit: int = 50, db: Session = Depends(get_db)):
+    """Get orders for an account, optionally filtered by side (BUY/SELL) or symbol"""
+    try:
+        from storage.repositories import OrderRepository, InstrumentRepository
+        
+        order_repo = OrderRepository(db)
+        instrument_repo = InstrumentRepository(db)
+        
+        # Get orders for the account
+        orders = order_repo.get_by_account_id(account_id, limit=limit)
+        
+        # Filter by side if provided
+        if side:
+            side_upper = side.upper()
+            orders = [o for o in orders if o.side == side_upper]
+        
+        # Filter by symbol if provided
+        if symbol:
+            symbol_upper = symbol.upper()
+            orders = [o for o in orders if o.instrument and o.instrument.symbol.upper().find(symbol_upper) >= 0]
+        
+        result = []
+        for order in orders:
+            result.append({
+                'id': order.id,
+                'order_id': order.order_id,
+                'symbol': order.instrument.symbol if order.instrument else 'N/A',
+                'order_type': order.order_type,
+                'side': order.side,
+                'quantity': float(order.quantity),
+                'price': float(order.price) if order.price else None,
+                'stop_price': float(order.stop_price) if order.stop_price else None,
+                'status': order.status,
+                'filled_quantity': float(order.filled_quantity) if order.filled_quantity else 0.0,
+                'average_fill_price': float(order.average_fill_price) if order.average_fill_price else None,
+                'submitted_at': order.submitted_at,
+                'filled_at': order.filled_at,
+                'cancelled_at': order.cancelled_at,
+                'created_at': order.created_at
+            })
+        
+        return result
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve orders: {str(e)}"
+        )
+
+
 @app.get("/api/strategies", response_model=List[Dict[str, Any]])
 async def get_all_strategies(db: Session = Depends(get_db)):
     """Get all strategies"""
@@ -477,11 +533,24 @@ async def get_strategy(strategy_id: int, db: Session = Depends(get_db)):
 
 
 @app.get("/api/trading-signals", response_model=List[Dict[str, Any]])
-async def get_trading_signals(limit: int = 25, strategy_id: Optional[int] = None, db: Session = Depends(get_db)):
-    """Get recent trading signals, optionally filtered by strategy_id"""
+async def get_trading_signals(limit: int = 25, strategy_id: Optional[int] = None, signal_type: Optional[str] = None, symbol: Optional[str] = None, db: Session = Depends(get_db)):
+    """Get recent trading signals, optionally filtered by strategy_id, signal_type, or symbol"""
     try:
         repo_factory = RepositoryFactory(db)
-        signals = repo_factory.trading_signals.get_recent_signals(strategy_id=strategy_id, limit=limit)
+        
+        # If symbol is provided, look up the instrument to get its ID
+        symbol_id = None
+        if symbol:
+            instrument = repo_factory.instruments.get_by_symbol(symbol.upper())
+            if instrument:
+                symbol_id = instrument.id
+        
+        signals = repo_factory.trading_signals.get_recent_signals(
+            strategy_id=strategy_id, 
+            signal_type=signal_type,
+            symbol_id=symbol_id,
+            limit=limit
+        )
         
         result = []
         for signal in signals:
