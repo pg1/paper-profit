@@ -7,10 +7,11 @@ import logging
 # Add the parent directory to Python path to allow imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from storage.database import get_session
+from storage.database import get_session, retry_on_lock
 from storage.repositories import RepositoryFactory
 from storage.models import Order, Position
 from octopus.data_providers.yahoo_finance import YahooFinanceService
+
 
 # Set up logging - use WARNING level to reduce noise for background jobs
 logging.basicConfig(level=logging.WARNING)
@@ -20,6 +21,7 @@ logger = logging.getLogger(__name__)
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 
+@retry_on_lock(max_retries=5, delay=1.0, backoff=2.0)
 def run():
     """Process pending orders and create positions for filled orders"""
     logger.info("Starting order processing job...")
@@ -56,6 +58,11 @@ def run():
                     message=f"Error processing order {order.id}",
                     details=str(e)
                 )
+                # Rollback the session to clear any failed transaction state
+                try:
+                    db.rollback()
+                except Exception as rollback_error:
+                    logger.error(f"Error during rollback for order {order.id}: {rollback_error}")
         
         logger.info(f"Order processing completed. Processed {processed_count} orders.")
         
@@ -65,6 +72,7 @@ def run():
     finally:
         # Close the session properly
         db.close()
+
 
 
 def process_order(order: Order, repo_factory: RepositoryFactory) -> bool:

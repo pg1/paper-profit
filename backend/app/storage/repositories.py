@@ -366,6 +366,14 @@ class AccountRepository:
             self.db.refresh(account)
         return account
     
+    def get_summaries(self, account_id: str, limit: int = 100) -> List[AccountSummary]:
+        """Get account summary history ordered by timestamp"""
+        return (self.db.query(AccountSummary)
+                .filter(AccountSummary.account_id == account_id)
+                .order_by(asc(AccountSummary.timestamp))
+                .limit(limit)
+                .all())
+    
     def delete(self, account_id: str) -> bool:
         """Delete account and all related data"""
         account = self.get_by_id(account_id)

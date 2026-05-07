@@ -17,6 +17,10 @@ const props = defineProps({
   showControls: {
     type: Boolean,
     default: true
+  },
+  marketData: {
+    type: Array,
+    default: null
   }
 })
 
@@ -27,8 +31,10 @@ const isLoading = ref(false)
 const error = ref(null)
 const selectedPeriod = ref(props.period)
 const hoveredPoint = ref(null)
-const containerWidth = ref(800)
+const containerWidth = ref(0)
 const resizeObserver = ref(null)
+const graphRef = ref(null)
+const chartType = ref('line')
 
 const timePeriods = [
   { value: '1d', label: '1D' },
@@ -41,10 +47,7 @@ const timePeriods = [
 ]
 
 // Chart dimensions and calculations
-const chartWidth = computed(() => {
-  // Use 100% of container width, with a minimum of 400px
-  return Math.max(containerWidth.value, 400)
-})
+const chartWidth = computed(() => Math.max(containerWidth.value, 400))
 const chartHeight = computed(() => props.height)
 const padding = computed(() => ({
   top: 20,
@@ -62,19 +65,36 @@ const chartArea = computed(() => ({
 // Price range calculations
 const priceRange = computed(() => {
   if (marketData.value.length === 0) return { min: 0, max: 100 }
-  
-  const prices = marketData.value.map(d => d.close_price)
-  const minPrice = Math.min(...prices)
-  const maxPrice = Math.max(...prices)
-  
-  // Add some padding to the range
-  const range = maxPrice - minPrice
-  const padding = range * 0.1
-  
-  return {
-    min: minPrice - padding,
-    max: maxPrice + padding
+
+  let minPrice, maxPrice
+  if (chartType.value === 'candle') {
+    minPrice = Math.min(...marketData.value.map(d => d.low_price))
+    maxPrice = Math.max(...marketData.value.map(d => d.high_price))
+  } else {
+    const prices = marketData.value.map(d => d.close_price)
+    minPrice = Math.min(...prices)
+    maxPrice = Math.max(...prices)
   }
+
+  const range = maxPrice - minPrice
+  const pad = range * 0.1
+
+  return { min: minPrice - pad, max: maxPrice + pad }
+})
+
+// Candle width based on available space
+const candleWidth = computed(() => {
+  if (marketData.value.length < 2) return 8
+  return Math.max(2, (chartArea.value.width / marketData.value.length) * 0.7)
+})
+
+// Volume scale — maps volume to bar height within bottom 20% of chart area
+const volumeScale = computed(() => {
+  if (marketData.value.length === 0) return () => 0
+  const maxVol = Math.max(...marketData.value.map(d => d.volume || 0))
+  if (maxVol === 0) return () => 0
+  const volAreaHeight = chartArea.value.height * 0.2
+  return (volume) => ((volume || 0) / maxVol) * volAreaHeight
 })
 
 // Date range calculations
@@ -109,39 +129,45 @@ const yScale = computed(() => {
 // Generate line path for the chart
 const linePath = computed(() => {
   if (marketData.value.length === 0) return ''
-  
+
   const points = marketData.value.map((point, index) => {
-    const x = xScale.value(point.date) + padding.value.left
-    const y = yScale.value(point.close_price) + padding.value.top
+    const x = xScale.value(point.date)
+    const y = yScale.value(point.close_price)
     return `${index === 0 ? 'M' : 'L'} ${x} ${y}`
   })
-  
+
   return points.join(' ')
 })
 
 // Generate area path for the chart
 const areaPath = computed(() => {
   if (marketData.value.length === 0) return ''
-  
+
   const points = marketData.value.map((point, index) => {
-    const x = xScale.value(point.date) + padding.value.left
-    const y = yScale.value(point.close_price) + padding.value.top
+    const x = xScale.value(point.date)
+    const y = yScale.value(point.close_price)
     return `${index === 0 ? 'M' : 'L'} ${x} ${y}`
   })
-  
+
   // Close the area path
   const lastPoint = marketData.value[marketData.value.length - 1]
   const firstPoint = marketData.value[0]
-  
-  return points.join(' ') + 
-    ` L ${xScale.value(lastPoint.date) + padding.value.left} ${chartArea.value.height + padding.value.top}` +
-    ` L ${xScale.value(firstPoint.date) + padding.value.left} ${chartArea.value.height + padding.value.top}` +
+
+  return points.join(' ') +
+    ` L ${xScale.value(lastPoint.date)} ${chartArea.value.height}` +
+    ` L ${xScale.value(firstPoint.date)} ${chartArea.value.height}` +
     ' Z'
 })
 
 // Fetch market data
 const fetchMarketData = async () => {
   if (!props.symbol) return
+  
+  // If marketData prop is provided, use it directly instead of fetching
+  if (props.marketData && props.marketData.length > 0) {
+    marketData.value = [...props.marketData].sort((a, b) => new Date(a.date) - new Date(b.date))
+    return
+  }
   
   isLoading.value = true
   error.value = null
@@ -175,22 +201,26 @@ const handlePeriodChange = (period) => {
 // Handle mouse move on chart
 const handleMouseMove = (event) => {
   if (marketData.value.length === 0) return
-  
+
   const svg = event.currentTarget
   const rect = svg.getBoundingClientRect()
-  const x = event.clientX - rect.left - padding.value.left
-  
-  // Find the closest data point
-  const pointWidth = chartArea.value.width / (marketData.value.length - 1)
-  const pointIndex = Math.round(x / pointWidth)
-  
-  if (pointIndex >= 0 && pointIndex < marketData.value.length) {
-    hoveredPoint.value = {
-      ...marketData.value[pointIndex],
-      index: pointIndex
+  const mouseX = event.clientX - rect.left - padding.value.left
+
+  // Find the closest data point by actual scaled x position
+  let closestIndex = 0
+  let closestDist = Infinity
+
+  marketData.value.forEach((point, index) => {
+    const dist = Math.abs(xScale.value(point.date) - mouseX)
+    if (dist < closestDist) {
+      closestDist = dist
+      closestIndex = index
     }
-  } else {
-    hoveredPoint.value = null
+  })
+
+  hoveredPoint.value = {
+    ...marketData.value[closestIndex],
+    index: closestIndex
   }
 }
 
@@ -226,17 +256,23 @@ watch(() => props.period, (newPeriod) => {
   fetchMarketData()
 })
 
+// Watch for marketData prop changes
+watch(() => props.marketData, (newData) => {
+  if (newData && newData.length > 0) {
+    marketData.value = [...newData].sort((a, b) => new Date(a.date) - new Date(b.date))
+  }
+}, { deep: true })
+
 // Setup resize observer
 const setupResizeObserver = () => {
-  const container = document.querySelector('.chart-container')
-  if (container) {
-    resizeObserver.value = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        containerWidth.value = entry.contentRect.width
-      }
-    })
-    resizeObserver.value.observe(container)
-  }
+  if (!graphRef.value) return
+  containerWidth.value = graphRef.value.clientWidth
+  resizeObserver.value = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      containerWidth.value = entry.contentRect.width
+    }
+  })
+  resizeObserver.value.observe(graphRef.value)
 }
 
 // Initial data fetch and setup
@@ -254,20 +290,47 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="stock-price-graph">
+  <div ref="graphRef" class="stock-price-graph">
     <!-- Graph Header -->
     <div v-if="showControls" class="graph-header">
       <h3 class="graph-title">Price Chart - {{ symbol }}</h3>
-      <div class="period-selector">
-        <button
-          v-for="period in timePeriods"
-          :key="period.value"
-          class="period-btn"
-          :class="{ active: selectedPeriod === period.value }"
-          @click="handlePeriodChange(period.value)"
-        >
-          {{ period.label }}
-        </button>
+      <div class="header-controls">
+        <div class="chart-type-toggle">
+          <button
+            class="chart-type-btn"
+            :class="{ active: chartType === 'line' }"
+            @click="chartType = 'line'"
+            title="Line chart"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <polyline points="1,11 4,6 7,8 10,3 13,5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button
+            class="chart-type-btn"
+            :class="{ active: chartType === 'candle' }"
+            @click="chartType = 'candle'"
+            title="Candlestick chart"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <line x1="3" y1="1" x2="3" y2="13" stroke="currentColor" stroke-width="1"/>
+              <rect x="1.5" y="4" width="3" height="5" fill="currentColor"/>
+              <line x1="11" y1="1" x2="11" y2="13" stroke="currentColor" stroke-width="1"/>
+              <rect x="9.5" y="3" width="3" height="6" fill="none" stroke="currentColor" stroke-width="1"/>
+            </svg>
+          </button>
+        </div>
+        <div class="period-selector">
+          <button
+            v-for="period in timePeriods"
+            :key="period.value"
+            class="period-btn"
+            :class="{ active: selectedPeriod === period.value }"
+            @click="handlePeriodChange(period.value)"
+          >
+            {{ period.label }}
+          </button>
+        </div>
       </div>
     </div>
 
@@ -285,9 +348,9 @@ onUnmounted(() => {
 
     <!-- Chart Container -->
     <div v-else-if="marketData.length > 0" class="chart-container">
-      <svg 
-        :width="chartWidth" 
-        :height="chartHeight" 
+      <svg
+        width="100%"
+        :height="chartHeight"
         class="chart-svg"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
@@ -302,22 +365,54 @@ onUnmounted(() => {
 
         <!-- Chart Area -->
         <g :transform="`translate(${padding.left}, ${padding.top})`">
-          <!-- Area fill -->
-          <path 
-            :d="areaPath" 
-            class="area-fill" 
-            fill="url(#areaGradient)"
-          />
 
-          <!-- Line -->
-          <path 
-            :d="linePath" 
-            class="price-line" 
-            fill="none" 
-            stroke-width="2"
-          />
+          <!-- Line chart -->
+          <template v-if="chartType === 'line'">
+            <path :d="areaPath" class="area-fill" fill="url(#areaGradient)" />
+            <path :d="linePath" class="price-line" fill="none" stroke-width="2" />
+            <circle
+              v-if="hoveredPoint"
+              :cx="xScale(hoveredPoint.date)"
+              :cy="yScale(hoveredPoint.close_price)"
+              r="4"
+              class="hover-point"
+            />
+          </template>
 
-          <!-- Hover line -->
+          <!-- Candlestick chart -->
+          <template v-if="chartType === 'candle'">
+            <!-- Volume bars (bottom 20% of chart, drawn first so candles sit on top) -->
+            <rect
+              v-for="point in marketData"
+              :key="`vol-${point.date}`"
+              :x="xScale(point.date) - candleWidth / 2"
+              :y="chartArea.height - volumeScale(point.volume)"
+              :width="candleWidth"
+              :height="volumeScale(point.volume)"
+              :fill="point.close_price >= point.open_price ? '#26a69a' : '#ef5350'"
+              opacity="0.25"
+            />
+            <!-- Candles -->
+            <g v-for="point in marketData" :key="point.date">
+              <line
+                :x1="xScale(point.date)"
+                :x2="xScale(point.date)"
+                :y1="yScale(point.high_price)"
+                :y2="yScale(point.low_price)"
+                :stroke="point.close_price >= point.open_price ? '#26a69a' : '#ef5350'"
+                stroke-width="1"
+              />
+              <rect
+                :x="xScale(point.date) - candleWidth / 2"
+                :y="yScale(Math.max(point.open_price, point.close_price))"
+                :width="candleWidth"
+                :height="Math.max(1, Math.abs(yScale(point.open_price) - yScale(point.close_price)))"
+                :fill="point.close_price >= point.open_price ? '#26a69a' : '#ef5350'"
+              />
+            </g>
+          </template>
+
+          <!-- Hover vertical line -->
           <line
             v-if="hoveredPoint"
             :x1="xScale(hoveredPoint.date)"
@@ -327,13 +422,14 @@ onUnmounted(() => {
             class="hover-line"
           />
 
-          <!-- Hover point -->
-          <circle
+          <!-- Hover horizontal line to price axis -->
+          <line
             v-if="hoveredPoint"
-            :cx="xScale(hoveredPoint.date)"
-            :cy="yScale(hoveredPoint.close_price)"
-            r="4"
-            class="hover-point"
+            x1="0"
+            :x2="xScale(hoveredPoint.date)"
+            :y1="yScale(hoveredPoint.close_price)"
+            :y2="yScale(hoveredPoint.close_price)"
+            class="hover-line"
           />
         </g>
 
@@ -373,8 +469,14 @@ onUnmounted(() => {
         top: `${yScale(hoveredPoint.close_price) + padding.top - 60}px`
       }">
         <div class="tooltip-date">{{ formatDate(hoveredPoint.date) }}</div>
-        <div class="tooltip-price">{{ formatCurrency(hoveredPoint.close_price) }}</div>
-        <div class="tooltip-volume">Volume: {{ hoveredPoint.volume?.toLocaleString() }}</div>
+        <template v-if="chartType === 'candle'">
+          <div class="tooltip-ohlc">O: {{ formatCurrency(hoveredPoint.open_price) }}</div>
+          <div class="tooltip-ohlc">H: {{ formatCurrency(hoveredPoint.high_price) }}</div>
+          <div class="tooltip-ohlc">L: {{ formatCurrency(hoveredPoint.low_price) }}</div>
+          <div class="tooltip-ohlc">C: {{ formatCurrency(hoveredPoint.close_price) }}</div>
+        </template>
+        <div v-else class="tooltip-price">{{ formatCurrency(hoveredPoint.close_price) }}</div>
+        <div class="tooltip-volume">Vol: {{ hoveredPoint.volume?.toLocaleString() }}</div>
       </div>
 
       <!-- Current Price Display -->
@@ -431,6 +533,47 @@ onUnmounted(() => {
   margin: 0;
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chart-type-toggle {
+  display: flex;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chart-type-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background-color: #ffffff;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.chart-type-btn:not(:last-child) {
+  border-right: 1px solid #e9ecef;
+}
+
+.chart-type-btn:hover {
+  background-color: #f8f9fa;
+  color: #007bff;
+}
+
+.chart-type-btn.active {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
 .period-selector {
   display: flex;
   gap: 0.5rem;
@@ -466,6 +609,8 @@ onUnmounted(() => {
 }
 
 .chart-svg {
+  display: block;
+  width: 100%;
   border-radius: 4px;
   background-color: #ffffff;
 }
@@ -524,9 +669,16 @@ onUnmounted(() => {
   margin-bottom: 0.25rem;
 }
 
+.tooltip-ohlc {
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.1rem;
+}
+
 .tooltip-volume {
   opacity: 0.8;
   font-size: 0.75rem;
+  margin-top: 0.25rem;
 }
 
 .current-price-display {

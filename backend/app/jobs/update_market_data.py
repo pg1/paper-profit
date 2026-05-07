@@ -7,11 +7,12 @@ import logging
 # Add the parent directory to Python path to allow imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from storage.database import get_session
+from storage.database import get_session, retry_on_lock
 from storage.repositories import RepositoryFactory
 from storage.models import Instrument, MarketData
 from octopus.data_providers.yahoo_finance import YahooFinanceService
 from utils.market_hours import market_hours
+
 
 # Set up logging - use WARNING level to reduce noise for background jobs
 logging.basicConfig(level=logging.INFO)
@@ -86,6 +87,7 @@ def update_market_data(db_session: Session):
     return updated_count
 
 
+@retry_on_lock(max_retries=5, delay=1.0, backoff=2.0)
 def run():
     """Main job execution function"""
     logger.info("Starting update market data job...")
@@ -98,6 +100,7 @@ def run():
     except Exception as e:
         logger.error(f"Error in update market data job: {e}")
         raise
+
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import logging
 # Add the parent directory to Python path to allow imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from storage.database import get_session
+from storage.database import get_session, retry_on_lock
 from storage.repositories import RepositoryFactory
 from storage.models import Order, Position, Instrument
 from octopus.data_providers.yahoo_finance import YahooFinanceService
@@ -71,13 +71,19 @@ def update_position_prices(db_session: Session):
             
         except Exception as e:
             logger.error(f"Error updating price for position ID {position.id}: {e}")
-            db_session.rollback()
+            # Always rollback the session to clear any failed transaction state
+            # before continuing to the next position
+            try:
+                db_session.rollback()
+            except Exception as rollback_error:
+                logger.error(f"Error during rollback for position ID {position.id}: {rollback_error}")
             failed_count += 1
     
     logger.info(f"Position price update completed: {updated_count} updated, {failed_count} failed")
     return updated_count
 
 
+@retry_on_lock(max_retries=5, delay=1.0, backoff=2.0)
 def run():
     """Main job execution function"""
     logger.info("Starting update positions job...")
@@ -93,3 +99,4 @@ def run():
    
 if __name__ == "__main__":
     run()
+

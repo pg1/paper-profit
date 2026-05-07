@@ -1,7 +1,7 @@
 from typing import List, Optional, Dict, Any
 from sqlalchemy.orm import Session
 from storage.repositories import AccountRepository, InstrumentRepository, OrderRepository
-from storage.models import Account as AccountModel, Strategy
+from storage.models import Account as AccountModel, Strategy, AccountSummary
 from .log_service import LogService
 from uuid import uuid4
 from datetime import datetime
@@ -360,6 +360,7 @@ class AccountService:
         
         # Calculate current portfolio metrics
         portfolio_value = 0.0
+        total_cost_basis = 0.0
         total_unrealized_pnl = 0.0
         total_realized_pnl = 0.0
         
@@ -369,6 +370,10 @@ class AccountService:
                 position_value = float(position.quantity) * float(position.current_price)
                 portfolio_value += position_value
                 total_unrealized_pnl += float(position.unrealized_pnl) if position.unrealized_pnl else 0.0
+            
+            # Calculate total cost basis (amount invested) for percentage calculations
+            if position.quantity and position.average_entry_price:
+                total_cost_basis += float(position.quantity) * float(position.average_entry_price)
         
         # Calculate total realized P&L from trades
         for trade in account.trades:
@@ -377,14 +382,18 @@ class AccountService:
         total_equity = float(account.cash_balance) + portfolio_value
         
         # Calculate performance metrics
-        initial_balance = float(account.cash_balance)  # For now, use current cash as initial (simplified)
         total_pnl = total_unrealized_pnl + total_realized_pnl
         
-        # Calculate percentage returns
-        if initial_balance > 0:
-            total_return_percentage = (total_pnl / initial_balance) * 100
+        # Calculate percentage returns using total cost basis (amount invested) as denominator
+        # This gives the true return on invested capital
+        if total_cost_basis > 0:
+            total_return_percentage = (total_pnl / total_cost_basis) * 100
+        elif total_equity > 0:
+            # Fallback: if no cost basis (e.g., new account with cash only), use total equity
+            total_return_percentage = (total_pnl / total_equity) * 100
         else:
             total_return_percentage = 0.0
+
         
         # Calculate daily performance (simplified - would need historical data for accurate calculation)
         account_age_days = (datetime.utcnow() - account.created_at).days if account.created_at else 1
@@ -393,6 +402,14 @@ class AccountService:
         # Calculate risk metrics (simplified)
         volatility = self._calculate_portfolio_volatility(account_id)
         sharpe_ratio = self._calculate_sharpe_ratio(daily_return_percentage, volatility)
+        
+        # Get max drawdown from the latest AccountSummary record
+        max_drawdown = 0.0
+        latest_summary = self.db.query(AccountSummary).filter(
+            AccountSummary.account_id == account_id
+        ).order_by(AccountSummary.timestamp.desc()).first()
+        if latest_summary and latest_summary.max_drawdown is not None:
+            max_drawdown = float(latest_summary.max_drawdown)
         
         return {
             'account_id': account.account_id,
@@ -406,10 +423,12 @@ class AccountService:
             'daily_return_percentage': round(daily_return_percentage, 2),
             'volatility': round(volatility, 4),
             'sharpe_ratio': round(sharpe_ratio, 4),
+            'max_drawdown': round(max_drawdown, 4),
             'number_of_positions': len(account.positions),
             'number_of_trades': len(account.trades),
             'account_age_days': account_age_days
         }
+
 
     def _calculate_portfolio_volatility(self, account_id: str) -> float:
         """Calculate portfolio volatility (simplified implementation)"""

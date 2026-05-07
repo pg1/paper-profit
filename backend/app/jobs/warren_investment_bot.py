@@ -6,8 +6,9 @@ from sqlalchemy.orm import Session
 # Add the parent directory to Python path to allow imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from storage.database import get_session
+from storage.database import get_session, retry_on_lock
 from storage.repositories import RepositoryFactory
+
 
 # Import the new modules
 from jobs.trading_bot.instrument_discovery import InstrumentDiscovery
@@ -205,6 +206,7 @@ class TradingBot:
             )
 
 
+@retry_on_lock(max_retries=5, delay=1.0, backoff=2.0)
 def run():
     """Main function to run the trading bot"""
     logger.info("Starting trading bot job...")
@@ -221,6 +223,7 @@ def run():
     finally:
         # Close the session properly
         db.close()
+
 
 
 if __name__ == "__main__":

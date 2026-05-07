@@ -69,30 +69,39 @@ async def get_all_accounts(db: Session = Depends(get_db)):
         for account in accounts:
             # Calculate portfolio value from positions
             portfolio_value = 0.0
-            for position in account.positions:
-                if position.current_price and position.quantity:
-                    position_value = float(position.quantity) * float(position.current_price)
-                    portfolio_value += position_value
-            
-            total_equity = float(account.cash_balance) + portfolio_value
-            
-            # Calculate total P&L from positions
+            total_cost_basis = 0.0
             total_unrealized_pnl = 0.0
             total_realized_pnl = 0.0
             
             for position in account.positions:
+                if position.current_price and position.quantity:
+                    position_value = float(position.quantity) * float(position.current_price)
+                    portfolio_value += position_value
+                
                 if position.unrealized_pnl:
                     total_unrealized_pnl += float(position.unrealized_pnl)
+                
+                # Calculate total cost basis (amount invested) for percentage calculations
+                if position.quantity and position.average_entry_price:
+                    total_cost_basis += float(position.quantity) * float(position.average_entry_price)
             
-            # Calculate realized P&L from trades (simplified - would need to iterate through trades)
-            # For now, we'll just use unrealized P&L
+            # Calculate realized P&L from trades
+            for trade in account.trades:
+                total_realized_pnl += float(trade.net_pnl) if trade.net_pnl else 0.0
+            
+            total_equity = float(account.cash_balance) + portfolio_value
             
             total_pnl = total_unrealized_pnl + total_realized_pnl
             
-            # Calculate gain/loss percentage as percentage of total equity
+            # Calculate gain/loss percentage using total cost basis (amount invested) as denominator
+            # This gives the true return on invested capital
             gain_loss_percentage = 0.0
-            if total_equity > 0:
+            if total_cost_basis > 0:
+                gain_loss_percentage = (total_pnl / total_cost_basis) * 100
+            elif total_equity > 0:
+                # Fallback: if no cost basis (e.g., new account with cash only), use total equity
                 gain_loss_percentage = (total_pnl / total_equity) * 100
+
             
             result.append({
                 "account_id": account.account_id,
@@ -352,6 +361,40 @@ async def get_account_performance(account_id: str, db: Session = Depends(get_db)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to retrieve account performance: {str(e)}"
+        )
+
+
+@app.get("/api/accounts/{account_id}/performance/history", response_model=List[Dict[str, Any]])
+async def get_account_performance_history(account_id: str, limit: int = 100, db: Session = Depends(get_db)):
+    """Get account performance history (equity curve and daily P&L)"""
+    try:
+        from storage.repositories import AccountRepository
+        
+        account_repo = AccountRepository(db)
+        summaries = account_repo.get_summaries(account_id, limit=limit)
+        
+        result = []
+        for summary in summaries:
+            result.append({
+                'date': summary.timestamp.isoformat() if summary.timestamp else None,
+                'total_equity': float(summary.total_equity) if summary.total_equity else 0,
+                'cash_balance': float(summary.cash_balance) if summary.cash_balance else 0,
+                'portfolio_value': float(summary.portfolio_value) if summary.portfolio_value else 0,
+                'daily_pnl': float(summary.daily_pnl) if summary.daily_pnl else 0,
+                'unrealized_pnl': float(summary.unrealized_pnl) if summary.unrealized_pnl else 0,
+                'realized_pnl': float(summary.realized_pnl) if summary.realized_pnl else 0,
+            })
+        
+        return result
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve account performance history: {str(e)}"
         )
 
 

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue'
+import StockPriceGraph from './ui/StockPriceGraph.vue'
 
 const props = defineProps({
   navigationParams: {
@@ -12,12 +13,14 @@ const performanceData = ref(null)
 const holdingsData = ref([])
 const ordersData = ref([])
 const tradingSignalsData = ref([])
+const performanceHistoryData = ref([])
 const isLoading = ref(false)
 const error = ref(null)
 const accountName = ref('test') 
 const isAccountActive = ref(null) // Account active status
 const strategyName = ref('') // Strategy name
-const activeTab = ref('holdings') // Tab state: 'holdings', 'orders', 'signals'
+const activeTab = ref('holdings') // Tab state: 'holdings', 'orders', 'signals', 'performance'
+const performanceChartType = ref('equity') // 'equity' or 'pnl'
 
 // Signal filter state
 const signalFilterType = ref('')
@@ -195,6 +198,47 @@ const fetchTradingSignals = async () => {
   }
 }
 
+// Fetch performance history (equity curve and daily P&L)
+const fetchPerformanceHistory = async () => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/accounts/${accountName.value}/performance/history?limit=100`)
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch performance history: ${response.status}`)
+    }
+    
+    const data = await response.json()
+    console.log('Performance History API Response:', data) // Debug log
+    performanceHistoryData.value = data
+  } catch (err) {
+    console.error('Error fetching performance history:', err)
+  }
+}
+
+// Computed property for equity curve data mapped to StockPriceGraph format
+const equityCurveData = computed(() => {
+  return performanceHistoryData.value.map(item => ({
+    date: item.date,
+    close_price: item.total_equity,
+    open_price: item.total_equity,
+    high_price: item.total_equity,
+    low_price: item.total_equity,
+    volume: 0
+  }))
+})
+
+// Computed property for daily P&L data mapped to StockPriceGraph format
+const dailyPnlData = computed(() => {
+  return performanceHistoryData.value.map(item => ({
+    date: item.date,
+    close_price: item.daily_pnl,
+    open_price: item.daily_pnl,
+    high_price: item.daily_pnl,
+    low_price: item.daily_pnl,
+    volume: 0
+  }))
+})
+
 // Fetch all data
 const fetchData = async () => {
   isLoading.value = true
@@ -251,30 +295,56 @@ const totalEquity = computed(() => {
 // Calculate total gain/loss
 const totalGainLoss = computed(() => {
   if (!performanceData.value) return 0
-  return performanceData.value.profit_loss || 0
+  return performanceData.value.total_pnl || 0
 })
 
 // Calculate total gain/loss percentage
 const totalGainLossPercentage = computed(() => {
   if (!performanceData.value) return 0
-  return performanceData.value.profit_loss_percent || 0
+  return performanceData.value.total_return_percentage || 0
 })
 
 // Get daily gain/loss value
 const dailyGainLoss = computed(() => {
   if (!performanceData.value) return 0
   // For now, use total gain/loss since daily data isn't available
-  return performanceData.value.profit_loss || 0
+  return performanceData.value.total_pnl || 0
 })
 
 // Get daily gain/loss percentage
 const dailyGainLossPercentage = computed(() => {
   if (!performanceData.value) return 0
   // For now, use total gain/loss percentage since daily data isn't available
-  return performanceData.value.profit_loss_percent || 0
+  return performanceData.value.daily_return_percentage || 0
 })
 
+// Get Sharpe ratio
+const sharpeRatio = computed(() => {
+  if (!performanceData.value) return 0
+  return performanceData.value.sharpe_ratio || 0
+})
+
+// Get max drawdown
+const maxDrawdown = computed(() => {
+  if (!performanceData.value) return 0
+  return performanceData.value.max_drawdown || 0
+})
+
+// Format Sharpe ratio (2 decimal places)
+const formatSharpeRatio = (value) => {
+  if (value === null || value === undefined) return '0.00'
+  return value.toFixed(2)
+}
+
+// Format max drawdown as percentage
+const formatMaxDrawdown = (value) => {
+  if (value === null || value === undefined) return '0.00%'
+  // Max drawdown is stored as a decimal (e.g., 0.15 = 15%), display as percentage
+  return `${(value * 100).toFixed(2)}%`
+}
+
 // Filtered trading signals based on signal type and symbol
+
 const filteredSignals = computed(() => {
   let signals = tradingSignalsData.value
   
@@ -363,8 +433,31 @@ onMounted(() => {
           <span class="summary-label">Total Portfolio Value</span>
           <span class="summary-value">{{ formatCurrency(totalPortfolioValue) }}</span>
         </div>
+        <div class="summary-card">
+          <span class="summary-label">Total Gain/Loss</span>
+          <span class="summary-value" :class="{ positive: totalGainLoss >= 0, negative: totalGainLoss < 0 }">
+            {{ formatCurrency(totalGainLoss) }}
+            <span class="percentage-badge" :class="{ positive: totalGainLossPercentage >= 0, negative: totalGainLossPercentage < 0 }">
+              {{ formatPercentage(totalGainLossPercentage) }}
+            </span>
+          </span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Sharpe Ratio</span>
+          <span class="summary-value" :class="{ positive: sharpeRatio >= 1, negative: sharpeRatio < 1 }">
+            {{ formatSharpeRatio(sharpeRatio) }}
+          </span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Max Drawdown</span>
+          <span class="summary-value negative">
+            {{ formatMaxDrawdown(maxDrawdown) }}
+          </span>
+        </div>
       </div>
+
     </div>
+
 
     <!-- Tabs Navigation -->
     <div class="tabs">
@@ -385,6 +478,12 @@ onMounted(() => {
         @click="activeTab = 'signals'"
       >
         Signals
+      </button>
+      <button 
+        :class="['tab', { active: activeTab === 'performance' }]" 
+        @click="activeTab = 'performance'; fetchPerformanceHistory()"
+      >
+        Performance
       </button>
     </div>
 
@@ -668,6 +767,37 @@ onMounted(() => {
           </table>
         </div>
       </div>
+
+      <!-- Performance Tab -->
+      <div v-if="activeTab === 'performance'" class="tab-pane">
+        <h3 class="subsection-header">Performance Charts</h3>
+        
+        <div v-if="performanceHistoryData.length === 0" class="empty-state">
+          <p class="empty-message">No performance history data available</p>
+        </div>
+        
+        <div v-else class="performance-charts">
+          <div class="chart-section">
+            <h4 class="chart-title">Daily Equity Value</h4>
+            <StockPriceGraph 
+              :marketData="equityCurveData" 
+              :symbol="accountName + ' Equity'"
+              :height="400"
+              :showControls="false"
+            />
+          </div>
+          
+          <div class="chart-section">
+            <h4 class="chart-title">Daily Gain / Loss ($)</h4>
+            <StockPriceGraph 
+              :marketData="dailyPnlData" 
+              :symbol="accountName + ' P&L'"
+              :height="400"
+              :showControls="false"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -730,6 +860,27 @@ onMounted(() => {
 .negative {
   color: #dc3545;
 }
+
+.percentage-badge {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.percentage-badge.positive {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.percentage-badge.negative {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
 
 /* Tab styles copied from AssetTrade.vue */
 .tabs {
@@ -1061,6 +1212,29 @@ th:nth-child(8) { /* % Gain/Loss */
   font-size: 0.9rem;
   color: #666;
   min-width: 60px;
+}
+
+/* Performance chart styles */
+.performance-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.chart-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.chart-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 @media (max-width: 768px) {
