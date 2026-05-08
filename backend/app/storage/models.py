@@ -150,6 +150,7 @@ class Strategy(Base):
     orders = relationship("Order", back_populates="strategy")
     trades = relationship("Trade", back_populates="strategy")
     accounts = relationship("Account", back_populates="strategy")
+    backtest_results = relationship("BacktestResult", back_populates="strategy")
 
 
 class TradingSignal(Base):
@@ -367,3 +368,43 @@ class QuantitativeData(Base):
 
     # Unique constraint
     __table_args__ = (UniqueConstraint('symbol_id', 'timestamp', 'meta', name='uq_quantitative_data_symbol_timestamp_meta'),)
+
+
+class BacktestResult(Base):
+    """Backtest results for strategies"""
+    __tablename__ = "backtest_results"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    strategy_id = Column(Integer, ForeignKey("strategies.id"), nullable=False)
+
+    # Backtest configuration
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=False)
+    initial_capital = Column(DECIMAL(15, 2), nullable=False)
+
+    # Performance metrics
+    total_return = Column(DECIMAL(10, 4))
+    total_return_pct = Column(DECIMAL(10, 4))
+    annualized_return = Column(DECIMAL(10, 4))
+    max_drawdown = Column(DECIMAL(10, 4))
+    max_drawdown_pct = Column(DECIMAL(10, 4))
+    sharpe_ratio = Column(DECIMAL(10, 4))
+    volatility = Column(DECIMAL(10, 4))
+    win_rate = Column(DECIMAL(10, 4))
+    total_trades = Column(Integer)
+    winning_trades = Column(Integer)
+    losing_trades = Column(Integer)
+    profit_factor = Column(DECIMAL(10, 4))
+
+    # JSON blobs for detailed results
+    equity_curve = Column(JSON)
+    trade_log = Column(JSON)
+    monthly_returns = Column(JSON)
+
+    # Metadata
+    status = Column(String, default='running')
+    error_message = Column(Text)
+    created_at = Column(DateTime, default=func.current_timestamp())
+
+    # Relationships
+    strategy = relationship("Strategy", back_populates="backtest_results")

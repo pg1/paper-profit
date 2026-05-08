@@ -1922,6 +1922,112 @@ async def get_learning_day_list():
         )
 
 
+# ── Backtest API Endpoints ──
+
+from services.backtest_service import BacktestService
+
+
+@app.post("/api/strategies/{strategy_id}/backtest", response_model=Dict[str, Any])
+async def run_strategy_backtest(
+    strategy_id: int,
+    backtest_request: Dict[str, Any],
+    db: Session = Depends(get_db)
+):
+    """Run a backtest for a strategy. Payload: { start_date: str, end_date: str, initial_capital?: float }"""
+    try:
+        start_date = backtest_request.get('start_date')
+        end_date = backtest_request.get('end_date')
+        initial_capital = backtest_request.get('initial_capital', 100000.0)
+
+        if not start_date or not end_date:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="start_date and end_date are required (YYYY-MM-DD format)"
+            )
+
+        backtest_service = BacktestService(db)
+        result = backtest_service.run_backtest(
+            strategy_id=strategy_id,
+            start_date=start_date,
+            end_date=end_date,
+            initial_capital=initial_capital,
+        )
+        return result
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Backtest failed: {str(e)}"
+        )
+
+
+@app.get("/api/strategies/{strategy_id}/backtest-results", response_model=List[Dict[str, Any]])
+async def get_strategy_backtest_results(
+    strategy_id: int,
+    limit: int = 10,
+    db: Session = Depends(get_db)
+):
+    """Get backtest results for a strategy"""
+    try:
+        backtest_service = BacktestService(db)
+        results = backtest_service.get_backtest_results(strategy_id, limit)
+        return results
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve backtest results: {str(e)}"
+        )
+
+
+@app.get("/api/backtest-results/{backtest_id}", response_model=Dict[str, Any])
+async def get_backtest_result(backtest_id: int, db: Session = Depends(get_db)):
+    """Get a single backtest result by ID"""
+    try:
+        backtest_service = BacktestService(db)
+        result = backtest_service.get_backtest_by_id(backtest_id)
+        if not result:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Backtest result with ID {backtest_id} not found"
+            )
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to retrieve backtest result: {str(e)}"
+        )
+
+
+@app.delete("/api/backtest-results/{backtest_id}")
+async def delete_backtest_result(backtest_id: int, db: Session = Depends(get_db)):
+    """Delete a backtest result"""
+    try:
+        backtest_service = BacktestService(db)
+        success = backtest_service.delete_backtest(backtest_id)
+        if not success:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Backtest result with ID {backtest_id} not found"
+            )
+        return {"message": f"Backtest result {backtest_id} deleted successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to delete backtest result: {str(e)}"
+        )
+
+
 # Serve index.html for all other routes (SPA support)
 @app.get("/{full_path:path}")
 async def serve_spa(full_path: str):

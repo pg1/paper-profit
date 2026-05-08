@@ -4,7 +4,7 @@ from sqlalchemy import and_, or_, desc, asc, func
 from .models import (
     Instrument, MarketData, TechnicalIndicator, Strategy, TradingSignal,
     Order, Position, Trade, Account, AccountSummary, NewsSentiment, SystemLog, Setting,
-    QuantitativeData
+    QuantitativeData, BacktestResult
 )
 
 
@@ -649,6 +649,52 @@ class QuantitativeDataRepository:
             return data
 
 
+class BacktestResultRepository:
+    """Repository for backtest result operations"""
+
+    def __init__(self, db: Session):
+        self.db = db
+
+    def get_by_id(self, backtest_id: int) -> Optional[BacktestResult]:
+        """Get backtest result by ID"""
+        return self.db.query(BacktestResult).filter(BacktestResult.id == backtest_id).first()
+
+    def get_by_strategy(self, strategy_id: int, limit: int = 10) -> List[BacktestResult]:
+        """Get backtest results for a strategy, ordered by most recent first"""
+        return (self.db.query(BacktestResult)
+                .filter(BacktestResult.strategy_id == strategy_id)
+                .order_by(desc(BacktestResult.created_at))
+                .limit(limit)
+                .all())
+
+    def create(self, backtest_data: Dict[str, Any]) -> BacktestResult:
+        """Create new backtest result"""
+        result = BacktestResult(**backtest_data)
+        self.db.add(result)
+        self.db.commit()
+        self.db.refresh(result)
+        return result
+
+    def update(self, backtest_id: int, backtest_data: Dict[str, Any]) -> Optional[BacktestResult]:
+        """Update backtest result"""
+        result = self.get_by_id(backtest_id)
+        if result:
+            for key, value in backtest_data.items():
+                setattr(result, key, value)
+            self.db.commit()
+            self.db.refresh(result)
+        return result
+
+    def delete(self, backtest_id: int) -> bool:
+        """Delete backtest result"""
+        result = self.get_by_id(backtest_id)
+        if result:
+            self.db.delete(result)
+            self.db.commit()
+            return True
+        return False
+
+
 # Repository factory for easy access
 class RepositoryFactory:
     """Factory class to provide repository instances"""
@@ -704,3 +750,7 @@ class RepositoryFactory:
     @property
     def quantitative_data(self) -> QuantitativeDataRepository:
         return QuantitativeDataRepository(self.db)
+
+    @property
+    def backtest_results(self) -> BacktestResultRepository:
+        return BacktestResultRepository(self.db)

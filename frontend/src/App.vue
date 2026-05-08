@@ -18,6 +18,7 @@ import LearningJourney from './components/LearningJourney.vue'
 import LearningDetails from './components/LearningDetails.vue'
 import Trade from './components/AssetTrade.vue'
 import InstrumentList from './components/InstrumentList.vue'
+import BacktestView from './components/BacktestView.vue'
 
 const currentPage = ref('learning')
 const navigationParams = ref({})
@@ -107,6 +108,11 @@ const handleNavigation = (page, params = {}) => {
         />
         <InstrumentList 
           v-else-if="currentPage === 'list'" 
+          @navigate="handleNavigation"
+          :navigation-params="navigationParams"
+        />
+        <BacktestView 
+          v-else-if="currentPage === 'backtest'" 
           @navigate="handleNavigation"
           :navigation-params="navigationParams"
         />

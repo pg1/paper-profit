@@ -113,6 +113,12 @@ const handleStrategyClick = (strategy) => {
   emit('navigate', 'strategy-edit', { strategyId: strategy.id })
 }
 
+// Handle backtest click
+const handleBacktestClick = (strategy, event) => {
+  event.stopPropagation()
+  emit('navigate', 'backtest', { strategyId: strategy.id })
+}
+
 // Get sort icon for column
 const getSortIcon = (column) => {
   if (sortBy.value !== column) return '⇅'
@@ -188,6 +194,7 @@ onMounted(() => {
                 <span>Created</span>
                 <span class="sort-arrow">{{ getSortIcon('created_at') }}</span>
               </th>
+              <th class="actions-header">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -200,6 +207,15 @@ onMounted(() => {
               <td class="strategy-id-cell">{{ strategy.id }}</td>
               <td class="name-cell">{{ strategy.name }}</td>
               <td class="created-cell">{{ getElapsedDays(strategy.created_at) }}</td>
+              <td class="actions-cell">
+                <button
+                  class="btn-backtest"
+                  @click="handleBacktestClick(strategy, $event)"
+                  title="Run backtest for this strategy"
+                >
+                  Backtest
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -285,6 +301,32 @@ onMounted(() => {
   color: #000000;
   opacity: 0.8;
   font-size: 0.9rem;
+}
+
+.actions-header {
+  text-align: center;
+  width: 100px;
+}
+
+.actions-cell {
+  text-align: center;
+}
+
+.btn-backtest {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #1976d2;
+  background: #ffffff;
+  color: #1976d2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-backtest:hover {
+  background: #1976d2;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
