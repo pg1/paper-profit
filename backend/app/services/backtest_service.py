@@ -36,6 +36,8 @@ class BacktestEngine:
         start_date: str,
         end_date: str,
         initial_capital: float = 100000.0,
+        commission_pct: float = 0.0,
+        slippage_pct: float = 0.0,
     ) -> Dict[str, Any]:
         """
         Run a full backtest for a strategy over a date range.
@@ -45,6 +47,8 @@ class BacktestEngine:
             start_date: Start date (YYYY-MM-DD)
             end_date: End date (YYYY-MM-DD)
             initial_capital: Starting capital
+            commission_pct: Commission as a fraction of trade value (e.g. 0.001 for 0.1%)
+            slippage_pct: Slippage as a fraction of fill price (e.g. 0.001 for 0.1%)
 
         Returns:
             Dict with backtest results including performance metrics
@@ -86,6 +90,8 @@ class BacktestEngine:
                 start_date=start_date,
                 end_date=end_date,
                 initial_capital=initial_capital,
+                commission_pct=commission_pct,
+                slippage_pct=slippage_pct,
             )
 
             # Update backtest record with results
@@ -97,6 +103,8 @@ class BacktestEngine:
                 'max_drawdown': result['max_drawdown'],
                 'max_drawdown_pct': result['max_drawdown_pct'],
                 'sharpe_ratio': result['sharpe_ratio'],
+                'sortino_ratio': result['sortino_ratio'],
+                'max_drawdown_duration_days': result['max_drawdown_duration_days'],
                 'volatility': result['volatility'],
                 'win_rate': result['win_rate'],
                 'total_trades': result['total_trades'],
@@ -107,6 +115,7 @@ class BacktestEngine:
                 'trade_log': json.dumps(result['trade_log']),
                 'monthly_returns': json.dumps(result['monthly_returns']),
             }
+
             self.repo_factory.backtest_results.update(backtest_record.id, update_data)
 
             logger.info(f"Backtest completed: {result['total_trades']} trades, "
@@ -301,51 +310,243 @@ class BacktestEngine:
 
         return list(reqs)
 
-    def _compute_indicators_for_day(
+    # ------------------------------------------------------------------
+    # Pre-compute all indicators once per ticker (FIX #1: O(n²) -> O(n))
+    # ------------------------------------------------------------------
+
+    def _precompute_all_indicators(
+        self,
+        price_histories: Dict[str, List[Dict]],
+        requirements: List[Tuple[str, int]],
+    ) -> Dict[str, Dict[str, Dict[str, float]]]:
+        """
+        Pre-compute all required indicators for every symbol on every date.
+        
+        Returns: {symbol: {date_str: {indicator_key: value, ...}, ...}, ...}
+        
+        This eliminates the O(n²) recomputation in the original _compute_indicators_for_day
+        which re-sliced and recomputed the full history on every single day × ticker.
+        """
+        result: Dict[str, Dict[str, Dict[str, float]]] = {}
+
+        for symbol, bars in price_histories.items():
+            if not bars:
+                result[symbol] = {}
+                continue
+
+            closes = [b['close'] for b in bars]
+            ohlc_tuples = [(b['high'], b['low'], b['close']) for b in bars]
+            dates = [b['date'] for b in bars]
+
+            symbol_indicators: Dict[str, Dict[str, float]] = {}
+
+            for ind, period in requirements:
+                if ind == 'RSI':
+                    self._precompute_rsi(symbol_indicators, closes, dates, period)
+                elif ind == 'EMA':
+                    self._precompute_ema(symbol_indicators, closes, dates, period)
+                elif ind == 'SMA':
+                    self._precompute_sma(symbol_indicators, closes, dates, period)
+                elif ind == 'ATR':
+                    self._precompute_atr(symbol_indicators, ohlc_tuples, dates, period)
+                elif ind in ('BB_UPPER', 'BB_LOWER'):
+                    self._precompute_bollinger(symbol_indicators, closes, dates, period, ind)
+
+            result[symbol] = symbol_indicators
+
+        return result
+
+    @staticmethod
+    def _precompute_rsi(
+        indicator_map: Dict[str, Dict[str, float]],
+        closes: List[float],
+        dates: List[Any],
+        period: int,
+    ) -> None:
+        """Pre-compute RSI for every date and store in indicator_map."""
+        key = f"rsi_{period}"
+        key_short = "rsi"
+
+        if len(closes) < period + 1:
+            return
+
+        # Compute all changes first
+        changes = [closes[i] - closes[i - 1] for i in range(1, len(closes))]
+
+        # Wilder's smoothed RSI: first average is simple, then smoothed
+        gains = [c if c > 0 else 0.0 for c in changes]
+        losses = [-c if c < 0 else 0.0 for c in changes]
+
+        # First values (simple average)
+        avg_gain = sum(gains[:period]) / period
+        avg_loss = sum(losses[:period]) / period
+
+        # Store RSI for the first valid date (index = period, since we need period+1 closes)
+        for idx in range(period, len(closes)):
+            if idx > period:
+                # Smoothed update
+                avg_gain = (avg_gain * (period - 1) + gains[idx - 1]) / period
+                avg_loss = (avg_loss * (period - 1) + losses[idx - 1]) / period
+
+            date_str = str(dates[idx])
+            if avg_loss == 0:
+                rsi_val = 100.0
+            else:
+                rs = avg_gain / avg_loss
+                rsi_val = 100.0 - (100.0 / (1.0 + rs))
+
+            if date_str not in indicator_map:
+                indicator_map[date_str] = {}
+            indicator_map[date_str][key] = rsi_val
+            indicator_map[date_str].setdefault(key_short, rsi_val)
+
+    @staticmethod
+    def _precompute_ema(
+        indicator_map: Dict[str, Dict[str, float]],
+        closes: List[float],
+        dates: List[Any],
+        period: int,
+    ) -> None:
+        """Pre-compute EMA for every date and store in indicator_map."""
+        key = f"ema_{period}"
+        key_short = "ema"
+
+        if len(closes) < period:
+            return
+
+        k = 2.0 / (period + 1)
+        ema = sum(closes[:period]) / period
+
+        # Store EMA starting from index = period - 1 (first date with enough data)
+        date_str = str(dates[period - 1])
+        if date_str not in indicator_map:
+            indicator_map[date_str] = {}
+        indicator_map[date_str][key] = ema
+        indicator_map[date_str].setdefault(key_short, ema)
+
+        # Continue for remaining dates
+        for idx in range(period, len(closes)):
+            ema = closes[idx] * k + ema * (1.0 - k)
+            date_str = str(dates[idx])
+            if date_str not in indicator_map:
+                indicator_map[date_str] = {}
+            indicator_map[date_str][key] = ema
+            indicator_map[date_str].setdefault(key_short, ema)
+
+    @staticmethod
+    def _precompute_sma(
+        indicator_map: Dict[str, Dict[str, float]],
+        closes: List[float],
+        dates: List[Any],
+        period: int,
+    ) -> None:
+        """Pre-compute SMA for every date and store in indicator_map."""
+        key = f"sma_{period}"
+        key_short = "sma"
+
+        if len(closes) < period:
+            return
+
+        running_sum = sum(closes[:period])
+
+        for idx in range(period - 1, len(closes)):
+            if idx > period - 1:
+                running_sum = running_sum - closes[idx - period] + closes[idx]
+            sma_val = running_sum / period
+            date_str = str(dates[idx])
+            if date_str not in indicator_map:
+                indicator_map[date_str] = {}
+            indicator_map[date_str][key] = sma_val
+            indicator_map[date_str].setdefault(key_short, sma_val)
+
+    @staticmethod
+    def _precompute_atr(
+        indicator_map: Dict[str, Dict[str, float]],
+        ohlc_tuples: List[Tuple],
+        dates: List[Any],
+        period: int,
+    ) -> None:
+        """Pre-compute ATR for every date and store in indicator_map."""
+        key = f"atr_{period}"
+        key_short = "atr"
+
+        if len(ohlc_tuples) < period + 1:
+            return
+
+        # Compute all true ranges
+        trs = []
+        for i in range(1, len(ohlc_tuples)):
+            h, l, prev_c = ohlc_tuples[i][0], ohlc_tuples[i][1], ohlc_tuples[i - 1][2]
+            trs.append(max(h - l, abs(h - prev_c), abs(l - prev_c)))
+
+        # First ATR is simple average
+        atr_val = sum(trs[:period]) / period
+
+        # Store first valid ATR (index = period, since we need period+1 bars)
+        date_str = str(dates[period])
+        if date_str not in indicator_map:
+            indicator_map[date_str] = {}
+        indicator_map[date_str][key] = atr_val
+        indicator_map[date_str].setdefault(key_short, atr_val)
+
+        # Continue with smoothed ATR
+        for idx in range(period + 1, len(ohlc_tuples)):
+            atr_val = (atr_val * (period - 1) + trs[idx - 1]) / period
+            date_str = str(dates[idx])
+            if date_str not in indicator_map:
+                indicator_map[date_str] = {}
+            indicator_map[date_str][key] = atr_val
+            indicator_map[date_str].setdefault(key_short, atr_val)
+
+    @staticmethod
+    def _precompute_bollinger(
+        indicator_map: Dict[str, Dict[str, float]],
+        closes: List[float],
+        dates: List[Any],
+        period: int,
+        band_type: str,
+    ) -> None:
+        """Pre-compute Bollinger Bands for every date and store in indicator_map."""
+        upper_key = f"bb_upper_{period}"
+        lower_key = f"bb_lower_{period}"
+
+        if len(closes) < period:
+            return
+
+        running_sum = sum(closes[:period])
+
+        for idx in range(period - 1, len(closes)):
+            if idx > period - 1:
+                running_sum = running_sum - closes[idx - period] + closes[idx]
+            sma_val = running_sum / period
+            variance = sum((closes[j] - sma_val) ** 2 for j in range(idx - period + 1, idx + 1)) / period
+            std = math.sqrt(variance)
+
+            date_str = str(dates[idx])
+            if date_str not in indicator_map:
+                indicator_map[date_str] = {}
+
+            if band_type == 'BB_UPPER':
+                val = sma_val + 2 * std
+                indicator_map[date_str][upper_key] = val
+                indicator_map[date_str].setdefault('bb_upper', val)
+            else:
+                val = sma_val - 2 * std
+                indicator_map[date_str][lower_key] = val
+                indicator_map[date_str].setdefault('bb_lower', val)
+
+    def _lookup_indicators_for_day(
         self,
         symbol: str,
         day: datetime,
-        price_histories: Dict[str, List[Dict]],
-        requirements: List[Tuple[str, int]],
+        precomputed_indicators: Dict[str, Dict[str, Dict[str, float]]],
     ) -> Dict[str, float]:
-        """Compute all required indicators from history up to (and including) day."""
-        bars = price_histories.get(symbol, [])
+        """O(1) lookup of pre-computed indicators for a symbol on a given day."""
         day_date = day.date() if isinstance(day, datetime) else day
-        bars_up_to = [b for b in bars if b['date'] <= day_date]
+        day_str = str(day_date)
 
-        if not bars_up_to:
-            return {}
-
-        closes = [b['close'] for b in bars_up_to]
-        ohlc_tuples = [(b['high'], b['low'], b['close']) for b in bars_up_to]
-        indicators: Dict[str, float] = {}
-
-        for ind, period in requirements:
-            val: Optional[float] = None
-            if ind == 'RSI':
-                val = self._calc_rsi(closes, period)
-            elif ind in ('EMA',):
-                val = self._calc_ema(closes, period)
-            elif ind in ('SMA',):
-                val = self._calc_sma(closes, period)
-            elif ind == 'ATR':
-                val = self._calc_atr(ohlc_tuples, period)
-            elif ind in ('BB_UPPER', 'BB_LOWER'):
-                sma = self._calc_sma(closes, period)
-                if sma is not None and len(closes) >= period:
-                    std = (sum((c - sma) ** 2 for c in closes[-period:]) / period) ** 0.5
-                    if ind == 'BB_UPPER':
-                        val = sma + 2 * std
-                    else:
-                        val = sma - 2 * std
-
-            if val is not None:
-                key = f"{ind.lower()}_{period}"
-                indicators[key] = val
-                # Also store without period so bare 'rsi' / 'ema' lookups work
-                indicators.setdefault(ind.lower(), val)
-
-        return indicators
+        symbol_indicators = precomputed_indicators.get(symbol, {})
+        return symbol_indicators.get(day_str, {})
 
     # ------------------------------------------------------------------
     # Core simulation
@@ -359,12 +560,20 @@ class BacktestEngine:
         start_date: str,
         end_date: str,
         initial_capital: float,
+        commission_pct: float = 0.0,
+        slippage_pct: float = 0.0,
     ) -> Dict[str, Any]:
         """
         Core simulation engine.
 
         Walks through each trading day, evaluates entry/exit conditions,
         executes trades, and tracks portfolio value.
+
+        Fixes applied:
+        1. O(n²) indicator computation → pre-compute all indicators once per ticker
+        2. Lookahead bias → signal on day N close, execute at day N+1 open
+        3. Commission & slippage → deduct on every fill
+        4. Integer share quantities → use fractional quantities
         """
         # Parse dates
         start_dt = datetime.strptime(start_date, '%Y-%m-%d')
@@ -377,6 +586,13 @@ class BacktestEngine:
         logger.info(f"Indicator requirements: {indicator_requirements}")
         for sym, hist in price_histories.items():
             logger.info(f"  {sym}: {len(hist)} daily bars loaded (incl. lookback)")
+
+        # FIX #1: Pre-compute all indicators once per ticker before the simulation loop
+        logger.info("Pre-computing indicators for all symbols...")
+        precomputed_indicators = self._precompute_all_indicators(
+            price_histories, indicator_requirements
+        )
+        logger.info("Indicator pre-computation complete.")
 
         # State
         cash = float(initial_capital)
@@ -400,36 +616,144 @@ class BacktestEngine:
         peak_equity = float(initial_capital)
         max_drawdown = 0.0
         max_drawdown_pct = 0.0
+        max_drawdown_duration_days = 0  # FIX #7: track longest drawdown duration
+        current_drawdown_start_day = None  # day_idx when current drawdown began
 
-        # Track daily returns for volatility/sharpe calculation
+        # Track daily returns for volatility/sharpe/sortino calculation
         daily_returns = []
+        risk_free_rate = 0.0  # Default 0% risk-free rate; can be parameterized
+
+
+        # FIX #2: Build a mapping of signals generated on day N to be executed on day N+1
+        # pending_signals: {symbol: {'action': 'BUY'|'SELL', 'price': float, 'reasons': ..., ...}}
+        pending_signals: Dict[str, Dict[str, Any]] = {}
 
         for day_idx, day in enumerate(trading_days):
             day_str = day.strftime('%Y-%m-%d')
             day_equity = cash
             holdings_value = 0.0
 
-            # Evaluate each stock in our universe
+            # ---------------------------------------------------------------
+            # STEP 1: Execute any pending signals from the previous day
+            # (FIX #2: signal on day N close, execute at day N+1 open)
+            # ---------------------------------------------------------------
+            if pending_signals:
+                for symbol in list(pending_signals.keys()):
+                    signal = pending_signals.pop(symbol)
+                    action = signal['action']
+
+                    # Get the open price for today (day N+1) for execution
+                    market_data_today = self._get_market_data_for_day(symbol, day)
+                    if not market_data_today:
+                        continue
+
+                    # Use open price for execution (FIX #2: avoid lookahead bias)
+                    execution_price = float(market_data_today.open)
+
+                    # Apply slippage (FIX #3)
+                    if slippage_pct > 0:
+                        if action == 'BUY':
+                            execution_price *= (1.0 + slippage_pct)
+                        else:
+                            execution_price *= (1.0 - slippage_pct)
+
+                    if action == 'BUY':
+                        # Calculate position size
+                        position_value = cash * max_position_pct
+                        # FIX #4: Use fractional quantities instead of int()
+                        quantity = position_value / execution_price
+
+                        if quantity > 0 and cash >= quantity * execution_price:
+                            cost = quantity * execution_price
+                            # FIX #3: Deduct commission
+                            commission = cost * commission_pct
+                            total_cost = cost + commission
+
+                            if cash >= total_cost:
+                                cash -= total_cost
+
+                                positions[symbol] = {
+                                    'quantity': quantity,
+                                    'avg_price': execution_price,
+                                    'entry_date': day_str,
+                                }
+
+                                trade_log.append({
+                                    'date': day_str,
+                                    'symbol': symbol,
+                                    'action': 'BUY',
+                                    'price': round(execution_price, 2),
+                                    'quantity': round(quantity, 4),
+                                    'value': round(cost, 2),
+                                    'commission': round(commission, 2),
+                                    'slippage': round(cost * slippage_pct, 2) if slippage_pct > 0 else 0,
+                                    'reasons': signal.get('reasons', []),
+                                })
+
+                                logger.debug(
+                                    f"  BUY {symbol} @ ${execution_price:.2f} x {quantity:.4f} "
+                                    f"(comm: ${commission:.2f}) on {day_str}"
+                                )
+
+                    elif action == 'SELL':
+                        pos = positions.get(symbol)
+                        if pos:
+                            proceeds = pos['quantity'] * execution_price
+                            # FIX #3: Deduct commission on sell
+                            commission = proceeds * commission_pct
+                            net_proceeds = proceeds - commission
+
+                            pnl = net_proceeds - (pos['quantity'] * pos['avg_price'])
+                            pnl_pct = ((execution_price - pos['avg_price']) / pos['avg_price']) * 100
+
+                            cash += net_proceeds
+                            del positions[symbol]
+
+                            trade_log.append({
+                                'date': day_str,
+                                'symbol': symbol,
+                                'action': 'SELL',
+                                'price': round(execution_price, 2),
+                                'quantity': round(pos['quantity'], 4),
+                                'value': round(proceeds, 2),
+                                'commission': round(commission, 2),
+                                'slippage': round(proceeds * slippage_pct, 2) if slippage_pct > 0 else 0,
+                                'pnl': round(pnl, 2),
+                                'pnl_pct': round(pnl_pct, 2),
+                                'reason': signal.get('reason', ''),
+                                'entry_date': pos['entry_date'],
+                                'holding_days': (day - datetime.strptime(pos['entry_date'], '%Y-%m-%d')).days,
+                            })
+
+                            logger.debug(
+                                f"  SELL {symbol} @ ${execution_price:.2f} "
+                                f"(pnl: ${pnl:.2f}, comm: ${commission:.2f}) on {day_str}"
+                            )
+
+            # ---------------------------------------------------------------
+            # STEP 2: Evaluate signals for today (to be executed tomorrow)
+            # ---------------------------------------------------------------
             for symbol in stock_symbols:
                 # Get market data for this symbol on this day
                 market_data = self._get_market_data_for_day(symbol, day)
                 if not market_data:
                     continue
 
-                current_price = float(market_data.close)
+                # Use close price for signal evaluation (FIX #2: signal on close)
+                signal_price = float(market_data.close)
                 has_position = symbol in positions
 
-                # Update position current value
+                # Update position current value (mark-to-market using close)
                 if has_position:
                     pos = positions[symbol]
-                    pos_value = pos['quantity'] * current_price
+                    pos_value = pos['quantity'] * signal_price
                     holdings_value += pos_value
 
-                # --- ENTRY LOGIC ---
+                # --- ENTRY SIGNAL EVALUATION (on close) ---
                 if not has_position and len(positions) < max_positions:
-                    # Check entry conditions
-                    computed_indicators = self._compute_indicators_for_day(
-                        symbol, day, price_histories, indicator_requirements
+                    # O(1) lookup from pre-computed indicators (FIX #1)
+                    computed_indicators = self._lookup_indicators_for_day(
+                        symbol, day, precomputed_indicators
                     )
                     should_enter, entry_reasons = self._check_entry_conditions(
                         strategy, strategy_params, symbol, market_data, day,
@@ -437,35 +761,18 @@ class BacktestEngine:
                     )
 
                     if should_enter:
-                        # Calculate position size
-                        position_value = cash * max_position_pct
-                        quantity = int(position_value / current_price)
+                        # Store signal for execution at next day's open
+                        pending_signals[symbol] = {
+                            'action': 'BUY',
+                            'price': signal_price,
+                            'reasons': entry_reasons,
+                        }
 
-                        if quantity > 0 and cash >= quantity * current_price:
-                            cost = quantity * current_price
-                            cash -= cost
-                            positions[symbol] = {
-                                'quantity': quantity,
-                                'avg_price': current_price,
-                                'entry_date': day_str,
-                            }
-
-                            trade_log.append({
-                                'date': day_str,
-                                'symbol': symbol,
-                                'action': 'BUY',
-                                'price': round(current_price, 2),
-                                'quantity': quantity,
-                                'value': round(cost, 2),
-                                'reasons': entry_reasons,
-                            })
-
-                            logger.debug(f"  BUY {symbol} @ ${current_price:.2f} x {quantity} on {day_str}")
-
-                # --- EXIT LOGIC ---
+                # --- EXIT SIGNAL EVALUATION (on close) ---
                 elif has_position:
-                    computed_indicators = self._compute_indicators_for_day(
-                        symbol, day, price_histories, indicator_requirements
+                    # O(1) lookup from pre-computed indicators (FIX #1)
+                    computed_indicators = self._lookup_indicators_for_day(
+                        symbol, day, precomputed_indicators
                     )
                     should_exit, exit_reason = self._check_exit_conditions(
                         strategy_params, symbol, market_data, positions[symbol], day,
@@ -473,29 +780,12 @@ class BacktestEngine:
                     )
 
                     if should_exit:
-                        pos = positions[symbol]
-                        proceeds = pos['quantity'] * current_price
-                        pnl = proceeds - (pos['quantity'] * pos['avg_price'])
-                        pnl_pct = ((current_price - pos['avg_price']) / pos['avg_price']) * 100
-
-                        cash += proceeds
-                        del positions[symbol]
-
-                        trade_log.append({
-                            'date': day_str,
-                            'symbol': symbol,
+                        # Store signal for execution at next day's open
+                        pending_signals[symbol] = {
                             'action': 'SELL',
-                            'price': round(current_price, 2),
-                            'quantity': pos['quantity'],
-                            'value': round(proceeds, 2),
-                            'pnl': round(pnl, 2),
-                            'pnl_pct': round(pnl_pct, 2),
+                            'price': signal_price,
                             'reason': exit_reason,
-                            'entry_date': pos['entry_date'],
-                            'holding_days': (day - datetime.strptime(pos['entry_date'], '%Y-%m-%d')).days,
-                        })
-
-                        logger.debug(f"  SELL {symbol} @ ${current_price:.2f} (pnl: ${pnl:.2f}) on {day_str}")
+                        }
 
             # Calculate end-of-day equity
             day_equity = cash + holdings_value
@@ -506,15 +796,27 @@ class BacktestEngine:
                 'holdings_value': round(holdings_value, 2),
             })
 
-            # Track drawdown
+            # Track drawdown (FIX #7: also track duration)
             if day_equity > peak_equity:
                 peak_equity = day_equity
+                # Recovered from drawdown — reset the timer
+                if current_drawdown_start_day is not None:
+                    duration = day_idx - current_drawdown_start_day
+                    if duration > max_drawdown_duration_days:
+                        max_drawdown_duration_days = duration
+                    current_drawdown_start_day = None
+            else:
+                # Still in drawdown or new drawdown
+                if current_drawdown_start_day is None:
+                    current_drawdown_start_day = day_idx
+
             drawdown = peak_equity - day_equity
             drawdown_pct = (drawdown / peak_equity) * 100 if peak_equity > 0 else 0
             if drawdown > max_drawdown:
                 max_drawdown = drawdown
             if drawdown_pct > max_drawdown_pct:
                 max_drawdown_pct = drawdown_pct
+
 
             # Track daily return
             if day_idx > 0 and previous_equity > 0:
@@ -541,7 +843,7 @@ class BacktestEngine:
         else:
             annualized_return = 0.0
 
-        # Volatility (annualized)
+        # Volatility (annualized) — FIX #5: use sample std of daily returns
         if len(daily_returns) > 1:
             mean_return = sum(daily_returns) / len(daily_returns)
             variance = sum((r - mean_return) ** 2 for r in daily_returns) / (len(daily_returns) - 1)
@@ -550,11 +852,39 @@ class BacktestEngine:
         else:
             volatility = 0.0
 
-        # Sharpe ratio (assuming 0% risk-free rate for simplicity)
-        if volatility > 0 and years > 0:
-            sharpe_ratio = (annualized_return / 100.0) / (volatility / 100.0)
+        # FIX #5: Correct Sharpe ratio — mean of daily excess returns / std of daily excess returns, annualized
+        if len(daily_returns) > 1:
+            risk_free_daily = (1.0 + risk_free_rate) ** (1.0 / 252.0) - 1.0
+            excess_returns = [r - risk_free_daily for r in daily_returns]
+            mean_excess = sum(excess_returns) / len(excess_returns)
+            excess_variance = sum((r - mean_excess) ** 2 for r in excess_returns) / (len(excess_returns) - 1)
+            excess_std = math.sqrt(excess_variance)
+            if excess_std > 0:
+                sharpe_ratio = (mean_excess / excess_std) * math.sqrt(252)
+            else:
+                sharpe_ratio = 0.0
         else:
             sharpe_ratio = 0.0
+
+        # FIX #6: Sortino ratio — same as Sharpe but uses only negative excess returns (downside deviation)
+        if len(daily_returns) > 1:
+            risk_free_daily = (1.0 + risk_free_rate) ** (1.0 / 252.0) - 1.0
+            excess_returns = [r - risk_free_daily for r in daily_returns]
+            mean_excess = sum(excess_returns) / len(excess_returns)
+            # Downside deviation: only negative excess returns
+            negative_excess = [r for r in excess_returns if r < 0]
+            if negative_excess:
+                downside_variance = sum(r ** 2 for r in negative_excess) / len(excess_returns)
+                downside_std = math.sqrt(downside_variance)
+                if downside_std > 0:
+                    sortino_ratio = (mean_excess / downside_std) * math.sqrt(252)
+                else:
+                    sortino_ratio = 0.0
+            else:
+                # No negative returns — Sortino is effectively infinite
+                sortino_ratio = 999.0
+        else:
+            sortino_ratio = 0.0
 
         # Win rate
         winning_trades = sum(1 for t in trade_log if t.get('action') == 'SELL' and t.get('pnl', 0) > 0)
@@ -562,10 +892,15 @@ class BacktestEngine:
         total_trades = winning_trades + losing_trades
         win_rate = (winning_trades / total_trades * 100) if total_trades > 0 else 0.0
 
-        # Profit factor
+        # FIX #8: Profit factor — use infinity sentinel when no losing trades
         gross_profit = sum(t['pnl'] for t in trade_log if t.get('action') == 'SELL' and t.get('pnl', 0) > 0)
         gross_loss = abs(sum(t['pnl'] for t in trade_log if t.get('action') == 'SELL' and t.get('pnl', 0) < 0))
-        profit_factor = (gross_profit / gross_loss) if gross_loss > 0 else (gross_profit if gross_profit > 0 else 0)
+        if gross_loss > 0:
+            profit_factor = gross_profit / gross_loss
+        elif gross_profit > 0:
+            profit_factor = 999.0  # Capped sentinel for infinity (no losing trades)
+        else:
+            profit_factor = 0.0
 
         # Aggregate monthly returns
         aggregated_monthly = {}
@@ -573,13 +908,21 @@ class BacktestEngine:
             if returns:
                 aggregated_monthly[month] = round(sum(returns) * 100, 2)  # As percentage
 
+        # FIX #7: Finalize drawdown duration — if still in drawdown at end, count it
+        if current_drawdown_start_day is not None:
+            final_duration = len(trading_days) - 1 - current_drawdown_start_day
+            if final_duration > max_drawdown_duration_days:
+                max_drawdown_duration_days = final_duration
+
         return {
             'total_return': round(total_return, 2),
             'total_return_pct': round(total_return_pct, 2),
             'annualized_return': round(annualized_return, 2),
             'max_drawdown': round(max_drawdown, 2),
             'max_drawdown_pct': round(max_drawdown_pct, 2),
+            'max_drawdown_duration_days': max_drawdown_duration_days,
             'sharpe_ratio': round(sharpe_ratio, 4),
+            'sortino_ratio': round(sortino_ratio, 4),
             'volatility': round(volatility, 4),
             'win_rate': round(win_rate, 2),
             'total_trades': total_trades,
@@ -591,6 +934,7 @@ class BacktestEngine:
             'monthly_returns': aggregated_monthly,
             'final_equity': round(day_equity, 2),
         }
+
 
     def _get_trading_days(self, symbols: List[str], start: datetime, end: datetime) -> List[datetime]:
         """Get all unique trading days across the given symbols.
@@ -800,7 +1144,9 @@ class BacktestEngine:
             'annualized_return': 0.0,
             'max_drawdown': 0.0,
             'max_drawdown_pct': 0.0,
+            'max_drawdown_duration_days': 0,
             'sharpe_ratio': 0.0,
+            'sortino_ratio': 0.0,
             'volatility': 0.0,
             'win_rate': 0.0,
             'total_trades': 0,
@@ -812,6 +1158,7 @@ class BacktestEngine:
             'monthly_returns': {},
             'final_equity': initial_capital,
         }
+
 
 
 class BacktestService:
@@ -828,6 +1175,8 @@ class BacktestService:
         start_date: str,
         end_date: str,
         initial_capital: float = 100000.0,
+        commission_pct: float = 0.0,
+        slippage_pct: float = 0.0,
     ) -> Dict[str, Any]:
         """Run a backtest and return results"""
         return self.engine.run_backtest(
@@ -835,6 +1184,8 @@ class BacktestService:
             start_date=start_date,
             end_date=end_date,
             initial_capital=initial_capital,
+            commission_pct=commission_pct,
+            slippage_pct=slippage_pct,
         )
 
     def get_backtest_results(self, strategy_id: int, limit: int = 10) -> List[Dict[str, Any]]:

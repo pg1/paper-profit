@@ -556,7 +556,14 @@ export function parametersToJson(parameters) {
     const conditionStrings = paramsWithGeneratedMapping.entryConditions.map((cond, idx) => {
       const periodStr = cond.period ? `(${cond.period})` : '';
       const logicStr = idx < paramsWithGeneratedMapping.entryConditions.length - 1 ? ` ${cond.logic} ` : '';
-      return `${cond.indicator}${periodStr} ${cond.op} ${cond.value}${logicStr}`;
+      let valDisplay;
+      if (cond.compareType === 'indicator' && cond.compareIndicator) {
+        const cmpPeriodStr = cond.comparePeriod ? `(${cond.comparePeriod})` : '';
+        valDisplay = `${cond.compareIndicator}${cmpPeriodStr}`;
+      } else {
+        valDisplay = cond.value !== undefined && cond.value !== '' ? cond.value : '?';
+      }
+      return `${cond.indicator}${periodStr} ${cond.op} ${valDisplay}${logicStr}`;
     }).join('');
     
     paramsWithGeneratedMapping.signalMapping.buyTrigger = conditionStrings || '';

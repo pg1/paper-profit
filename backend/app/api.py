@@ -1933,11 +1933,13 @@ async def run_strategy_backtest(
     backtest_request: Dict[str, Any],
     db: Session = Depends(get_db)
 ):
-    """Run a backtest for a strategy. Payload: { start_date: str, end_date: str, initial_capital?: float }"""
+    """Run a backtest for a strategy. Payload: { start_date: str, end_date: str, initial_capital?: float, commission_pct?: float, slippage_pct?: float }"""
     try:
         start_date = backtest_request.get('start_date')
         end_date = backtest_request.get('end_date')
         initial_capital = backtest_request.get('initial_capital', 100000.0)
+        commission_pct = backtest_request.get('commission_pct', 0.0)
+        slippage_pct = backtest_request.get('slippage_pct', 0.0)
 
         if not start_date or not end_date:
             raise HTTPException(
@@ -1951,6 +1953,8 @@ async def run_strategy_backtest(
             start_date=start_date,
             end_date=end_date,
             initial_capital=initial_capital,
+            commission_pct=commission_pct,
+            slippage_pct=slippage_pct,
         )
         return result
 

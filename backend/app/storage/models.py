@@ -389,7 +389,10 @@ class BacktestResult(Base):
     max_drawdown = Column(DECIMAL(10, 4))
     max_drawdown_pct = Column(DECIMAL(10, 4))
     sharpe_ratio = Column(DECIMAL(10, 4))
+    sortino_ratio = Column(DECIMAL(10, 4))
+    max_drawdown_duration_days = Column(Integer)
     volatility = Column(DECIMAL(10, 4))
+
     win_rate = Column(DECIMAL(10, 4))
     total_trades = Column(Integer)
     winning_trades = Column(Integer)
